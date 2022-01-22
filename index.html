@@ -15,7 +15,7 @@
         specStatus:           "CG-DRAFT",
 
         // the specification's short name, as in http://www.w3.org/TR/short-name/
-        shortName:            "lds-ecdsa-secp384r1-2019",
+        shortName:            "di-ecdsa-secp384r1-2019",
 
         // if you wish the publication date to be other than today, set this
         // publishDate:  "2009-08-06",
@@ -27,7 +27,7 @@
 
 
         // if there a publicly available Editor's Draft, this is the link
-        edDraftURI: "https://digitalbazaar.github.io/lds-ecdsa-secp384r1-2019/",
+        edDraftURI: "https://digitalbazaar.github.io/di-ecdsa-secp384r1-2019/",
 
         // if this is a LCWD, uncomment and set the end of its review period
         // lcEnd: "2009-08-05",
@@ -67,14 +67,14 @@
         otherLinks: [{
           key: "Source control",
           data: [{
-            value: "https://github.com/digitalbazaar/lds-ecdsa-secp384r1-2019/",
-            href: "https://github.com/digitalbazaar/lds-ecdsa-secp384r1-2019/"
+            value: "https://github.com/digitalbazaar/di-ecdsa-secp384r1-2019/",
+            href: "https://github.com/digitalbazaar/di-ecdsa-secp384r1-2019/"
           }]
         }, {
           key: "Issue Tracker",
           data: [{
-            value: "https://github.com/digitalbazaar/lds-ecdsa-secp384r1-2019/issues/",
-            href: "https://github.com/digitalbazaar/lds-ecdsa-secp384r1-2019/issues/"
+            value: "https://github.com/digitalbazaar/di-ecdsa-secp384r1-2019/issues/",
+            href: "https://github.com/digitalbazaar/di-ecdsa-secp384r1-2019/issues/"
           }]
         }],
 
@@ -103,9 +103,9 @@
             status:   "Draft Community Group Report",
             publisher:  "Web Payments Community Group"
           },
-          "LD-SIGNATURES": {
-            title:    "Linked Data Signatures 1.0",
-            href:     "https://w3c-ccg.github.io/ld-signatures/",
+          "DATA-INTEGRITY": {
+            title:    "Data Integrity 1.0",
+            href:     "https://w3c-ccg.github.io/data-integrity-spec/",
             authors:  ["David Longley", "Manu Sporny"],
             status:   "Draft Community Group Report",
             publisher:  "Credentials Community Group"
@@ -118,7 +118,7 @@
     <section id='abstract'>
       <p>
 This specification describes the Ecdsa Secp384r1 Signature created in 2019 for the
-Linked Data Signatures specification.
+Data Integrity specification.
       </p>
     </section>
 
@@ -133,7 +133,7 @@ is not fit for production deployment.
       <h2>Introduction</h2>
       <p>
 This specification describes the Ecdsa Secp384r1 Signature created in 2019 for the
-Linked Data Signatures [[!LD-SIGNATURES]] specification. It uses the RDF
+Data Integrity [[!DATA-INTEGRITY]] specification. It uses the RDF
 Dataset Canonicalization Algorithm [[!RDF-DATASET-CANONICALIZATION]] to transform the
 input document into its canonical form. It uses SHA-384 [[RFC6234]] as the
 <a>message digest algorithm</a> and P-384 defined in [[RFC7797]] as
@@ -179,7 +179,7 @@ been modified in transit and came from someone possessing a particular secret.
       </dl>
 
       <section>
-        <h2>Linked Data Signatures Definitions</h2>
+        <h2>Data Integrity Definitions</h2>
         <p>
 The following values are defined by this specification:
         </p>
@@ -187,7 +187,7 @@ The following values are defined by this specification:
         <dl>
           <dt><dfn>EcdsaSecp384r1Signature2019</dfn></dt>
           <dd>
-A document that complies with the Linked Data Signatures specification has been signed
+A document that complies with the Data Integrity specification has been signed
 with EcdsaSecp384r1Signature2019 when it contains a `proof` value, and that
 value contains a `type` set to `EcdsaSecp384r1Signature2019`, a `proofPurpose`,
 `verificationMethod`, and `proofValue`, as is defined by this specification.
@@ -236,7 +236,7 @@ An encoded public key example:
       <p>
 The 2019 Ecdsa Secp384r1 Signature <a>signature suite</a> MUST be used in
 conjunction with the signing and verification algorithms in the
-Linked Data Signatures [[LD-SIGNATURES]] specification. The suite consists of
+Data Integrity [[DATA-INTEGRITY]] specification. The suite consists of
 the following algorithms:
       </p>
 
