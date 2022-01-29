@@ -480,7 +480,7 @@ result in <var>rawSignature</var>.
           </li>
           <li>
 Take <var>rawSignature</var> and perform the digital signature verification
-algorithm associated with the provided <em>public key<em> as specified in
+algorithm associated with the provided <em>public key</em> as specified in
 [[FIPS-186-4]]. If the result is a valid signature, return <code>true</code>,
 otherwise return <code>false</code>.
           </li>
@@ -498,15 +498,34 @@ implementing this specification should be aware of in order to create secure
 software.
       </p>
 
+      <section>
+        <h3>Split Key Formats From Cryptosuites</h3>
+
+        <p class=issue>
+Ensuring that cryptographic suites are versioned and tightly scoped to a very
+small set of possible key types and signature schemes (ideally one key type and
+size and one signature output type) is a design goal for most Data Integrity
+cryptographic suites. Historically, this has been done by defining both the
+key type and the cryptographic suite that uses the key type in the same
+specification. The downside of doing so, however, is that there might be a
+proliferation of different key types in multikey that result in different
+cryptosuites defining the same key material differently. For example, one
+cryptosuite might use compressed Curve P-256 keys while another uses
+uncompressed values. If that occurs, it will harm standardization. It will be
+important in the coming months to years to ensure that this does not happen
+by fully defining the multikey format in a separate specification so
+cryptosuite specifications, such as this one, can refer to the multikey
+specification, thus improving the chances of maximum interoperability for the
+multikey format.
+        </p>
+
+      </section>
+
 <div class="issue">TODO: We need to add a complete list of security
 considerations.</div>
 
-<ol class="security_considerations">
-  <li>
-This Signature Suite relies on the security and assumptions made by ECDSA over
-Secp384r1. We assume specifcally that sign and verify are implemented safely.
-  </li>
-</ol>
+
+
     </section>
 
   </body>
