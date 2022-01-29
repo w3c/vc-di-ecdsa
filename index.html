@@ -269,7 +269,7 @@ demonstrated below is the loss of human-readable key type information. It could
 be argued that developers shouldn't be provided such affordances to ensure that
 they do not meddle with the values. Software libraries would ensure that the
 multicodec header information matches the expected header based on the
-cryptosuite that is utilizing the key. See the section on
+cryptosuite that is utilizing the key for verification. See the section on
 <a href="#signature-format-examples"></a> for more information.
           </p>
 
@@ -386,7 +386,7 @@ The suite consists of the following algorithms:
 An data integrity digital signature using ECDSA with Curve P-384:
       </p>
 
-      <pre class="example highlight">
+      <pre class="example">
 {
   "@context": ["https://w3id.org/security/suites/ecdsa-2019/v1"],
   "type": "EcdsaSecp384r1Signature2019",
@@ -402,18 +402,20 @@ An data integrity digital signature using ECDSA with Curve P-384:
         title="Avoid signature format proliferation by using text-based suite value">
 The pattern that Data Integrity Signatures use presently leads to an
 proliferation in signature types and JSON-LD Contexts. This proliferation can be
-avoided without any loss of the tightly bound cryptography suite version to
-acceptable public key. See <a href="#key-format-examples"></a> for more
-information on what the matching
+avoided without any loss of the security characteristics of tightly binding  a
+cryptography suite version to one or more acceptable public keys.  See
+<a href="#key-format-examples"></a>  for more information on what the matching
 <a href="#example-a-multibase-encoded-multicodec-curve-p-384-public-key">
-MulticodecVerificationKey format</a> could look like.
+MulticodecVerificationKey format</a> could look like. The following signature
+suites are currently being contemplated: Eddsa2022, NistEcdsa2022,
+KoblitzEcdsa2022, Pgp2022, GostDsa2022, Sm9Ibsa2022, and Jws2022.
       </p>
 
-      <pre class="example highlight" title="A DataIntegritySignature example using a NistEcdsa2019 Cryptosuite">
+      <pre class="example" title="A DataIntegritySignature example using a NistEcdsa2019 Cryptosuite">
 {
   "@context": ["https://w3id.org/security/data-integrity/v1"],
   "type": "DataIntegritySignature",
-  "suite": "NistEcdsa2019",
+  "suite": "NistEcdsa2022",
   "created": "2021-11-29T20:35:38Z",
   "verificationMethod": "did:example:123456789abcdefghi#keys-1",
   "proofPurpose": "assertionMethod",
@@ -431,30 +433,33 @@ MulticodecVerificationKey format</a> could look like.
       <h2>Algorithms</h2>
 
       <p>
-This signature suite uses ECDSA over Secp384r1 as described in [[RFC8422]].
-
-The steps to construct and verify the digital signature are defined below.
+This signature suite uses ECDSA over Curve P-256 or Curve P-384 as described in
+[[FIPS-186-4]]. The steps to construct and verify the digital signature are
+defined below.
       <p>
 
       <section>
         <h3>Modifications to Signature Algorithm</h3>
 
         <p>
-The <var>digital signature algorithm</var> defined:
-Signature Algorithm takes <var>tbs</var>, a <var>privateKey</var>,
-and </var><var>options</var> as inputs and produces a
+The <var>digital signature algorithm</var> takes <var>tbs</var>, a
+<var>privateKey</var>, and <var>options</var> as inputs and produces a
 <var>signatureValue</var> as output.
         </p>
         <ol class="algorithm">
           <li>
-Take <var>tbs</var>, which is the data to be signed, an private key and options dictionary as input to the signature suite.
+Take <var>tbs</var>, which is the cryptographic hash of the data to be signed, a
+set of raw <var>privateKey</var> bytes, and an <var>options</var> dictionary as
+input to the signature suite.
           </li>
           <li>
-Perform the digital signature on <var>tbs</var> using the digital signature algorith for P-384 as defined in
-<a href="http://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.180-4.pdf">FIPS-180-4</a> and return the result encoded as <var>signatureValue</var>.
+Perform the digital signature on <var>tbs</var> using the ECDSA digital
+signature algorithm using the requested curve (either Curve P-256 or P-384), as
+defined in [[FIPS-186-4]] and store the result as <var>signatureValue</var>.
           </li>
           <li>
-Multibase encode the <var>signatureValue</var> using base58btc encoding.
+Update <var>signatureValue</var> by multibase-encoding the value using the
+the base58btc encoding.
           </li>
         </ol>
 
@@ -464,21 +469,20 @@ Multibase encode the <var>signatureValue</var> using base58btc encoding.
         <h3>Modifications to Signature Verification Algorithm</h3>
 
         <p>
-The <var>digital signature algorithm</var> defined
-Signature Verification Algorithm takes the value to be verified,
-<em>tbv</em>, the <em>public key</em> to the signature algorithm
-and returns a boolean value.
+The <var>digital signature algorithm</var> defined Signature Verification
+Algorithm takes the value to be verified, <em>tbv</em>, the <em>public key</em>
+to the signature algorithm and returns a boolean value.
         </p>
         <ol class="algorithm">
           <li>
-Multibase decode <var>tbv</var> as base58btc and store the result in
-<var>rawSignature</var>.
+Multibase decode <var>tbv</var> using the base58btc alphabet and store the
+result in <var>rawSignature</var>.
           </li>
           <li>
-Take <var>rawSignature</var> and perform the
-digital signature verification algorithm for P-384 specified in
-<a href="http://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.180-4.pdf">FIPS-180-4</a>. If the result is a valid signature, return
-<code>true</code>, otherwise return <code>false</code>.
+Take <var>rawSignature</var> and perform the digital signature verification
+algorithm associated with the provided <em>public key<em> as specified in
+[[FIPS-186-4]]. If the result is a valid signature, return <code>true</code>,
+otherwise return <code>false</code>.
           </li>
         </ol>
 
