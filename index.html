@@ -1,21 +1,24 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Ecdsa Secp384r1 Cryptosuite v2019</title>
+    <title>ECDSA secpr1 Cryptosuite v2019</title>
     <meta http-equiv='Content-Type' content='text/html;charset=utf-8'/>
     <!--
       === NOTA BENE ===
       For the three scripts below, if your spec resides on dev.w3 you can check them
       out in the same tree and use relative links so that they'll work offline,
      -->
-    <script src='//www.w3.org/Tools/respec/respec-w3c-common' class='remove'></script>
+    <script src='//www.w3.org/Tools/respec/respec-w3c' class='remove'></script>
     <script type="text/javascript" class="remove">
       var respecConfig = {
+        subtitle: "Achieving Data Integrity using ECDSA with NIST-compliant curves",
         // specification status (e.g. WD, LCWD, NOTE, etc.). If in doubt use ED.
         specStatus:           "CG-DRAFT",
 
+
+
         // the specification's short name, as in http://www.w3.org/TR/short-name/
-        shortName:            "di-ecdsa-secp384r1-2019",
+        shortName:            "di-ecdsa-secpr1-2019",
 
         // if you wish the publication date to be other than today, set this
         // publishDate:  "2009-08-06",
@@ -27,7 +30,7 @@
 
 
         // if there a publicly available Editor's Draft, this is the link
-        edDraftURI: "https://digitalbazaar.github.io/di-ecdsa-secp384r1-2019/",
+        edDraftURI: "https://digitalbazaar.github.io/di-ecdsa-secpr1-2019/",
 
         // if this is a LCWD, uncomment and set the end of its review period
         // lcEnd: "2009-08-05",
@@ -67,14 +70,14 @@
         otherLinks: [{
           key: "Source control",
           data: [{
-            value: "https://github.com/digitalbazaar/di-ecdsa-secp384r1-2019/",
-            href: "https://github.com/digitalbazaar/di-ecdsa-secp384r1-2019/"
+            value: "https://github.com/digitalbazaar/di-ecdsa-secpr1-2019/",
+            href: "https://github.com/digitalbazaar/di-ecdsa-secpr1-2019/"
           }]
         }, {
           key: "Issue Tracker",
           data: [{
-            value: "https://github.com/digitalbazaar/di-ecdsa-secp384r1-2019/issues/",
-            href: "https://github.com/digitalbazaar/di-ecdsa-secp384r1-2019/issues/"
+            value: "https://github.com/digitalbazaar/di-ecdsa-secpr1-2019/issues/",
+            href: "https://github.com/digitalbazaar/di-ecdsa-secpr1-2019/issues/"
           }]
         }],
 
@@ -109,6 +112,12 @@
             authors:  ["David Longley", "Manu Sporny"],
             status:   "Draft Community Group Report",
             publisher:  "Credentials Community Group"
+          },
+          "FIPS-186-4": {
+            title:    "FIPS PUB 186-4: Digital Signature Standard (DSS)",
+            href:     "https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.186-4.pdf",
+            status:   "National Standard",
+            publisher:  "U.S. Department of Commerce/National Institute of Standards and Technology"
           }
         }
       };
@@ -117,8 +126,8 @@
   <body>
     <section id='abstract'>
       <p>
-This specification describes the Ecdsa Secp384r1 Signature created in 2019 for the
-Data Integrity specification.
+This specification describes the EcdsaSecp384r1Signature and
+EcdsaSecp256r1Signature created in 2019 for the Data Integrity specification.
       </p>
     </section>
 
@@ -132,87 +141,94 @@ is not fit for production deployment.
     <section>
       <h2>Introduction</h2>
       <p>
-This specification describes the Ecdsa Secp384r1 Signature created in 2019 for the
-Data Integrity [[!DATA-INTEGRITY]] specification. It uses the RDF
-Dataset Canonicalization Algorithm [[!RDF-DATASET-CANONICALIZATION]] to transform the
-input document into its canonical form. It uses SHA-384 [[RFC6234]] as the
-<a>message digest algorithm</a> and P-384 defined in [[RFC7797]] as
-the <a>signature algorithm</a>.
+This specification describes the EcdsaSecp384r1Signature and
+EcdsaSecp256r1Signature created in 2019 for the Data Integrity
+[[DATA-INTEGRITY]] specification. It uses the RDF Dataset Canonicalization
+Algorithm [[RDF-DATASET-CANONICALIZATION]] to transform the input document into
+its canonical form. It uses one of two mechanisms to digest and sign: SHA-256
+[[RFC6234]] as the <a>message digest algorithm</a> and ECDSA with Curve P-256
+defined in [[FIPS-186-4]] as the <a>signature algorithm</a>, or SHA-384
+[[RFC6234]] as the <a>message digest algorithm</a> and ECDSA with Curve P-384
+defined in [[FIPS-186-4]] as the <a>signature algorithm</a>.
       </p>
-    </section>
 
-    <section>
-      <h2>Terminology</h2>
-      <p>
+      <section id="conformance"></section>
+
+      <section>
+        <h2>Terminology</h2>
+        <p>
 The following terms are used throughout this document:
-      </p>
+        </p>
 
-      <dl>
-        <dt><dfn>signature suite</dfn></dt>
-        <dd>
+        <dl>
+          <dt><dfn>signature suite</dfn></dt>
+          <dd>
 A specified set of cryptographic primitives typically consisting of
 a canonicalization algorithm, a message digest algorithm, and a signature
 algorithm that are bundled together by cryptographers for developers
 for the purposes of safety and convenience.
-        </dd>
-        <dt><dfn>canonicalization algorithm</dfn></dt>
-        <dd>
+          </dd>
+          <dt><dfn>canonicalization algorithm</dfn></dt>
+          <dd>
 An algorithm that takes an input document that has more than one possible
 representation and always transforms it into a canonical form. This process is
 sometimes also called <em>normalization</em>.
-        </dd>
-        <dt><dfn>message digest algorithm</dfn></dt>
-        <dd>
+          </dd>
+          <dt><dfn>message digest algorithm</dfn></dt>
+          <dd>
 An algorithm that takes an input message and produces a cryptographic
 output message that is often many orders of magnitude smaller than the
 input message. These algorithms are often 1) very fast, 2)
 non-reversible, 3) cause the output to change significantly when even one
 bit of the input message changes, and 4) make it infeasible to find two
 different inputs for the same output.
-        </dd>
-        <dt><dfn>signature algorithm</dfn></dt>
-        <dd>
+          </dd>
+          <dt><dfn>signature algorithm</dfn></dt>
+          <dd>
 An algorithm that takes an input message and produces an output value where the
 receiver of the message can mathematically verify that the message has not
 been modified in transit and came from someone possessing a particular secret.
-        </dd>
-      </dl>
-
-      <section>
-        <h2>Data Integrity Definitions</h2>
-        <p>
-The following values are defined by this specification:
-        </p>
-
-        <dl>
-          <dt><dfn>EcdsaSecp384r1Signature2019</dfn></dt>
-          <dd>
-A document that complies with the Data Integrity specification has been signed
-with EcdsaSecp384r1Signature2019 when it contains a `proof` value, and that
-value contains a `type` set to `EcdsaSecp384r1Signature2019`, a `proofPurpose`,
-`verificationMethod`, and `proofValue`, as is defined by this specification.
-          </dd>
-
-          <dt><dfn>EcdsaSecp384r1VerificationKey2019</dfn></dt>
-          <dd>
-A Secp384r1 public key. The key MUST contain a `type` set to
-`EcdsaSecp384r1VerificationKey2019`, `controller`, and `publicKeyMultibase`
-value as defined by this specification.
           </dd>
         </dl>
-
       </section>
-
     </section>
 
     <section>
-      <h2>Key Format</h2>
+      <h2>Data Model</h2>
+      <p>
+This specification defines a data model for a number of key formats and
+signature formats.
+      </p>
 
-	<section>
-      <h2>Examples</h2>
+      <section>
+        <h2>Key Formats</h2>
+
+        <p>
+The following two key formats are defined by this specification:
+        </p>
+
+        <section>
+          <h3>EcdsaSecp256r1VerificationKey2019</h3>
+          <p>
+A Curve P-256 compressed public key as defined in [[FIPS-186-4]]. The key MUST
+contain a `type` set to `EcdsaSecp256r1VerificationKey2019`, `controller`, and
+`publicKeyMultibase` value as defined by this specification.
+          </p>
+        </section>
+        <section>
+          <h3>EcdsaSecp384r1VerificationKey2019</h3>
+          <p>
+A Curve P-384 compressed public key. The key MUST contain a `type` set to
+`EcdsaSecp384r1VerificationKey2019`, `controller`, and `publicKeyMultibase`
+value as defined by this specification.
+          </p>
+        </section>
+
+	      <section>
+      <h2>Key Format Examples</h2>
 
       <p>
-An encoded public key example:
+An encoded Curve P-384 public key:
       </p>
 
       <pre class="example highlight">
@@ -222,22 +238,75 @@ An encoded public key example:
   "type": "EcdsaSecp384r1VerificationKey2019",
   "controller": "did:example:123456789abcdefghi",
   "expires": "2020-03-14T04:19:53Z",
-  "publicKeyMultibase" : "z82Lm1MpAkeJcix9K8TMiLd5NMAhnwkjjCBeWHXyu3U4oT2MVJJ
-                          KXkcVBgjGhnLBn2Kaau9"
+  "publicKeyMultibase" : "zXwpDaUC3GovVSzKUNRqseLk84LXJF1m7M2Y8uAtiXhE8un6
+                          b3eCXgoDckmUGfBF3BJhkXoT43wVZqvzNndfTnUrmAKE"
 }
       </pre>
 
-    </section>
+        </section>
     </section>
 
     <section>
-      <h2>Signature Format</h2>
+      <h2>Signature Formats</h2>
 
       <p>
-The 2019 Ecdsa Secp384r1 Signature <a>signature suite</a> MUST be used in
+The <a>signature suites</a> listed in this specification MUST be used in
 conjunction with the signing and verification algorithms in the
-Data Integrity [[DATA-INTEGRITY]] specification. The suite consists of
-the following algorithms:
+Data Integrity [[DATA-INTEGRITY]] specification. The following two signature
+formats are defined by this specification.
+      </p>
+
+      <section>
+      <h3>EcdsaSecp256r1Signature2019</h3>
+      <p>
+A document that complies with the Data Integrity specification has been signed
+with EcdsaSecp256r1Signature2019 when it contains a `proof` value, and that
+value contains a `type` set to `EcdsaSecp256r1Signature2019`, a `proofPurpose`,
+`verificationMethod`, and `proofValue`, as is defined by this specification.
+      </p>
+
+      <p>
+ The suite consists of the following algorithms:
+      </p>
+
+      <table class="simple">
+        <thead>
+          <th>Parameter</th>
+          <th>Value</th>
+          <th>Specification</th>
+        </thead>
+        <tbody>
+          <tr>
+            <td>canonicalizationAlgorithm</td>
+            <td>https://w3id.org/security#GCA2015</td>
+            <td>[[RDF-DATASET-CANONICALIZATION]]</td>
+          </tr>
+          <tr>
+            <td>digestAlgorithm</td>
+            <td>https://www.iana.org/assignments/cose/cose.xhtml#SHA-256</td>
+            <td>[[RFC6234]]</td>
+          </tr>
+          <tr>
+            <td>signatureAlgorithm</td>
+            <td>https://www.iana.org/assignments/cose/cose.xhtml#P-256</a></td>
+            <td>[[RFC8422]]</td>
+          </tr>
+        </tbody>
+
+      </table>
+
+    </section>
+      <section>
+      <h3>EcdsaSecp384r1Signature2019</h3>
+      <p>
+A document that complies with the Data Integrity specification has been signed
+with EcdsaSecp384r1Signature2019 when it contains a `proof` value, and that
+value contains a `type` set to `EcdsaSecp384r1Signature2019`, a `proofPurpose`,
+`verificationMethod`, and `proofValue`, as is defined by this specification.
+      </p>
+
+      <p>
+ The suite consists of the following algorithms:
       </p>
 
       <table class="simple">
@@ -266,8 +335,13 @@ the following algorithms:
 
       </table>
 
+    </section>
+
+    </section>
+  </section>
+
     <section>
-      <h2>Modification to Algorithms</h2>
+      <h2>Algorithms</h2>
 
       <p>
 This signature suite uses ECDSA over Secp384r1 as described in [[RFC8422]].
