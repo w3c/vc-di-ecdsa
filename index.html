@@ -254,11 +254,36 @@ An encoded Curve P-384 public key:
   "id": "did:example:123456789abcdefghi#keys-1",
   "type": "EcdsaSecp384r1VerificationKey2019",
   "controller": "did:example:123456789abcdefghi",
-  "expires": "2020-03-14T04:19:53Z",
   "publicKeyMultibase" : "zXwpDaUC3GovVSzKUNRqseLk84LXJF1m7M2Y8uAtiXhE8un6
                           b3eCXgoDckmUGfBF3BJhkXoT43wVZqvzNndfTnUrmAKE"
 }
       </pre>
+
+      <p class="issue"
+        title="Avoid key format explosion by using multikey header value">
+The pattern that Data Integrity Verification Keys use presently leads to an
+explosion in key types and JSON-LD Contexts. This explosion can be avoided
+without any loss of the single-field precision benefits of a multibase-encoded
+multicodec public key. The only downside for the approach demonstrated below
+is the loss of human-readable key type information. It could be argued that
+developers shouldn't be provided such affordances to ensure that they do
+not meddle with the values. Software libraries would ensure that the multicodec
+header information matches the expected header based on the cryptosuite that
+is utilizing the key. See the section on
+<a href="#signature-format-examples"></a> for more information.
+      </p>
+
+      <pre class="example highlight" title="A Multibase-encoded Multicodec Curve P-384 public key">
+{
+  "@context": ["https://w3id.org/security/multikey/v1"],
+  "id": "did:example:123456789abcdefghi#keys-1",
+  "type": "MulticodecVerificationKey",
+  "controller": "did:example:123456789abcdefghi",
+  "publicKeyMultibase" : "zXwpDaUC3GovVSzKUNRqseLk84LXJF1m7M2Y8uAtiXhE8un6
+                          b3eCXgoDckmUGfBF3BJhkXoT43wVZqvzNndfTnUrmAKE"
+}
+      </pre>
+
 
         </section>
     </section>
