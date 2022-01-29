@@ -203,6 +203,23 @@ signature formats.
       <section>
         <h2>Key Formats</h2>
 
+        <p class="issue" title="Refer normatively to a Multikey specification">
+This specification should not specify multikey formats. It should, instead,
+point to a multikey registry and/or specification. Examples of these
+sorts of documents include the DID Specification Registries for <a
+href="https://w3c.github.io/did-spec-registries/#verification-method-types">
+Verification Method Types</a>, the key types in the <a
+href="https://ns.did.ai/suites/multikey-2021/v1/">
+Multikey2021 JSON-LD Context</a>, and key definitions in the <a
+href="https://w3c-ccg.github.io/security-vocab/">Security Vocabulary</a>.
+Ideally, the specification that this one points to would define all possible
+multikeys listed in the <a href="https://github.com/multiformats/multicodec/blob/master/table.csv">Multicodec Registry</a>
+and define how to encode them as multibase values in fields such as
+`publicKeyMultibase` and `secretKeyMultibase`. The referenced specification
+should also include an extensbility mechanism and registry for new values as
+they are added to the Multicodec Registry.
+        </p>
+
         <p>
 The following two key formats are defined by this specification:
         </p>
