@@ -242,13 +242,13 @@ value as defined by this specification.
         </section>
 
 	      <section>
-      <h2>Key Format Examples</h2>
+          <h2>Key Format Examples</h2>
 
-      <p>
+          <p>
 An encoded Curve P-384 public key:
-      </p>
+          </p>
 
-      <pre class="example highlight">
+          <pre class="example highlight">
 {
   "@context": ["https://w3id.org/security/suites/ecdsa-2019/v1"],
   "id": "did:example:123456789abcdefghi#keys-1",
@@ -257,23 +257,23 @@ An encoded Curve P-384 public key:
   "publicKeyMultibase" : "zXwpDaUC3GovVSzKUNRqseLk84LXJF1m7M2Y8uAtiXhE8un6
                           b3eCXgoDckmUGfBF3BJhkXoT43wVZqvzNndfTnUrmAKE"
 }
-      </pre>
+          </pre>
 
-      <p class="issue"
-        title="Avoid key format explosion by using multikey header value">
+          <p class="issue"
+            title="Avoid key format proliferation by using multikey header value">
 The pattern that Data Integrity Verification Keys use presently leads to an
-explosion in key types and JSON-LD Contexts. This explosion can be avoided
-without any loss of the single-field precision benefits of a multibase-encoded
-multicodec public key. The only downside for the approach demonstrated below
-is the loss of human-readable key type information. It could be argued that
-developers shouldn't be provided such affordances to ensure that they do
-not meddle with the values. Software libraries would ensure that the multicodec
-header information matches the expected header based on the cryptosuite that
-is utilizing the key. See the section on
+proliferation in key types and JSON-LD Contexts. This proliferation can be
+avoided without any loss of the single-field precision benefits of a
+multibase-encoded multicodec public key. The only downside for the approach
+demonstrated below is the loss of human-readable key type information. It could
+be argued that developers shouldn't be provided such affordances to ensure that
+they do not meddle with the values. Software libraries would ensure that the
+multicodec header information matches the expected header based on the
+cryptosuite that is utilizing the key. See the section on
 <a href="#signature-format-examples"></a> for more information.
-      </p>
+          </p>
 
-      <pre class="example highlight" title="A Multibase-encoded Multicodec Curve P-384 public key">
+          <pre class="example highlight" title="A Multibase-encoded Multicodec Curve P-384 public key">
 {
   "@context": ["https://w3id.org/security/multikey/v1"],
   "id": "did:example:123456789abcdefghi#keys-1",
@@ -282,10 +282,10 @@ is utilizing the key. See the section on
   "publicKeyMultibase" : "zXwpDaUC3GovVSzKUNRqseLk84LXJF1m7M2Y8uAtiXhE8un6
                           b3eCXgoDckmUGfBF3BJhkXoT43wVZqvzNndfTnUrmAKE"
 }
-      </pre>
+          </pre>
 
 
-        </section>
+      </section>
     </section>
 
     <section>
@@ -299,56 +299,56 @@ formats are defined by this specification.
       </p>
 
       <section>
-      <h3>EcdsaSecp256r1Signature2019</h3>
-      <p>
+        <h3>EcdsaSecp256r1Signature2019</h3>
+        <p>
 A document that complies with the Data Integrity specification has been signed
 with EcdsaSecp256r1Signature2019 when it contains a `proof` value, and that
 value contains a `type` set to `EcdsaSecp256r1Signature2019`, a `proofPurpose`,
 `verificationMethod`, and `proofValue`, as is defined by this specification.
-      </p>
+        </p>
 
-      <p>
- The suite consists of the following algorithms:
-      </p>
+        <p>
+The suite consists of the following algorithms:
+        </p>
 
-      <table class="simple">
-        <thead>
-          <th>Parameter</th>
-          <th>Value</th>
-          <th>Specification</th>
-        </thead>
-        <tbody>
-          <tr>
-            <td>canonicalizationAlgorithm</td>
-            <td>https://w3id.org/security#GCA2015</td>
-            <td>[[RDF-DATASET-CANONICALIZATION]]</td>
-          </tr>
-          <tr>
-            <td>digestAlgorithm</td>
-            <td>https://www.iana.org/assignments/cose/cose.xhtml#SHA-256</td>
-            <td>[[RFC6234]]</td>
-          </tr>
-          <tr>
-            <td>signatureAlgorithm</td>
-            <td>https://www.iana.org/assignments/cose/cose.xhtml#P-256</a></td>
-            <td>[[RFC8422]]</td>
-          </tr>
-        </tbody>
-
-      </table>
+        <table class="simple">
+          <thead>
+            <th>Parameter</th>
+            <th>Value</th>
+            <th>Specification</th>
+          </thead>
+          <tbody>
+            <tr>
+              <td>canonicalizationAlgorithm</td>
+              <td>https://w3id.org/security#GCA2015</td>
+              <td>[[RDF-DATASET-CANONICALIZATION]]</td>
+            </tr>
+            <tr>
+              <td>digestAlgorithm</td>
+              <td>https://www.iana.org/assignments/cose/cose.xhtml#SHA-256</td>
+              <td>[[RFC6234]]</td>
+            </tr>
+            <tr>
+              <td>signatureAlgorithm</td>
+              <td>https://www.iana.org/assignments/cose/cose.xhtml#P-256</a></td>
+              <td>[[RFC8422]]</td>
+            </tr>
+          </tbody>
+        </table>
 
     </section>
-      <section>
+
+    <section>
       <h3>EcdsaSecp384r1Signature2019</h3>
       <p>
-A document that complies with the Data Integrity specification has been signed
-with EcdsaSecp384r1Signature2019 when it contains a `proof` value, and that
-value contains a `type` set to `EcdsaSecp384r1Signature2019`, a `proofPurpose`,
-`verificationMethod`, and `proofValue`, as is defined by this specification.
+  A document that complies with the Data Integrity specification has been signed
+  with EcdsaSecp384r1Signature2019 when it contains a `proof` value, and that
+  value contains a `type` set to `EcdsaSecp384r1Signature2019`, a `proofPurpose`,
+  `verificationMethod`, and `proofValue`, as is defined by this specification.
       </p>
 
       <p>
- The suite consists of the following algorithms:
+  The suite consists of the following algorithms:
       </p>
 
       <table class="simple">
@@ -379,8 +379,53 @@ value contains a `type` set to `EcdsaSecp384r1Signature2019`, a `proofPurpose`,
 
     </section>
 
+    <section>
+      <h2>Signature Format Examples</h2>
+
+      <p>
+An data integrity digital signature using ECDSA with Curve P-384:
+      </p>
+
+      <pre class="example highlight">
+{
+  "@context": ["https://w3id.org/security/suites/ecdsa-2019/v1"],
+  "type": "EcdsaSecp384r1Signature2019",
+  "created": "2022-01-29T20:35:38Z",
+  "verificationMethod": "did:example:123456789abcdefghi#keys-1",
+  "proofPurpose": "assertionMethod",
+  "proofValue": "z2rb7doJxczUFBTdV5F5pehtbUXPDUgKVugZZ99jniVXCUpojJ9PqLYV
+                 evMeB1gCyJ4HqpnTyQwaoRPWaD3afEZboXCBTdV5F5pehtbUXPDUgKVugUpoj"
+}
+      </pre>
+
+      <p class="issue"
+        title="Avoid signature format proliferation by using text-based suite value">
+The pattern that Data Integrity Signatures use presently leads to an
+proliferation in signature types and JSON-LD Contexts. This proliferation can be
+avoided without any loss of the tightly bound cryptography suite version to
+acceptable public key. See <a href="#key-format-examples"></a> for more
+information on what the matching
+<a href="#example-a-multibase-encoded-multicodec-curve-p-384-public-key">
+MulticodecVerificationKey format</a> could look like.
+      </p>
+
+      <pre class="example highlight" title="A DataIntegritySignature example using a NistEcdsa2019 Cryptosuite">
+{
+  "@context": ["https://w3id.org/security/data-integrity/v1"],
+  "type": "DataIntegritySignature",
+  "suite": "NistEcdsa2019",
+  "created": "2021-11-29T20:35:38Z",
+  "verificationMethod": "did:example:123456789abcdefghi#keys-1",
+  "proofPurpose": "assertionMethod",
+  "proofValue": "z2rb7doJxczUFBTdV5F5pehtbUXPDUgKVugZZ99jniVXCUpojJ9PqLYV
+                 evMeB1gCyJ4HqpnTyQwaoRPWaD3afEZboXCBTdV5F5pehtbUXPDUgKVugUpoj"
+}
+      </pre>
+
     </section>
+
   </section>
+</section>
 
     <section>
       <h2>Algorithms</h2>
