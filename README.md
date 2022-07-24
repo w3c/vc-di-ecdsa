@@ -1,14 +1,16 @@
 # ECDSA secpr1 Data Integrity Cryptosuite
 
-This specification describes a Data Integrity Cryptosuite for use when generating a Elliptic Curve Digital Signature Algorithm (ECDSA) based on the Standards for Efficient Cryptography over Prime fields using the R1 Elliptic Curve (secpr1). The approach is accepted by the U.S. National Institute of Standards and meets U.S. Federal Information Processing requirements when using cryptography to secure digital information.
+This specification describes a Data Integrity Cryptosuite for use when generating a digital signature using the Elliptic Curve Digital Signature Algorithm (ECDSA) based on the Standards for Efficient Cryptography over prime fields using a verifiably random Elliptic Curve (secpr1). The approach is accepted by the U.S. National Institute of Standards and meets U.S. Federal Information Processing requirements when using cryptography to secure digital information.
 
-The specification defining the cryptography suite is available at the following URL: [https://w3c-ccg.github.io/di-ecdsa-nist-2019/](https://w3c-ccg.github.io/di-ecdsa-nist-2019/)
+The specification defining the cryptography suite is available at the following URL: [https://w3c-ccg.github.io/di-ecdsa-2019/](https://w3c-ccg.github.io/di-ecdsa-2019/)
 
 ## Implementations
 
 - none so far
 
 ## Abstract
+
+This specification describes a Data Integrity Cryptosuite for use when generating a digital signature using the Elliptic Curve Digital Signature Algorithm (ECDSA) based on the Standards for Efficient Cryptography over prime fields using a verifiably random Elliptic Curve (secpr1). The approach is accepted by the U.S. National Institute of Standards and meets U.S. Federal Information Processing requirements when using cryptography to secure digital information.
 
 Just like the exiting CCG work items for the <a
 href="https://w3c-ccg.github.io/di-eddsa-2022/">Ed25519 Cryptosuite</a>, the <a href="https://w3c-ccg.github.io/lds-ecdsa-secp256k1-2019/">Secp256k1 Cryptosuite</a>, and the <a href="https://w3c-ccg.github.io/ldp-bbs2020/">BBS+ Cryptosuite</a>, this cryptosuite extends the Data Integrity specification to support cryptography supported by many large organizations and governments throughout the world.
