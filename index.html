@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>ECDSA secpr1 Cryptosuite v2019</title>
+    <title>ECDSA Cryptosuite v2019</title>
     <meta http-equiv='Content-Type' content='text/html;charset=utf-8'/>
     <!--
       === NOTA BENE ===
@@ -13,12 +13,11 @@
       var respecConfig = {
         subtitle: "Achieving Data Integrity using ECDSA with NIST-compliant curves",
         // specification status (e.g. WD, LCWD, NOTE, etc.). If in doubt use ED.
-        specStatus:           "CG-DRAFT",
-
-
+        specStatus: "CG-DRAFT",
 
         // the specification's short name, as in http://www.w3.org/TR/short-name/
-        shortName:            "di-ecdsa-secpr1-2019",
+        shortName: "di-ecdsa-2019",
+        group: "credentials",
 
         // if you wish the publication date to be other than today, set this
         // publishDate:  "2009-08-06",
@@ -28,9 +27,8 @@
         // previousPublishDate:  "1977-03-15",
         // previousMaturity:  "WD",
 
-
         // if there a publicly available Editor's Draft, this is the link
-        edDraftURI: "https://digitalbazaar.github.io/di-ecdsa-secpr1-2019/",
+        edDraftURI: "https://digitalbazaar.github.io/di-ecdsa-2019/",
 
         // if this is a LCWD, uncomment and set the end of its review period
         // lcEnd: "2009-08-05",
@@ -42,8 +40,15 @@
         // editors, add as many as you like
         // only "name" is required
         editors: [{
-          name: "Manu Sporny", url: "https://www.linkedin.com/in/manusporny/",
-          company: "Digital Bazaar", companyURL: "https://digitalbazaar.com/"
+          name: "Manu Sporny",
+          url: "https://www.linkedin.com/in/manusporny/",
+          company: "Digital Bazaar",
+          companyURL: "https://digitalbazaar.com/"
+        }, {
+          name: "Marty Reed",
+          url: "https://www.linkedin.com/in/marty-reed-b5b2352/",
+          company: "RANDA Solutions",
+          companyURL: "https://www.randasolutions.com/"
         }],
 
         // authors, add as many as you like.
@@ -70,14 +75,14 @@
         otherLinks: [{
           key: "Source control",
           data: [{
-            value: "https://github.com/digitalbazaar/di-ecdsa-secpr1-2019/",
-            href: "https://github.com/digitalbazaar/di-ecdsa-secpr1-2019/"
+            value: "https://github.com/digitalbazaar/di-ecdsa-2019/",
+            href: "https://github.com/digitalbazaar/di-ecdsa-2019/"
           }]
         }, {
           key: "Issue Tracker",
           data: [{
-            value: "https://github.com/digitalbazaar/di-ecdsa-secpr1-2019/issues/",
-            href: "https://github.com/digitalbazaar/di-ecdsa-secpr1-2019/issues/"
+            value: "https://github.com/digitalbazaar/di-ecdsa-2019/issues/",
+            href: "https://github.com/digitalbazaar/di-ecdsa-2019/issues/"
           }]
         }],
 
@@ -168,7 +173,7 @@ a canonicalization algorithm, a message digest algorithm, and a signature
 algorithm that are bundled together by cryptographers for developers
 for the purposes of safety and convenience.
           </dd>
-          <dt><dfn>canonicalization algorithm</dfn></dt>
+          <dt><dfn class="lint-ignore">canonicalization algorithm</dfn></dt>
           <dd>
 An algorithm that takes an input document that has more than one possible
 representation and always transforms it into a canonical form. This process is
