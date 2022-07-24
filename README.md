@@ -1,4 +1,4 @@
-# EcdsaSecpr1Signature2019
+# Elliptic Curve Digital Signature Algorithm secp256r1
 
 The specification defining the cryptography suite is available at the following
 URL: [https://w3c-ccg.github.io/di-ecdsa-nist-2019/](https://w3c-ccg.github.io/di-ecdsa-nist-2019/)
