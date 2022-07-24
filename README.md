@@ -1,7 +1,7 @@
 # EcdsaSecpr1Signature2019
 
 The specification defining the cryptography suite is available at the following
-URL: [https://digitalbazaar.github.io/di-ecdsa-secpr1-2019/](https://digitalbazaar.github.io/di-ecdsa-secpr1-2019/)
+URL: [https://w3c-ccg.github.io/di-ecdsa-nist-2019/](https://w3c-ccg.github.io/di-ecdsa-nist-2019/)
 
 ## Implementations
 
@@ -9,10 +9,10 @@ URL: [https://digitalbazaar.github.io/di-ecdsa-secpr1-2019/](https://digitalbaza
 
 ## Abstract
 
-https://digitalbazaar.github.io/di-ecdsa-secpr1-2019/
+https://digitalbazaar.github.io/di-ecdsa-nist-2019/
 
-This specification describes the ECDSA Secpr1 cryptosuite created in 2019 for the Data Integrity specification. Just like the exiting CCG work items for the <a
-href="https://w3c-ccg.github.io/lds-ed25519-2020/">Ed25519 Cryptosuite</a>, the <a href="https://w3c-ccg.github.io/lds-ecdsa-secp256k1-2019/">Secp256k1 Cryptosuite</a>, and the <a href="https://w3c-ccg.github.io/ldp-bbs2020/">BBS+ Cryptosuite</a>, this cryptosuite extends the Data Integrity specification to support cryptography supported by many large organizations throughout the world.
+This specification describes the ECDSA NIST (Secpr1) cryptosuite created in 2019 for the Data Integrity specification. Just like the exiting CCG work items for the <a
+href="https://w3c-ccg.github.io/di-eddsa-2022/">Ed25519 Cryptosuite</a>, the <a href="https://w3c-ccg.github.io/lds-ecdsa-secp256k1-2019/">Secp256k1 Cryptosuite</a>, and the <a href="https://w3c-ccg.github.io/ldp-bbs2020/">BBS+ Cryptosuite</a>, this cryptosuite extends the Data Integrity specification to support cryptography supported by many large organizations and governments throughout the world.
 
 ## Owners
 
