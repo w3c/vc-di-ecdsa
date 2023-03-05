@@ -107,6 +107,25 @@
             status:   "Draft Community Group Report",
             publisher:  "Web Payments Community Group"
           },
+          MULTIBASE: {
+            title: "Multibase",
+            href: "https://tools.ietf.org/html/draft-multiformats-multibase-01",
+          },
+          MULTICODEC: {
+            title: "Multicodec",
+            href: "https://github.com/multiformats/multicodec/",
+          },
+          "VC-DATA-MODEL-2": {
+            title: "Verifiable Credentials Data Model v2.0",
+            href: "https://www.w3.org/TR/vc-data-model-2.0/",
+            authors: [
+              "Manu Sporny", "Dave Longley", "Grant Noble", "Dan Burnett",
+              "Ted Thibodeau", "Brent Zundel", "David Chadwick",
+              "Kyle Den Hartog"
+            ],
+            status: "Working Draft",
+            publisher: "W3C Verifiable Credentials Working Group"
+          },
           "DATA-INTEGRITY": {
             title:    "Data Integrity 1.0",
             href:     "https://w3c-ccg.github.io/data-integrity-spec/",
@@ -222,13 +241,120 @@ JSON-LD.
 
     <section>
       <h2>Data Model</h2>
+
       <p>
-This specification defines a data model for a number of key formats and
-signature formats.
+The following sections outline the data model that is used by this specification
+for <a>verification methods</a> and <a>data integrity proof</a> formats.
       </p>
 
       <section>
-        <h2>Key Formats</h2>
+        <h2>Verification Methods</h2>
+        <p>
+The cryptographic material used to verify a <a>data integrity proof</a> is
+called the <a>verification method</a>. This suite relies on public key material
+represented using [[MULTIBASE]] and [[MULTICODEC]]. This suite supports public
+key use for both digital signature generation and verification, according to
+[[FIPS-186-4]].
+        </p>
+
+        <p>
+This suite MAY be used to verify Data Integrity Proofs [[VC-DATA-INTEGRITY]]
+produced by secpr1 public key material encoded as a
+<a href="#multikey">Multikey</a>. Loss-less key transformation processes that
+result in equivalent cryptographic material MAY be utilized.
+        </p>
+
+        <section>
+          <h3>Multikey</h3>
+
+          <p class="issue">
+This definition should go in the Data Integrity specification and referenced
+from there.
+          </p>
+
+          <p>
+The `type` of the verification method MUST be `Multikey`.
+          </p>
+
+          <p>
+The `controller` of the verification method MUST be a URL.
+          </p>
+
+          <p>
+The `publicKeyMultibase` property of the verification method MUST be
+a public key encoded according to [[MULTICODEC]] and formatted according to
+[[MULTIBASE]]. The multicodec encoding of a secpr1 (P-256) public key is the
+two-byte prefix `0x1200` followed by the 33-byte compressed public key data.
+The 35 byte value is then encoded using base58-btc (`z`) as the prefix.
+The multicodec encoding of a secpr1 (P-384) public key is the
+two-byte prefix `0x1201` followed by the 49-byte compressed public key data.
+The 51 byte value is then encoded using base58-btc (`z`) as the prefix.
+Any other encodings MUST NOT be allowed.
+          </p>
+
+          <p class="advisement">
+Developers are advised to not accidentally publish a representation of a private
+key. Implementations of this specification will raise errors in the event of a
+[[MULTICODEC]] value other than `0x1200` or `0x1201` being used in a
+`publicKeyMultibase` value.
+          </p>
+
+          <pre class="example"
+            title="An secpr1 (P-256) public key encoded as a Multikey">
+{
+  "id": "https://example.com/issuer/123#key-0",
+  "type": "Multikey",
+  "controller": "https://example.com/issuer/123",
+  "publicKeyMultibase": "zDnaerx9CtbPJ1q36T5Ln5wYt3MQYeGRG5ehnPAmxcf5mDZpv"
+}
+          </pre>
+
+          <pre class="example"
+            title="An secpr1 (P-384) public key encoded as a Multikey">
+{
+  "id": "https://example.com/issuer/123#key-0",
+  "type": "Multikey",
+  "controller": "https://example.com/issuer/123",
+  "publicKeyMultibase": "z82LkvCwHNreneWpsgPEbV3gu1C6NFJEBg4srfJ5gdxEsMGRJ
+    Uz2sG9FE42shbn2xkZJh54"
+}
+          </pre>
+
+          <pre class="example" title="Two secpr1 public keys (P-256 and P-384)
+            encoded as Multikeys in a controller document">
+{
+  "@context": [
+    "https://www.w3.org/ns/did/v1",
+    "https://w3id.org/security/data-integrity/v1"
+  ],
+  "id": "did:example:123",
+  "verificationMethod": [{
+    "id": "https://example.com/issuer/123#key-1",
+    "type": "Multikey",
+    "controller": "https://example.com/issuer/123",
+    "publicKeyMultibase": "zDnaerx9CtbPJ1q36T5Ln5wYt3MQYeGRG5ehnPAmxcf5mDZpv"
+  }, {
+    "id": "https://example.com/issuer/123#key-2",
+    "type": "Multikey",
+    "controller": "https://example.com/issuer/123",
+    "publicKeyMultibase": "z82LkvCwHNreneWpsgPEbV3gu1C6NFJEBg4srfJ5gdxEsMGRJ
+      Uz2sG9FE42shbn2xkZJh54"
+  }],
+  "authentication": [
+    "did:example:123#key-1"
+  ],
+  "assertionMethod": [
+    "did:example:123#key-2"
+  ],
+  "capabilityDelegation": [
+    "did:example:123#key-2"
+  ],
+  "capabilityInvocation": [
+    "did:example:123#key-2"
+  ]
+}
+          </pre>
+        </section>
 
         <p class="issue" title="Refer normatively to a Multikey specification">
 This specification should not specify multikey formats. It should, instead,
@@ -246,71 +372,6 @@ and define how to encode them as multibase values in fields such as
 should also include an extensbility mechanism and registry for new values as
 they are added to the Multicodec Registry.
         </p>
-
-        <p>
-The following two key formats are defined by this specification:
-        </p>
-
-        <section>
-          <h3>EcdsaSecp256r1VerificationKey2019</h3>
-          <p>
-A Curve P-256 compressed public key as defined in [[FIPS-186-4]]. The key MUST
-contain a `type` set to `EcdsaSecp256r1VerificationKey2019`, `controller`, and
-`publicKeyMultibase` value as defined by this specification.
-          </p>
-        </section>
-        <section>
-          <h3>EcdsaSecp384r1VerificationKey2019</h3>
-          <p>
-A Curve P-384 compressed public key. The key MUST contain a `type` set to
-`EcdsaSecp384r1VerificationKey2019`, `controller`, and `publicKeyMultibase`
-value as defined by this specification.
-          </p>
-        </section>
-
-	      <section>
-          <h2>Key Format Examples</h2>
-
-          <p>
-An encoded Curve P-384 public key:
-          </p>
-
-          <pre class="example highlight">
-{
-  "@context": ["https://w3id.org/security/suites/ecdsa-2019/v1"],
-  "id": "did:example:123456789abcdefghi#keys-1",
-  "type": "EcdsaSecp384r1VerificationKey2019",
-  "controller": "did:example:123456789abcdefghi",
-  "publicKeyMultibase" : "zsJV1eTDACogBS8FMj5vXSa51g1CY1y88DR2DGDwTsMTotTG
-			  ELVH1XTEsFP8ok9q22ssAaqHN5fMgm1kweTABZZNRSc"
-}
-          </pre>
-
-          <p class="issue"
-            title="Avoid key format proliferation by using multikey header value">
-The pattern that Data Integrity Verification Keys use presently leads to an
-proliferation in key types and JSON-LD Contexts. This proliferation can be
-avoided without any loss of the single-field precision benefits of a
-multibase-encoded multicodec public key. The only downside for the approach
-demonstrated below is the loss of human-readable key type information. It could
-be argued that developers shouldn't be provided such affordances to ensure that
-they do not meddle with the values. Software libraries would ensure that the
-multicodec header information matches the expected header based on the
-cryptosuite that is utilizing the key for verification. See the section on
-<a href="#signature-format-examples"></a> for more information.
-          </p>
-
-          <pre class="example highlight" title="A Multibase-encoded Multicodec Curve P-384 public key">
-{
-  "@context": ["https://w3id.org/security/multikey/v1"],
-  "id": "did:example:123456789abcdefghi#keys-1",
-  "type": "MulticodecVerificationKey",
-  "controller": "did:example:123456789abcdefghi",
-  "publicKeyMultibase" : "zsJV1eTDACogBS8FMj5vXSa51g1CY1y88DR2DGDwTsMTotTG
-			  ELVH1XTEsFP8ok9q22ssAaqHN5fMgm1kweTABZZNRSc"
-}
-          </pre>
-
 
       </section>
     </section>
