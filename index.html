@@ -181,50 +181,42 @@ using cryptography to secure digital information. It uses either the RDF
 Dataset Canonicalization Algorithm [[RDF-CANON]] or the JSON Canonicalization
 Scheme [[RFC8785]] to transform the input document into
 its canonical form. It uses one of two mechanisms to digest and sign: SHA-256
-[[RFC6234]] as the <a>message digest algorithm</a> and ECDSA with Curve P-256
-defined in [[FIPS-186-4]] as the <a>signature algorithm</a>, or SHA-384
-[[RFC6234]] as the <a>message digest algorithm</a> and ECDSA with Curve P-384
-defined in [[FIPS-186-4]] as the <a>signature algorithm</a>.
+[[RFC6234]] as the message digest algorithm and ECDSA with Curve P-256
+defined in [[FIPS-186-4]] as the signature algorithm, or SHA-384
+[[RFC6234]] as the message digest algorithm and ECDSA with Curve P-384
+defined in [[FIPS-186-4]] as the signature algorithm.
       </p>
 
-      <section id="conformance"></section>
-
-      <section>
+      <section id="terminology">
         <h2>Terminology</h2>
+
+        <div data-include="https://w3c.github.io/vc-data-integrity/terms.html"></div>
+
+      </section>
+
+      <section id="conformance">
         <p>
-The following terms are used throughout this document:
+A <dfn>conforming proof</dfn> is any concrete expression of the data model
+that complies with the normative statements in this specification. Specifically,
+all relevant normative statements in Sections
+<a href="#data-model"></a> and <a href="#algorithms"></a>
+of this document MUST be enforced.
         </p>
 
-        <dl>
-          <dt><dfn>signature suite</dfn></dt>
-          <dd>
-A specified set of cryptographic primitives typically consisting of
-a canonicalization algorithm, a message digest algorithm, and a signature
-algorithm that are bundled together by cryptographers for developers
-for the purposes of safety and convenience.
-          </dd>
-          <dt><dfn class="lint-ignore">canonicalization algorithm</dfn></dt>
-          <dd>
-An algorithm that takes an input document that has more than one possible
-representation and always transforms it into a canonical form. This process is
-sometimes also called <em>normalization</em>.
-          </dd>
-          <dt><dfn>message digest algorithm</dfn></dt>
-          <dd>
-An algorithm that takes an input message and produces a cryptographic
-output message that is often many orders of magnitude smaller than the
-input message. These algorithms are often 1) very fast, 2)
-non-reversible, 3) cause the output to change significantly when even one
-bit of the input message changes, and 4) make it infeasible to find two
-different inputs for the same output.
-          </dd>
-          <dt><dfn>signature algorithm</dfn></dt>
-          <dd>
-An algorithm that takes an input message and produces an output value where the
-receiver of the message can mathematically verify that the message has not
-been modified in transit and came from someone possessing a particular secret.
-          </dd>
-        </dl>
+        <p>
+A <dfn class="lint-ignore">conforming processor</dfn> is any algorithm realized
+as software and/or hardware that generates or consumes a
+<a>conforming proof</a>. Conforming processors MUST produce errors when
+non-conforming documents are consumed.
+        </p>
+        <p>
+This document also contains examples that contain JSON and JSON-LD content. Some
+of these examples contain characters that are invalid JSON, such as inline
+comments (`//`) and the use of ellipsis (`...`) to denote
+information that adds little value to the example. Implementers are cautioned to
+remove this content if they desire to use the information as valid JSON or
+JSON-LD.
+        </p>
       </section>
     </section>
 
