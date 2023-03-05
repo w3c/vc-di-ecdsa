@@ -158,10 +158,7 @@
 This specification describes a Data Integrity Cryptosuite for use when
 generating a digital signature using the Elliptic Curve Digital Signature
 Algorithm (ECDSA) based on the Standards for Efficient Cryptography over prime
-fields using a verifiably random Elliptic Curve (secpr1). The approach is
-accepted by the U.S. National Institute of Standards and meets U.S. Federal
-Information Processing requirements when using cryptography to secure digital
-information.
+fields using a verifiably random Elliptic Curve (secpr1).
       </p>
     </section>
 
@@ -175,10 +172,14 @@ is not fit for production deployment.
     <section>
       <h2>Introduction</h2>
       <p>
-This specification describes the EcdsaSecp384r1Signature and
-EcdsaSecp256r1Signature created in 2019 for the Data Integrity
-[[DATA-INTEGRITY]] specification. It uses the RDF Dataset Canonicalization
-Algorithm [[RDF-DATASET-CANONICALIZATION]] to transform the input document into
+This specification defines a cryptographic suite for the purpose of creating,
+and verifying proofs for secpr1 ECDSA signatures in conformance with the
+Data Integrity [[VC-DATA-INTEGRITY]] specification. The approach is
+accepted by the U.S. National Institute of Standards in the latest FIPS 186-5
+publication and meets U.S. Federal Information Processing requirements when
+using cryptography to secure digital information. It uses either the RDF
+Dataset Canonicalization Algorithm [[RDF-CANON]] or the JSON Canonicalization
+Scheme [[RFC8785]] to transform the input document into
 its canonical form. It uses one of two mechanisms to digest and sign: SHA-256
 [[RFC6234]] as the <a>message digest algorithm</a> and ECDSA with Curve P-256
 defined in [[FIPS-186-4]] as the <a>signature algorithm</a>, or SHA-384
