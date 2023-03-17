@@ -1,7 +1,7 @@
 ## ECDSA Data Integrity Cryptosuites
 
 This specification describes a
-[Data Integrity Cryptosuite](https://github.com/w3c/vc-data-integrity)
+[Data Integrity Cryptosuite](https://www.w3.org/TR/vc-data-integrity/)
 for use when generating a digital signature using the Elliptic Curve Digital
 Signature Algorithm (ECDSA) based on the Standards for Efficient Cryptography
 over prime fields using a verifiably random Elliptic Curve (secpr1).
@@ -22,9 +22,9 @@ issues and Pull Requests in the GitHub repository, discussions also occur on the
   * Ivan Herman - @iherman
 
 ### Other Relevant Working Group Repositories
-* [Use Cases](https://github.com/w3c/vc-use-cases)
-* [Data Model](https://github.com/w3c/vc-data-model)
-* [Data Integrity](https://github.com/w3c/vc-data-integrity)
+* [Use Cases](https://www.w3.org/TR/vc-use-cases)
+* [Data Model](https://www.w3.org/TR/vc-data-model)
+* [Data Integrity](https://www.w3.org/TR/vc-data-integrity)
 
 ### Discussion Forums
 * [W3C Credentials Community Group Mailing List (Incubation)](https://lists.w3.org/Archives/Public/public-credentials/)
