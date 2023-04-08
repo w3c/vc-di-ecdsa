@@ -16,13 +16,13 @@
         subtitle: "Achieving Data Integrity using ECDSA with NIST-compliant curves",
         // specification status (e.g. WD, LCWD, NOTE, etc.). If in doubt use ED.
         group: "vc",
-        specStatus: "ED",
+        specStatus: "FPWD",
 
         // the specification's short name, as in http://www.w3.org/TR/short-name/
         shortName: "vc-di-ecdsa",
 
         // if you wish the publication date to be other than today, set this
-        // publishDate:  "2009-08-06",
+        publishDate:  "2023-04-18",
 
         // if there is a previously published draft, uncomment this and set its YYYY-MM-DD date
         // and its maturity status
@@ -46,12 +46,14 @@
           name: "Manu Sporny",
           url: "https://www.linkedin.com/in/manusporny/",
           company: "Digital Bazaar",
-          companyURL: "https://digitalbazaar.com/"
+          companyURL: "https://digitalbazaar.com/",
+          w3cid: 41758
         }, {
           name: "Marty Reed",
           url: "https://www.linkedin.com/in/marty-reed-b5b2352/",
           company: "RANDA Solutions",
-          companyURL: "https://www.randasolutions.com/"
+          companyURL: "https://www.randasolutions.com/",
+          w3cid: 127611
         }],
 
         // authors, add as many as you like.
@@ -60,10 +62,12 @@
 
         authors: [{
           name: "Dave Longley", url: "http://digitalbazaar.com/",
-          company: "Digital Bazaar", companyURL: "http://digitalbazaar.com/"
+          company: "Digital Bazaar", companyURL: "http://digitalbazaar.com/",
+          w3cid: 48025
         }, {
           name: "Manu Sporny", url: "https://www.linkedin.com/in/manusporny/",
-          company: "Digital Bazaar", companyURL: "https://digitalbazaar.com/"
+          company: "Digital Bazaar", companyURL: "https://digitalbazaar.com/",
+          w3cid: 41758
         }],
 
         // extend the bibliography entries
@@ -759,13 +763,22 @@ improving the chances of maximum interoperability for the multikey format.
     </p>
 
   </section>
-
-<div class="issue">TODO: We need to add a complete list of security
-considerations.</div>
-
-
-
 </section>
 
+<section>
+  <h2>Privacy Considerations</h2>
+  <p>
+The following section describes privacy considerations that developers
+implementing this specification should be aware of in order to avoid violating
+privacy assumptions.
+  </p>
+
+  <p class="issue">
+This cryptography suite does not provide for selective disclosure or
+unlinkability. If signatures are re-used, they can be used as correlatable data.
+  </p>
+</section>
+
+</section>
   </body>
 </html>
