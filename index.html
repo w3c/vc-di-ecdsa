@@ -179,7 +179,7 @@ defined in [[FIPS-186-5]] as the signature algorithm.
       </p>
 
       <section id="terminology">
-        <h2>Terminology</h2>
+        <h3>Terminology</h3>
 
         <div data-include="https://w3c.github.io/vc-data-integrity/terms.html"></div>
 
@@ -221,7 +221,7 @@ for <a>verification methods</a> and <a>data integrity proof</a> formats.
       </p>
 
       <section>
-        <h2>Verification Methods</h2>
+        <h3>Verification Methods</h3>
         <p>
 The cryptographic material used to verify a <a>data integrity proof</a> is
 called the <a>verification method</a>. This suite relies on public key material
@@ -238,7 +238,7 @@ result in equivalent cryptographic material MAY be utilized.
         </p>
 
         <section>
-          <h3>Multikey</h3>
+          <h4>Multikey</h4>
 
           <p class="issue">
 This definition should go in the Data Integrity specification and referenced
@@ -349,7 +349,7 @@ they are added to the Multicodec Registry.
       </section>
 
       <section>
-        <h2>Proof Representations</h2>
+        <h3>Proof Representations</h3>
 
         <p>
 This suite relies on detached digital signatures represented using [[MULTIBASE]]
@@ -357,7 +357,7 @@ and [[MULTICODEC]].
         </p>
 
         <section>
-          <h3>DataIntegrityProof</h3>
+          <h4>DataIntegrityProof</h4>
 
           <p>
 The `verificationMethod` property of the proof MUST be a URL.
@@ -435,7 +435,7 @@ section also include the verification of such a data integrity proof.
         </p>
 
         <section>
-          <h2>Add Proof (ecdsa-2019)</h2>
+          <h4>Add Proof (ecdsa-2019)</h4>
 
           <p>
 To generate a proof, the algorithm in
@@ -456,7 +456,7 @@ proof serialization algorithm</a> is defined in Section
         </section>
 
         <section>
-          <h2>Verify Proof (ecdsa-2019)</h2>
+          <h4>Verify Proof (ecdsa-2019)</h4>
 
           <p>
 To verify a proof, the algorithm in
@@ -477,7 +477,7 @@ proof verification algorithm</a> is defined in Section
         </section>
 
         <section>
-          <h3>Transformation (ecdsa-2019)</h3>
+          <h4>Transformation (ecdsa-2019)</h4>
 
           <p>
 The following algorithm specifies how to transform an unsecured input document
@@ -520,7 +520,7 @@ Return <var>canonicalDocument</var> as the <em>transformed data document</em>.
         </section>
 
         <section>
-          <h3>Hashing (ecdsa-2019)</h3>
+          <h4>Hashing (ecdsa-2019)</h4>
 
           <p>
 The following algorithm specifies how to cryptographically hash a
@@ -562,7 +562,7 @@ Return <var>hashData</var> as the <em>hash data</em>.
         </section>
 
         <section>
-          <h3>Proof Configuration (ecdsa-2019)</h3>
+          <h4>Proof Configuration (ecdsa-2019)</h4>
 
           <p>
 The following algorithm specifies how to generate a
@@ -618,7 +618,7 @@ Return <var>proofConfig</var>.
         </section>
 
         <section>
-          <h3>Proof Serialization (ecdsa-2019)</h3>
+          <h4>Proof Serialization (ecdsa-2019)</h4>
 
           <p>
 The following algorithm specifies how to serialize a digital signature from
@@ -660,7 +660,7 @@ Return <var>proofBytes</var> as the <em>digital proof</em>.
         </section>
 
         <section>
-          <h3>Proof Verification (ecdsa-2019)</h3>
+          <h4>Proof Verification (ecdsa-2019)</h4>
 
           <p>
 The following algorithm specifies how to verify a digital signature from
