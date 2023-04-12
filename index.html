@@ -209,6 +209,7 @@ remove this content if they desire to use the information as valid JSON or
 JSON-LD.
         </p>
       </section>
+
     </section>
 
     <section>
@@ -347,49 +348,49 @@ they are added to the Multicodec Registry.
 
       </section>
 
-    <section>
-      <h2>Proof Representations</h2>
-
-      <p>
-This suite relies on detached digital signatures represented using [[MULTIBASE]]
-and [[MULTICODEC]].
-      </p>
-
       <section>
-        <h3>DataIntegrityProof</h3>
+        <h2>Proof Representations</h2>
 
         <p>
+This suite relies on detached digital signatures represented using [[MULTIBASE]]
+and [[MULTICODEC]].
+        </p>
+
+        <section>
+          <h3>DataIntegrityProof</h3>
+
+          <p>
 The `verificationMethod` property of the proof MUST be a URL.
 Dereferencing the `verificationMethod` MUST result in an object
 containing a `type` property with the value set to
 `Multikey`.
-        </p>
+          </p>
 
-        <p>
+          <p>
 The `type` property of the proof MUST be `DataIntegrityProof`.
-        </p>
-        <p>
+          </p>
+          <p>
 The `cryptosuite` property of the proof MUST be `ecdsa-2019`.
-        </p>
-        <p>
+          </p>
+          <p>
 The `created` property of the proof MUST be an [[XMLSCHEMA11-2]]
 formatted date string.
-        </p>
-        <p>
+          </p>
+          <p>
 The `proofPurpose` property of the proof MUST be a string, and MUST
 match the verification relationship expressed by the verification method
 `controller`.
-        </p>
-        <p>
+          </p>
+          <p>
 The `proofValue` property of the proof MUST be a detached ECDSA
 produced according to [[FIPS-186-5]], encoded according to [[MULTIBASE]] using
 the base58-btc base encoding.
-        </p>
+          </p>
 
-        <pre class="example highlight" style="overflow-x:
-          auto; white-space: pre-wrap; word-wrap: break-word;"
-          title="An secpr1 (P-256) digital signature expressed as a
-            DataIntegrityProof">
+          <pre class="example highlight" style="overflow-x:
+            auto; white-space: pre-wrap; word-wrap: break-word;"
+            title="An secpr1 (P-256) digital signature expressed as a
+              DataIntegrityProof">
 {
   "@context": [
     {"title": "https://schema.org/title"},
@@ -406,38 +407,37 @@ the base58-btc base encoding.
       VHMrXFkXJpmEcqdoDwLWxaqA3Q1geV6"
   }
 }
-        </pre>
+          </pre>
 
+        </section>
       </section>
     </section>
-  </section>
-</section>
 
-  <section>
-    <h2>Algorithms</h2>
+    <section>
+      <h2>Algorithms</h2>
 
-    <p>
+      <p>
 The following section describes multiple Data Integrity cryptographic suites
 that utilize the Elliptic Curve Digital Signature Algorithm (ECDSA) based on the
 Standards for Efficient Cryptography over prime fields using a verifiably random
 Elliptic Curve (secpr1).
-    </p>
+      </p>
 
-    <section>
-    <h3>ecdsa-2019</h3>
+      <section>
+        <h3>ecdsa-2019</h3>
 
-    <p>
+        <p>
 The `ecdsa-2019` cryptographic suite takes an input document, canonicalizes
 the document using the Universal RDF Dataset Canonicalization Algorithm
 [[RDF-CANON]], and then cryptographically hashes and signs the output
 resulting in the production of a data integrity proof. The algorithms in this
 section also include the verification of such a data integrity proof.
-    </p>
+        </p>
 
-    <section>
-      <h2>Add Proof (ecdsa-2019)</h2>
+        <section>
+          <h2>Add Proof (ecdsa-2019)</h2>
 
-      <p>
+          <p>
 To generate a proof, the algorithm in
 <a href="https://www.w3.org/TR/vc-data-integrity/#add-proof">
 Section 4.1: Add Proof</a> in the Data Integrity
@@ -452,13 +452,13 @@ and the
 <a href="https://www.w3.org/TR/vc-data-integrity/#dfn-proof-serialization-algorithm">
 proof serialization algorithm</a> is defined in Section
 <a href="#proof-serialization-ecdsa-2019"></a>.
-      </p>
-    </section>
+          </p>
+        </section>
 
-    <section>
-      <h2>Verify Proof (ecdsa-2019)</h2>
+        <section>
+          <h2>Verify Proof (ecdsa-2019)</h2>
 
-      <p>
+          <p>
 To verify a proof, the algorithm in
 <a href="https://www.w3.org/TR/vc-data-integrity/#verify-proof">
 Section 4.2: Verify Proof</a> in the Data Integrity
@@ -473,19 +473,19 @@ and the
 <a href="https://www.w3.org/TR/vc-data-integrity/#dfn-proof-serialization-algorithm">
 proof verification algorithm</a> is defined in Section
 <a href="#proof-verification-ecdsa-2019"></a>.
-      </p>
-    </section>
+          </p>
+        </section>
 
-    <section>
-      <h3>Transformation (ecdsa-2019)</h3>
+        <section>
+          <h3>Transformation (ecdsa-2019)</h3>
 
-      <p>
+          <p>
 The following algorithm specifies how to transform an unsecured input document
 into a transformed document that is ready to be provided as input to the
 hashing algorithm in Section <a href="#hashing-ecdsa-2019"></a>.
-      </p>
+          </p>
 
-      <p>
+          <p>
 Required inputs to this algorithm are an
 <a data-cite="vc-data-integrity#dfn-unsecured-data-document">
 unsecured data document</a> (<var>unsecuredDocument</var>) and
@@ -496,81 +496,81 @@ cryptographic suite</a> (<var>type</var>) and a cryptosuite
 identifier (<var>cryptosuite</var>). A <em>transformed data document</em> is
 produced as output. Whenever this algorithm encodes strings, it MUST use UTF-8
 encoding.
-      </p>
+          </p>
 
-      <ol class="algorithm">
-        <li>
+          <ol class="algorithm">
+            <li>
 If <var>options</var>.<var>type</var> is not set to the string
 `DataIntegrityProof` and <var>options</var>.<var>cryptosuite</var> is not
 set to the string `ecdsa-2019` then a `PROOF_TRANSFORMATION_ERROR` MUST be
 raised.
-        </li>
-        <li>
+            </li>
+            <li>
 Let <var>canonicalDocument</var> be the result of applying the
 Universal RDF Dataset Canonicalization Algorithm
 [[RDF-CANON]] to the <var>unsecuredDocument</var>.
-        </li>
-        <li>
+            </li>
+            <li>
 Set <var>output</var> to the value of <var>canonicalDocument</var>.
-        </li>
-        <li>
+            </li>
+            <li>
 Return <var>canonicalDocument</var> as the <em>transformed data document</em>.
-        </li>
-      </ol>
-    </section>
+            </li>
+          </ol>
+        </section>
 
-    <section>
-      <h3>Hashing (ecdsa-2019)</h3>
+        <section>
+          <h3>Hashing (ecdsa-2019)</h3>
 
-      <p>
+          <p>
 The following algorithm specifies how to cryptographically hash a
 <em>transformed data document</em> and <em>proof configuration</em>
 into cryptographic hash data that is ready to be provided as input to the
 algorithms in Section <a href="#proof-serialization-ecdsa-2019"></a> or
 Section <a href="#proof-verification-ecdsa-2019"></a>.
-      </p>
+          </p>
 
-      <p>
+          <p>
 The required inputs to this algorithm are a <em>transformed data document</em>
 (<var>transformedDocument</var>) and <em>proof configuration</em>
 (<var>proofConfig</var>). A single <em>hash data</em> value represented as
 series of bytes is produced as output.
-      </p>
+          </p>
 
-      <ol class="algorithm">
-        <li>
+          <ol class="algorithm">
+            <li>
 Let <var>transformedDocumentHash</var> be the result of applying the
 SHA-256 (SHA-2 with 256-bit output) cryptographic hashing algorithm [[RFC6234]]
 to the <var>transformedDocument</var>. <var>transformedDocumentHash</var> will
 be exactly 32 bytes in size.
-        </li>
-        <li>
+            </li>
+            <li>
 Let <var>proofConfigHash</var> be the result of applying the
 SHA-256 (SHA-2 with 256-bit output) cryptographic hashing algorithm [[RFC6234]]
 to the <var>proofConfig</var>. <var>proofConfigHash</var> will be
 exactly 32 bytes in size.
-        </li>
-        <li>
+            </li>
+            <li>
 Let <var>hashData</var> be the result of joining <var>proofConfigHash</var> (the
 first hash) with <var>transformedDocumentHash</var> (the second hash).
-        </li>
-        <li>
+            </li>
+            <li>
 Return <var>hashData</var> as the <em>hash data</em>.
-        </li>
-      </ol>
+            </li>
+          </ol>
 
-    </section>
+        </section>
 
-    <section>
-      <h3>Proof Configuration (ecdsa-2019)</h3>
+        <section>
+          <h3>Proof Configuration (ecdsa-2019)</h3>
 
-      <p>
+          <p>
 The following algorithm specifies how to generate a
 <em>proof configuration</em> from a set of <em>proof options</em>
 that is used as input to the <a href="#hashing-ecdsa-2019">proof hashing algorithm</a>.
-      </p>
+          </p>
 
-      <p>
+          <p>
 The required inputs to this algorithm are <em>proof options</em>
 (<var>options</var>). The <em>proof options</em> MUST contain a type identifier
 for the
@@ -578,49 +578,49 @@ for the
 cryptographic suite</a> (<var>type</var>) and MUST contain a cryptosuite
 identifier (<var>cryptosuite</var>). A <em>proof configuration</em>
 object is produced as output.
-      </p>
+          </p>
 
-      <ol class="algorithm">
-        <li>
+          <ol class="algorithm">
+            <li>
 Let <var>proofConfig</var> be an empty object.
-        </li>
-        <li>
+            </li>
+            <li>
 Set <var>proofConfig</var>.<var>type</var> to
 <var>options</var>.<var>type</var>.
-        </li>
-        <li>
+            </li>
+            <li>
 If <var>options</var>.<var>cryptosuite</var> is set, set
 <var>proofConfig</var>.<var>cryptosuite</var> to its value.
-        </li>
-        <li>
+            </li>
+            <li>
 If <var>options</var>.<var>type</var> is not set to `DataIntegrityProof` and
 <var>proofConfig</var>.<var>cryptosuite</var> is not set to `ecdsa-2019`, an
 `INVALID_PROOF_CONFIGURATION` error MUST be raised.
-        </li>
-        <li>
+            </li>
+            <li>
 Set <var>proofConfig</var>.<var>created</var> to
 <var>options</var>.<var>created</var>. If the value is not a valid
 [[XMLSCHEMA11-2]] datetime, an `INVALID_PROOF_DATETIME` error MUST be raised.
-        </li>
-        <li>
+            </li>
+            <li>
 Set <var>proofConfig</var>.<var>verificationMethod</var> to
 <var>options</var>.<var>verificationMethod</var>.
-        </li>
-        <li>
+            </li>
+            <li>
 Set <var>proofConfig</var>.<var>proofPurpose</var> to
 <var>options</var>.<var>proofPurpose</var>.
-        </li>
-        <li>
+            </li>
+            <li>
 Return <var>proofConfig</var>.
-        </li>
-      </ol>
+            </li>
+          </ol>
 
-    </section>
+        </section>
 
-    <section>
-      <h3>Proof Serialization (ecdsa-2019)</h3>
+        <section>
+          <h3>Proof Serialization (ecdsa-2019)</h3>
 
-      <p>
+          <p>
 The following algorithm specifies how to serialize a digital signature from
 a set of cryptographic hash data. This
 algorithm is designed to be used in conjunction with the algorithms defined
@@ -634,35 +634,35 @@ cryptographic hash data (<var>hashData</var>) and
 cryptographic suite</a> (<var>type</var>) and MAY contain a cryptosuite
 identifier (<var>cryptosuite</var>). A single <em>digital proof</em> value
 represented as series of bytes is produced as output.
-      </p>
+          </p>
 
-      <ol class="algorithm">
-        <li>
+          <ol class="algorithm">
+            <li>
 Let <var>privateKeyBytes</var> be the result of retrieving the
 private key bytes associated with the
 <var>options</var>.<var>verificationMethod</var> value as described in the
 Data Integrity [[VC-DATA-INTEGRITY]] specification,
 <a data-cite="vc-data-integrity#algorithms">
 Section 4: Retrieving Cryptographic Material</a>.
-        </li>
-        <li>
+            </li>
+            <li>
 Let <var>proofBytes</var> be the result of applying the Elliptic Curve Digital
 Signature Algorithm (ECDSA) [[FIPS-186-5]], with <var>hashData</var> as the data
 to be signed using the private key specified by <var>privateKeyBytes</var>.
 <var>proofBytes</var> will be exactly 64 bytes in size for a P-256 key, and
 96 bytes in size for a P-384 key.
-        </li>
-        <li>
+            </li>
+            <li>
 Return <var>proofBytes</var> as the <em>digital proof</em>.
-        </li>
-      </ol>
+            </li>
+          </ol>
 
-    </section>
+        </section>
 
-    <section>
-      <h3>Proof Verification (ecdsa-2019)</h3>
+        <section>
+          <h3>Proof Verification (ecdsa-2019)</h3>
 
-      <p>
+          <p>
 The following algorithm specifies how to verify a digital signature from
 a set of cryptographic hash data. This
 algorithm is designed to be used in conjunction with the algorithms defined
@@ -673,44 +673,44 @@ cryptographic hash data (<var>hashData</var>),
 a digital signature (<var>proofBytes</var>) and
 proof options (<var>options</var>). A <em>verification result</em>
 represented as a boolean value is produced as output.
-      </p>
+          </p>
 
-      <ol class="algorithm">
-        <li>
+          <ol class="algorithm">
+            <li>
 Let <var>publicKeyBytes</var> be the result of retrieving the
 public key bytes associated with the
 <var>options</var>.<var>verificationMethod</var> value as described in the
 Data Integrity [[VC-DATA-INTEGRITY]] specification,
 <a data-cite="vc-data-integrity#algorithms">
 Section 4: Retrieving Cryptographic Material</a>.
-        </li>
-        <li>
+            </li>
+            <li>
 Let <var>verificationResult</var> be the result of applying the verification
 algorithm Elliptic Curve Digital Signature Algorithm (ECDSA) [[FIPS-186-5]],
 with <var>hashData</var> as the data to be verified against the
 <var>proofBytes</var> using the public key specified by
 <var>publicKeyBytes</var>.
-        </li>
-        <li>
+            </li>
+            <li>
 Return <var>verificationResult</var> as the <em>verification result</em>.
-        </li>
-      </ol>
+            </li>
+          </ol>
 
+        </section>
+      </section>
     </section>
-  </section>
-</section>
-<section>
-  <h2>Security Considerations</h2>
-  <p>
+    <section>
+      <h2>Security Considerations</h2>
+      <p>
 The following section describes security considerations that developers
 implementing this specification should be aware of in order to create secure
 software.
-  </p>
+      </p>
 
-  <section>
-    <h3>Split Key Formats From Cryptosuites</h3>
+      <section>
+        <h3>Split Key Formats From Cryptosuites</h3>
 
-    <p class="issue">
+        <p class="issue">
 Ensuring that cryptographic suites are versioned and tightly scoped to a very
 small set of possible key types and signature schemes (ideally one key type and
 size and one signature output type) is a design goal for most Data Integrity
@@ -726,25 +726,25 @@ by fully defining the multikey format in a separate specification so
 cryptosuite specifications, such as this one, can refer to the multikey
 specification, thus reducing the chances of multikey type proliferation and
 improving the chances of maximum interoperability for the multikey format.
-    </p>
+        </p>
 
-  </section>
-</section>
+      </section>
+    </section>
 
-<section>
-  <h2>Privacy Considerations</h2>
-  <p>
+    <section>
+      <h2>Privacy Considerations</h2>
+      <p>
 The following section describes privacy considerations that developers
 implementing this specification should be aware of in order to avoid violating
 privacy assumptions.
-  </p>
+      </p>
 
-  <p class="issue">
+      <p class="issue">
 This cryptography suite does not provide for selective disclosure or
 unlinkability. If signatures are re-used, they can be used as correlatable data.
-  </p>
-</section>
+      </p>
+    </section>
 
-</section>
+    </section>
   </body>
 </html>
