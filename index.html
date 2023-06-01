@@ -740,5 +740,150 @@ unlinkability. If signatures are re-used, they can be used as correlatable data.
     </section>
 
     </section>
+    <section class="appendix informative">
+      <h2>Test Vectors</h2>
+      <section>
+        <h3>Representation: ecdsa-2019, with curve P-256</h3>
+        <p>
+The signer needs to generate a private/public key pair with the private key used
+for signing and the public key made available for verification. The
+[[MULTIBASE]]/[[MULTICODEC]] representation for the public key, <code>p256-pub</code>,
+and the representation for the private key, <code>p256-priv</code>, are shown below.
+        </p>
+        <pre class="example" title="Private and Public keys for Signature" 
+        data-include="TestVectors/p256KeyPair.json" 
+        data-include-format="text">
+        </pre>
+
+        <p>
+Signing begins with a credential without an attached proof, which is converted
+to canonical form, and then hashed, as shown in the following three examples.
+        </p>
+
+        <pre class="example" title="Credential without Proof" data-include="TestVectors/unsigned.json" 
+        data-include-format="text"></pre>
+
+        <pre class="example" title="Canonical Credential without Proof" data-include="TestVectors/ecdsa-2019-p256/canonDocECDSAP256.txt"
+        data-include-format="text"></pre>
+
+
+        <pre class="example" title="Hash of Canonical Credential without Proof (hex)"
+        data-include="TestVectors/ecdsa-2019-p256/docHashECDSAP256.txt" data-include-format="text"></pre>
+
+        <p>
+The next step is to take the proof options document, convert it to canonical form,
+and obtain its hash, as shown in the next three examples.
+        </p>
+
+        <pre class="example" title="Proof Options Document" 
+        data-include="TestVectors/ecdsa-2019-p256/proofConfigECDSAP256.json" data-include-format="text"></pre>
+
+        <pre class="example" title="Canonical Proof Options Document"
+        data-include="TestVectors/ecdsa-2019-p256/proofCanonECDSAP256.txt" data-include-format="text"></pre>
+
+        <pre class="example" title="Hash of Canonical Proof Options Document (hex)"
+        data-include="TestVectors/ecdsa-2019-p256/proofHashECDSAP256.txt" data-include-format="text"></pre>
+
+        <p>
+Finally, we concatenate the hash of the proof options followed by the hash of the credential without proof, use the private key with the combined hash to
+compute the Ed25519 signature, and then base58-btc encode the signature.
+        </p>
+
+        <pre class="example" title="Combine hashes of Proof Options and Credential (hex)"
+        data-include="TestVectors/ecdsa-2019-p256/combinedHashECDSAP256.txt" data-include-format="text"></pre>
+
+        <pre class="example" title="Signature of Combined Hashes (hex)"
+        data-include="TestVectors/ecdsa-2019-p256/sigHexECDSAP256.txt" data-include-format="text"></pre>
+
+        <pre class="example" title="Signature of Combined Hashes base58-btc"
+        data-include="TestVectors/ecdsa-2019-p256/sigBTC58ECDSAP256.txt" data-include-format="text"></pre>
+
+        <p>Assemble the signed credential with the following two steps:</p>
+        <ol>
+          <li>
+Add the <code>proofValue</code> field with the previously computed base58-btc
+value to the proof options document.
+          </li>
+          <li>
+Set the <code>proof</code> field of the credential to the augmented proof
+option document.
+          </li>
+        </ol>
+
+        <pre class="example" title="Signed Credential"
+        data-include="TestVectors/ecdsa-2019-p256/signedECDSAP256.json" data-include-format="text"></pre>
+      </section>
+      <section>
+        <h3>Representation: ecdsa-2019, with curve P-384</h3>
+        <p>
+The signer needs to generate a private/public key pair with the private key used
+for signing and the public key made available for verification. The
+[[MULTIBASE]]/[[MULTICODEC]] representation for the public key, <code>p384-pub</code>,
+and the representation for the private key, <code>p384-priv</code>, are shown below.
+        </p>
+        <pre class="example" title="Private and Public keys for Signature" 
+        data-include="TestVectors/p384KeyPair.json" 
+        data-include-format="text">
+        </pre>
+
+        <p>
+Signing begins with a credential without an attached proof, which is converted
+to canonical form, and then hashed, as shown in the following three examples.
+        </p>
+
+        <pre class="example" title="Credential without Proof" data-include="TestVectors/unsigned.json" 
+        data-include-format="text"></pre>
+
+        <pre class="example" title="Canonical Credential without Proof" data-include="TestVectors/ecdsa-2019-p384/canonDocECDSAP384.txt"
+        data-include-format="text"></pre>
+
+
+        <pre class="example" title="Hash of Canonical Credential without Proof (hex)"
+        data-include="TestVectors/ecdsa-2019-p384/docHashECDSAP384.txt" data-include-format="text"></pre>
+
+        <p>
+The next step is to take the proof options document, convert it to canonical form,
+and obtain its hash, as shown in the next three examples.
+        </p>
+
+        <pre class="example" title="Proof Options Document" 
+        data-include="TestVectors/ecdsa-2019-p384/proofConfigECDSAP384.json" data-include-format="text"></pre>
+
+        <pre class="example" title="Canonical Proof Options Document"
+        data-include="TestVectors/ecdsa-2019-p384/proofCanonECDSAP384.txt" data-include-format="text"></pre>
+
+        <pre class="example" title="Hash of Canonical Proof Options Document (hex)"
+        data-include="TestVectors/ecdsa-2019-p384/proofHashECDSAP384.txt" data-include-format="text"></pre>
+
+        <p>
+Finally, we concatenate the hash of the proof options followed by the hash of the credential without proof, use the private key with the combined hash to
+compute the Ed25519 signature, and then base58-btc encode the signature.
+        </p>
+
+        <pre class="example" title="Combine hashes of Proof Options and Credential (hex)"
+        data-include="TestVectors/ecdsa-2019-p384/combinedHashECDSAP384.txt" data-include-format="text"></pre>
+
+        <pre class="example" title="Signature of Combined Hashes (hex)"
+        data-include="TestVectors/ecdsa-2019-p384/sigHexECDSAP384.txt" data-include-format="text"></pre>
+
+        <pre class="example" title="Signature of Combined Hashes base58-btc"
+        data-include="TestVectors/ecdsa-2019-p384/sigBTC58ECDSAP384.txt" data-include-format="text"></pre>
+
+        <p>Assemble the signed credential with the following two steps:</p>
+        <ol>
+          <li>
+Add the <code>proofValue</code> field with the previously computed base58-btc
+value to the proof options document.
+          </li>
+          <li>
+Set the <code>proof</code> field of the credential to the augmented proof
+option document.
+          </li>
+        </ol>
+
+        <pre class="example" title="Signed Credential"
+        data-include="TestVectors/ecdsa-2019-p384/signedECDSAP384.json" data-include-format="text"></pre>
+      </section>    
+    </section>
   </body>
 </html>
