@@ -766,7 +766,8 @@ P-256 and P-384 at these respective security strength levels.
         <h3>Implementation Considerations for ECDSA Algorithms</h3>
         <p>
 The ECDSA algorithm as detailed in [[FIPS-186-5]] states: &quot;A 
-new secret random number <em>k</em>, shall be generated prior to the generation 
+new secret random number <em>k</em>, 0 < <em>k</em> < <em>n</em>,
+<strong>shall</strong> be generated prior to the generation 
 of each digital signature for use during the signature generation process.&quot; 
 The failure to properly generate this <em>k</em> value has lead to some highly 
 public, integrity breaches in widely deployed systems. To counter this problem 
