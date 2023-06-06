@@ -749,8 +749,8 @@ valid signature for a new message (except with negligible probability).
 message attacks</em>) is a stronger notion than <em>EUF-CMA</em>. It guarantees 
 that for any efficient adversary who has the public key <em>pk</em> of the 
 signer and received an arbitrary number of signatures on messages of its 
-choice, it cannot output a new valid signature pair for either a new message 
-or a new signature for an old message (except with negligible probability). 
+choice, it cannot output a new valid signature pair for a new message 
+nor a new signature for an old message (except with negligible probability). 
  ECDSA signature scheme does <strong>not</strong> have the SUF-CMA property, 
  while other schemes such as EdDSA [[FIPS-186-5]] do.
         </p>
