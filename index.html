@@ -819,8 +819,8 @@ to the <var>canonicalProofConfig</var>. <var>proofConfigHash</var> will be
 exactly 32 bytes in size.
             </li>
             <li>
-Let <var>hashData</var> be the result of joining <var>proofConfigHash</var> (the
-first hash) with <var>transformedDocumentHash</var> (the second hash).
+Let <var>hashData</var> be the result of concatenating <var>proofConfigHash</var> (the
+first hash) followed by <var>transformedDocumentHash</var> (the second hash).
             </li>
             <li>
 Return <var>hashData</var> as the <em>hash data</em>.
