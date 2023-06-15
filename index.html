@@ -521,7 +521,9 @@ The following algorithm specifies how to cryptographically hash a
 <em>transformed data document</em> and <em>proof configuration</em>
 into cryptographic hash data that is ready to be provided as input to the
 algorithms in Section <a href="#proof-serialization-ecdsa-2019"></a> or
-Section <a href="#proof-verification-ecdsa-2019"></a>.
+Section <a href="#proof-verification-ecdsa-2019"></a>. One must use the hash
+algorithm appropriate in security level to the curve used, i.e., for curve 
+P-256 one uses SHA-256 and for curve P-384 one uses SHA-384.
           </p>
 
           <p>
@@ -534,15 +536,18 @@ series of bytes is produced as output.
           <ol class="algorithm">
             <li>
 Let <var>transformedDocumentHash</var> be the result of applying the
-SHA-256 (SHA-2 with 256-bit output) cryptographic hashing algorithm [[RFC6234]]
-to the <var>transformedDocument</var>. <var>transformedDocumentHash</var> will
-be exactly 32 bytes in size.
+SHA-256 (SHA-2 with 256-bit output) or SHA-384 (SHA-2 with 384-bit output) 
+cryptographic hashing algorithm [[RFC6234]] to the 
+<var>transformedDocument</var> in the case of curve P-256 or curve P-384 
+respectively. <var>transformedDocumentHash</var> will be exactly 32 or 48 bytes
+in size respectively.
             </li>
             <li>
 Let <var>proofConfigHash</var> be the result of applying the
-SHA-256 (SHA-2 with 256-bit output) cryptographic hashing algorithm [[RFC6234]]
-to the <var>proofConfig</var>. <var>proofConfigHash</var> will be
-exactly 32 bytes in size.
+SHA-256 (SHA-2 with 256-bit output) or SHA-384 (SHA-2 with 384-bit output) 
+cryptographic hashing algorithm [[RFC6234]] to the <var>proofConfig</var> in 
+the case of curve P-256 or curve P-384 respectively. <var>proofConfigHash</var> 
+will be exactly 32 or 48 bytes in size respectively.
             </li>
             <li>
 Let <var>hashData</var> be the result of joining <var>proofConfigHash</var> (the
@@ -795,7 +800,9 @@ The following algorithm specifies how to cryptographically hash a
 <em>transformed data document</em> and <em>proof configuration</em>
 into cryptographic hash data that is ready to be provided as input to the
 algorithms in Section <a href="#proof-serialization-jcs-ecdsa-2019"></a> or
-Section <a href="#proof-verification-jcs-ecdsa-2019"></a>.
+Section <a href="#proof-verification-jcs-ecdsa-2019"></a>. One must use the 
+hash algorithm appropriate in security level to the curve used, i.e., for curve
+P-256 one uses SHA-256 and for curve P-384 one uses SHA-384.
           </p>
 
           <p>
@@ -807,16 +814,20 @@ series of bytes is produced as output.
 
           <ol class="algorithm">
             <li>
-Let <var>transformedDocumentHash</var> be the result of applying the
-SHA-256 (SHA-2 with 256-bit output) cryptographic hashing algorithm [[RFC6234]]
-to the <var>transformedDocument</var>. <var>transformedDocumentHash</var> will
-be exactly 32 bytes in size.
+Let <var>transformedDocumentHash</var> be the result of applying the SHA-256
+(SHA-2 with 256-bit output) or SHA-384 (SHA-2 with 384-bit output) 
+cryptographic hashing algorithm [[RFC6234]] to the 
+<var>transformedDocument</var> in the case of curve P-256 or curve P-384 
+respectively. <var>transformedDocumentHash</var> will be exactly 32 or 48 bytes
+in size respectively.
             </li>
             <li>
-Let <var>proofConfigHash</var> be the result of applying the
-SHA-256 (SHA-2 with 256-bit output) cryptographic hashing algorithm [[RFC6234]]
-to the <var>canonicalProofConfig</var>. <var>proofConfigHash</var> will be
-exactly 32 bytes in size.
+Let <var>proofConfigHash</var> be the result of applying the SHA-256 
+(SHA-2 with 256-bit output) or SHA-384 (SHA-2 with 384-bit output) 
+cryptographic hashing algorithm [[RFC6234]] to the 
+<var>canonicalProofConfig</var> in the case of curve P-256 or curve P-384 
+respectively. <var>proofConfigHash</var> will be exactly 32 or 48 bytes in size 
+respectively.
             </li>
             <li>
 Let <var>hashData</var> be the result of concatenating <var>proofConfigHash</var> (the
