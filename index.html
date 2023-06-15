@@ -105,6 +105,18 @@
             title: "Multicodec",
             href: "https://github.com/multiformats/multicodec/",
           },
+          SECG2: {
+            title: "SEC 2: Recommended Elliptic Curve Domain Parameters",
+            href: "http://www.secg.org/sec2-v2.pdf",
+            date: "January 27, 2010",
+            publisher: "Certicom Research"
+          },
+          "NIST-SP-800-186": {
+            title: "Recommendations for Discrete Logarithm-based Cryptography: Elliptic Curve Domain Parameters",
+            authors: ["Lily Chen", "Dustin Moody", "Karen Randall", "Andrew Regenscheid", "Angela Robinson"],
+            date: "February 2023",
+            publisher: "National Institute of Standards and Technology"
+          },
           "NIST-SP-800-186": {
             title: "Recommendations for Discrete Logarithm-based Cryptography: Elliptic Curve Domain Parameters",
             authors: ["Lily Chen", "Dustin Moody", "Karen Randall", "Andrew Regenscheid", "Angela Robinson"],
@@ -155,8 +167,7 @@
       <p>
 This specification describes a Data Integrity Cryptosuite for use when
 generating a digital signature using the Elliptic Curve Digital Signature
-Algorithm (ECDSA) based on the Standards for Efficient Cryptography over prime
-fields using a verifiably random Elliptic Curve (secpr1).
+Algorithm (ECDSA).
       </p>
     </section>
 
@@ -171,18 +182,24 @@ is not fit for production deployment.
       <h2>Introduction</h2>
       <p>
 This specification defines a cryptographic suite for the purpose of creating,
-and verifying proofs for secpr1 ECDSA signatures in conformance with the
-Data Integrity [[VC-DATA-INTEGRITY]] specification. The approach is
-accepted by the U.S. National Institute of Standards in the latest FIPS 186-5
-publication and meets U.S. Federal Information Processing requirements when
-using cryptography to secure digital information. It uses either the RDF
-Dataset Canonicalization Algorithm [[RDF-CANON]] or the JSON Canonicalization
-Scheme [[RFC8785]] to transform the input document into
-its canonical form. It uses one of two mechanisms to digest and sign: SHA-256
-[[RFC6234]] as the message digest algorithm and ECDSA with Curve P-256
-defined in [[FIPS-186-5]] as the signature algorithm, or SHA-384
-[[RFC6234]] as the message digest algorithm and ECDSA with Curve P-384
-defined in [[FIPS-186-5]] as the signature algorithm.
+and verifying proofs for ECDSA signatures in conformance with the
+Data Integrity [[VC-DATA-INTEGRITY]] specification. ECDSA signatures are
+specified in [[FIPS-186-5]] with elliptic curves P-256 and P-384 specified in
+[[NIST-SP-800-186]]. [[FIPS-186-5]] includes the <em>deterministic</em> ECDSA
+algorithm which is also specified in [[RFC6979]].
+      </p>
+      <p>
+This specification uses either the RDF Dataset Canonicalization Algorithm 
+[[RDF-CANON]] or the JSON Canonicalization Scheme [[RFC8785]] to transform the 
+input document into its canonical form. It uses one of two mechanisms to digest 
+and sign: SHA-256 [[RFC6234]] as the message digest algorithm and ECDSA with 
+Curve P-256 as the signature algorithm, or SHA-384 [[RFC6234]] as the message 
+digest algorithm and ECDSA with Curve P-384 as the signature algorithm.
+      </p>
+      <p class="note">
+The elliptic curves P-256 and P-384 of [[NIST-SP-800-186]] are referred to as 
+<em>secp256r1</em> and <em>secp384r1</em> respectively in [[SECG2]]. In 
+addition, this notation is sometimes used in ECDSA software libraries.
       </p>
 
       <section id="terminology">
@@ -239,7 +256,7 @@ key use for both digital signature generation and verification, according to
 
         <p>
 This suite MAY be used to verify Data Integrity Proofs [[VC-DATA-INTEGRITY]]
-produced by secpr1 public key material encoded as a
+produced by ECDSA public key material encoded as a
 <a href="#multikey">Multikey</a>. Loss-less key transformation processes that
 result in equivalent cryptographic material MAY be utilized.
         </p>
@@ -263,10 +280,10 @@ The `controller` of the verification method MUST be a URL.
           <p>
 The `publicKeyMultibase` property of the verification method MUST be
 a public key encoded according to [[MULTICODEC]] and formatted according to
-[[MULTIBASE]]. The multicodec encoding of a secpr1 (P-256) public key is the
+[[MULTIBASE]]. The multicodec encoding of a P-256 public key is the
 two-byte prefix `0x1200` followed by the 33-byte compressed public key data.
 The 35 byte value is then encoded using base58-btc (`z`) as the prefix.
-The multicodec encoding of a secpr1 (P-384) public key is the
+The multicodec encoding of a P-384 public key is the
 two-byte prefix `0x1201` followed by the 49-byte compressed public key data.
 The 51 byte value is then encoded using base58-btc (`z`) as the prefix.
 Any other encodings MUST NOT be allowed.
@@ -280,7 +297,7 @@ key. Implementations of this specification will raise errors in the event of a
           </p>
 
           <pre class="example"
-            title="An secpr1 (P-256) public key encoded as a Multikey">
+            title="An P-256 public key encoded as a Multikey">
 {
   "id": "https://example.com/issuer/123#key-0",
   "type": "Multikey",
@@ -290,7 +307,7 @@ key. Implementations of this specification will raise errors in the event of a
           </pre>
 
           <pre class="example"
-            title="An secpr1 (P-384) public key encoded as a Multikey">
+            title="An P-384 public key encoded as a Multikey">
 {
   "id": "https://example.com/issuer/123#key-0",
   "type": "Multikey",
@@ -300,7 +317,7 @@ key. Implementations of this specification will raise errors in the event of a
 }
           </pre>
 
-          <pre class="example" title="Two secpr1 public keys (P-256 and P-384)
+          <pre class="example" title="Two public keys (P-256 and P-384)
             encoded as Multikeys in a controller document">
 {
   "@context": [
@@ -396,7 +413,7 @@ the base58-btc base encoding.
 
           <pre class="example highlight" style="overflow-x:
             auto; white-space: pre-wrap; word-wrap: break-word;"
-            title="An secpr1 (P-256) digital signature expressed as a
+            title="An ECDSA P-256 digital signature expressed as a
               DataIntegrityProof">
 {
   "@context": [
@@ -425,9 +442,7 @@ the base58-btc base encoding.
 
       <p>
 The following section describes multiple Data Integrity cryptographic suites
-that utilize the Elliptic Curve Digital Signature Algorithm (ECDSA) based on the
-Standards for Efficient Cryptography over prime fields using a verifiably random
-Elliptic Curve (secpr1).
+that utilize the Elliptic Curve Digital Signature Algorithm (ECDSA) [[FIPS-186-5]].
       </p>
 
       <section>
@@ -539,8 +554,8 @@ Section <a href="#proof-verification-ecdsa-2019"></a>.
 
           <p>
 The required inputs to this algorithm are a <em>transformed data document</em>
-(<var>transformedDocument</var>) and <em>proof configuration</em>
-(<var>proofConfig</var>). A single <em>hash data</em> value represented as
+(<var>transformedDocument</var>) and <em>canonical proof configuration</em>
+(<var>canonicalProofConfig</var>). A single <em>hash data</em> value represented as
 series of bytes is produced as output.
           </p>
 
@@ -554,7 +569,7 @@ be exactly 32 bytes in size.
             <li>
 Let <var>proofConfigHash</var> be the result of applying the
 SHA-256 (SHA-2 with 256-bit output) cryptographic hashing algorithm [[RFC6234]]
-to the <var>proofConfig</var>. <var>proofConfigHash</var> will be
+to the <var>canonicalProofConfig</var>. <var>proofConfigHash</var> will be
 exactly 32 bytes in size.
             </li>
             <li>
@@ -618,7 +633,16 @@ Set <var>proofConfig</var>.<var>proofPurpose</var> to
 <var>options</var>.<var>proofPurpose</var>.
             </li>
             <li>
-Return <var>proofConfig</var>.
+Set <var>proofConfig</var>.<var>@context</var> to
+<var>unsecuredDocument</var>.<var>@context</var>.
+            </li>
+            <li>
+Let <var>canonicalProofConfig</var> be the result of applying the
+Universal RDF Dataset Canonicalization Algorithm
+[[RDF-CANON]] to the <var>proofConfig</var>.
+            </li>
+            <li>
+Return <var>canonicalProofConfig</var>.
             </li>
           </ol>
 
