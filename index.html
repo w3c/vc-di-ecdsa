@@ -802,7 +802,7 @@ into cryptographic hash data that is ready to be provided as input to the
 algorithms in Section <a href="#proof-serialization-jcs-ecdsa-2019"></a> or
 Section <a href="#proof-verification-jcs-ecdsa-2019"></a>. One must use the 
 hash algorithm appropriate in security level to the curve used, i.e., for curve
-P-256 one uses SHA-256 and for curve P-384 one uses SHA-384.
+P-256 one uses SHA-256, and for curve P-384 one uses SHA-384.
           </p>
 
           <p>
@@ -817,17 +817,16 @@ series of bytes is produced as output.
 Let <var>transformedDocumentHash</var> be the result of applying the SHA-256
 (SHA-2 with 256-bit output) or SHA-384 (SHA-2 with 384-bit output) 
 cryptographic hashing algorithm [[RFC6234]] to the 
-<var>transformedDocument</var> in the case of curve P-256 or curve P-384 
-respectively. <var>transformedDocumentHash</var> will be exactly 32 or 48 bytes
-in size respectively.
+respective curve P-256 or curve P-384 <var>transformedDocument</var>.
+Respective <var>transformedDocumentHash</var> will be exactly 32 or 48 bytes
+in size.
             </li>
             <li>
 Let <var>proofConfigHash</var> be the result of applying the SHA-256 
 (SHA-2 with 256-bit output) or SHA-384 (SHA-2 with 384-bit output) 
 cryptographic hashing algorithm [[RFC6234]] to the 
-<var>canonicalProofConfig</var> in the case of curve P-256 or curve P-384 
-respectively. <var>proofConfigHash</var> will be exactly 32 or 48 bytes in size 
-respectively.
+respective curve P-256 or curve P-384 <var>canonicalProofConfig</var>.
+Respective <var>proofConfigHash</var> will be exactly 32 or 48 bytes in size.
             </li>
             <li>
 Let <var>hashData</var> be the result of concatenating <var>proofConfigHash</var> (the
