@@ -538,16 +538,16 @@ series of bytes is produced as output.
 Let <var>transformedDocumentHash</var> be the result of applying the
 SHA-256 (SHA-2 with 256-bit output) or SHA-384 (SHA-2 with 384-bit output) 
 cryptographic hashing algorithm [[RFC6234]] to the 
-<var>transformedDocument</var> in the case of curve P-256 or curve P-384 
-respectively. <var>transformedDocumentHash</var> will be exactly 32 or 48 bytes
-in size respectively.
+respective curve P-256 or curve P-384 <var>transformedDocument</var>.
+Respective <var>transformedDocumentHash</var> will be exactly 32 or 48 bytes
+in size.
             </li>
             <li>
 Let <var>proofConfigHash</var> be the result of applying the
 SHA-256 (SHA-2 with 256-bit output) or SHA-384 (SHA-2 with 384-bit output) 
-cryptographic hashing algorithm [[RFC6234]] to the <var>proofConfig</var> in 
-the case of curve P-256 or curve P-384 respectively. <var>proofConfigHash</var> 
-will be exactly 32 or 48 bytes in size respectively.
+cryptographic hashing algorithm [[RFC6234]] to the respective curve P-256 or curve P-384
+<var>proofConfig</var>. Respective <var>proofConfigHash</var> 
+will be exactly 32 or 48 bytes in size.
             </li>
             <li>
 Let <var>hashData</var> be the result of joining <var>proofConfigHash</var> (the
