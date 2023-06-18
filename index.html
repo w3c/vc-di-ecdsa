@@ -1390,6 +1390,27 @@ schemes such as BBS.
           </p>
 
         </section>
+        <section>
+          <h4>labelMapCanonize</h4>
+
+          <p>
+The following algorithm creates a label replacement function that uses a label
+map to replace canonical blank node identifiers with the associated value from
+the labeel map. The required inputs are a label map, <var>labelMap</var>. A
+function, <em>labelMapReplacementFunction</em>, is produced as output.
+          </p>
+
+          <ol class="algorithm">
+            <li>
+Set <em>labelMapReplacementFunction</em> to a function that returns the
+reverse of <var>labelMap</var>.
+            </li>
+            <li>
+Return <em>labelMapReplacementFunction</em>.
+            </li>
+          </ol>
+
+        </section>
 
       </section>
 
