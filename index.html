@@ -1495,11 +1495,12 @@ produced as output.
 
           <ol class="algorithm">
             <li>
-Initialize `skolemizedQuads` to the result of calling <a href="#skolemize"></a>,
-with <var>inputNQuads</var> and "custom-scheme" as parameters. Implementations
-MAY choose a different <em>urnSchemeName</em> that is different than
-"custom-scheme" so long as the same scheme name is used in
-<a href="#todeskolemizedrdf"></a> algorithm.
+Initialize `skolemizedQuads` to the result of calling the algorithm in
+Section <a href="#skolemize"></a>, with <var>inputNQuads</var> and
+"custom-scheme" as parameters. Implementations MAY choose a different
+<em>urnSchemeName</em> that is different than "custom-scheme" so long as the
+same scheme name is used in the algorithm in Section
+<a href="#todeskolemizedrdf"></a>.
             </li>
             <li>
 Join `skolemizedQuads` into a single N-Quads string, `dataset`.
@@ -1521,8 +1522,8 @@ Return <em>skolemizedJSONLD</em>.
 
           <p>
 The following algorithm converts a skolemized JSON-LD document, such as one
-created using the Section <a href="#toskolemizedjsonld"></a> algorithm, to array of
-deskolemized N-Quads. The required inputs are a JSON-LD document,
+created using the algorithm in Section <a href="#toskolemizedjsonld"></a>, to an
+array of deskolemized N-Quads. The required inputs are a JSON-LD document,
 <em>skolemizedJSONLD</em>. An array of deskolemized N-Quad strings
 (<var>outputNquads</var>) is produced as output.
           </p>
@@ -1540,11 +1541,11 @@ Split `skolemizedDataset` into an array of individual N-Quads,
 `skolemizedNquads`.
             </li>
             <li>
-Set <var>outputNquads</var> to the result of calling the
-<a href="#deskolemize"></a> with `skolemizedNquads` and and "custom-scheme" as
+Set <var>outputNquads</var> to the result of calling the algorithm in Section
+<a href="#deskolemize"></a> with `skolemizedNquads` and "custom-scheme" as
 parameters. Implementations MAY choose a different <em>urnSchemeName</em> that
 is different than "custom-scheme" so long as the same scheme name is used in
-<a href="#toskolemizedjsonld"></a> algorithm.
+the algorithm in Section <a href="#toskolemizedjsonld"></a>.
             </li>
             <li>
 Return <em>outputNquads</em>.
