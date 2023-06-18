@@ -1390,6 +1390,7 @@ schemes such as BBS.
           </p>
 
         </section>
+
         <section>
           <h4>labelMapCanonize</h4>
 
@@ -1409,7 +1410,41 @@ reverse of <var>labelMap</var>.
 Return <em>labelMapReplacementFunction</em>.
             </li>
           </ol>
+        </section>
 
+        <section>
+          <h4>skolemize</h4>
+
+          <p>
+The following algorithm replaces all blank node identifiers in an array of
+N-Quad statements with a URN. The required inputs are an array of N-Quad strings
+(<var>inputNquads</var>) and a URN scheme (<var>urnScheme</var>). An array of
+N-Quad strings, <em>skolemizedNquads</em>, is produced as output.
+          </p>
+
+          <ol class="algorithm">
+            <li>
+Create a new array of N-Quad strings, <em>skolemizedNquads</em>.
+            </li>
+            <li>
+For each N-Quad string, <em>s1</em>, in the input array:
+            <ol class="algorithm">
+              <li>
+Create a new string, <em>s2</em>, that is a copy of <em>s1</em> replacing any
+occurrence of a blank node identifier with a URN ("urn:"), plus the input
+custom scheme (<var>urnScheme</var>), plus a colon (":"), and
+the value of the blank node identifier. For example, a regular expression
+of a similar form to the following would achieve the desired result:
+<code>s1.replace(/(_:([^\s]+))/g, '&lt;urn:custom-scheme:$2>')</code>.
+              </li>
+              <li>
+Append <em>s2</em> to <em>skolemizedNquads</em>.
+              </li>
+            </ol>
+            <li>
+Return <em>skolemizedNquads</em>.
+            </li>
+          </ol>
         </section>
 
       </section>
