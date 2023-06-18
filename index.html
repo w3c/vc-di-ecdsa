@@ -1447,7 +1447,6 @@ Return <em>skolemizedNquads</em>.
           </ol>
         </section>
 
-
         <section>
           <h4>deskolemize</h4>
 
@@ -1480,6 +1479,39 @@ Append <em>s2</em> to <em>deskolemizedNquads</em>.
             </ol>
             <li>
 Return <em>deskolemizedNquads</em>.
+            </li>
+          </ol>
+        </section>
+
+        <section>
+          <h4>toSkolemizedJSONLD</h4>
+
+          <p>
+The following algorithm converts an array of N-Quads to a skolemized
+JSON-LD document. The required inputs are an array of N-Quad strings
+(<var>inputNquads</var>). A JSON-LD document, <em>skolemizedJSONLD</em>, is
+produced as output.
+          </p>
+
+          <ol class="algorithm">
+            <li>
+Initialize `skolemizedQuads` to the result of calling <a href="#skolemize"></a>,
+with <var>inputNQuads</var> and "custom-scheme" as parameters. Implementations
+MAY choose a different <em>urnSchemeName</em> that is different than
+"custom-scheme" so long as the same scheme name is used in
+<a href="#toDeskolemizedRDF"></a> algorithm.
+            </li>
+            <li>
+Join `skolemizedQuads` into a single N-Quads string, `dataset`.
+            </li>
+            <li>
+Set <em>skolemizedJSONLD</em> to the result of the
+<a href="https://www.w3.org/TR/json-ld11-api/#serialize-rdf-as-json-ld-algorithm">
+Serialize RDF as JSON-LD</a> algorithm, passing any custom options (such as a
+document loader), to convert `dataset` from RDF to a JSON-LD document.
+            </li>
+            <li>
+Return <em>skolemizedJSONLD</em>.
             </li>
           </ol>
         </section>
