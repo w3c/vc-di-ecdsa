@@ -1499,7 +1499,7 @@ Initialize `skolemizedQuads` to the result of calling <a href="#skolemize"></a>,
 with <var>inputNQuads</var> and "custom-scheme" as parameters. Implementations
 MAY choose a different <em>urnSchemeName</em> that is different than
 "custom-scheme" so long as the same scheme name is used in
-<a href="#toDeskolemizedRDF"></a> algorithm.
+<a href="#todeskolemizedrdf"></a> algorithm.
             </li>
             <li>
 Join `skolemizedQuads` into a single N-Quads string, `dataset`.
@@ -1512,6 +1512,42 @@ document loader), to convert `dataset` from RDF to a JSON-LD document.
             </li>
             <li>
 Return <em>skolemizedJSONLD</em>.
+            </li>
+          </ol>
+        </section>
+
+        <section>
+          <h4>toDeskolemizedRDF</h4>
+
+          <p>
+The following algorithm converts a skolemized JSON-LD document, such as one
+created using the Section <a href="#toskolemizedjsonld"></a> algorithm, to array of
+deskolemized N-Quads. The required inputs are a JSON-LD document,
+<em>skolemizedJSONLD</em>. An array of deskolemized N-Quad strings
+(<var>outputNquads</var>) is produced as output.
+          </p>
+
+          <ol class="algorithm">
+            <li>
+Initialize `skolemizedDataset` to the result of calling the
+<a href="https://www.w3.org/TR/json-ld11-api/#deserialize-json-ld-to-rdf-algorithm">
+Deserialize JSON-LD to RDF</a> algorithm, passing any custom options (such as a
+document loader), to convert `skolemizedJSONLD` from JSON-LD to RDF in N-Quads
+format.
+            </li>
+            <li>
+Split `skolemizedDataset` into an array of individual N-Quads,
+`skolemizedNquads`.
+            </li>
+            <li>
+Set <var>outputNquads</var> to the result of calling the
+<a href="#deskolemize"></a> with `skolemizedNquads` and and "custom-scheme" as
+parameters. Implementations MAY choose a different <em>urnSchemeName</em> that
+is different than "custom-scheme" so long as the same scheme name is used in
+<a href="#toskolemizedjsonld"></a> algorithm.
+            </li>
+            <li>
+Return <em>outputNquads</em>.
             </li>
           </ol>
         </section>
