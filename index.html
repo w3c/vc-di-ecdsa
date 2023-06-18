@@ -1320,10 +1320,10 @@ The following algorithm canonizes a JSON-LD document and replaces any blank node
 identifiers in the canonicalized document by applying a label replacement
 function, <var>labelReplacementFunction</var>. The required inputs are a JSON-LD
 document (<var>document</var>) and a label replacement functon
-(</var>labelReplacementFunction<var>). A N-Quads representation of the
+(<var>labelReplacementFunction</var>). A N-Quads representation of the
 <em>canonized result</em>, with the replaced blank node labels, and a map from
-the old blank node IDs to the new blank node IDs, <em>map</em> is produced as
-output.
+the old blank node IDs to the new blank node IDs, <em>bnodeIdMap</em>, is
+produced as output.
           </p>
 
           <ol class="algorithm">
@@ -1342,6 +1342,52 @@ Produce canonical N-Quads representation, <em>canonized result</em>, using
 canonicalized dataset along with <em>bnodeIdMap</em> and return it.
             </li>
           </ol>
+
+        </section>
+
+        <section>
+          <h4>hmacIdCanonize</h4>
+
+          <p>
+The following algorithm creates a label replacement function that uses an
+HMAC to replace canonical blank node identifiers with their encoded HMAC
+digests. The required inputs are a canonical node identifier map,
+<var>canonicalIdMap</var>. A blank node identifier map, <em>bnodeIdMap</em>, is
+produced as output.
+          </p>
+
+          <ol class="algorithm">
+            <li>
+Generate a new empty bnode identifier map, <em>bnodeIdMap</em>.
+            </li>
+            <li>
+For each map entry in <var>canonicalIdMap</var>:
+              <ol class="algorithm">
+                <li>
+HMAC the canonical identifier from the entry to get an HMAC digest,
+<em>digest</em>.
+                </li>
+                <li>
+Generate a new string value, <em>b64urlDigest</em>, and initialize it to "u"
+followed by appending a base64url-no-pad encoded version of the <em>digest</em>
+value.
+                </li>
+                <li>
+Add this new entry to <em>bnodeIdMap</em>.
+                </li>
+              </ol>
+            </li>
+            <li>
+Return <em>bnodeIdMap</em>.
+            </li>
+          </ol>
+
+          <p class="note" title="Other algorithms are possible">
+A different primitive could be created that sorted the resulting HMAC digests
+and assigned labels using a prefix and integers based on their sorted order
+instead. This primitive might be useful for index-based selective disclosure
+schemes such as BBS.
+          </p>
 
         </section>
 
