@@ -1328,7 +1328,7 @@ produced as output.
 
           <ol class="algorithm">
             <li>
-Run the RDF Dataset Canonicalization Algorithm [[RDFC-1.0]] on
+Run the RDF Dataset Canonicalization Algorithm [[RDF-CANON]] on
 <var>document</var>, passing any custom options (such as a document loader), and
 get the canonicalized dataset as output, which includes a canonical bnode
 identifier map, <var>canonicalIdMap</var>.
@@ -1677,7 +1677,7 @@ If `pointers` is empty, return `null`.
             </li>
             <li>
 Initialize `frame` to an initial frame passing `document` as `value` to
-"createInitialFrame".
+the algorithm in Section <a href="#createinitialframe"></a>.
             </li>
             <li>
 For each `pointer` in `pointers` walk the document from root to the pointer
@@ -1697,10 +1697,11 @@ Initialize `value` to `parentValue`.
 Initialize `valueFrame` to `parentFrame`.
               </li>
               <li>
-Parse the `pointer` into an array of `paths` using "pointerToPaths".
+Parse the `pointer` into an array of `paths` using the algorithm in
+Section <a href="#jsonpointertopaths"></a>.
               </li>
               <li>
-For each `path` in `paths:
+For each `path` in `paths`:
               </li>
               <ol class="algorithm">
                 <li>
@@ -1725,7 +1726,7 @@ If `value` is an array, set `valueFrame` to an empty array.
                   </li>
                   <li>
 Otherwise, set `valueFrame` to an initial frame passing `value` to
-"createInitialFrame".
+the algorithm in Section <a href="#createinitialframe"></a>.
                   </li>
                   <li>
 Set `parentFrame[path]` to `valueFrame`.
@@ -1772,7 +1773,6 @@ Return `frame`.
               </li>
             </ol>
           </ol>
-
         </section>
 
       </section>
