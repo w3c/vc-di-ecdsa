@@ -1799,6 +1799,78 @@ Return <em>framedDocument</em>.
           </ol>
         </section>
 
+        <section>
+          <h4>groupNquads</h4>
+
+          <p>
+The following algorithm groups N-Quads into matching and non-matching groups.
+The inputs are an array of N-Quads (<var>nquads</var>, an optional skolemized
+JSON-LD document (<var>skolemizedDocument</var>), an optional JSON-LD frame
+(<var>frame</var>) , and any options, such as a document loader, to be passed to
+JSON-LD APIs. Each of the output groups (matching and non-matching) are
+expressed as a map that maps an index into <var>nquads<var> to the N-Quad value.
+This algorithm uses a JSON-LD frame to match specific N-Quads in the array of
+given <var>nquads</var>. It internally skolemizes and then deskolemizes any
+blank nodes around the framing operation to ensure blank node identifiers do not
+change, preventing the matching operation from working properly.
+An object containing a <em>matching</em> and <em>nonmatching</em> arrays of
+N-Quads are generated as output.
+          </p>
+
+          <ol class="algorithm">
+            <li>
+Initialize `matching` to an empty map.
+            </li>
+            <li>
+Initialize `nonMatching` to an empty map.
+            </li>
+            <li>
+If `frame` is not given or `null`, then there are no matches so:
+              <ol class="algorithm">
+                <li>
+Add each entry (index, element) in `nquads` to `nonMatching`.
+                </li>
+                <li>
+Return an object with "matching" set to `matching` and "nonMatching" set to
+`nonMatching`.
+                </li>
+              </ol>
+            </li>
+            <li>
+If `skolemizedDocument` has not been given: Set `skolemizedDocument` to the
+result of calling "createSkolemizedDocument", passing `nquads` and any custom
+JSON-LD API options (such as a document loader).
+            </li>
+            <li>
+Initialize `framed` to the result of calling "strictFrame", passing
+`skolemizedDocument`, `frame`, and any custom JSON-LD API options. Note: This
+step filters the skolemized document to get only data that matches the frame as
+a new JSON-LD document.
+            </li>
+            <li>
+Initialize `matchingDeskolemized` to the result of calling "toDeskolemizedRDF",
+passing `framed` and any custom JSON-LD API options. Note: This step converts
+any matching data back to deskolemized N-Quads, matching their original
+expression.
+            </li>
+            <li>
+For each entry (`index`, `nq`) in `nquads`:
+              <ol class="algorithm">
+                <li>
+If `matchingDeskolemized` includes `nq`, add the entry to `matching`.
+                </li>
+                <li>
+Otherwise, add the entry to `nonMatching`.
+                </li>
+              </ol>
+            </li>
+            <li>
+Return an object with "matching" set to `matching` and "nonMatching" set to
+`nonMatching`.
+            </li>
+          </ol>
+        </section>
+
       </section>
 
     </section>
