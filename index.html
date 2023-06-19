@@ -1775,6 +1775,30 @@ Return `frame`.
           </ol>
         </section>
 
+        <section>
+          <h4>strictFrame</h4>
+
+          <p>
+The following algorithm performs a JSON-LD framing operation on a JSON-LD
+document with strict framing options. The required inputs are a JSON-LD Document
+(<var>document</var>) and a JSON-LD Frame (<var>frame</var>). A JSON-LD document
+(<em>framedDocument</em>) is generated as output.
+          </p>
+
+          <ol class="algorithm">
+            <li>
+Set <em>framedDocument</em> to the result of the
+<a href="https://www.w3.org/TR/json-ld11-framing/#framing">
+JSON-LD Framing algorithm</a>, passing `document` and `frame`, and setting the
+options `requireAll`, `explicit`, and `omitGraph` to `true`. Any additional
+custom options passed, such as a document loader, is included as well.
+            </li>
+            <li>
+Return <em>framedDocument</em>.
+            </li>
+          </ol>
+        </section>
+
       </section>
 
     </section>
