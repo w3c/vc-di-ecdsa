@@ -1629,6 +1629,37 @@ Return `paths`.
           </ol>
         </section>
 
+        <section>
+          <h4>createInitialFrame</h4>
+
+          <p>
+The following algorithm creates an initial JSON-LD frame based on a JSON-LD
+object. This is a helper function used within the algorithm in
+Section <a href="#jsonpointerstoframe"></a>. The required input is a
+JSON-LD object (<var>value</var>). A JSON-LD frame <em>frame</em> is produced
+as output.
+          </p>
+
+          <ol class="algorithm">
+            <li>
+Initialize <em>frame</em> to an empty object.
+            </li>
+            <li>
+If <var>value</var> has an `id` that is not a blank node identifier, set
+`frame.id` to its value. Note: All non-blank node identifiers in the path of
+any JSON Pointer MUST be included in the frame, this includes any root document
+identifier.
+            </li>
+            <li>
+If <var>value</var>.`type` is set, set <em>frame</em>.`type` to its value.
+Note: All `type`s in the path of any JSON Pointer MUST be included in the frame,
+this includes any root document `type`.
+            </li>
+            <li>
+Return <em>frame</em>.
+            </li>
+          </ol>
+        </section>
 
       </section>
 
