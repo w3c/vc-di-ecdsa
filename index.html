@@ -1871,6 +1871,97 @@ Return an object with "matching" set to `matching` and "nonMatching" set to
           </ol>
         </section>
 
+        <section>
+          <h4>filterAndGroupNquads</h4>
+
+          <p>
+The following algorithm filters N-Quads, given in an array of N-Quads and a
+JSON-LD filtering frame, and then groups the N-Quads that passed the filter into
+matching and non-matching groups based on another JSON-LD grouping frame. This
+function will internally perform skolemization and deskolemization around
+framing operations to ensure that any blank node identifiers do not change,
+which would prevent filtering and matching operations from working properly. The
+inputs to the algorithm are an array of N-Quads (<var>nquads</var>), a JSON-LD
+filtering frame (<var>filterFrame</var>), a JSON-LD grouping frame
+(<var>groupFrame</var>). Additionally, any custom JSON-LD API options are
+expected to be given as an input. An object containing two properties is
+provided as output; <em>matching</em> and <em>nonmatching</em> each hold arrays
+of their associated N-Quads.
+          </p>
+
+          <ol class="algorithm">
+            <li>
+Initialize `skolemizedDocument` to the result of calling the algorithm in
+Section <a href="#toskolemizedjsonld"></a>, passing `nquads` and any custom
+JSON-LD API options (such as a document loader).
+            </li>
+            <li>
+Initialize `filteredDocument` to the result of calling the algorithm in Section
+<a href="#strictframe"></a>, passing `skolemizedDocument`, `filterFrame`, and
+any custom JSON-LD API options.
+            </li>
+            <li>
+Initialize `filteredNQuads` to the result of calling the algorithm in Section <a
+href="#todeskolemizedrdf"></a>, passing `filteredDocument` and any custom
+JSON-LD API options.
+            </li>
+            <li>
+Note: These next two steps can be performed in parallel.
+            </li>
+            <ol class="algorithm">
+              <li>
+Get the canonical blank node identifier map, `canonicalIdMap`, by calling
+[[RDF-CANON]], passing the joined `filteredNQuads`. Canonicalize `filteredNQuads
+Note: These two steps can be performed in parallel.
+              </li>
+              <li>
+Get the `groupResult` by calling the algorithm in Section
+<a href="#groupnquads"></a>, passing `filteredNQuads`, `filteredDocument`,
+`groupFrame`, and any custom JSON-LD API options.
+              </li>
+            </ol>
+            <li>
+Note: Next generate matching and non-matching maps composed of original indexes
+to original N-Quads. The `groupResult` is different; it contains matching and
+non-matching maps using the `filteredNQuads` indexes. Both maps of indexes are
+useful to callers.
+            </li>
+            <li>
+Initialize `matching` to a new map.
+            </li>
+            <li>
+Initialize `nonMatching` to a new map.
+            </li>
+            <li>
+Initialize filteredMatches to the values in `groupResult.matching`.
+            </li>
+            <li>
+Initialize filteredNonMatches to the values in `groupResult.nonMatching`.
+            </li>
+            <li>
+For each entry (`index`, `nq`) in `nquads`:
+              <ol class="algorithm">
+                <li>
+If `filteredMatches` includes `nq` then add the entry to `matching`.
+                </li>
+                <li>
+Otherwise, if `filteredNonMatching` includes `nq` then add the entry to
+`nonMatching`.
+                </li>
+              </ol>
+            </li>
+            <li>
+Initialize `labelMap` to the reverse of `canonicalIdMap`. `labelMap` uses
+canonical blank node identifiers as keys and original blank node identifiers as
+values.
+            </li>
+            <li>
+Return an object with "filtered" set to `groupResult`, "labelMap" set to
+`labelMap`, "matching" to `matching`, and "nonMatching" to `nonMatching`.
+            </li>
+          </ol>
+        </section>
+
       </section>
 
     </section>
