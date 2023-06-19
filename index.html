@@ -1661,6 +1661,120 @@ Return <em>frame</em>.
           </ol>
         </section>
 
+        <section>
+          <h4>jsonPointersToFrame</h4>
+
+          <p>
+The following algorithm converts an array of JSON Pointers and a JSON-LD
+document to a JSON-LD Frame to be used on that specific document. The required
+input is an array of JSON Pointers (<var>pointers</var>) and a JSON-LD document
+(<var>document</var>). A JSON-LD frame (<em>frame</em>) is produced as output.
+          </p>
+
+          <ol class="algorithm">
+            <li>
+If `pointers` is empty, return `null`.
+            </li>
+            <li>
+Initialize `frame` to an initial frame passing `document` as `value` to
+"createInitialFrame".
+            </li>
+            <li>
+For each `pointer` in `pointers` walk the document from root to the pointer
+target value building the frame:
+            </li>
+            <ol class="algorithm">
+              <li>
+Initialize `parentFrame` to `frame`.
+              </li>
+              <li>
+Initialize `parentValue` to `document`.
+              </li>
+              <li>
+Initialize `value` to `parentValue`.
+              </li>
+              <li>
+Initialize `valueFrame` to `parentFrame`.
+              </li>
+              <li>
+Parse the `pointer` into an array of `paths` using "pointerToPaths".
+              </li>
+              <li>
+For each `path` in `paths:
+              </li>
+              <ol class="algorithm">
+                <li>
+Set `parentFrame` to `valueFrame`.
+                </li>
+                <li>
+Set `parentValue` to `value`.
+                </li>
+                <li>
+Set `value` to `parentValue[path]`. If `value` is now undefined, throw an error
+indicating that the JSON pointer does not match the given `document`.
+                </li>
+                <li>
+Set `valueFrame` to `parentFrame[path]`.
+                </li>
+                <li>
+If `valueFrame` is undefined:
+                </li>
+                <ol class="algorithm">
+                  <li>
+If `value` is an array, set `valueFrame` to an empty array.
+                  </li>
+                  <li>
+Otherwise, set `valueFrame` to an initial frame passing `value` to
+"createInitialFrame".
+                  </li>
+                  <li>
+Set `parentFrame[path]` to `valueFrame`.
+                  </li>
+                </ol>
+              </ol>
+              <li>
+Note: Next we generate the final `valueFrame`.
+              </li>
+              <li>
+If `value` is not an object, then a literal has been selected: Set `valueFrame`
+to `value`.
+              </li>
+              <li>
+Otherwise, if `value` is an array: Set `valueFrame` to the result of mapping
+every element in `value` to a deep copy of itself. If any element in `value` is
+also an `array`, throw an error indicating that arrays of arrays are not
+supported.
+              </li>
+              <li>
+Otherwise: Set `valueFrame` to an object that merges a shallow copy of
+`valueFrame` with a deep copy of `value`, e.g., `{...valueFrame,
+&hellip;deepCopy(value)}`.
+              </li>
+              <li>
+If `paths` has a length of zero, then the whole `document` has been selected by
+the `pointer`: Set `frame` to `valueFrame`.
+              </li>
+              <li>
+Otherwise, a partial selection has been made by the pointer:
+                <ol class="algorithm">
+                  <li>
+Get the last `path`, `lastPath`, from `paths`.
+                  </li>
+                  <li>
+Set `parentFrame[lastPath]` to `valueFrame`.
+                  </li>
+                </ol>
+              <li>
+Set `frame['@context']` to a deep copy of `document['@context']`.
+              </li>
+              <li>
+Return `frame`.
+              </li>
+            </ol>
+          </ol>
+
+        </section>
+
       </section>
 
     </section>
