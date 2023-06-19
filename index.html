@@ -1591,6 +1591,45 @@ Return `paths`.
           </ol>
         </section>
 
+        <section>
+          <h4>jsonPointerToPaths</h4>
+
+          <p>
+The following algorithm converts a JSON Pointer [[RFC6901]] to an array of paths
+into a JSON tree. The required input is a JSON Pointer string
+(<var>pointer</var>). An array of paths (<em>paths</em>) is produced as output.
+          </p>
+
+          <ol class="algorithm">
+            <li>
+Initialize `paths` to an empty array.
+            </li>
+            <li>
+Initialize `splitPath` to an array by splitting <var>pointer</var> on the
+"/" character and skipping the first, empty, split element. In Javascript
+notation, this step is equivalent to the following code:
+`pointer.split('/').slice(1)`
+            </li>
+            <li>
+For each `path` in `splitPath`:
+              <ol class="algorithm">
+                <li>
+If `path` does not include `~`, then add `path` to `paths`, converting it to
+an integer if it parses as one, leaving it as a string if it does not.
+                </li>
+                <li>
+Otherwise, unescape any JSON pointer escape sequences in `path` and add the
+result to `paths`.
+                </li>
+              </ol>
+            </li>
+            <li>
+Return `paths`.
+            </li>
+          </ol>
+        </section>
+
+
       </section>
 
     </section>
