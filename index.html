@@ -1924,6 +1924,31 @@ Return an object with "filtered" set to `groupResult`, "labelMap" set to
           </ol>
         </section>
 
+        <section>
+          <h4>hashMandatoryNQuads</h4>
+
+          <p>
+The following algorithm cryptographically hashes an array of mandatory to
+disclose N-Quads using a provided hashing API. The required input is an array of
+mandatory to disclose N-Quads (<var>mandatory</var>) and a hashing function
+(<var>hasher</var>). A cryptographic hash (<em>mandatoryHash</em>) is produced
+as output.
+          </p>
+
+          <ol class="algorithm">
+            <li>
+Initialize `bytes` to the UTF-8 representation of the joined `mandatory`
+N-Quads.
+            </li>
+            <li>
+Initialize `mandatoryHash` to the result of using `hasher` to hash `bytes`.
+            </li>
+            <li>
+Return `mandatoryHash`.
+            </li>
+          </ol>
+        </section>
+
       </section>
 
     </section>
