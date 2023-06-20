@@ -2015,33 +2015,21 @@ unsecured data document</a> (<var>unsecuredDocument</var>) and
 transformation options (<var>options</var>). The
 transformation options MUST contain a type identifier for the
 <a data-cite="vc-data-integrity#dfn-cryptosuite">
-cryptographic suite</a> (<var>type</var>) and a cryptosuite
-identifier (<var>cryptosuite</var>). The
-transformation options MUST contain an array of mandatory JSON pointers
-(<var>mandatoryPointers</var>) and MAY contain additional options, such as a
-JSON-LD document loader. A <em>transformed data document</em> is
-produced as output. Whenever this algorithm encodes strings, it MUST use UTF-8
-encoding.
+cryptographic suite</a> (<var>type</var>), a cryptosuite
+identifier (<var>cryptosuite</var>), and a verification method
+(<var>verificationMethod</var>). The transformation options MUST contain an
+array of mandatory JSON pointers (<var>mandatoryPointers</var>) and MAY contain
+additional options, such as a JSON-LD document loader. A <em>transformed data
+document</em> is produced as output. Whenever this algorithm encodes strings, it
+MUST use UTF-8 encoding.
           </p>
 
           <ol class="algorithm">
             <li>
-Initialize `canonicalProofConfig` by calling the algorithm in Section
-<a href="#base-proof-configuration-ecdsa-sd-2023"></a> and passing
-<var>options</var> as the proof option parameters.
-            </li>
-            <li>
-Initialize `proofHash` to the result of calling the RDF Dataset Canonicalization
-algorithm [[RDF-CANON]] on `canonicalProofConfig` and then cryptographically
-hashing the result using the same hash that is used by the signature algorithm,
-i.e., SHA-256 for a P-256 curve. Note: This step can be performed in parallel;
-it only needs to be completed before this algorithm terminates as the result is
-part of the return value.
-            </li>
-            <li>
 Initialize `hmac` to an HMAC API using a locally generated and exportable HMAC
 key. The HMAC uses the same hash algorithm used in the signature algorithm,
-i.e., SHA-256 for a P-256 curve.
+which is detected via the <var>verificationMethod</var> provided to the
+function. i.e., SHA-256 for a P-256 curve.
             </li>
             <li>
 Initialize `nquads` to the result of calling the algorithm in Section
@@ -2070,16 +2058,12 @@ Initialize `mandatory` to the values in the `matching` map.
 Initialize `nonMandatory` to the values in the `nonMatching` map.
             </li>
             <li>
-Initialize `mandatoryHash` to the result of calling the the algorithm in Section
-<a href="#hashmandatorynquads"></a>, passing `mandatory`.
-            </li>
-            <li>
 Initialize `hmacKey` to the result of exporting the HMAC key from `hmac`.
             </li>
             <li>
-Return an object with "proofHash" set to `proofHash`, "mandatoryPointers" set to
-`mandatoryPointers`, "mandatoryHash" set to `mandatoryHash`, "nonMandatory" set
-to `nonMandatory`, and "hmacKey" set to `hmacKey`.
+Return an object with "mandatoryPointers" set to `mandatoryPointers`,
+"mandatory" set to `mandatory`, "nonMandatory" set to `nonMandatory`,
+and "hmacKey" set to `hmacKey`.
             </li>
           </ol>
         </section>
@@ -2097,12 +2081,32 @@ algorithms in Section <a href="#base-proof-serialization-ecdsa-sd-2023"></a>.
           <p>
 The required inputs to this algorithm are a <em>transformed data document</em>
 (<var>transformedDocument</var>) and <em>canonical proof configuration</em>
-(<var>canonicalProofConfig</var>). A single <em>hash data</em> value represented as
-series of bytes is produced as output.
+(<var>canonicalProofConfig</var>). A <em>hash data</em> value represented
+as an object is produced as output.
           </p>
 
           <ol class="algorithm">
-
+            <li>
+Initialize `proofHash` to the result of calling the RDF Dataset Canonicalization
+algorithm [[RDF-CANON]] on `canonicalProofConfig` and then cryptographically
+hashing the result using the same hash that is used by the signature algorithm,
+i.e., SHA-256 for a P-256 curve. Note: This step can be performed in parallel;
+it only needs to be completed before this algorithm terminates as the result is
+part of the return value.
+            </li>
+            <li>
+Initialize `mandatoryHash` to the result of calling the the algorithm in Section
+<a href="#hashmandatorynquads"></a>, passing
+<var>transformedDocument</var>.`mandatory`.
+            </li>
+            <li>
+Initialize `hashData` as a deep copy of <var>transformedDocument</var> and
+add `proofHash` as "proofHash" and `mandatoryHash` as "mandatoryHash" to that
+object.
+            </li>
+            <li>
+Return `hashData` as <em>hash data</em>.
+            </li>
           </ol>
 
         </section>
