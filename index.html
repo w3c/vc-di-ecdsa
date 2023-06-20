@@ -2238,8 +2238,10 @@ Return `baseProof` as <em>base proof</em>.
           <h4>Base Proof Serialization (ecdsa-sd-2023)</h4>
 
           <p>
-The following algorithm specifies how to serialize a digital signature from
-a set of cryptographic hash data. This
+The following algorithm specifies how to create a base proof; called by an
+issuer of an ECDSA-SD-protected Verifiable Credential. The base proof is to be
+given only to the holder, who is responsible for generating a derived proof from
+it, exposing only selectively disclosed details in the proof to a verifier. This
 algorithm is designed to be used in conjunction with the algorithms defined
 in the Data Integrity [[VC-DATA-INTEGRITY]] specification,
 <a data-cite="vc-data-integrity#algorithms">
@@ -2254,7 +2256,53 @@ represented as series of bytes is produced as output.
           </p>
 
           <ol class="algorithm">
-
+            <li>
+Initialize `proofHash`, `mandatoryPointers`, `mandatoryHash`, `nonMandatory`,
+and `hmacKey` to the values associated with their property names
+<var>hashData</var>.
+            </li>
+            <li>
+Initialize `proofScopedKeyPair` to a locally generated P-256 ECDSA key pair.
+Note: This key pair is scoped to the specific proof; it is not used for anything
+else and the private key will be destroyed when this algorithm terminates.
+            </li>
+            <li>
+Initialize `signatures` to an array where each element holds the result of
+digitally signing the UTF-8 representation of each N-Quad string in
+`nonMandatory`, in order. The digital signature algorithm is ES256, i.e., uses a
+P-256 curve over a SHA-256 digest, and uses the private key from
+`proofScopedKeyPair`. Note: This step generates individual signatures for each
+statement that can be selectively disclosed using a local, proof-scoped key pair
+that binds them together; this key pair will be bound to the proof by a
+signature over its public key using the private key associated with the base
+proof verification method.
+            </li>
+            <li>
+Initialize `publicKey` to the multikey expression of the public key exported
+from `proofScopedKeyPair`. That is, an array of bytes starting with the bytes
+0x80 and 0x24 (which is the multikey p256-pub header (0x1200) expressed as a
+varint) followed by the compressed public key bytes (the compressed header with
+`2` for an even `y` coordinate and `3` for an odd one followed by the `x`
+coordinate of the public key).
+            </li>
+            <li>
+Initialize `toSign` to the result of calling the algorithm in Section
+<a href="#serializebasesigndata"></a>, passing `proofHash`, `publicKey`, and
+`mandatoryHash` as parameters to the algorithm.
+            </li>
+            <li>
+Initialize `baseSignature` to the result of digitally signing `toSign` using the
+private key associated with the base proof verification method.
+            </li>
+            <li>
+Initialize `proofValue to the result of calling the algorithm in Section
+<a href="#serializebaseproofvalue"></a>, passing `baseSignature`,
+`publicKey`, `hmacKey`, `signatures`, and `mandatoryPointers` as parameters
+to the algorithm.
+            </li>
+            <li>
+Return `proofValue` as <em>digital proof</em>.
+            </li>
           </ol>
 
         </section>
