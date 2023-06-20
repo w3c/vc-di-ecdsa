@@ -2178,6 +2178,27 @@ Return <var>canonicalProofConfig</var>.
         </section>
 
         <section>
+          <h4>serializeSignData</h4>
+
+          <p>
+The following algorithm serializes the data that is to be signed by the private
+key associated with the base proof verification method. The required inputs are
+the proof options hash (<var>proofHash</var>), the proof-scoped multikey-encoded
+public key (<var>publicKey</var>), and the mandatory hash
+(<var>mandatoryHash</var>). A single <em>sign data</em> value,
+represented as series of bytes, is produced as output.
+          </p>
+
+          <ol class="algorithm">
+            <li>
+Return the concatenation of <var>proofHash</var>, <var>publicKey</var>, and
+<var>mandatoryHash</var>, in that order, as <em>sign data</em>.
+            </li>
+          </ol>
+
+        </section>
+
+        <section>
           <h4>Base Proof Serialization (ecdsa-sd-2023)</h4>
 
           <p>
