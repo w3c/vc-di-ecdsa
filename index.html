@@ -2006,10 +2006,6 @@ proof serialization algorithm</a> is defined in Section
 The following algorithm specifies how to transform an unsecured input document
 into a transformed document that is ready to be provided as input to the
 hashing algorithm in Section <a href="#base-proof-hashing-ecdsa-sd-2023"></a>.
-Creates the data that will be used to generate a base proof. The inputs to the
-algorithm are the JSON-LD document to be signed, `document`, the proof options,
-`proof options`, an array of mandatory JSON pointers, `mandatoryPointers`, and
-any custom JSON-LD API options (such as a document loader).
           </p>
 
           <p>
@@ -2020,13 +2016,71 @@ transformation options (<var>options</var>). The
 transformation options MUST contain a type identifier for the
 <a data-cite="vc-data-integrity#dfn-cryptosuite">
 cryptographic suite</a> (<var>type</var>) and a cryptosuite
-identifier (<var>cryptosuite</var>). A <em>transformed data document</em> is
+identifier (<var>cryptosuite</var>). The
+transformation options MUST contain an array of mandatory JSON pointers
+(<var>mandatoryPointers</var>) and MAY contain additional options, such as a
+JSON-LD document loader. A <em>transformed data document</em> is
 produced as output. Whenever this algorithm encodes strings, it MUST use UTF-8
 encoding.
           </p>
 
           <ol class="algorithm">
-
+            <li>
+Initialize `canonicalProofConfig` by calling the algorithm in Section
+<a href="#base-proof-configuration-ecdsa-sd-2023"></a> and passing
+<var>options</var> as the proof option parameters.
+            </li>
+            <li>
+Initialize `proofHash` to the result of calling the RDF Dataset Canonicalization
+algorithm [[RDF-CANON]] on `canonicalProofConfig` and then cryptographically
+hashing the result using the same hash that is used by the signature algorithm,
+i.e., SHA-256 for a P-256 curve. Note: This step can be performed in parallel;
+it only needs to be completed before this algorithm terminates as the result is
+part of the return value.
+            </li>
+            <li>
+Initialize `hmac` to an HMAC API using a locally generated and exportable HMAC
+key. The HMAC uses the same hash algorithm used in the signature algorithm,
+i.e., SHA-256 for a P-256 curve.
+            </li>
+            <li>
+Initialize `nquads` to the result of calling the algorithm in Section
+<a href="#labelreplacementcanonize"></a>, passing `unsecuredDocument`, the
+result of calling the algorithm in Section
+<a href="#labelmapcanonize"></a> (passing `hmac`) as the
+`labelReplacementFunction`, and any custom JSON-LD API options. Note: This step
+transforms the document into an array of canonical N-Quads with pseudorandom
+blank node identifiers based on `hmac`.
+            </li>
+            <li>
+Initialize `mandatoryFrame` to the result of calling the algorithm in Section
+<a href="#jsonpointerstoframe"></a>, passing `document` and `mandatoryPointers` as
+`pointers`.
+            </li>
+            <li>
+Initialize `matching` and `nonMatching` to the result of calling the algorithm
+in Section <a href="#groupnquads"></a>, passing `nquads`, `mandatoryFrame` as
+`frame`, and any custom JSON-LD API options. Note: This step separates the
+N-Quads to mandatory (to disclose) and non-mandatory groups.
+            </li>
+            <li>
+Initialize `mandatory` to the values in the `matching` map.
+            </li>
+            <li>
+Initialize `nonMandatory` to the values in the `nonMatching` map.
+            </li>
+            <li>
+Initialize `mandatoryHash` to the result of calling the the algorithm in Section
+<a href="#hashmandatorynquads"></a>, passing `mandatory`.
+            </li>
+            <li>
+Initialize `hmacKey` to the result of exporting the HMAC key from `hmac`.
+            </li>
+            <li>
+Return an object with "proofHash" set to `proofHash`, "mandatoryPointers" set to
+`mandatoryPointers`, "mandatoryHash" set to `mandatoryHash`, "nonMandatory" set
+to `nonMandatory`, and "hmacKey" set to `hmacKey`.
+            </li>
           </ol>
         </section>
 
