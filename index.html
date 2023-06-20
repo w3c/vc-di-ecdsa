@@ -1971,54 +1971,37 @@ section also include the verification of such a data integrity proof.
         </p>
 
         <section>
-          <h4>Add Proof (ecdsa-sd-2023)</h4>
+          <h4>Add Base Proof (ecdsa-sd-2023)</h4>
 
           <p>
-To generate a proof, the algorithm in
+To generate a base proof, the algorithm in
 <a href="https://www.w3.org/TR/vc-data-integrity/#add-proof">
 Section 4.1: Add Proof</a> in the Data Integrity
 [[VC-DATA-INTEGRITY]] specification MUST be executed.
 For that algorithm, the cryptographic suite specific
 <a href="https://www.w3.org/TR/vc-data-integrity/#dfn-transformation-algorithm">
 transformation algorithm</a> is defined in Section
-<a href="#transformation-ecdsa-sd-2023"></a>, the
+<a href="#base-proof-transformation-ecdsa-sd-2023"></a>, the
 <a href="https://www.w3.org/TR/vc-data-integrity/#dfn-hashing-algorithm">
-hashing algorithm</a> is defined in Section <a href="#hashing-ecdsa-sd-2023"></a>,
+hashing algorithm</a> is defined in Section <a href="#base-proof-hashing-ecdsa-sd-2023"></a>,
 and the
 <a href="https://www.w3.org/TR/vc-data-integrity/#dfn-proof-serialization-algorithm">
 proof serialization algorithm</a> is defined in Section
-<a href="#proof-serialization-ecdsa-sd-2023"></a>.
+<a href="#base-proof-serialization-ecdsa-sd-2023"></a>.
           </p>
         </section>
 
         <section>
-          <h4>Verify Proof (ecdsa-sd-2023)</h4>
-
-          <p>
-To verify a proof, the algorithm in
-<a href="https://www.w3.org/TR/vc-data-integrity/#verify-proof">
-Section 4.2: Verify Proof</a> in the Data Integrity
-[[VC-DATA-INTEGRITY]] specification MUST be executed.
-For that algorithm, the cryptographic suite specific
-<a href="https://www.w3.org/TR/vc-data-integrity/#dfn-transformation-algorithm">
-transformation algorithm</a> is defined in Section
-<a href="#transformation-ecdsa-sd-2023"></a>, the
-<a href="https://www.w3.org/TR/vc-data-integrity/#dfn-hashing-algorithm">
-hashing algorithm</a> is defined in Section <a href="#hashing-ecdsa-sd-2023"></a>,
-and the
-<a href="https://www.w3.org/TR/vc-data-integrity/#dfn-proof-serialization-algorithm">
-proof verification algorithm</a> is defined in Section
-<a href="#proof-verification-ecdsa-sd-2023"></a>.
-          </p>
-        </section>
-
-        <section>
-          <h4>Transformation (ecdsa-sd-2023)</h4>
+          <h4>Base Proof Transformation (ecdsa-sd-2023)</h4>
 
           <p>
 The following algorithm specifies how to transform an unsecured input document
 into a transformed document that is ready to be provided as input to the
-hashing algorithm in Section <a href="#hashing-ecdsa-sd-2023"></a>.
+hashing algorithm in Section <a href="#base-proof-hashing-ecdsa-sd-2023"></a>.
+Creates the data that will be used to generate a base proof. The inputs to the
+algorithm are the JSON-LD document to be signed, `document`, the proof options,
+`proof options`, an array of mandatory JSON pointers, `mandatoryPointers`, and
+any custom JSON-LD API options (such as a document loader).
           </p>
 
           <p>
@@ -2040,14 +2023,13 @@ encoding.
         </section>
 
         <section>
-          <h4>Hashing (ecdsa-sd-2023)</h4>
+          <h4>Base Proof Hashing (ecdsa-sd-2023)</h4>
 
           <p>
 The following algorithm specifies how to cryptographically hash a
 <em>transformed data document</em> and <em>proof configuration</em>
 into cryptographic hash data that is ready to be provided as input to the
-algorithms in Section <a href="#proof-serialization-ecdsa-sd-2023"></a> or
-Section <a href="#proof-verification-ecdsa-sd-2023"></a>.
+algorithms in Section <a href="#base-proof-serialization-ecdsa-sd-2023"></a>.
           </p>
 
           <p>
@@ -2064,12 +2046,13 @@ series of bytes is produced as output.
         </section>
 
         <section>
-          <h4>Proof Configuration (ecdsa-sd-2023)</h4>
+          <h4>Base Proof Configuration (ecdsa-sd-2023)</h4>
 
           <p>
 The following algorithm specifies how to generate a
 <em>proof configuration</em> from a set of <em>proof options</em>
-that is used as input to the <a href="#hashing-ecdsa-sd-2023">proof hashing algorithm</a>.
+that is used as input to the
+<a href="#base-proof-hashing-ecdsa-sd-2023">base proof hashing algorithm</a>.
           </p>
 
           <p>
@@ -2129,7 +2112,7 @@ Return <var>canonicalProofConfig</var>.
         </section>
 
         <section>
-          <h4>Proof Serialization (ecdsa-sd-2023)</h4>
+          <h4>Base Proof Serialization (ecdsa-sd-2023)</h4>
 
           <p>
 The following algorithm specifies how to serialize a digital signature from
@@ -2145,28 +2128,6 @@ cryptographic hash data (<var>hashData</var>) and
 cryptographic suite</a> (<var>type</var>) and MAY contain a cryptosuite
 identifier (<var>cryptosuite</var>). A single <em>digital proof</em> value
 represented as series of bytes is produced as output.
-          </p>
-
-          <ol class="algorithm">
-
-          </ol>
-
-        </section>
-
-        <section>
-          <h4>Proof Verification (ecdsa-sd-2023)</h4>
-
-          <p>
-The following algorithm specifies how to verify a digital signature from
-a set of cryptographic hash data. This
-algorithm is designed to be used in conjunction with the algorithms defined
-in the Data Integrity [[VC-DATA-INTEGRITY]] specification,
-<a data-cite="vc-data-integrity#algorithms">
-Section 4: Algorithms</a>. Required inputs are
-cryptographic hash data (<var>hashData</var>),
-a digital signature (<var>proofBytes</var>) and
-proof options (<var>options</var>). A <em>verification result</em>
-represented as a boolean value is produced as output.
           </p>
 
           <ol class="algorithm">
