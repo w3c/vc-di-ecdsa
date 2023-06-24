@@ -2210,6 +2210,45 @@ label map (<var>labelMap</var>). The output is a <em>compressed label map</em>.
 
         </section>
 
+        <section>
+          <h4>serializeDerivedProofValue</h4>
+
+          <p>
+The following algorithm serializes a derived proof value. The required inputs
+are a base signature (<var>baseSignature</var>), public key
+(<var>publicKey</var>), an array of signatures (<var>signatures</var>), a label
+map (<var>labelMap</var>), and an array of mandatory indexes
+(<var>mandatoryIndexes</var>). A single <em>derived proof</em> value, serialized
+as a byte string, is produced as output.
+          </p>
+
+          <ol class="algorithm">
+            <li>
+Initialize `compressedLabelMap` to the result of calling the algorithm in
+Section <a href="#compresslabelmap"></a>, passing `labelMap` as the parameter.
+            </li>
+            <li>
+Initialize a byte array, `proofValue`, that starts with the ECDSA-SD disclosure
+proof header bytes `0xd9`, `0x5d`, and `0x01`.
+            </li>
+            <li>
+Initialize `components` to an array with five elements containing the values of:
+`baseSignature`, `publicKey`, `signatures`, `compressedLabelMap`, and
+`mandatoryIndexes`.
+            </li>
+            <li>
+CBOR-encode `components` and append it to `proofValue`.
+            </li>
+            <li>
+Return the <em>derived proof</em> as a string with the
+multibase-base64url-no-pad-encoding of `proofValue`. That is, return a string
+starting with "u" and ending with the base64url-no-pad-encoded value of
+`proofValue`.
+            </li>
+          </ol>
+
+        </section>
+
       </section>
 
       <section>
