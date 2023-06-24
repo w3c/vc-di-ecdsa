@@ -2211,6 +2211,34 @@ label map (<var>labelMap</var>). The output is a <em>compressed label map</em>.
         </section>
 
         <section>
+          <h4>decompressLabelMap</h4>
+
+          <p>
+The following algorithm decompresses a label map. The required input is a
+compressed label map (<var>compressedLabelMap</var>). The output is a
+<em>decompressed label map</em>.
+          </p>
+
+          <ol class="algorithm">
+            <li>
+Initialize `map` to an empty map.
+              </li>
+              <li>
+For each entry (`k`, `v`) in `compressedLabelMap`:
+                <ol class="algorithm">
+                  <li>
+Add an entry to `map` with a key that adds the prefix "c14n" to `k` and a value
+that adds a prefix of "u" to the base64url-no-pad-encoded value for `v`.
+                  </li>
+                </ol>
+              <li>
+Return `map` as <em>decompressed label map</em>.
+              </li>
+          </ol>
+
+        </section>
+
+        <section>
           <h4>serializeDerivedProofValue</h4>
 
           <p>
