@@ -2560,17 +2560,18 @@ value, represented as an object, is produced as output.
             <li>
 Initialize `baseSignature`, `publicKey`, `signatures`, `labelMap`,
 `mandatoryIndexes`, `revealDocument` to the values associated with their
-property names in the object returned when calling "createDisclosureData",
-passing the `document`, `proof`, `selectivePointers`, and any custom JSON-LD API
-options, such as a document loader.
+property names in the object returned when calling the algorithm in
+Section <a href="#createdisclosuredata"></a>, passing the `document`, `proof`,
+`selectivePointers`, and any custom JSON-LD API options, such as a document
+loader.
             </li>
             <li>
 Initialize `newProof` to a shallow copy of `proof`.
             </li>
             <li>
-Replace `proofValue` in `newProof` with the result of calling
-"serializeDisclosureProofValue", passing `baseSignature`, `publicKey`,
-`signatures`, `labelMap`, and `mandatoryIndexes`.
+Replace `proofValue` in `newProof` with the result of calling the algorithm
+in Section <a href="#serializederivedproofvalue"></a>, passing
+`baseSignature`, `publicKey`, `signatures`, `labelMap`, and `mandatoryIndexes`.
             </li>
             <li>
 Set the value of the "proof" property in `revealDocument` to `newProof`.
