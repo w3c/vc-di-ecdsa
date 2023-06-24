@@ -2320,6 +2320,48 @@ Return `proofValue` as <em>digital proof</em>.
 
         <section>
           <h4>Add Derived Proof (ecdsa-sd-2023)</h4>
+
+          <p>
+The following algorithm creates a selective disclosure derived proof; called by
+a <a>holder</a> of an `ecdsa-sd-2023`-protected <a>verifiable credential</a>.
+The derived proof is to be given to the <a>verifier</a>. The inputs include a
+JSON-LD document (<var>document</var>), an ECDSA-SD base proof
+(<var>proof</var>), an array of JSON pointers to use to selectively disclose
+statements (<var>selectivePointers</var>), and any custom JSON-LD API options,
+such as a document loader. A single <em>selectively revealed document</em>
+value, represented as an object, is produced as output.
+          </p>
+
+          <ol>
+            <li>
+Initialize `baseSignature`, `publicKey`, `signatures`, `labelMap`,
+`mandatoryIndexes`, `revealDocument` to the values associated with their
+property names in the object returned when calling "createDisclosureData",
+passing the `document`, `proof`, `selectivePointers`, and any custom JSON-LD API
+options, such as a document loader.
+            </li>
+            <li>
+Initialize `newProof` to a shallow copy of `proof`.
+            </li>
+            <li>
+Replace `proofValue` in `newProof` with the result of calling
+"serializeDisclosureProofValue", passing `baseSignature`, `publicKey`,
+`signatures`, `labelMap`, and `mandatoryIndexes`.
+            </li>
+            <li>
+Set the value of the "proof" property in `revealDocument` to `newProof`.
+            </li>
+            <li>
+If `revealDocument` has an `@context` field that includes a <a>verifiable
+credential</a> base context and it has a "credentialSubject" property that is a
+string, set the "credentialSubject" value to an object with an "id" value that
+matches the original string value.
+            </li>
+            <li>
+Return `revealDocument` as the <em>selectively revealed document</em>.
+            </li>
+          </ol>
+
         </section>
 
       </section>
