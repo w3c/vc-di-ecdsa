@@ -2726,6 +2726,72 @@ Return `revealDocument` as the <em>selectively revealed document</em>.
 
         </section>
 
+        <section>
+          <h4>Verify Derived Proof (ecdsa-sd-2023)</h4>
+
+          <p>
+The following algorithm attempts verification of an `ecdsa-sd-2023` derived
+proof. This algorithm is called by a verifier of an ECDSA-SD-protected
+<a>verifiable credential</a>. The inputs include a JSON-LD document
+(<var>document</var>), an ECDSA-SD disclosure proof (<var>proof</var>), and any
+custom JSON-LD API options, such as a document loader. A single boolean
+<em>verification result</em> value is produced as output.
+          </p>
+
+          <ol class="algorithm">
+            <li>
+Initialize `baseSignature`, `proofHash`, `publicKey`, `signatures`,
+`nonMandatory`, and `mandatoryHash` to the values associated with their property
+names in the object returned when calling the algorithm in Section
+<a href="#serializesigndata"></a>, passing the `document`, `proof`, and any
+custom JSON-LD API options, such as a document loader.
+            </li>
+            <li>
+If the length of `signatures` does not match the length of `nonMandatory`, throw
+an error indicating that the signature count does not match the non-mandatory
+message count.
+            </li>
+            <li>
+Initialize `publicKeyBytes` to the public key bytes expressed in `publicKey`.
+Instructions on how to decode the public key value can be found in Section
+<a href="#multikey"></a>.
+            </li>
+            <li>
+Initialize `toVerify` to the result of calling the algorithm in Setion
+<a href="#serializesigndata"></a>, passing `proofHash`, `publicKey`, and
+`mandatoryHash`.
+            </li>
+            <li>
+Initialize `verificationResult` be the result of applying the verification
+algorithm of the Elliptic Curve Digital Signature Algorithm (ECDSA) [FIPS-186-5],
+with `toVerify` as the data to be verified against the `baseSignature` using
+the public key specified by `publicKeyBytes`. If `verificationResult` is
+`false`, return `false`.
+            </li>
+            <li>
+For every entry (`index`, `signature`) in `signatures`, verify every signature
+for every selectively disclosed (non-mandatory) statement:
+              <ol class="algorithm">
+                <li>
+Initialize `verificationResult` to the result of applying the verification
+algorithm Elliptic Curve Digital Signature Algorithm (ECDSA) [FIPS-186-5], with
+the UTF-8 representation of the value at `index` of `nonMandatory` as the data
+to be verified against `signature` using the public key specified by
+`publicKeyBytes`.
+                </li>
+                <li>
+If `verificationResult` is `false`, return `false`.
+                </li>
+              </ol>
+            </li>
+
+            <li>
+Return `verificationResult` as <em>verification result</em>.
+            </li>
+          </ol>
+
+        </section>
+
       </section>
 
     </section>
