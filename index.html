@@ -2191,20 +2191,20 @@ label map (<var>labelMap</var>). The output is a <em>compressed label map</em>.
 
           <ol class="algorithm">
             <li>
-              Initialize `map` to an empty map.
+Initialize `map` to an empty map.
               </li>
               <li>
-              For each entry (`k`, `v`) in `labelMap`:
+For each entry (`k`, `v`) in `labelMap`:
                 <ol class="algorithm">
                   <li>
-                Add an entry to `map` with a key that is a base-10 integer parsed from the
-                characters following the "c14n" prefix in `k` and a value that is a byte array
-                resulting from base64url-no-pad-decoding the characters after the "u" prefix in
+Add an entry to `map` with a key that is a base-10 integer parsed from the
+characters following the "c14n" prefix in `k` and a value that is a byte array
+resulting from base64url-no-pad-decoding the characters after the "u" prefix in
                 `v`.
                   </li>
                 </ol>
               <li>
-              Return `map` as <em>compressed label map</em>.
+Return `map` as <em>compressed label map</em>.
               </li>
           </ol>
 
