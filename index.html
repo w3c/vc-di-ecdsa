@@ -1959,6 +1959,74 @@ Return `mandatoryHash`.
         </section>
       </section>
 
+
+      <section>
+        <h3>ecdsa-sd-2023 Functions</h3>
+
+        <p>
+This section contains subalgorithms that are useful to the `ecdsa-sd-2023`
+cryptographic suite.
+        </p>
+
+        <section>
+          <h4>serializeSignData</h4>
+
+          <p>
+The following algorithm serializes the data that is to be signed by the private
+key associated with the base proof verification method. The required inputs are
+the proof options hash (<var>proofHash</var>), the proof-scoped multikey-encoded
+public key (<var>publicKey</var>), and the mandatory hash
+(<var>mandatoryHash</var>). A single <em>sign data</em> value,
+represented as series of bytes, is produced as output.
+          </p>
+
+          <ol class="algorithm">
+            <li>
+Return the concatenation of <var>proofHash</var>, <var>publicKey</var>, and
+<var>mandatoryHash</var>, in that order, as <em>sign data</em>.
+            </li>
+          </ol>
+
+        </section>
+
+        <section>
+          <h4>serializeBaseProofValue</h4>
+
+          <p>
+The following algorithm serializes the base proof value, including the
+base signature, public key, HMAC key, signatures, and mandatory pointers.
+The required inputs are a base signature <var>baseSignature</var>, a public key
+<var>publicKey</var>, an HMAC key <var>hmacKey</var>, an array of
+<var>signatures</var>, and an array of <var>mandatoryPointers</var>.
+A single <em>base proof</em> string value is produced as output.
+          </p>
+
+          <ol class="algorithm">
+            <li>
+Initialize a byte array, `proofValue`, that starts with the ECDSA-SD base proof
+header bytes 0xd9, 0x5d, and 0x00.
+            </li>
+            <li>
+Initialize `components` to an array with five elements containing the values of:
+`baseSignature`, `publicKey`, `hmacKey`, `signatures`, and `mandatoryPointers`.
+            </li>
+            <li>
+CBOR-encode `components` and append it to `proofValue`.
+            </li>
+            <li>
+Initialize `baseProof` to a string with the multibase-base64url-no-pad-encoding
+of `proofValue`. That is, return a string starting with "u" and ending with the
+base64url-no-pad-encoded value of `proofValue`.
+            </li>
+            <li>
+Return `baseProof` as <em>base proof</em>.
+            </li>
+          </ol>
+
+        </section>
+
+      </section>
+
       <section>
         <h3>ecdsa-sd-2023</h3>
 
@@ -2178,63 +2246,6 @@ Return <var>canonicalProofConfig</var>.
         </section>
 
         <section>
-          <h4>serializeSignData</h4>
-
-          <p>
-The following algorithm serializes the data that is to be signed by the private
-key associated with the base proof verification method. The required inputs are
-the proof options hash (<var>proofHash</var>), the proof-scoped multikey-encoded
-public key (<var>publicKey</var>), and the mandatory hash
-(<var>mandatoryHash</var>). A single <em>sign data</em> value,
-represented as series of bytes, is produced as output.
-          </p>
-
-          <ol class="algorithm">
-            <li>
-Return the concatenation of <var>proofHash</var>, <var>publicKey</var>, and
-<var>mandatoryHash</var>, in that order, as <em>sign data</em>.
-            </li>
-          </ol>
-
-        </section>
-
-        <section>
-          <h4>serializeBaseProofValue</h4>
-
-          <p>
-The following algorithm serializes the base proof value, including the
-base signature, public key, HMAC key, signatures, and mandatory pointers.
-The required inputs are a base signature <var>baseSignature</var>, a public key
-<var>publicKey</var>, an HMAC key <var>hmacKey</var>, an array of
-<var>signatures</var>, and an array of <var>mandatoryPointers</var>.
-A single <em>base proof</em> string value is produced as output.
-          </p>
-
-          <ol class="algorithm">
-            <li>
-Initialize a byte array, `proofValue`, that starts with the ECDSA-SD base proof
-header bytes 0xd9, 0x5d, and 0x00.
-            </li>
-            <li>
-Initialize `components` to an array with five elements containing the values of:
-`baseSignature`, `publicKey`, `hmacKey`, `signatures`, and `mandatoryPointers`.
-            </li>
-            <li>
-CBOR-encode `components` and append it to `proofValue`.
-            </li>
-            <li>
-Initialize `baseProof` to a string with the multibase-base64url-no-pad-encoding
-of `proofValue`. That is, return a string starting with "u" and ending with the
-base64url-no-pad-encoded value of `proofValue`.
-            </li>
-            <li>
-Return `baseProof` as <em>base proof</em>.
-            </li>
-          </ol>
-
-        </section>
-
-        <section>
           <h4>Base Proof Serialization (ecdsa-sd-2023)</h4>
 
           <p>
@@ -2305,6 +2316,10 @@ Return `proofValue` as <em>digital proof</em>.
             </li>
           </ol>
 
+        </section>
+
+        <section>
+          <h4>Add Derived Proof (ecdsa-sd-2023)</h4>
         </section>
 
       </section>
