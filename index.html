@@ -2063,6 +2063,123 @@ respectively.
 
         </section>
 
+        <section>
+          <h4>createDisclosureData</h4>
+
+          <p>
+The following algorithm creates data to be used to generate a derived proof. The
+inputs include a JSON-LD document (<var>document</var>), an ECDSA-SD base proof
+(<var>proof</var>), an array of JSON pointers to use to selectively disclose
+statements (<var>selectivePointers</var>), and any custom JSON-LD API options,
+such as a document loader). A single object, <em>disclosure data</em>, is
+produced as output, which contains the "baseSignature", "publicKey",
+"signatures" for "filteredSignatures", "labelMap", "mandatoryIndexes", and
+"revealDocument" fields.
+          </p>
+
+          <ol class="algorithm">
+            <li>
+Initialize `baseSignature`, `publicKey`, `hmacKey`, `signatures`, and
+`mandatoryPointers` to the values of the associated properties in the object
+returned when calling the algorithm in Section
+<a href="#parsebaseproofvalue"></a>, passing the `proofValue` from `proof`.
+            </li>
+            <li>
+Initialize `hmac` to an HMAC API using `hmacKey`. The HMAC uses the same hash
+algorithm used in the signature algorithm, i.e., SHA-256 for a P-256 curve.
+            </li>
+            <li>
+Initialize `nquads` to the result of calling the algorithm in Section
+<a href="#hmacidcanonize"></a>, passing `document`, `hmac`, and any custom
+JSON-LD API options as parameters. Note: This step transforms the document into
+an array of canonical N-Quads with pseudorandom blank node identifiers based on
+`hmac`.
+            </li>
+            <li>
+Initialize `mandatoryFrame` to the result of calling the algorithm in Section <a
+href="#jsonpointerstoframe"></a>, passing `document` and `mandatoryPointers` as
+`pointers`.
+            </li>
+            <li>
+Initialize `combinedFrame` to the result of calling the
+<a href="#jsonpointerstoframe"></a> primitive, passing `document` and the
+concatenation of `mandatoryPointers` and `selectivePointers` as `pointers`.
+            </li>
+            <li>
+If `mandatoryFrame` and `combinedFrame` are both `null`, then throw an error
+indicating that nothing is to be disclosed.
+            </li>
+            <li>
+Execute the following two steps in parallel (if the runtime environment allows
+for parallel execution, otherwise, execute the operations serially):
+              <ol class="algorithm">
+                <li>
+Initialize `revealDocument` to the result of calling the algorithm in
+Section <a href="#strictframe"></a>, passing `document`, `combinedFrame` as
+`frame`, and any custom JSON-LD API options.
+                </li>
+                <li>
+Initialize `filterAndGroupResult` to the result of calling the algorithm in
+Section <a href="#filterandgroupnquads"></a>, passing `nquads`, `combinedFrame` for
+`filterFrame`, `mandatoryFrame` for `groupFrame`, and any custom JSON-LD API
+options.
+                </li>
+              </ol>
+            </li>
+            <li>
+Initialize `labelMap` to the value of "labelMap" in `filterAndGroupResult`.
+            </li>
+            <li>
+Initialize `relativeMandatory` to the value of "matching" in the value of
+"filtered" in `filterAndGroupResult`.
+            </li>
+            <li>
+Initialize `absoluteMandatory` to the value of "matching" in
+`filterAndGroupResult`.
+            </li>
+            <li>
+Initialize `absoluteNonMandatory` to the value of "nonMatching" in
+`filterAndGroupResult`.
+            </li>
+            <li>
+Initialize `mandatoryIndexes` to the keys from `relativeMandatory`.
+            </li>
+            <li>
+Choose the signatures that match the selectively disclosed statements, which
+requires shifting by any absolute mandatory indexes to cause the indexes in
+`signatures` to match with `absoluteNonMandatory` map keys:
+              <ol class="algorithm">
+                <li>
+Initialize `index` to `0`.
+                </li>
+                <li>
+Initialize `filteredSignatures` to an empty array.
+                </li>
+                <li>
+For each `signature` in `signatures`:
+                  <ol class="algorithm">
+                    <li>
+While `index` is in `absoluteMandatory`, increment `index`.
+                    </li>
+                    <li>
+If `index` is in `absoluteNonMandatory`, add `signature` to
+`filteredSignatures`.
+                    </li>
+                    <li>
+Increment `index`.
+                    </li>
+                  </ol>
+                </li>
+              </ol>
+            </li>
+            <li>
+Return an object with properties matching `baseSignature`, `publicKey`,
+"signatures" for `filteredSignatures`, `labelMap`, `mandatoryIndexes`, and
+`revealDocument`.
+            </li>
+          </ol>
+
+        </section>
 
       </section>
 
@@ -2362,7 +2479,7 @@ Return `proofValue` as <em>digital proof</em>.
 
           <p>
 The following algorithm creates a selective disclosure derived proof; called by
-a <a>holder</a> of an `ecdsa-sd-2023`-protected <a>verifiable credential</a>.
+a holder of an `ecdsa-sd-2023`-protected <a>verifiable credential</a>.
 The derived proof is to be given to the <a>verifier</a>. The inputs include a
 JSON-LD document (<var>document</var>), an ECDSA-SD base proof
 (<var>proof</var>), an array of JSON pointers to use to selectively disclose
