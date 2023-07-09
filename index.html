@@ -271,52 +271,39 @@ JSON-LD.
 
       <p>
 The following sections outline the data model that is used by this specification
-for <a>verification methods</a> and <a>data integrity proof</a> formats.
+to express verification methods, such as cryptographic public keys, and
+data integrity proofs, such as digital signatures.
       </p>
 
       <section>
         <h3>Verification Methods</h3>
-        <p>
-The cryptographic material used to verify a <a>data integrity proof</a> is
-called the <a>verification method</a>. This suite relies on public key material
-represented using [[MULTIBASE]] and [[MULTICODEC]]. This suite supports public
-key use for both digital signature generation and verification, according to
-[[FIPS-186-5]].
-        </p>
 
         <p>
-This suite MAY be used to verify Data Integrity Proofs [[VC-DATA-INTEGRITY]]
-produced by ECDSA public key material encoded as a
-<a href="#multikey">Multikey</a>. Loss-less key transformation processes that
-result in equivalent cryptographic material MAY be utilized.
+These verification methods are used to verify Data Integrity Proofs
+[[VC-DATA-INTEGRITY]] produced using Elliptic Curve cryptographic key material
+that is compliant with [[FIPS-186-5]]. The encoding formats for these key types
+are provided in this section. Lossless cryptographic key transformation
+processes that result in equivalent cryptographic key material MAY be utilized
+during the processing of digital signatures.
         </p>
 
         <section>
           <h4>Multikey</h4>
 
-          <p class="issue">
-This definition should go in the Data Integrity specification and referenced
-from there.
+          <p>
+The <a data-cite="VC-DATA-INTEGRITY#multikey">Multikey format</a>, as defined in
+[[VC-DATA-INTEGRITY]], is used to express public keys for the cryptographic
+suites defined in this specification.
           </p>
 
           <p>
-The `type` of the verification method MUST be `Multikey`.
-          </p>
-
-          <p>
-The `controller` of the verification method MUST be a URL.
-          </p>
-
-          <p>
-The `publicKeyMultibase` property of the verification method MUST be
-a public key encoded according to [[MULTICODEC]] and formatted according to
-[[MULTIBASE]]. The multicodec encoding of a P-256 public key is the
-two-byte prefix `0x1200` followed by the 33-byte compressed public key data.
-The 35 byte value is then encoded using base58-btc (`z`) as the prefix.
-The multicodec encoding of a P-384 public key is the
-two-byte prefix `0x1201` followed by the 49-byte compressed public key data.
-The 51 byte value is then encoded using base58-btc (`z`) as the prefix.
-Any other encodings MUST NOT be allowed.
+The `publicKeyMultibase` property represents a Multibase-encoded Multikey
+expression of a P-256 or P-384 public key. The encoding of a P-256 public key is
+the two-byte prefix `0x1200` followed by the 33-byte compressed public key data.
+The 35 byte value is then encoded using base58-btc (`z`) as the prefix. The
+encoding of a P-384 public key is the two-byte prefix `0x1201` followed by the
+49-byte compressed public key data. The 51 byte value is then encoded using
+base58-btc (`z`) as the prefix. Any other encodings MUST NOT be allowed.
           </p>
 
           <p class="advisement">
@@ -382,23 +369,6 @@ key. Implementations of this specification will raise errors in the event of a
 }
           </pre>
         </section>
-
-        <p class="issue" title="Refer normatively to a Multikey specification">
-This specification should not specify multikey formats. It should, instead,
-point to a multikey registry and/or specification. Examples of these
-sorts of documents include the DID Specification Registries for <a
-href="https://www.w3.org/TR/did-spec-registries/#verification-method-types">
-Verification Method Types</a>, the key types in the <a
-href="https://ns.did.ai/suites/multikey-2021/v1/">
-Multikey2021 JSON-LD Context</a>, and key definitions in the <a
-href="https://w3c-ccg.github.io/security-vocab/">Security Vocabulary</a>.
-Ideally, the specification that this one points to would define all possible
-multikeys listed in the <a href="https://github.com/multiformats/multicodec/blob/master/table.csv">Multicodec Registry</a>
-and define how to encode them as multibase values in fields such as
-`publicKeyMultibase` and `secretKeyMultibase`. The referenced specification
-should also include an extensibility mechanism and registry for new values as
-they are added to the Multicodec Registry.
-        </p>
 
       </section>
 
