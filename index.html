@@ -277,11 +277,13 @@ suites defined in this specification.
           <p>
 The `publicKeyMultibase` property represents a Multibase-encoded Multikey
 expression of a P-256 or P-384 public key. The encoding of a P-256 public key is
-the two-byte prefix `0x1200` followed by the 33-byte compressed public key data.
+the two-byte prefix `0x8024` (the varint expression of `0x1200`) followed
+by the 33-byte compressed public key data.
 The 35 byte value is then encoded using base58-btc (`z`) as the prefix. The
-encoding of a P-384 public key is the two-byte prefix `0x1201` followed by the
-49-byte compressed public key data. The 51 byte value is then encoded using
-base58-btc (`z`) as the prefix. Any other encodings MUST NOT be allowed.
+encoding of a P-384 public key is the two-byte prefix `0x8124` (the varint
+expression of `0x1201`) followed by the 49-byte compressed public key data.
+The 51 byte value is then encoded using base58-btc (`z`) as the prefix. Any
+other encodings MUST NOT be allowed.
           </p>
 
           <p class="advisement">
