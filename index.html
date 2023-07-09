@@ -140,6 +140,10 @@ code {
   color: rgb(199, 73, 0);
   font-weight: bold;
 }
+pre.nohighlight {
+  overflow-x: auto;
+  white-space: pre-wrap;
+}
 pre .highlight {
   font-weight: bold;
   color: green;
@@ -300,7 +304,7 @@ key. Implementations of this specification will raise errors in the event of a
 `publicKeyMultibase` value.
           </p>
 
-          <pre class="example"
+          <pre class="example nohighlight"
             title="An P-256 public key encoded as a Multikey">
 {
   "id": "https://example.com/issuer/123#key-0",
@@ -310,7 +314,7 @@ key. Implementations of this specification will raise errors in the event of a
 }
           </pre>
 
-          <pre class="example"
+          <pre class="example nohighlight"
             title="An P-384 public key encoded as a Multikey">
 {
   "id": "https://example.com/issuer/123#key-0",
@@ -321,7 +325,7 @@ key. Implementations of this specification will raise errors in the event of a
 }
           </pre>
 
-          <pre class="example" title="Two public keys (P-256 and P-384)
+          <pre class="example nohighlight" title="Two public keys (P-256 and P-384)
             encoded as Multikeys in a controller document">
 {
   "@context": [
@@ -415,8 +419,7 @@ produced according to [[FIPS-186-5]], encoded according to [[MULTIBASE]] using
 the base58-btc base encoding.
           </p>
 
-          <pre class="example highlight" style="overflow-x:
-            auto; white-space: pre-wrap; word-wrap: break-word;"
+          <pre class="example nohighlight"
             title="An ECDSA P-256 digital signature expressed as a
               DataIntegrityProof">
 {
@@ -1178,7 +1181,7 @@ for signing and the public key made available for verification. The
 [[MULTIBASE]]/[[MULTICODEC]] representation for the public key, <code>p256-pub</code>,
 and the representation for the private key, <code>p256-priv</code>, are shown below.
         </p>
-        <pre class="example" title="Private and Public keys for Signature"
+        <pre class="example nohighlight" title="Private and Public keys for Signature"
         data-include="TestVectors/p256KeyPair.json"
         data-include-format="text">
         </pre>
@@ -1188,14 +1191,14 @@ Signing begins with a credential without an attached proof, which is converted
 to canonical form, which is then hashed, as shown in the following three examples.
         </p>
 
-        <pre class="example" title="Credential without Proof" data-include="TestVectors/unsigned.json"
+        <pre class="example nohighlight" title="Credential without Proof" data-include="TestVectors/unsigned.json"
         data-include-format="text"></pre>
 
-        <pre class="example" title="Canonical Credential without Proof" data-include="TestVectors/ecdsa-2019-p256/canonDocECDSAP256.txt"
+        <pre class="example nohighlight" title="Canonical Credential without Proof" data-include="TestVectors/ecdsa-2019-p256/canonDocECDSAP256.txt"
         data-include-format="text"></pre>
 
 
-        <pre class="example" title="Hash of Canonical Credential without Proof (hex)"
+        <pre class="example nohighlight" title="Hash of Canonical Credential without Proof (hex)"
         data-include="TestVectors/ecdsa-2019-p256/docHashECDSAP256.txt" data-include-format="text"></pre>
 
         <p>
@@ -1203,13 +1206,13 @@ The next step is to take the proof options document, convert it to canonical for
 and obtain its hash, as shown in the next three examples.
         </p>
 
-        <pre class="example" title="Proof Options Document"
+        <pre class="example nohighlight" title="Proof Options Document"
         data-include="TestVectors/ecdsa-2019-p256/proofConfigECDSAP256.json" data-include-format="text"></pre>
 
-        <pre class="example" title="Canonical Proof Options Document"
+        <pre class="example nohighlight" title="Canonical Proof Options Document"
         data-include="TestVectors/ecdsa-2019-p256/proofCanonECDSAP256.txt" data-include-format="text"></pre>
 
-        <pre class="example" title="Hash of Canonical Proof Options Document (hex)"
+        <pre class="example nohighlight" title="Hash of Canonical Proof Options Document (hex)"
         data-include="TestVectors/ecdsa-2019-p256/proofHashECDSAP256.txt" data-include-format="text"></pre>
 
         <p>
@@ -1217,13 +1220,13 @@ Finally, we concatenate the hash of the proof options followed by the hash of th
 compute the ECDSA signature, and then base58-btc encode the signature.
         </p>
 
-        <pre class="example" title="Combine hashes of Proof Options and Credential (hex)"
+        <pre class="example nohighlight" title="Combine hashes of Proof Options and Credential (hex)"
         data-include="TestVectors/ecdsa-2019-p256/combinedHashECDSAP256.txt" data-include-format="text"></pre>
 
-        <pre class="example" title="Signature of Combined Hashes (hex)"
+        <pre class="example nohighlight" title="Signature of Combined Hashes (hex)"
         data-include="TestVectors/ecdsa-2019-p256/sigHexECDSAP256.txt" data-include-format="text"></pre>
 
-        <pre class="example" title="Signature of Combined Hashes base58-btc"
+        <pre class="example nohighlight" title="Signature of Combined Hashes base58-btc"
         data-include="TestVectors/ecdsa-2019-p256/sigBTC58ECDSAP256.txt" data-include-format="text"></pre>
 
         <p>Assemble the signed credential with the following two steps:</p>
@@ -1238,7 +1241,7 @@ option document.
           </li>
         </ol>
 
-        <pre class="example" title="Signed Credential"
+        <pre class="example nohighlight" title="Signed Credential"
         data-include="TestVectors/ecdsa-2019-p256/signedECDSAP256.json" data-include-format="text"></pre>
       </section>
       <section>
@@ -1249,7 +1252,7 @@ for signing and the public key made available for verification. The
 [[MULTIBASE]]/[[MULTICODEC]] representation for the public key, <code>p384-pub</code>,
 and the representation for the private key, <code>p384-priv</code>, are shown below.
         </p>
-        <pre class="example" title="Private and Public keys for Signature"
+        <pre class="example nohighlight" title="Private and Public keys for Signature"
         data-include="TestVectors/p384KeyPair.json"
         data-include-format="text">
         </pre>
@@ -1259,14 +1262,14 @@ Signing begins with a credential without an attached proof, which is converted
 to canonical form, and then hashed, as shown in the following three examples.
         </p>
 
-        <pre class="example" title="Credential without Proof" data-include="TestVectors/unsigned.json"
+        <pre class="example nohighlight" title="Credential without Proof" data-include="TestVectors/unsigned.json"
         data-include-format="text"></pre>
 
-        <pre class="example" title="Canonical Credential without Proof" data-include="TestVectors/ecdsa-2019-p384/canonDocECDSAP384.txt"
+        <pre class="example nohighlight" title="Canonical Credential without Proof" data-include="TestVectors/ecdsa-2019-p384/canonDocECDSAP384.txt"
         data-include-format="text"></pre>
 
 
-        <pre class="example" title="Hash of Canonical Credential without Proof (hex)"
+        <pre class="example nohighlight" title="Hash of Canonical Credential without Proof (hex)"
         data-include="TestVectors/ecdsa-2019-p384/docHashECDSAP384.txt" data-include-format="text"></pre>
 
         <p>
@@ -1274,13 +1277,13 @@ The next step is to take the proof options document, convert it to canonical for
 and obtain its hash, as shown in the next three examples.
         </p>
 
-        <pre class="example" title="Proof Options Document"
+        <pre class="example nohighlight" title="Proof Options Document"
         data-include="TestVectors/ecdsa-2019-p384/proofConfigECDSAP384.json" data-include-format="text"></pre>
 
-        <pre class="example" title="Canonical Proof Options Document"
+        <pre class="example nohighlight" title="Canonical Proof Options Document"
         data-include="TestVectors/ecdsa-2019-p384/proofCanonECDSAP384.txt" data-include-format="text"></pre>
 
-        <pre class="example" title="Hash of Canonical Proof Options Document (hex)"
+        <pre class="example nohighlight" title="Hash of Canonical Proof Options Document (hex)"
         data-include="TestVectors/ecdsa-2019-p384/proofHashECDSAP384.txt" data-include-format="text"></pre>
 
         <p>
@@ -1288,13 +1291,13 @@ Finally, we concatenate the hash of the proof options followed by the hash of th
 compute the ECDSA signature, and then base58-btc encode the signature.
         </p>
 
-        <pre class="example" title="Combine hashes of Proof Options and Credential (hex)"
+        <pre class="example nohighlight" title="Combine hashes of Proof Options and Credential (hex)"
         data-include="TestVectors/ecdsa-2019-p384/combinedHashECDSAP384.txt" data-include-format="text"></pre>
 
-        <pre class="example" title="Signature of Combined Hashes (hex)"
+        <pre class="example nohighlight" title="Signature of Combined Hashes (hex)"
         data-include="TestVectors/ecdsa-2019-p384/sigHexECDSAP384.txt" data-include-format="text"></pre>
 
-        <pre class="example" title="Signature of Combined Hashes base58-btc"
+        <pre class="example nohighlight" title="Signature of Combined Hashes base58-btc"
         data-include="TestVectors/ecdsa-2019-p384/sigBTC58ECDSAP384.txt" data-include-format="text"></pre>
 
         <p>Assemble the signed credential with the following two steps:</p>
@@ -1309,7 +1312,7 @@ option document.
           </li>
         </ol>
 
-        <pre class="example" title="Signed Credential"
+        <pre class="example nohighlight" title="Signed Credential"
         data-include="TestVectors/ecdsa-2019-p384/signedECDSAP384.json" data-include-format="text"></pre>
       </section>
       <section>
@@ -1320,7 +1323,7 @@ for signing and the public key made available for verification. The
 [[MULTIBASE]]/[[MULTICODEC]] representation for the public key, <code>p256-pub</code>,
 and the representation for the private key, <code>p256-priv</code>, are shown below.
         </p>
-        <pre class="example" title="Private and Public keys for Signature"
+        <pre class="example nohighlight" title="Private and Public keys for Signature"
         data-include="TestVectors/p256KeyPair.json"
         data-include-format="text">
         </pre>
@@ -1330,14 +1333,14 @@ Signing begins with a credential without an attached proof, which is converted
 to canonical form, which is then hashed, as shown in the following three examples.
         </p>
 
-        <pre class="example" title="Credential without Proof" data-include="TestVectors/unsigned.json"
+        <pre class="example nohighlight" title="Credential without Proof" data-include="TestVectors/unsigned.json"
         data-include-format="text"></pre>
 
-        <pre class="example" title="Canonical Credential without Proof" data-include="TestVectors/jcs-ecdsa-2019-p256/canonDocJCSECDSAP256.txt"
+        <pre class="example nohighlight" title="Canonical Credential without Proof" data-include="TestVectors/jcs-ecdsa-2019-p256/canonDocJCSECDSAP256.txt"
         data-include-format="text"></pre>
 
 
-        <pre class="example" title="Hash of Canonical Credential without Proof (hex)"
+        <pre class="example nohighlight" title="Hash of Canonical Credential without Proof (hex)"
         data-include="TestVectors/jcs-ecdsa-2019-p256/docHashJCSECDSAP256.txt" data-include-format="text"></pre>
 
         <p>
@@ -1345,13 +1348,13 @@ The next step is to take the proof options document, convert it to canonical for
 and obtain its hash, as shown in the next three examples.
         </p>
 
-        <pre class="example" title="Proof Options Document"
+        <pre class="example nohighlight" title="Proof Options Document"
         data-include="TestVectors/jcs-ecdsa-2019-p256/proofConfigJCSECDSAP256.json" data-include-format="text"></pre>
 
-        <pre class="example" title="Canonical Proof Options Document"
+        <pre class="example nohighlight" title="Canonical Proof Options Document"
         data-include="TestVectors/jcs-ecdsa-2019-p256/proofCanonJCSECDSAP256.txt" data-include-format="text"></pre>
 
-        <pre class="example" title="Hash of Canonical Proof Options Document (hex)"
+        <pre class="example nohighlight" title="Hash of Canonical Proof Options Document (hex)"
         data-include="TestVectors/jcs-ecdsa-2019-p256/proofHashJCSECDSAP256.txt" data-include-format="text"></pre>
 
         <p>
@@ -1359,13 +1362,13 @@ Finally, we concatenate the hash of the proof options followed by the hash of th
 compute the ECDSA signature, and then base58-btc encode the signature.
         </p>
 
-        <pre class="example" title="Combine hashes of Proof Options and Credential (hex)"
+        <pre class="example nohighlight" title="Combine hashes of Proof Options and Credential (hex)"
         data-include="TestVectors/jcs-ecdsa-2019-p256/combinedHashJCSECDSAP256.txt" data-include-format="text"></pre>
 
-        <pre class="example" title="Signature of Combined Hashes (hex)"
+        <pre class="example nohighlight" title="Signature of Combined Hashes (hex)"
         data-include="TestVectors/jcs-ecdsa-2019-p256/sigHexJCSECDSAP256.txt" data-include-format="text"></pre>
 
-        <pre class="example" title="Signature of Combined Hashes base58-btc"
+        <pre class="example nohighlight" title="Signature of Combined Hashes base58-btc"
         data-include="TestVectors/jcs-ecdsa-2019-p256/sigBTC58JCSECDSAP256.txt" data-include-format="text"></pre>
 
         <p>Assemble the signed credential with the following two steps:</p>
@@ -1380,7 +1383,7 @@ option document.
           </li>
         </ol>
 
-        <pre class="example" title="Signed Credential"
+        <pre class="example nohighlight" title="Signed Credential"
         data-include="TestVectors/jcs-ecdsa-2019-p256/signedJCSECDSAP256.json" data-include-format="text"></pre>
       </section>
       <section>
@@ -1391,7 +1394,7 @@ for signing and the public key made available for verification. The
 [[MULTIBASE]]/[[MULTICODEC]] representation for the public key, <code>p384-pub</code>,
 and the representation for the private key, <code>p384-priv</code>, are shown below.
         </p>
-        <pre class="example" title="Private and Public keys for Signature"
+        <pre class="example nohighlight" title="Private and Public keys for Signature"
         data-include="TestVectors/p384KeyPair.json"
         data-include-format="text">
         </pre>
@@ -1401,14 +1404,14 @@ Signing begins with a credential without an attached proof, which is converted
 to canonical form, which is then hashed, as shown in the following three examples.
         </p>
 
-        <pre class="example" title="Credential without Proof" data-include="TestVectors/unsigned.json"
+        <pre class="example nohighlight" title="Credential without Proof" data-include="TestVectors/unsigned.json"
         data-include-format="text"></pre>
 
-        <pre class="example" title="Canonical Credential without Proof" data-include="TestVectors/jcs-ecdsa-2019-p384/canonDocJCSECDSAP384.txt"
+        <pre class="example nohighlight" title="Canonical Credential without Proof" data-include="TestVectors/jcs-ecdsa-2019-p384/canonDocJCSECDSAP384.txt"
         data-include-format="text"></pre>
 
 
-        <pre class="example" title="Hash of Canonical Credential without Proof (hex)"
+        <pre class="example nohighlight" title="Hash of Canonical Credential without Proof (hex)"
         data-include="TestVectors/jcs-ecdsa-2019-p384/docHashJCSECDSAP384.txt" data-include-format="text"></pre>
 
         <p>
@@ -1416,13 +1419,13 @@ The next step is to take the proof options document, convert it to canonical for
 and obtain its hash, as shown in the next three examples.
         </p>
 
-        <pre class="example" title="Proof Options Document"
+        <pre class="example nohighlight" title="Proof Options Document"
         data-include="TestVectors/jcs-ecdsa-2019-p384/proofConfigJCSECDSAP384.json" data-include-format="text"></pre>
 
-        <pre class="example" title="Canonical Proof Options Document"
+        <pre class="example nohighlight" title="Canonical Proof Options Document"
         data-include="TestVectors/jcs-ecdsa-2019-p384/proofCanonJCSECDSAP384.txt" data-include-format="text"></pre>
 
-        <pre class="example" title="Hash of Canonical Proof Options Document (hex)"
+        <pre class="example nohighlight" title="Hash of Canonical Proof Options Document (hex)"
         data-include="TestVectors/jcs-ecdsa-2019-p384/proofHashJCSECDSAP384.txt" data-include-format="text"></pre>
 
         <p>
@@ -1430,13 +1433,13 @@ Finally, we concatenate the hash of the proof options followed by the hash of th
 compute the ECDSA signature, and then base58-btc encode the signature.
         </p>
 
-        <pre class="example" title="Combine hashes of Proof Options and Credential (hex)"
+        <pre class="example nohighlight" title="Combine hashes of Proof Options and Credential (hex)"
         data-include="TestVectors/jcs-ecdsa-2019-p384/combinedHashJCSECDSAP384.txt" data-include-format="text"></pre>
 
-        <pre class="example" title="Signature of Combined Hashes (hex)"
+        <pre class="example nohighlight" title="Signature of Combined Hashes (hex)"
         data-include="TestVectors/jcs-ecdsa-2019-p384/sigHexJCSECDSAP384.txt" data-include-format="text"></pre>
 
-        <pre class="example" title="Signature of Combined Hashes base58-btc"
+        <pre class="example nohighlight" title="Signature of Combined Hashes base58-btc"
         data-include="TestVectors/jcs-ecdsa-2019-p384/sigBTC58JCSECDSAP384.txt" data-include-format="text"></pre>
 
         <p>Assemble the signed credential with the following two steps:</p>
@@ -1451,7 +1454,7 @@ option document.
           </li>
         </ol>
 
-        <pre class="example" title="Signed Credential"
+        <pre class="example nohighlight" title="Signed Credential"
         data-include="TestVectors/jcs-ecdsa-2019-p384/signedJCSECDSAP384.json" data-include-format="text"></pre>
       </section>
     </section>
