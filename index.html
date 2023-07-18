@@ -408,9 +408,10 @@ match the verification relationship expressed by the verification method
 `controller`.
           </p>
           <p>
-The `proofValue` property of the proof MUST be a detached ECDSA
-produced according to [[FIPS-186-5]], encoded according to [[MULTIBASE]] using
-the base58-btc base encoding.
+The `proofValue` property of the proof MUST be an ECDSA or deterministic ECDSA
+signature produced according to [[FIPS-186-5]] using the curves and hashes as
+specified in section <a href="#algorithms"></a> and encoded according to 
+[[MULTIBASE]] using the base58-btc base encoding.
           </p>
 
           <pre class="example nohighlight"
