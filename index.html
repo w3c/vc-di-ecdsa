@@ -261,7 +261,7 @@ These verification methods are used to verify Data Integrity Proofs
 [[VC-DATA-INTEGRITY]] produced using Elliptic Curve cryptographic key material
 that is compliant with [[FIPS-186-5]]. The encoding formats for these key types
 are provided in this section. Lossless cryptographic key transformation
-processes that result in equivalent cryptographic key material MAY be utilized
+processes that result in equivalent cryptographic key material MAY be used
 during the processing of digital signatures.
         </p>
 
@@ -279,10 +279,10 @@ The `publicKeyMultibase` property represents a Multibase-encoded Multikey
 expression of a P-256 or P-384 public key. The encoding of a P-256 public key is
 the two-byte prefix `0x8024` (the varint expression of `0x1200`) followed
 by the 33-byte compressed public key data.
-The 35 byte value is then encoded using base58-btc (`z`) as the prefix. The
+The 35-byte value is then encoded using base58-btc (`z`) as the prefix. The
 encoding of a P-384 public key is the two-byte prefix `0x8124` (the varint
 expression of `0x1201`) followed by the 49-byte compressed public key data.
-The 51 byte value is then encoded using base58-btc (`z`) as the prefix. Any
+The 51-byte value is then encoded using base58-btc (`z`) as the prefix. Any
 other encodings MUST NOT be allowed.
           </p>
 
