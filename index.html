@@ -396,7 +396,7 @@ containing a `type` property with the value set to
 The `type` property of the proof MUST be `DataIntegrityProof`.
           </p>
           <p>
-The `cryptosuite` property of the proof MUST be `ecdsa-2019`.
+The `cryptosuite` property of the proof MUST be `ecdsa-rdfc-2019` or `ecdsa-jcs-2019`.
           </p>
           <p>
 The `created` property of the proof MUST be an [[XMLSCHEMA11-2]]
@@ -449,10 +449,10 @@ that utilize the Elliptic Curve Digital Signature Algorithm (ECDSA) [[FIPS-186-5
       </p>
 
       <section>
-        <h3>ecdsa-2019</h3>
+        <h3>ecdsa-rdfc-2019</h3>
 
         <p>
-The `ecdsa-2019` cryptographic suite takes an input document, canonicalizes
+The `ecdsa-rdfc-2019` cryptographic suite takes an input document, canonicalizes
 the document using the Universal RDF Dataset Canonicalization Algorithm
 [[RDF-CANON]], and then cryptographically hashes and signs the output
 resulting in the production of a data integrity proof. The algorithms in this
@@ -467,7 +467,7 @@ by default, and abort processing upon detection.
         </p>
 
         <section>
-          <h4>Add Proof (ecdsa-2019)</h4>
+          <h4>Add Proof (ecdsa-rdfc-2019)</h4>
 
           <p>
 To generate a proof, the algorithm in
@@ -477,18 +477,18 @@ Section 4.1: Add Proof</a> in the Data Integrity
 For that algorithm, the cryptographic suite specific
 <a href="https://www.w3.org/TR/vc-data-integrity/#dfn-transformation-algorithm">
 transformation algorithm</a> is defined in Section
-<a href="#transformation-ecdsa-2019"></a>, the
+<a href="#transformation-ecdsa-rdfc-2019"></a>, the
 <a href="https://www.w3.org/TR/vc-data-integrity/#dfn-hashing-algorithm">
-hashing algorithm</a> is defined in Section <a href="#hashing-ecdsa-2019"></a>,
+hashing algorithm</a> is defined in Section <a href="#hashing-ecdsa-rdfc-2019"></a>,
 and the
 <a href="https://www.w3.org/TR/vc-data-integrity/#dfn-proof-serialization-algorithm">
 proof serialization algorithm</a> is defined in Section
-<a href="#proof-serialization-ecdsa-2019"></a>.
+<a href="#proof-serialization-ecdsa-rdfc-2019"></a>.
           </p>
         </section>
 
         <section>
-          <h4>Verify Proof (ecdsa-2019)</h4>
+          <h4>Verify Proof (ecdsa-rdfc-2019)</h4>
 
           <p>
 To verify a proof, the algorithm in
@@ -498,23 +498,23 @@ Section 4.2: Verify Proof</a> in the Data Integrity
 For that algorithm, the cryptographic suite specific
 <a href="https://www.w3.org/TR/vc-data-integrity/#dfn-transformation-algorithm">
 transformation algorithm</a> is defined in Section
-<a href="#transformation-ecdsa-2019"></a>, the
+<a href="#transformation-ecdsa-rdfc-2019"></a>, the
 <a href="https://www.w3.org/TR/vc-data-integrity/#dfn-hashing-algorithm">
-hashing algorithm</a> is defined in Section <a href="#hashing-ecdsa-2019"></a>,
+hashing algorithm</a> is defined in Section <a href="#hashing-ecdsa-rdfc-2019"></a>,
 and the
 <a href="https://www.w3.org/TR/vc-data-integrity/#dfn-proof-serialization-algorithm">
 proof verification algorithm</a> is defined in Section
-<a href="#proof-verification-ecdsa-2019"></a>.
+<a href="#proof-verification-ecdsa-rdfc-2019"></a>.
           </p>
         </section>
 
         <section>
-          <h4>Transformation (ecdsa-2019)</h4>
+          <h4>Transformation (ecdsa-rdfc-2019)</h4>
 
           <p>
 The following algorithm specifies how to transform an unsecured input document
 into a transformed document that is ready to be provided as input to the
-hashing algorithm in Section <a href="#hashing-ecdsa-2019"></a>.
+hashing algorithm in Section <a href="#hashing-ecdsa-rdfc-2019"></a>.
           </p>
 
           <p>
@@ -534,7 +534,7 @@ encoding.
             <li>
 If <var>options</var>.<var>type</var> is not set to the string
 `DataIntegrityProof` and <var>options</var>.<var>cryptosuite</var> is not
-set to the string `ecdsa-2019` then a `PROOF_TRANSFORMATION_ERROR` MUST be
+set to the string `ecdsa-rdfc-2019` then a `PROOF_TRANSFORMATION_ERROR` MUST be
 raised.
             </li>
             <li>
@@ -552,14 +552,14 @@ Return <var>canonicalDocument</var> as the <em>transformed data document</em>.
         </section>
 
         <section>
-          <h4>Hashing (ecdsa-2019)</h4>
+          <h4>Hashing (ecdsa-rdfc-2019)</h4>
 
           <p>
 The following algorithm specifies how to cryptographically hash a
 <em>transformed data document</em> and <em>proof configuration</em>
 into cryptographic hash data that is ready to be provided as input to the
-algorithms in Section <a href="#proof-serialization-ecdsa-2019"></a> or
-Section <a href="#proof-verification-ecdsa-2019"></a>. One must use the hash
+algorithms in Section <a href="#proof-serialization-ecdsa-rdfc-2019"></a> or
+Section <a href="#proof-verification-ecdsa-rdfc-2019"></a>. One must use the hash
 algorithm appropriate in security level to the curve used, i.e., for curve
 P-256 one uses SHA-256 and for curve P-384 one uses SHA-384.
           </p>
@@ -599,12 +599,12 @@ Return <var>hashData</var> as the <em>hash data</em>.
         </section>
 
         <section>
-          <h4>Proof Configuration (ecdsa-2019)</h4>
+          <h4>Proof Configuration (ecdsa-rdfc-2019)</h4>
 
           <p>
 The following algorithm specifies how to generate a
 <em>proof configuration</em> from a set of <em>proof options</em>
-that is used as input to the <a href="#hashing-ecdsa-2019">proof hashing algorithm</a>.
+that is used as input to the <a href="#hashing-ecdsa-rdfc-2019">proof hashing algorithm</a>.
           </p>
 
           <p>
@@ -631,7 +631,7 @@ If <var>options</var>.<var>cryptosuite</var> is set, set
             </li>
             <li>
 If <var>options</var>.<var>type</var> is not set to `DataIntegrityProof` and
-<var>proofConfig</var>.<var>cryptosuite</var> is not set to `ecdsa-2019`, an
+<var>proofConfig</var>.<var>cryptosuite</var> is not set to `ecdsa-rdfc-2019`, an
 `INVALID_PROOF_CONFIGURATION` error MUST be raised.
             </li>
             <li>
@@ -664,7 +664,7 @@ Return <var>canonicalProofConfig</var>.
         </section>
 
         <section>
-          <h4>Proof Serialization (ecdsa-2019)</h4>
+          <h4>Proof Serialization (ecdsa-rdfc-2019)</h4>
 
           <p>
 The following algorithm specifies how to serialize a digital signature from
@@ -706,7 +706,7 @@ Return <var>proofBytes</var> as the <em>digital proof</em>.
         </section>
 
         <section>
-          <h4>Proof Verification (ecdsa-2019)</h4>
+          <h4>Proof Verification (ecdsa-rdfc-2019)</h4>
 
           <p>
 The following algorithm specifies how to verify a digital signature from
@@ -745,10 +745,10 @@ Return <var>verificationResult</var> as the <em>verification result</em>.
         </section>
       </section>
       <section>
-        <h3>jcs-ecdsa-2019</h3>
+        <h3>ecdsa-jcs-2019</h3>
 
         <p>
-The `jcs-ecdsa-2019` cryptographic suite takes an input document, canonicalizes
+The `ecdsa-jcs-2019` cryptographic suite takes an input document, canonicalizes
 the document using the JSON Canonicalization Scheme [[RFC8785]], and then
 cryptographically hashes and signs the output
 resulting in the production of a data integrity proof. The algorithms in this
@@ -756,7 +756,7 @@ section also include the verification of such a data integrity proof.
         </p>
 
         <section>
-          <h4>Add Proof (jcs-ecdsa-2019)</h4>
+          <h4>Add Proof (ecdsa-jcs-2019)</h4>
 
           <p>
 To generate a proof, the algorithm in
@@ -766,18 +766,18 @@ Section 4.1: Add Proof</a> of the Data Integrity
 For that algorithm, the cryptographic suite-specific
 <a href="https://www.w3.org/TR/vc-data-integrity/#dfn-transformation-algorithm">
 transformation algorithm</a> is defined in Section
-<a href="#transformation-jcs-ecdsa-2019"></a>, the
+<a href="#transformation-ecdsa-jcs-2019"></a>, the
 <a href="https://www.w3.org/TR/vc-data-integrity/#dfn-hashing-algorithm">
-hashing algorithm</a> is defined in Section <a href="#hashing-jcs-ecdsa-2019"></a>,
+hashing algorithm</a> is defined in Section <a href="#hashing-ecdsa-jcs-2019"></a>,
 and the
 <a href="https://www.w3.org/TR/vc-data-integrity/#dfn-proof-serialization-algorithm">
 proof serialization algorithm</a> is defined in Section
-<a href="#proof-serialization-jcs-ecdsa-2019"></a>.
+<a href="#proof-serialization-ecdsa-jcs-2019"></a>.
           </p>
         </section>
 
         <section>
-          <h4>Verify Proof (jcs-ecdsa-2019)</h4>
+          <h4>Verify Proof (ecdsa-jcs-2019)</h4>
 
           <p>
 To verify a proof, the algorithm in
@@ -787,23 +787,23 @@ Section 4.2: Verify Proof</a> of the Data Integrity
 For that algorithm, the cryptographic suite-specific
 <a href="https://www.w3.org/TR/vc-data-integrity/#dfn-transformation-algorithm">
 transformation algorithm</a> is defined in Section
-<a href="#transformation-jcs-ecdsa-2019"></a>, the
+<a href="#transformation-ecdsa-jcs-2019"></a>, the
 <a href="https://www.w3.org/TR/vc-data-integrity/#dfn-hashing-algorithm">
-hashing algorithm</a> is defined in Section <a href="#hashing-jcs-ecdsa-2019"></a>,
+hashing algorithm</a> is defined in Section <a href="#hashing-ecdsa-jcs-2019"></a>,
 and the
 <a href="https://www.w3.org/TR/vc-data-integrity/#dfn-proof-serialization-algorithm">
 proof verification algorithm</a> is defined in Section
-<a href="#proof-verification-jcs-ecdsa-2019"></a>.
+<a href="#proof-verification-ecdsa-jcs-2019"></a>.
           </p>
         </section>
 
         <section>
-          <h4>Transformation (jcs-ecdsa-2019)</h4>
+          <h4>Transformation (ecdsa-jcs-2019)</h4>
 
           <p>
 The following algorithm specifies how to transform an unsecured input document
 into a transformed document that is ready to be provided as input to the
-hashing algorithm in Section <a href="#hashing-jcs-ecdsa-2019"></a>.
+hashing algorithm in Section <a href="#hashing-ecdsa-jcs-2019"></a>.
           </p>
 
           <p>
@@ -823,7 +823,7 @@ encoding.
             <li>
 If <var>options</var>.<var>type</var> is not set to the string
 `DataIntegrityProof` and <var>options</var>.<var>cryptosuite</var> is not
-set to the string `jcs-ecdsa-2019`, then a `PROOF_TRANSFORMATION_ERROR` MUST be
+set to the string `ecdsa-jcs-2019`, then a `PROOF_TRANSFORMATION_ERROR` MUST be
 raised.
             </li>
             <li>
@@ -840,14 +840,14 @@ Return <var>canonicalDocument</var> as the <em>transformed data document</em>.
         </section>
 
         <section>
-          <h4>Hashing (jcs-ecdsa-2019)</h4>
+          <h4>Hashing (ecdsa-jcs-2019)</h4>
 
           <p>
 The following algorithm specifies how to cryptographically hash a
 <em>transformed data document</em> and <em>proof configuration</em>
 into cryptographic hash data that is ready to be provided as input to the
-algorithms in Section <a href="#proof-serialization-jcs-ecdsa-2019"></a> or
-Section <a href="#proof-verification-jcs-ecdsa-2019"></a>. One must use the
+algorithms in Section <a href="#proof-serialization-ecdsa-jcs-2019"></a> or
+Section <a href="#proof-verification-ecdsa-jcs-2019"></a>. One must use the
 hash algorithm appropriate in security level to the curve used, i.e., for curve
 P-256 one uses SHA-256, and for curve P-384 one uses SHA-384.
           </p>
@@ -887,12 +887,12 @@ Return <var>hashData</var> as the <em>hash data</em>.
         </section>
 
         <section>
-          <h4>Proof Configuration (jcs-ecdsa-2019)</h4>
+          <h4>Proof Configuration (ecdsa-jcs-2019)</h4>
 
           <p>
 The following algorithm specifies how to generate a
 <em>proof configuration</em> from a set of <em>proof options</em>
-that is used as input to the <a href="#hashing-jcs-ecdsa-2019">proof hashing algorithm</a>.
+that is used as input to the <a href="#hashing-ecdsa-jcs-2019">proof hashing algorithm</a>.
           </p>
 
           <p>
@@ -919,7 +919,7 @@ If <var>options</var>.<var>cryptosuite</var> is set, set
             </li>
             <li>
 If <var>options</var>.<var>type</var> is not set to `DataIntegrityProof` and
-<var>proofConfig</var>.<var>cryptosuite</var> is not set to `jcs-ecdsa-2019`, an
+<var>proofConfig</var>.<var>cryptosuite</var> is not set to `ecdsa-jcs-2019`, an
 `INVALID_PROOF_CONFIGURATION` error MUST be raised.
             </li>
             <li>
@@ -947,7 +947,7 @@ Return <var>canonicalProofConfig</var>.
         </section>
 
         <section>
-          <h4>Proof Serialization (jcs-ecdsa-2019)</h4>
+          <h4>Proof Serialization (ecdsa-jcs-2019)</h4>
 
           <p>
 The following algorithm specifies how to serialize a digital signature from
@@ -989,7 +989,7 @@ Return <var>proofBytes</var> as the <em>digital proof</em>.
         </section>
 
         <section>
-          <h4>Proof Verification (jcs-ecdsa-2019)</h4>
+          <h4>Proof Verification (ecdsa-jcs-2019)</h4>
 
           <p>
 The following algorithm specifies how to verify a digital signature from
@@ -2674,7 +2674,7 @@ implementation was validated against the test vectors in [[RFC6979]].
 The group is debating the names used for the cryptosuite identifiers in <a href="https://github.com/w3c/vc-data-integrity/issues/38">VC Data Integrity issue #38</a>. Cryptosuite identifiers might change in the future.
       </p>
       <section>
-        <h3>Representation: ecdsa-2019, with curve P-256</h3>
+        <h3>Representation: ecdsa-rdfc-2019, with curve P-256</h3>
         <p>
 The signer needs to generate a private/public key pair with the private key used
 for signing and the public key made available for verification. The
@@ -2745,7 +2745,7 @@ option document.
         data-include="TestVectors/ecdsa-2019-p256/signedECDSAP256.json" data-include-format="text"></pre>
       </section>
       <section>
-        <h3>Representation: ecdsa-2019, with curve P-384</h3>
+        <h3>Representation: ecdsa-rdfc-2019, with curve P-384</h3>
         <p>
 The signer needs to generate a private/public key pair with the private key used
 for signing and the public key made available for verification. The
@@ -2816,7 +2816,7 @@ option document.
         data-include="TestVectors/ecdsa-2019-p384/signedECDSAP384.json" data-include-format="text"></pre>
       </section>
       <section>
-        <h3>Representation: jcs-ecdsa-2019 with curve P-256</h3>
+        <h3>Representation: ecdsa-jcs-2019 with curve P-256</h3>
         <p>
 The signer needs to generate a private/public key pair with the private key used
 for signing and the public key made available for verification. The
@@ -2887,7 +2887,7 @@ option document.
         data-include="TestVectors/jcs-ecdsa-2019-p256/signedJCSECDSAP256.json" data-include-format="text"></pre>
       </section>
       <section>
-        <h3>Representation: jcs-ecdsa-2019 with curve P-384</h3>
+        <h3>Representation: ecdsa-jcs-2019 with curve P-384</h3>
         <p>
 The signer needs to generate a private/public key pair with the private key used
 for signing and the public key made available for verification. The
