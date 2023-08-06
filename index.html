@@ -1600,19 +1600,19 @@ JSON-LD API options.
             </li>
             <li>
 Note: These next two steps can be performed in parallel.
+              <ol class="algorithm">
+                <li>
+  Get the canonical blank node identifier map, `canonicalIdMap`, by calling
+  [[RDF-CANON]], passing the joined `filteredNQuads`. Canonicalize `filteredNQuads
+  Note: These two steps can be performed in parallel.
+                </li>
+                <li>
+  Get the `groupResult` by calling the algorithm in Section
+  <a href="#groupnquads"></a>, passing `filteredNQuads`, `filteredDocument`,
+  `groupFrame`, and any custom JSON-LD API options.
+                </li>
+              </ol>
             </li>
-            <ol class="algorithm">
-              <li>
-Get the canonical blank node identifier map, `canonicalIdMap`, by calling
-[[RDF-CANON]], passing the joined `filteredNQuads`. Canonicalize `filteredNQuads
-Note: These two steps can be performed in parallel.
-              </li>
-              <li>
-Get the `groupResult` by calling the algorithm in Section
-<a href="#groupnquads"></a>, passing `filteredNQuads`, `filteredDocument`,
-`groupFrame`, and any custom JSON-LD API options.
-              </li>
-            </ol>
             <li>
 Note: Next generate matching and non-matching maps composed of original indexes
 to original N-Quads. The `groupResult` is different; it contains matching and
