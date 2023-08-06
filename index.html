@@ -461,8 +461,8 @@ section also include the verification of such a data integrity proof.
 
         <p class="advisement">
 When the RDF Dataset Canonicalization Algorithm [[RDF-CANON]] is used,
-implementations of that algorithm MUST detect 
-<a data-cite="RDF-CANON#dataset-poisoning">dataset poisoning</a> 
+implementations of that algorithm MUST detect
+<a data-cite="RDF-CANON#dataset-poisoning">dataset poisoning</a>
 by default, and abort processing upon detection.
         </p>
 
@@ -1660,7 +1660,6 @@ the algorithm in Section <a href="#createinitialframe"></a>.
             <li>
 For each `pointer` in `pointers` walk the document from root to the pointer
 target value building the frame:
-            </li>
             <ol class="algorithm">
               <li>
 Initialize `parentFrame` to `frame`.
@@ -1680,37 +1679,36 @@ Section <a href="#jsonpointertopaths"></a>.
               </li>
               <li>
 For each `path` in `paths`:
-              </li>
-              <ol class="algorithm">
-                <li>
-Set `parentFrame` to `valueFrame`.
-                </li>
-                <li>
-Set `parentValue` to `value`.
-                </li>
-                <li>
-Set `value` to `parentValue[path]`. If `value` is now undefined, throw an error
-indicating that the JSON pointer does not match the given `document`.
-                </li>
-                <li>
-Set `valueFrame` to `parentFrame[path]`.
-                </li>
-                <li>
-If `valueFrame` is undefined:
-                </li>
                 <ol class="algorithm">
                   <li>
-If `value` is an array, set `valueFrame` to an empty array.
+Set `parentFrame` to `valueFrame`.
                   </li>
                   <li>
+Set `parentValue` to `value`.
+                  </li>
+                  <li>
+Set `value` to `parentValue[path]`. If `value` is now undefined, throw an error
+indicating that the JSON pointer does not match the given `document`.
+                  </li>
+                  <li>
+Set `valueFrame` to `parentFrame[path]`.
+                  </li>
+                  <li>
+If `valueFrame` is undefined:
+                    <ol class="algorithm">
+                      <li>
+If `value` is an array, set `valueFrame` to an empty array.
+                      </li>
+                      <li>
 Otherwise, set `valueFrame` to an initial frame passing `value` to
 the algorithm in Section <a href="#createinitialframe"></a>.
-                  </li>
-                  <li>
+                      </li>
+                      <li>
 Set `parentFrame[path]` to `valueFrame`.
+                      </li>
+                    </ol>
                   </li>
-                </ol>
-              </ol>
+                </li>
               <li>
 Note: Next we generate the final `valueFrame`.
               </li>
