@@ -1,7 +1,0 @@
-{
-  "type": "DataIntegrityProof",
-  "cryptosuite": "jcs-ecdsa-2019",
-  "created": "2023-02-24T23:36:38Z",
-  "verificationMethod": "https://vc.example/issuers/5678#zDnaepBuvsQ8cpsWrVKw8fbpGpvPeNSjVPTWoq6cRqaYzBKVP",
-  "proofPurpose": "assertionMethod"
-}
