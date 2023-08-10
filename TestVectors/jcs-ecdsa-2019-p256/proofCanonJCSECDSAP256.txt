@@ -1,1 +1,0 @@
-{"created":"2023-02-24T23:36:38Z","cryptosuite":"jcs-ecdsa-2019","proofPurpose":"assertionMethod","type":"DataIntegrityProof","verificationMethod":"https://vc.example/issuers/5678#zDnaepBuvsQ8cpsWrVKw8fbpGpvPeNSjVPTWoq6cRqaYzBKVP"}
