@@ -1230,18 +1230,20 @@ such as BBS, that favor unlinkability over minimizing unrevealed data leakage.
         </section>
 
         <section>
-          <h4>skolemize</h4>
+          <h4>skolemizeNQuads</h4>
 
           <p>
 The following algorithm replaces all blank node identifiers in an array of
-N-Quad statements with a URN. The required inputs are an array of N-Quad strings
-(<var>inputNquads</var>) and a URN scheme (<var>urnScheme</var>). An array of
-N-Quad strings, <em>skolemizedNquads</em>, is produced as output.
+N-Quad strings with custom scheme URNs. The required inputs are an array of
+N-Quad strings (<var>inputNQuads</var>) and a URN scheme (<var>urnScheme</var>).
+An array of N-Quad strings, <em>skolemizedNQuads</em>, is produced as output.
+This operation is intended to be reversible through the use of the algorithm in
+Section <a href="#deskolemizeNQuads"></a>.
           </p>
 
           <ol class="algorithm">
             <li>
-Create a new array of N-Quad strings, <em>skolemizedNquads</em>.
+Create a new array of N-Quad strings, <em>skolemizedNQuads</em>.
             </li>
             <li>
 For each N-Quad string, <em>s1</em>, in the input array:
@@ -1255,31 +1257,33 @@ of a similar form to the following would achieve the desired result:
 <code>s1.replace(/(_:([^\s]+))/g, '&lt;urn:custom-scheme:$2>')</code>.
               </li>
               <li>
-Append <em>s2</em> to <em>skolemizedNquads</em>.
+Append <em>s2</em> to <em>skolemizedNQuads</em>.
               </li>
             </ol>
             <li>
-Return <em>skolemizedNquads</em>.
+Return <em>skolemizedNQuads</em>.
             </li>
           </ol>
         </section>
 
         <section>
-          <h4>deskolemize</h4>
+          <h4>deskolemizeNQuads</h4>
 
           <p>
 The following algorithm replaces all custom scheme URNs in an array of
-N-Quad statements with a blank node identifier. The required inputs are an array of N-Quad strings
-(<var>inputNquads</var>) and a URN scheme (<var>urnScheme</var>). An array of
-N-Quad strings, <em>deskolemizedNquads</em>, is produced as output.
+N-Quad statements with a blank node identifier. The required inputs are an array
+of N-Quad strings (<var>inputNQuads</var>) and a URN scheme
+(<var>urnScheme</var>). An array of N-Quad strings,
+<em>deskolemizedNquads</em>, is produced as output. This operation is intended
+to reverse use of the algorithm in Section <a href="#deskolemizeNQuads"></a>.
           </p>
 
           <ol class="algorithm">
             <li>
-Create a new array of N-Quad strings, <em>deskolemizedNquads</em>.
+Create a new array of N-Quad strings, <em>deskolemizedNQuads</em>.
             </li>
             <li>
-For each N-Quad string, <em>s1</em>, in the <var>inputNquads</var> array:
+For each N-Quad string, <em>s1</em>, in the <var>inputNQuads</var> array:
             <ol class="algorithm">
               <li>
 Create a new string, <em>s2</em>, that is a copy of <em>s1</em> replacing any
@@ -1291,81 +1295,157 @@ of a similar form to the following would achieve the desired result:
 <code>s1.replace(/(&lt;urn:custom-scheme:([^>]+)>)/g, '_:$2').</code>.
               </li>
               <li>
-Append <em>s2</em> to <em>deskolemizedNquads</em>.
+Append <em>s2</em> to <em>deskolemizedNQuads</em>.
               </li>
             </ol>
             <li>
-Return <em>deskolemizedNquads</em>.
+Return <em>deskolemizedNQuads</em>.
             </li>
           </ol>
         </section>
 
         <section>
-          <h4>toSkolemizedJSONLD</h4>
+          <h4>skolemizeExpandedJsonLd</h4>
 
           <p>
-The following algorithm converts an array of N-Quads to a skolemized
-JSON-LD document. The required inputs are an array of N-Quad strings
-(<var>inputNquads</var>). A JSON-LD document, <em>skolemizedJSONLD</em>, is
-produced as output.
+The following algorithm replaces all blank node identifiers in an expanded
+JSON-LD document with custom-scheme URNs. The required inputs are an expanded
+JSON-LD document (<var>expanded</var>), a custom URN scheme
+(<var>urnScheme</var>), a UUID string or other comparably random string
+(<var>random</var>), and reference to a shared integer (<var>count</var>).
+Any additional custom options (such as a document loader) can also be passed.
+It produces the expanded form of the skolemized, JSON-LD document
+(<var>skolemizedExpandedDocument</var> as output. The skolemization used in this
+operation is intended to be reversible through the use of the algorithm in
+Section <a href="#toDeskolemizedNQuads"></a>.
           </p>
 
           <ol class="algorithm">
             <li>
-Initialize `skolemizedQuads` to the result of calling the algorithm in
-Section <a href="#skolemize"></a>, with <var>inputNQuads</var> and
-"custom-scheme" as parameters. Implementations MAY choose a different
-<em>urnSchemeName</em> that is different than "custom-scheme" so long as the
-same scheme name is used in the algorithm in Section
-<a href="#todeskolemizedrdf"></a>.
+Initialize <var>skomelizedExpanded</var> to an empty array.
             </li>
             <li>
-Join `skolemizedQuads` into a single N-Quads string, `dataset`.
+For each <var>element</var> in <var>expanded</var>:
+              <ol class="algorithm">
+                <li>
+If either <var>element</var> is not an object or it contains the key
+<em>@value</em>, append a copy of <var>element</var> to
+<var>skolemizedExpandedDocument</var> and continue to the next
+<var>element</var>.
+                </li>
+                <li>
+Otherwise, initialize <var>skolemizedNode</var> to an object. And for
+each <em>property</em> and <em>value</em> in <var>element</var>:
+                  <ol class="algorithm">
+                    <li>
+If <em>value</em> is an array, set the value of <em>property</em> in
+<var>skolemizedNode</var> to the result of calling this algorithm
+recursively passing <em>value</em> for <var>expanded</var> and keeping the
+other parameters the same.
+                    </li>
+                    <li>
+Otherwise, set the value of <em>property</em> in <var>skolemizedNode</var> to
+the first element in the array result of calling this algorithm recursively
+passing an array with <em>value</em> as its only element for <var>expanded</var>
+and keeping the other parameters the same.
+                    </li>
+                  </ol>
+                </li>
+                <li>
+If <var>skolemizedNode</var> has no <em>@id</em> property, set the value of
+the <em>@id</em> property in <var>skolemizedNode</var> to the concatenation
+of "urn:", <var>urnScheme</var>, <var>random</var>, "_" and the value of
+<var>count</var>, incrementing the value of <var>count</var> afterwards.
+                </li>
+                <li>
+Otherwise, if the value of the <em>@id</em> property in
+<var>skolemizedNode</var> starts with "_:", preserve the existing blank node
+identifier when skolemizing by setting the value of the <em>@id</em> property
+in <var>skolemizedNode</var> to the concatenation of "urn:",
+<var>urnScheme</var>, and the existing value of the <em>@id</em> property.
+                </li>
+                <li>
+Append <var>skolemizedNode</var> to <var>skolemizedExpandedDocument</var>.
+                </li>
+              </ol>
             </li>
-            <li>
-Set <em>skolemizedJSONLD</em> to the result of the
-<a href="https://www.w3.org/TR/json-ld11-api/#serialize-rdf-as-json-ld-algorithm">
-Serialize RDF as JSON-LD</a> algorithm, passing any custom options (such as a
-document loader), to convert `dataset` from RDF to a JSON-LD document.
-            </li>
-            <li>
-Return <em>skolemizedJSONLD</em>.
+Return <var>skolemizedExpandedDocument</var>.
             </li>
           </ol>
         </section>
 
         <section>
-          <h4>toDeskolemizedRDF</h4>
+          <h4>skolemizeCompactJsonLd</h4>
+
+          <p>
+The following algorithm replaces all blank node identifiers in a compact
+JSON-LD document with custom-scheme URNs. The required inputs are a compact
+JSON-LD document (<var>document</var>) and a custom URN scheme
+(<var>urnScheme</var>). Any additional custom options (such as a document
+loader) can also be passed. It produces both an expanded form of the
+skolemized, JSON-LD document (<var>skolemizedExpandedDocument</var> and a
+compact form of the skolemized, JSON-LD document
+(<var>skolemizedCompactDocument</var>) as output. The skolemization used in this
+operation is intended to be reversible through the use of the algorithm in
+Section <a href="#toDeskolemizedNQuads"></a>.
+          </p>
+
+          <ol class="algorithm">
+            <li>
+Initialize <var>expanded</var> to the result of the JSON-LD
+<a href="https://www.w3.org/TR/json-ld11-api/#expansion-algorithm">
+Expansion Algorithm</a>, passing <var>document</var> and any custom
+options.
+            </li>
+            <li>
+Initialize <var>skolemizedExpandedDocument</var> to the result of the
+algorithm in Section <a href="#skolemizeExpandedJsonLd"></a>.
+            </li>
+            <li>
+Initialize <var>skolemizedCompactDocument</var> to the result of the JSON-LD
+<a href="https://www.w3.org/TR/json-ld11-api/#compaction-algorithm">
+Compaction Algorithm</a>, passing <var>skolemizedExpandedDocument</var> and any
+custom options.
+            </li>
+            <li>
+Return an object with both <var>skolemizedExpandedDocument</var> and
+<var>skolemizedCompactDocument</var>.
+            </li>
+          </ol>
+        </section>
+
+        <section>
+          <h4>toDeskolemizedNQuads</h4>
 
           <p>
 The following algorithm converts a skolemized JSON-LD document, such as one
-created using the algorithm in Section <a href="#toskolemizedjsonld"></a>, to an
-array of deskolemized N-Quads. The required inputs are a JSON-LD document,
-<em>skolemizedJSONLD</em>. An array of deskolemized N-Quad strings
-(<var>outputNquads</var>) is produced as output.
+created using the algorithm in Section <a href="#skolemizeCompactJsonLd"></a>,
+to an array of deskolemized N-Quads. The required inputs are a JSON-LD document,
+<em>skolemizedDocument</em>. An array of deskolemized N-Quad strings
+(<var>deskolemizedNQuads</var>) is produced as output.
           </p>
 
           <ol class="algorithm">
             <li>
-Initialize `skolemizedDataset` to the result of calling the
+Initialize `skolemizedDataset` to the result of the
 <a href="https://www.w3.org/TR/json-ld11-api/#deserialize-json-ld-to-rdf-algorithm">
 Deserialize JSON-LD to RDF</a> algorithm, passing any custom options (such as a
-document loader), to convert `skolemizedJSONLD` from JSON-LD to RDF in N-Quads
+document loader), to convert `skolemizedDocument` from JSON-LD to RDF in N-Quads
 format.
             </li>
             <li>
 Split `skolemizedDataset` into an array of individual N-Quads,
-`skolemizedNquads`.
+`skolemizedNQuads`.
             </li>
             <li>
-Set <var>outputNquads</var> to the result of calling the algorithm in Section
-<a href="#deskolemize"></a> with `skolemizedNquads` and "custom-scheme" as
-parameters. Implementations MAY choose a different <em>urnSchemeName</em> that
-is different than "custom-scheme" so long as the same scheme name is used in
-the algorithm in Section <a href="#toskolemizedjsonld"></a>.
+Set <var>deskolemizedNQuads</var> to the result of the algorithm in Section
+<a href="#deskolemizeNQuads"></a> with `skolemizedNQuads` and "custom-scheme:"
+as parameters. Implementations MAY choose a different <em>urnScheme</em>
+that is different than "custom-scheme:" so long as the same scheme name was
+used to generate <em>skolemizedDocument</em>.
             </li>
             <li>
-Return <em>outputNquads</em>.
+Return <var>deskolemizedNQuads</var>.
             </li>
           </ol>
         </section>
