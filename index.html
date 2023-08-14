@@ -1238,7 +1238,7 @@ N-Quad strings with custom scheme URNs. The required inputs are an array of
 N-Quad strings (<var>inputNQuads</var>) and a URN scheme (<var>urnScheme</var>).
 An array of N-Quad strings, <em>skolemizedNQuads</em>, is produced as output.
 This operation is intended to be reversible through the use of the algorithm in
-Section <a href="#deskolemizeNQuads"></a>.
+Section <a href="#deskolemizenquads"></a>.
           </p>
 
           <ol class="algorithm">
@@ -1275,7 +1275,7 @@ N-Quad statements with a blank node identifier. The required inputs are an array
 of N-Quad strings (<var>inputNQuads</var>) and a URN scheme
 (<var>urnScheme</var>). An array of N-Quad strings,
 <em>deskolemizedNquads</em>, is produced as output. This operation is intended
-to reverse use of the algorithm in Section <a href="#deskolemizeNQuads"></a>.
+to reverse use of the algorithm in Section <a href="#deskolemizenquads"></a>.
           </p>
 
           <ol class="algorithm">
@@ -1317,7 +1317,7 @@ Any additional custom options (such as a document loader) can also be passed.
 It produces the expanded form of the skolemized, JSON-LD document
 (<var>skolemizedExpandedDocument</var> as output. The skolemization used in this
 operation is intended to be reversible through the use of the algorithm in
-Section <a href="#toDeskolemizedNQuads"></a>.
+Section <a href="#todeskolemizednquads"></a>.
           </p>
 
           <ol class="algorithm">
@@ -1381,13 +1381,14 @@ Return <var>skolemizedExpandedDocument</var>.
 The following algorithm replaces all blank node identifiers in a compact
 JSON-LD document with custom-scheme URNs. The required inputs are a compact
 JSON-LD document (<var>document</var>) and a custom URN scheme
-(<var>urnScheme</var>). Any additional custom options (such as a document
-loader) can also be passed. It produces both an expanded form of the
-skolemized, JSON-LD document (<var>skolemizedExpandedDocument</var> and a
-compact form of the skolemized, JSON-LD document
-(<var>skolemizedCompactDocument</var>) as output. The skolemization used in this
-operation is intended to be reversible through the use of the algorithm in
-Section <a href="#toDeskolemizedNQuads"></a>.
+(<var>urnScheme</var>). The <var>document</var> is assumed to use only one
+<em>@context</em> property at the top level of the document. Any additional
+custom options (such as a document loader) can also be passed. It produces both
+an expanded form of the skolemized, JSON-LD document
+(<var>skolemizedExpandedDocument</var> and a compact form of the skolemized,
+JSON-LD document (<var>skolemizedCompactDocument</var>) as output. The
+skolemization used in this operation is intended to be reversible through the
+use of the algorithm in Section <a href="#todeskolemizednquads"></a>.
           </p>
 
           <ol class="algorithm">
@@ -1399,7 +1400,7 @@ options.
             </li>
             <li>
 Initialize <var>skolemizedExpandedDocument</var> to the result of the
-algorithm in Section <a href="#skolemizeExpandedJsonLd"></a>.
+algorithm in Section <a href="#skolemizeexpandedjsonld"></a>.
             </li>
             <li>
 Initialize <var>skolemizedCompactDocument</var> to the result of the JSON-LD
@@ -1419,7 +1420,7 @@ Return an object with both <var>skolemizedExpandedDocument</var> and
 
           <p>
 The following algorithm converts a skolemized JSON-LD document, such as one
-created using the algorithm in Section <a href="#skolemizeCompactJsonLd"></a>,
+created using the algorithm in Section <a href="#skolemizecompactjsonld"></a>,
 to an array of deskolemized N-Quads. The required inputs are a JSON-LD document,
 <em>skolemizedDocument</em>. An array of deskolemized N-Quad strings
 (<var>deskolemizedNQuads</var>) is produced as output.
@@ -1439,7 +1440,7 @@ Split `skolemizedDataset` into an array of individual N-Quads,
             </li>
             <li>
 Set <var>deskolemizedNQuads</var> to the result of the algorithm in Section
-<a href="#deskolemizeNQuads"></a> with `skolemizedNQuads` and "custom-scheme:"
+<a href="#deskolemizenquads"></a> with `skolemizedNQuads` and "custom-scheme:"
 as parameters. Implementations MAY choose a different <em>urnScheme</em>
 that is different than "custom-scheme:" so long as the same scheme name was
 used to generate <em>skolemizedDocument</em>.
@@ -1489,146 +1490,174 @@ Return `paths`.
         </section>
 
         <section>
-          <h4>createInitialFrame</h4>
+          <h4>createInitialSelection</h4>
 
           <p>
-The following algorithm creates an initial JSON-LD frame based on a JSON-LD
-object. This is a helper function used within the algorithm in
-Section <a href="#jsonpointerstoframe"></a>. The required input is a
-JSON-LD object (<var>value</var>). A JSON-LD frame <em>frame</em> is produced
-as output.
+The following algorithm creates an initial selection (a fragment of a JSON-LD
+document) based on a JSON-LD object. This is a helper function used within the
+algorithm in Section <a href="#selectjsonld"></a>. The required input is a
+JSON-LD object (<var>source</var>). A JSON-LD document fragment object
+(<var>selection</var>) is produced as output.
           </p>
 
           <ol class="algorithm">
             <li>
-Initialize <em>frame</em> to an empty object.
+Initialize <var>selection</var> to an empty object.
             </li>
             <li>
 If <var>value</var> has an `id` that is not a blank node identifier, set
-`frame.id` to its value. Note: All non-blank node identifiers in the path of
-any JSON Pointer MUST be included in the frame, this includes any root document
-identifier.
+`selection.id` to its value. Note: All non-blank node identifiers in the path of
+any JSON Pointer MUST be included in the selection, this includes any root
+document identifier.
             </li>
             <li>
-If <var>value</var>.`type` is set, set <em>frame</em>.`type` to its value.
-Note: All `type`s in the path of any JSON Pointer MUST be included in the frame,
-this includes any root document `type`.
+If <var>value</var>.`type` is set, set <var>selection</var>.`type` to its value.
+Note: All `type`s in the path of any JSON Pointer MUST be included in the
+selection, this includes any root document `type`.
             </li>
             <li>
-Return <em>frame</em>.
+Return <var>selection</var>.
             </li>
           </ol>
         </section>
 
         <section>
-          <h4>jsonPointersToFrame</h4>
+          <h4>selectPaths</h4>
 
           <p>
-The following algorithm converts an array of JSON Pointers and a JSON-LD
-document to a JSON-LD Frame to be used on that specific document. The required
-input is an array of JSON Pointers (<var>pointers</var>) and a JSON-LD document
-(<var>document</var>). A JSON-LD frame (<em>frame</em>) is produced as output.
+The following algorithm selects a portion of a compact JSON-LD document using
+paths parsed from a parsed JSON Pointer. This is a helper function used within
+the algorithm in Section <a href="#selectjsonld"></a>. The required input is an
+array of paths (<var>paths</var>) parsed from a JSON Pointer, a compact JSON-LD
+document (<var>document</var>), a selection document
+(<var>selectionDocument</var>) to be populated, and an array of arrays
+(<var>arrays</var>) for tracking selected arrays. This algorithm produces
+no output but instead populates the given <var>selectionDocument</var> with
+any values selected via <var>paths</var>.
           </p>
 
           <ol class="algorithm">
             <li>
-If `pointers` is empty, return `null`.
-            </li>
-            <li>
-Initialize `frame` to an initial frame passing `document` as `value` to
-the algorithm in Section <a href="#createinitialframe"></a>.
-            </li>
-            <li>
-For each `pointer` in `pointers` walk the document from root to the pointer
-target value building the frame:
-            <ol class="algorithm">
-              <li>
-Initialize `parentFrame` to `frame`.
-              </li>
-              <li>
 Initialize `parentValue` to `document`.
-              </li>
-              <li>
+            </li>
+            <li>
 Initialize `value` to `parentValue`.
-              </li>
-              <li>
-Initialize `valueFrame` to `parentFrame`.
-              </li>
-              <li>
-Parse the `pointer` into an array of `paths` using the algorithm in
-Section <a href="#jsonpointertopaths"></a>.
-              </li>
-              <li>
+            </li>
+            <li>
+Initialize `selectedParent` to `selectionDocument`.
+            </li>
+            <li>
+Initialize `selectedValue` to `selectedParent`.
+            </li>
+            <li>
 For each `path` in `paths`:
-                <ol class="algorithm">
-                  <li>
-Set `parentFrame` to `valueFrame`.
-                  </li>
-                  <li>
+              <ol class="algorithm">
+                <li>
+Set `selectedParent` to `selectedValue`.
+                </li>
+                <li>
 Set `parentValue` to `value`.
-                  </li>
-                  <li>
+                </li>
+                <li>
 Set `value` to `parentValue[path]`. If `value` is now undefined, throw an error
 indicating that the JSON pointer does not match the given `document`.
-                  </li>
-                  <li>
-Set `valueFrame` to `parentFrame[path]`.
-                  </li>
-                  <li>
-If `valueFrame` is undefined:
-                    <ol class="algorithm">
-                      <li>
-If `value` is an array, set `valueFrame` to an empty array.
-                      </li>
-                      <li>
-Otherwise, set `valueFrame` to an initial frame passing `value` to
-the algorithm in Section <a href="#createinitialframe"></a>.
-                      </li>
-                      <li>
-Set `parentFrame[path]` to `valueFrame`.
-                      </li>
-                    </ol>
-                  </li>
                 </li>
-              <li>
-Note: Next we generate the final `valueFrame`.
+                <li>
+Set `selectedValue` to `selectedParent[path]`.
+                </li>
+                <li>
+If `selectedValue` is now undefined:
+                  <ol class="algorithm">
+                    <li>
+If `value` is an array, set `selectedValue` to an empty array and append
+`selectedValue` to <var>arrays</var>.
+                    </li>
+                    <li>
+Otherwise, set `selectedValue` to an initial selection passing `value` as
+`source` to the algorithm in Section <a href="#createinitialselection"></a>.
+                    </li>
+                    <li>
+Set `selectedParent[path]` to `selectedValue`.
+                    </li>
+                  </ol>
+                </li>
               </li>
-              <li>
-If `value` is not an object, then a literal has been selected: Set `valueFrame`
-to `value`.
-              </li>
-              <li>
-Otherwise, if `value` is an array: Set `valueFrame` to the result of mapping
-every element in `value` to a deep copy of itself. If any element in `value` is
-also an `array`, throw an error indicating that arrays of arrays are not
-supported.
-              </li>
-              <li>
-Otherwise: Set `valueFrame` to an object that merges a shallow copy of
-`valueFrame` with a deep copy of `value`, e.g., `{...valueFrame,
+            <li>
+Note: With path traversal complete at the target value, the selected value will
+now be computed.
+            </li>
+            <li>
+If `value` is not an object, then a literal has been selected; set
+`selectedValue` to `value`.
+            </li>
+            <li>
+Otherwise, if `value` is an array, Set `selectedValue` to a copy of `value`.
+            </li>
+            <li>
+Otherwise, set `selectedValue` to an object that merges a shallow copy of
+`selectedValue` with a deep copy of `value`, e.g., `{...selectedValue,
 &hellip;deepCopy(value)}`.
-              </li>
-              <li>
-If `paths` has a length of zero, then the whole `document` has been selected by
-the `pointer`: Set `frame` to `valueFrame`.
-              </li>
-              <li>
-Otherwise, a partial selection has been made by the pointer:
-                <ol class="algorithm">
-                  <li>
+            </li>
+            <li>
 Get the last `path`, `lastPath`, from `paths`.
-                  </li>
-                  <li>
-Set `parentFrame[lastPath]` to `valueFrame`.
-                  </li>
-                </ol>
-              <li>
-Set `frame['@context']` to a deep copy of `document['@context']`.
-              </li>
-              <li>
-Return `frame`.
-              </li>
+            </li>
+            <li>
+Set `selectedParent[lastPath]` to `selectedValue`.
+            </li>
+          </ol>
+        </section>
+
+        <section>
+          <h4>selectJsonLd</h4>
+
+          <p>
+The following algorithm selects a portion of a compact JSON-LD document using
+an array of JSON Pointers. The required input is an array of JSON Pointers
+(<var>pointers</var>) and a compact JSON-LD document (<var>document</var>). The
+<var>document</var> is assumed to use a JSON-LD context that aliases "@id"
+and "@type" to "id" and "type", respectively, and to use only one
+<em>@context</em> property at the top level of the document. A new JSON-LD
+document that represents a selection (<em>selectionDocument</em>) of the
+original JSON-LD document is produced as output.
+          </p>
+
+          <ol class="algorithm">
+            <li>
+If `pointers` is empty, return `null`. This indicates nothing has been selected
+from the original document.
+            </li>
+            <li>
+Initialize `arrays` to an empty array. This variable will be used to track
+selected sparse arrays to make them dense after all <var>pointers</var> have
+been processed.
+            </li>
+            <li>
+Initialize `selectionDocument` to an initial selection passing `document` as
+`source` to the algorithm in Section <a href="#createinitialselection"></a>.
+            </li>
+Set the value of the <em>@context</em> property in `selectionDocument` to
+a copy of the value of the <em>@context</em> property in `document`.
+            <li>
+For each `pointer` in `pointers` walk the document from root to the pointer
+target value building the `selectionDocument`:
+              <ol class="algorithm">
+                <li>
+Parse the `pointer` into an array of paths, <var>paths</var>, using the
+algorithm in Section <a href="#jsonpointertopaths"></a>.
+                </li>
+                <li>
+Use the algorithm in Section <a href="#selectpaths"></a>, passing
+<var>document</var>, <var>paths</var>, <var>selectionDocument</var>, and
+<var>arrays</var>.
+                </li>
+              </ol>
             </ol>
+            <li>
+FIXME: make sparse arrays dense
+            </li>
+            <li>
+Return `selectionDocument`.
+            </li>
           </ol>
         </section>
 
