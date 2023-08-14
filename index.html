@@ -1046,33 +1046,76 @@ cryptographic suites that perform selective disclosure.
         </p>
 
         <section>
-          <h4>labelReplacementCanonize</h4>
+          <h4>labelReplacementCanonizeNQuads</h4>
 
           <p>
-The following algorithm canonizes a JSON-LD document and replaces any blank node
-identifiers in the canonicalized document by applying a label replacement
-function, <var>labelReplacementFunction</var>. The required inputs are a JSON-LD
-document (<var>document</var>) and a label replacement functon
-(<var>labelReplacementFunction</var>). A N-Quads representation of the
-<em>canonized result</em>, with the replaced blank node labels, and a map from
-the old blank node IDs to the new blank node IDs, <em>bnodeIdMap</em>, is
-produced as output.
+The following algorithm canonizes a JSON-LD document and replaces any blank
+node identifiers in the canonicalized document using a label map factory
+function, <var>labelMapFactoryFunction</var>. The required inputs are a JSON-LD
+document (<var>document</var>) and a label map factory functon
+(<var>labelMapFactoryFunction</var>). Any JSON-LD custom options (such as
+a document loader) can also be passed. A N-Quads representation of the
+<em>canonicalNQuads</em> as an array of N-Quad strings, with the replaced
+blank node labels, and a map from the old blank node IDs to the new blank node
+IDs, <em>labelMap</em>, is produced as output.
           </p>
 
           <ol class="algorithm">
             <li>
+Deserialize the JSON-LD document to RDF, <var>rdf</var>, using the <a
+href="https://www.w3.org/TR/json-ld11-api/#deserialize-json-ld-to-rdf-algorithm">
+JSON-LD Deserialize to RDF algorithm</a>, passing any custom options (such
+as a document loader).
+            </li>
+            <li>
 Run the RDF Dataset Canonicalization Algorithm [[RDF-CANON]] on
-<var>document</var>, passing any custom options (such as a document loader), and
-get the canonicalized dataset as output, which includes a canonical bnode
-identifier map, <var>canonicalIdMap</var>.
+<var>rdf</var>, passing any custom options, and get the canonicalized dataset
+as output, which includes a canonical bnode identifier map,
+<var>canonicalIdMap</var>.
             </li>
             <li>
-Pass <var>canonicalIdMap</var> to <var>labelReplacementFunction</var> to produce
-a new bnode identifier map, <em>bnodeIdMap</em>.
+Pass <var>canonicalIdMap</var> to <var>labelMapFactoryFunction</var> to produce
+a new bnode identifier map, <em>labelMap</em>.
             </li>
             <li>
-Produce canonical N-Quads representation, <em>canonized result</em>, using
-canonicalized dataset along with <em>bnodeIdMap</em> and return it.
+Use the canonicalized dataset and <em>labelMap</em> to produce canonical
+N-Quads representation as an array of N-Quad strings, <em>canonicalNQuads</em>.
+            </li>
+            <li>
+Return <em>labelMap</em> and <em>canonicalNQuads</em>.
+            </li>
+          </ol>
+
+        </section>
+
+        <section>
+          <h4>labelReplacementCanonizeJsonLd</h4>
+
+          <p>
+The following algorithm deserializes a JSON-LD document to RDF and returns
+the result of calling the algorithm in Section
+<a href="#labelReplacementCanonizeNQuads"></a>. The required inputs are an
+array of N-Quad strings (<var>nquads</var>), a label map factory functon
+(<var>labelMapFactoryFunction</var>). Any custom options can also be passed. An
+N-Quads representation of the <em>canonized result</em>, with the replaced
+blank node labels, and a map from the old blank node IDs to the new blank node
+IDs, <em>labelMap</em>, is produced as output.
+          </p>
+
+          <ol class="algorithm">
+            <li>
+Deserialize the JSON-LD document to RDF, <var>rdf</var>, using the <a
+href="https://www.w3.org/TR/json-ld11-api/#deserialize-json-ld-to-rdf-algorithm">
+JSON-LD Deserialize to RDF algorithm</a>, passing any custom options (such
+as a document loader).
+            </li>
+            <li>
+Serialize <var>rdf</var> to an array of N-Quad strings, <var>nquads</var>.
+            </li>
+            <li>
+Return the result of calling the algorithm in Section
+<a href="#labelReplacementCanonizeNQuads"></a>, passing <var>nquads</var>,
+<var>labelMapFactoryFunction</var>, and any custom options.
             </li>
           </ol>
 
