@@ -1122,70 +1122,111 @@ Return the result of calling the algorithm in Section
         </section>
 
         <section>
-          <h4>hmacIdCanonize</h4>
+          <h4>createLabelMapFunction</h4>
 
           <p>
-The following algorithm creates a label replacement function that uses an
+The following algorithm creates a label map factory function that uses an
+input label map to replace canonical blank node identifiers with another
+value. The required input is a label map, <var>labelMap</var>. A
+function, <em>labelMapFactoryFunction</em>, is produced as output.
+          </p>
+
+          <ol class="algorithm">
+            <li>
+Create a function, <var>labelMapFactoryFunction</var>, with one required input:
+a canonical node identifier map, <var>canonicalIdMap</var>, and that will
+return a blank node identifier map, <em>bnodeIdMap</em> as output. Set the
+function's implementation to:
+              <ol class="algorithm">
+                <li>
+                  <li>
+Generate a new empty bnode identifier map, <em>bnodeIdMap</em>.
+                  </li>
+                  <li>
+For each map entry, <em>entry</em>, in <var>canonicalIdMap</var>:
+                    <ol class="algorithm">
+                      <li>
+Use the canonical identifier from the value in <em>entry</em> as a key
+in <var>labelMap</var> to get the new label, <em>newLabel</em>.
+                      </li>
+                      <li>
+Add a new entry, <var>newEntry</var>, to <em>bnodeIdMap</em> using the key
+from <em>entry</em> and <em>newLabel</em> as the value.
+                      </li>
+                    </ol>
+                  </li>
+                  <li>
+Return <em>bnodeIdMap</em>.
+                  </li>
+                </li>
+              </ol>
+            </li>
+            <li>
+Return <var>labelMapFactoryFunction</var>.
+            </li>
+          </ol>
+
+        </section>
+
+        <section>
+          <h4>createHmacIdLabelMapFunction</h4>
+
+          <p>
+The following algorithm creates a label map factory function that uses an
 HMAC to replace canonical blank node identifiers with their encoded HMAC
-digests. The required inputs are a canonical node identifier map,
-<var>canonicalIdMap</var>. A blank node identifier map, <em>bnodeIdMap</em>, is
+digests. The required input is an HMAC (previously initialized with a
+secret key), <var>HMAC</var>. A function, <em>labelMapFactoryFunction</em>, is
 produced as output.
           </p>
 
           <ol class="algorithm">
             <li>
-Generate a new empty bnode identifier map, <em>bnodeIdMap</em>.
-            </li>
-            <li>
-For each map entry in <var>canonicalIdMap</var>:
+Create a function, <var>labelMapFactoryFunction</var>, with one required input:
+a canonical node identifier map, <var>canonicalIdMap</var>, and that will
+return a blank node identifier map, <em>bnodeIdMap</em> as output. Set the
+function's implementation to:
               <ol class="algorithm">
                 <li>
-HMAC the canonical identifier from the entry to get an HMAC digest,
-<em>digest</em>.
-                </li>
-                <li>
+                  <li>
+Generate a new empty bnode identifier map, <em>bnodeIdMap</em>.
+                  </li>
+                  <li>
+For each map entry, <em>entry</em>, in <var>canonicalIdMap</var>:
+                    <ol class="algorithm">
+                      <li>
+HMAC the canonical identifier from the value in <em>entry</em> to get an HMAC
+digest, <em>digest</em>.
+                      </li>
+                      <li>
 Generate a new string value, <em>b64urlDigest</em>, and initialize it to "u"
 followed by appending a base64url-no-pad encoded version of the <em>digest</em>
 value.
-                </li>
-                <li>
-Add this new entry to <em>bnodeIdMap</em>.
+                      </li>
+                      <li>
+Add a new entry, <var>newEntry</var>, to <em>bnodeIdMap</em> using the key
+from <em>entry</em> and <em>b64urlDigest</em> as the value.
+                      </li>
+                    </ol>
+                  </li>
+                  <li>
+Return <em>bnodeIdMap</em>.
+                  </li>
                 </li>
               </ol>
             </li>
             <li>
-Return <em>bnodeIdMap</em>.
+Return <var>labelMapFactoryFunction</var>.
             </li>
           </ol>
 
           <p class="note" title="Other algorithms are possible">
-A different primitive could be created that sorted the resulting HMAC digests
-and assigned labels using a prefix and integers based on their sorted order
-instead. This primitive might be useful for index-based selective disclosure
-schemes such as BBS.
+A different primitive could be created that returned a label map factory
+function that would instead sort the resulting HMAC digests and assign labels
+in the produced label map using a prefix and integers based on their sorted
+order instead. This primitive might be useful for selective disclosure schemes,
+such as BBS, that favor unlinkability over minimizing unrevealed data leakage.
           </p>
 
-        </section>
-
-        <section>
-          <h4>labelMapCanonize</h4>
-
-          <p>
-The following algorithm creates a label replacement function that uses a label
-map to replace canonical blank node identifiers with the associated value from
-the labeel map. The required inputs are a label map, <var>labelMap</var>. A
-function, <em>labelMapReplacementFunction</em>, is produced as output.
-          </p>
-
-          <ol class="algorithm">
-            <li>
-Set <em>labelMapReplacementFunction</em> to a function that returns the
-reverse of <var>labelMap</var>.
-            </li>
-            <li>
-Return <em>labelMapReplacementFunction</em>.
-            </li>
-          </ol>
         </section>
 
         <section>
