@@ -1651,9 +1651,15 @@ Use the algorithm in Section <a href="#selectpaths"></a>, passing
 <var>arrays</var>.
                 </li>
               </ol>
-            </ol>
+            </li>
             <li>
-FIXME: make sparse arrays dense
+For each <var>array</var> in <var>arrays</var>:
+              <ol class="algorithm">
+                <li>
+Make <var>array</var> dense by removing any undefined elements between
+elements that are defined.
+                </li>
+              </ol>
             </li>
             <li>
 Return `selectionDocument`.
