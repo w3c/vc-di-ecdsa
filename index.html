@@ -1049,7 +1049,7 @@ cryptographic suites that perform selective disclosure.
           <h4>labelReplacementCanonicalizeNQuads</h4>
 
           <p>
-The following algorithm canonizes a JSON-LD document and replaces any blank
+The following algorithm canonicalizes a JSON-LD document and replaces any blank
 node identifiers in the canonicalized document using a label map factory
 function, <var>labelMapFactoryFunction</var>. The required inputs are a JSON-LD
 document (<var>document</var>) and a label map factory functon
@@ -1097,7 +1097,7 @@ the result of calling the algorithm in Section
 <a href="#labelReplacementCanonicalizeNQuads"></a>. The required inputs are an
 array of N-Quad strings (<var>nquads</var>), a label map factory functon
 (<var>labelMapFactoryFunction</var>). Any custom options can also be passed. An
-N-Quads representation of the <em>canonized result</em>, with the replaced
+N-Quads representation of the <em>canonicalized result</em>, with the replaced
 blank node labels, and a map from the old blank node IDs to the new blank node
 IDs, <em>labelMap</em>, is produced as output.
           </p>
@@ -2285,8 +2285,8 @@ object returned when calling the algorithm in Section
 <a href="#parsederivedproofvalue"></a>, passing `proofValue` from `proof`.
             </li>
             <li>
-Initialize `nquads` to the result of calling the "labelReplacementCanonize"
-primitive, passing `document`, the result of calling the "labelMapCanonize"
+Initialize `nquads` to the result of calling the "labelReplacementCanonicalize"
+primitive, passing `document`, the result of calling the "labelMapCanonicalize"
 primitive (passing `labelMap`) as `labelReplacementFunction`, and any custom
 JSON-LD API options. Note: This step transforms the document into an array of
 canonical N-Quads with pseudorandom blank node identifiers based on `labelMap`.
