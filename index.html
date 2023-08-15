@@ -1062,9 +1062,9 @@ IDs to the new blank node IDs, <em>labelMap</em>, is produced as output.
           <ol class="algorithm">
             <li>
 Run the RDF Dataset Canonicalization Algorithm [[RDF-CANON]] on
-<var>rdf</var>, passing any custom options, and get the canonicalized dataset
-as output, which includes a canonical bnode identifier map,
-<var>canonicalIdMap</var>.
+the joined <var>nquads</var>, passing any custom options, and get the
+canonicalized dataset as output, which includes a canonical bnode identifier
+map, <var>canonicalIdMap</var>.
             </li>
             <li>
 Pass <var>canonicalIdMap</var> to <var>labelMapFactoryFunction</var> to produce
