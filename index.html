@@ -2285,9 +2285,12 @@ object returned when calling the algorithm in Section
 <a href="#parsederivedproofvalue"></a>, passing `proofValue` from `proof`.
             </li>
             <li>
+Initialize `labelMapFactoryFunction` to the result of calling the
+"createLabelMapFunction" algorithm.
+            </li>
+            <li>
 Initialize `nquads` to the result of calling the "labelReplacementCanonicalize"
-primitive, passing `document`, the result of calling the "labelMapCanonicalize"
-primitive (passing `labelMap`) as `labelReplacementFunction`, and any custom
+algorithm, passing `document`, `labelMapFactoryFunction`, and any custom
 JSON-LD API options. Note: This step transforms the document into an array of
 canonical N-Quads with pseudorandom blank node identifiers based on `labelMap`.
             </li>
