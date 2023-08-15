@@ -2023,65 +2023,53 @@ Initialize `hmac` to an HMAC API using `hmacKey`. The HMAC uses the same hash
 algorithm used in the signature algorithm, i.e., SHA-256 for a P-256 curve.
             </li>
             <li>
-Initialize `nquads` to the result of calling the algorithm in Section
-<a href="#hmacidcanonize"></a>, passing `document`, `hmac`, and any custom
+Initialize `labelMapFactoryFunction` to the result of callign the
+`createHmacIdLabelMapFunction` algorithm passing `hmac` as `HMAC`.
+            </li>
+            <li>
+Initialize `combinedPointers` to the concatenation of `mandatoryPointers`
+and `selectivePointers`.
+            </li>
+            <li>
+Initialize `groupDefinitions` to a map with the following entries: key of
+the string "mandatory" and value of `mandatoryPointers`, key of the string
+"selective" and value of `selectivePointers`, and key of the string "combined"
+and value of `combinedPointers`.
+            </li>
+            <li>
+Initialize `groups` and `labelMap` to their associated values in the result
+of calling the algorithm in Section
+<a href="#canonicalizeAndGroup"></a>, passing `document`,
+`labelMapFactoryFunction`, `groupDefinitions`, and any custom
 JSON-LD API options as parameters. Note: This step transforms the document into
-an array of canonical N-Quads with pseudorandom blank node identifiers based on
-`hmac`.
+an array of canonical N-Quad strings with pseudorandom blank node identifiers
+based on `hmac` and groups the N-Quad strings according to selections based on
+JSON pointers.
             </li>
             <li>
-Initialize `mandatoryFrame` to the result of calling the algorithm in Section <a
-href="#jsonpointerstoframe"></a>, passing `document` and `mandatoryPointers` as
-`pointers`.
+Initialize `relativeIndex` to zero.
             </li>
             <li>
-Initialize `combinedFrame` to the result of calling the
-<a href="#jsonpointerstoframe"></a> primitive, passing `document` and the
-concatenation of `mandatoryPointers` and `selectivePointers` as `pointers`.
+Initialize `mandatoryIndexes` to an empty array.
             </li>
             <li>
-If `mandatoryFrame` and `combinedFrame` are both `null`, then throw an error
-indicating that nothing is to be disclosed.
-            </li>
-            <li>
-Execute the following two steps in parallel (if the runtime environment allows
-for parallel execution, otherwise, execute the operations serially):
+For each `absoluteIndex` in the keys in `groups.combined.matching`, convert the
+absolute index of any mandatory N-Quad to an index relative to the combined
+output that is to be revealed:
               <ol class="algorithm">
                 <li>
-Initialize `revealDocument` to the result of calling the algorithm in
-Section <a href="#strictframe"></a>, passing `document`, `combinedFrame` as
-`frame`, and any custom JSON-LD API options.
+If `groups.mandatory.matching` has `absoluteIndex` as a key, then append
+`relativeIndex` to `mandatoryIndexes`.
                 </li>
                 <li>
-Initialize `filterAndGroupResult` to the result of calling the algorithm in
-Section <a href="#filterandgroupnquads"></a>, passing `nquads`, `combinedFrame` for
-`filterFrame`, `mandatoryFrame` for `groupFrame`, and any custom JSON-LD API
-options.
+Increment `relativeIndex`.
                 </li>
               </ol>
             </li>
             <li>
-Initialize `labelMap` to the value of "labelMap" in `filterAndGroupResult`.
-            </li>
-            <li>
-Initialize `relativeMandatory` to the value of "matching" in the value of
-"filtered" in `filterAndGroupResult`.
-            </li>
-            <li>
-Initialize `absoluteMandatory` to the value of "matching" in
-`filterAndGroupResult`.
-            </li>
-            <li>
-Initialize `absoluteNonMandatory` to the value of "nonMatching" in
-`filterAndGroupResult`.
-            </li>
-            <li>
-Initialize `mandatoryIndexes` to the keys from `relativeMandatory`.
-            </li>
-            <li>
-Choose the signatures that match the selectively disclosed statements, which
-requires shifting by any absolute mandatory indexes to cause the indexes in
-`signatures` to match with `absoluteNonMandatory` map keys:
+Determine which signatures match a selectively disclosed statement, which
+requires incrementing an index counter while iterating over all `signatures`,
+skipping over any indexes that matching the mandatory group.
               <ol class="algorithm">
                 <li>
 Initialize `index` to `0`.
@@ -2093,10 +2081,10 @@ Initialize `filteredSignatures` to an empty array.
 For each `signature` in `signatures`:
                   <ol class="algorithm">
                     <li>
-While `index` is in `absoluteMandatory`, increment `index`.
+While `index` is in `groups.mandatory.matching`, increment `index`.
                     </li>
                     <li>
-If `index` is in `absoluteNonMandatory`, add `signature` to
+If `index` is in `groups.selective.matching`, add `signature` to
 `filteredSignatures`.
                     </li>
                     <li>
@@ -2107,9 +2095,35 @@ Increment `index`.
               </ol>
             </li>
             <li>
+Initialize <var>revealDocument</var> to the result of the "selectJsonLd"
+algorithm, passing `document` and `combinedPointers` as `pointers`.
+            </li>
+            <li>
+Run the RDF Dataset Canonicalization Algorithm [[RDF-CANON]] on
+the joined <var>combinedGroup.deskolemizedNQuads</var>, passing any custom
+options, and get the canonical bnode identifier map, <var>canonicalIdMap</var>.
+Note: This map includes the canonical blank node identifiers that a verifier
+will produce when they canonicalize the reveal document.
+            </li>
+            <li>
+Initialize <var>verifierLabelMap</var> to an empty map. This map will map
+the canonical blank node identifiers the verifier will produce when they
+canonicalize the reveal document to the blank node identifiers that were
+originally signed in the base proof.
+            </li>
+            <li>
+For each key (`inputLabel`) and value (`verifierLabel`) in `canonicalIdMap:
+              <ol class="algorithm">
+                <li>
+Add an entry to `verifierLabelMap` using `verifierLabel` as the key and the
+value associated with `inputLabel` as a key in `labelMap` as the value.
+                </li>
+              </ol>
+            </li>
+            <li>
 Return an object with properties matching `baseSignature`, `publicKey`,
-"signatures" for `filteredSignatures`, `labelMap`, `mandatoryIndexes`, and
-`revealDocument`.
+"signatures" for `filteredSignatures`, "verifierLabelMap" for `labelMap`,
+`mandatoryIndexes`, and `revealDocument`.
             </li>
           </ol>
 
@@ -2398,30 +2412,27 @@ which is detected via the <var>verificationMethod</var> provided to the
 function. i.e., SHA-256 for a P-256 curve.
             </li>
             <li>
-Initialize `nquads` to the result of calling the algorithm in Section
-<a href="#labelreplacementcanonicalize"></a>, passing `unsecuredDocument`, the
-result of calling the algorithm in Section
-<a href="#labelmapcanonize"></a> (passing `hmac`) as the
-`labelReplacementFunction`, and any custom JSON-LD API options. Note: This step
-transforms the document into an array of canonical N-Quads with pseudorandom
-blank node identifiers based on `hmac`.
+Initialize `labelMapFactoryFunction` to the result of callign the
+`createHmacIdLabelMapFunction` algorithm passing `hmac` as `HMAC`.
             </li>
             <li>
-Initialize `mandatoryFrame` to the result of calling the algorithm in Section
-<a href="#jsonpointerstoframe"></a>, passing `document` and `mandatoryPointers` as
-`pointers`.
+Initialize `groupDefinitions` to a map with an entry with a key of the string
+"mandatory" and a value of <var>mandatoryPointers</var>.
             </li>
             <li>
-Initialize `matching` and `nonMatching` to the result of calling the algorithm
-in Section <a href="#groupnquads"></a>, passing `nquads`, `mandatoryFrame` as
-`frame`, and any custom JSON-LD API options. Note: This step separates the
-N-Quads to mandatory (to disclose) and non-mandatory groups.
+Initialize `groups` to the result of calling the algorithm in Section
+<a href="#canonicalizeAndGroup"></a>, passing `unsecuredDocument` as `document`,
+`labelMapFactoryFunction`, `groupDefinitions`, and any custom JSON-LD API
+options. Note: This step transforms the document into an array of canonical
+N-Quads with pseudorandom blank node identifiers based on `hmac` and groups
+the N-Quad strings according to selections based on JSON pointers.
             </li>
             <li>
-Initialize `mandatory` to the values in the `matching` map.
+Initialize `mandatory` to the values in the `groups.mandatory.matching` map.
             </li>
             <li>
-Initialize `nonMandatory` to the values in the `nonMatching` map.
+Initialize `nonMandatory` to the values in the `groups.mandatory.nonMatching`
+map.
             </li>
             <li>
 Initialize `hmacKey` to the result of exporting the HMAC key from `hmac`.
@@ -2649,12 +2660,6 @@ in Section <a href="#serializederivedproofvalue"></a>, passing
             </li>
             <li>
 Set the value of the "proof" property in `revealDocument` to `newProof`.
-            </li>
-            <li>
-If `revealDocument` has an `@context` field that includes a <a>verifiable
-credential</a> base context and it has a "credentialSubject" property that is a
-string, set the "credentialSubject" value to an object with an "id" value that
-matches the original string value.
             </li>
             <li>
 Return `revealDocument` as the <em>selectively revealed document</em>.
