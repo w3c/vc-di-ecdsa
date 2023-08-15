@@ -1246,7 +1246,7 @@ Section <a href="#deskolemizenquads"></a>.
 Create a new array of N-Quad strings, <em>skolemizedNQuads</em>.
             </li>
             <li>
-For each N-Quad string, <em>s1</em>, in the input array:
+For each N-Quad string, <em>s1</em>, in <var>inputNQuads</var>:
             <ol class="algorithm">
               <li>
 Create a new string, <em>s2</em>, that is a copy of <em>s1</em> replacing any
@@ -1283,7 +1283,7 @@ to reverse use of the algorithm in Section <a href="#deskolemizenquads"></a>.
 Create a new array of N-Quad strings, <em>deskolemizedNQuads</em>.
             </li>
             <li>
-For each N-Quad string, <em>s1</em>, in the <var>inputNQuads</var> array:
+For each N-Quad string, <em>s1</em>, in <var>inputNQuads</var>:
             <ol class="algorithm">
               <li>
 Create a new string, <em>s2</em>, that is a copy of <em>s1</em> replacing any
@@ -1422,7 +1422,8 @@ Return an object with both <var>skolemizedExpandedDocument</var> and
 The following algorithm converts a skolemized JSON-LD document, such as one
 created using the algorithm in Section <a href="#skolemizecompactjsonld"></a>,
 to an array of deskolemized N-Quads. The required inputs are a JSON-LD document,
-<em>skolemizedDocument</em>. An array of deskolemized N-Quad strings
+<em>skolemizedDocument</em>. Additional custom options (such as a document
+loader) can be passed. An array of deskolemized N-Quad strings
 (<var>deskolemizedNQuads</var>) is produced as output.
           </p>
 
@@ -1612,7 +1613,7 @@ Set `selectedParent[lastPath]` to `selectedValue`.
 
           <p>
 The following algorithm selects a portion of a compact JSON-LD document using
-an array of JSON Pointers. The required input is an array of JSON Pointers
+an array of JSON Pointers. The required inputs are an array of JSON Pointers
 (<var>pointers</var>) and a compact JSON-LD document (<var>document</var>). The
 <var>document</var> is assumed to use a JSON-LD context that aliases "@id"
 and "@type" to "id" and "type", respectively, and to use only one
@@ -1668,26 +1669,80 @@ Return `selectionDocument`.
         </section>
 
         <section>
-          <h4>strictFrame</h4>
+          <h4>relabelBlankNodes</h4>
 
           <p>
-The following algorithm performs a JSON-LD framing operation on a JSON-LD
-document with strict framing options. The required inputs are a JSON-LD Document
-(<var>document</var>) and a JSON-LD Frame (<var>frame</var>). A JSON-LD document
-(<em>framedDocument</em>) is generated as output.
+The following algorithm relabels the blank node identifiers in an array of
+N-Quad strings using a blank node label map. The required inputs are an array
+of N-Quad strings (<var>nquads</var>) and a blank node label map
+(<var>labelMap</var>). An array of N-Quad strings with relabeled blank node
+identifiers (<var>relabeledNQuads</var>) is produced as output.
           </p>
 
           <ol class="algorithm">
             <li>
-Set <em>framedDocument</em> to the result of the
-<a href="https://www.w3.org/TR/json-ld11-framing/#framing">
-JSON-LD Framing algorithm</a>, passing `document` and `frame`, and setting the
-options `requireAll`, `explicit`, and `omitGraph` to `true`. Any additional
-custom options passed, such as a document loader, is included as well.
+Create a new array of N-Quad strings, <em>relabeledNQuads</em>.
             </li>
             <li>
-Return <em>framedDocument</em>.
+For each N-Quad string, <em>s1</em>, in <var>nquads</var>:
+            <ol class="algorithm">
+              <li>
+Create a new string, <em>s2</em>, such it that is a copy of <em>s1</em> except
+each blank node identifier therein has been replaced with the value associated
+with it as a key in <var>labelMap</var>.
+              </li>
+              <li>
+Append <em>s2</em> to <em>relabeledNQuads</em>.
+              </li>
+            </ol>
+            <li>
+Return <em>relabeledNQuads</em>.
             </li>
+          </ol>
+
+        </section>
+
+        <section>
+          <h4>selectCanonicalNQuads</h4>
+
+          <p>
+The following algorithm selects a portion of a skolemized, compact JSON-LD
+document using an array of JSON Pointers and outputs the resulting canonical
+N-Quads with any blank node labels replaced using the given label map. The
+required inputs are an array of JSON Pointers (<var>pointers</var>), a
+skolemized, compact JSON-LD document (<var>skolemizedCompactDocument</var>),
+and a blank node label map (<var>labelMap</var>). Additional custom options
+(such as a document loader) can be passed. The <var>document</var> is assumed
+to use a JSON-LD context that aliases "@id" and "@type" to "id" and "type",
+respectively, and to use only one <em>@context</em> property at the top level
+of the document. An object containing the new JSON-LD document that represents
+a selection (<var>selectionDocument</var>) of the original JSON-LD document, an
+array of deskolemized N-Quad strings (<var>deskolemizedNQuads</var>), and an
+array of canonical N-Quads with blank node labels replaced (<var>nquads</var>)
+is produced as output.
+          </p>
+
+          <ol class="algorithm">
+            <li>
+Initialize <var>selectionDocument</var> to the result of the algorithm
+in Section <a href="#selectjsonld"></a> passing
+<var>skolemizedCompactDocument</var> as <em>document</em> and
+<var>pointers</var>.
+            </li>
+            <li>
+Initialize <var>deskolemizedNQuads</var> to the result of the algorithm
+in Section <a href="#todeskolemizednquads"></a> passing
+<var>selectionDocument</var> as <var>skolemizedCompactDocument</var> and
+any custom options.
+            </li>
+            <li>
+Initialize <var>nquads</var> to the result of the algorithm
+in Section <a href="#relabelblanknodes"></a> passing
+<var>deskolemizedNQuads</var> as <var>nquads</var> and <var>labelMap</var>.
+            </li>
+Return an object containing <var>selectionDocument</var>,
+<var>deskolemizedNQuads</var>, and <var>nquads</var>.
+            <li>
           </ol>
         </section>
 
