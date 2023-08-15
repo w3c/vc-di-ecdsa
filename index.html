@@ -1094,7 +1094,7 @@ Return <em>labelMap</em> and <em>canonicalNQuads</em>.
           <p>
 The following algorithm deserializes a JSON-LD document to RDF and returns
 the result of calling the algorithm in Section
-<a href="#labelReplacementCanonicalizeNQuads"></a>. The required inputs are an
+<a href="#labelreplacementcanonicalizenquads"></a>. The required inputs are an
 array of N-Quad strings (<var>nquads</var>), a label map factory functon
 (<var>labelMapFactoryFunction</var>). Any custom options can also be passed. An
 N-Quads representation of the <em>canonicalized result</em>, with the replaced
@@ -1114,7 +1114,7 @@ Serialize <var>rdf</var> to an array of N-Quad strings, <var>nquads</var>.
             </li>
             <li>
 Return the result of calling the algorithm in Section
-<a href="#labelReplacementCanonicalizeNQuads"></a>, passing <var>nquads</var>,
+<a href="#labelreplacementcanonicalizenquads"></a>, passing <var>nquads</var>,
 <var>labelMapFactoryFunction</var>, and any custom options.
             </li>
           </ol>
@@ -1139,25 +1139,23 @@ return a blank node identifier map, <em>bnodeIdMap</em> as output. Set the
 function's implementation to:
               <ol class="algorithm">
                 <li>
-                  <li>
 Generate a new empty bnode identifier map, <em>bnodeIdMap</em>.
-                  </li>
-                  <li>
+                </li>
+                <li>
 For each map entry, <em>entry</em>, in <var>canonicalIdMap</var>:
-                    <ol class="algorithm">
-                      <li>
+                  <ol class="algorithm">
+                    <li>
 Use the canonical identifier from the value in <em>entry</em> as a key
 in <var>labelMap</var> to get the new label, <em>newLabel</em>.
-                      </li>
-                      <li>
+                    </li>
+                    <li>
 Add a new entry, <var>newEntry</var>, to <em>bnodeIdMap</em> using the key
 from <em>entry</em> and <em>newLabel</em> as the value.
-                      </li>
-                    </ol>
-                  </li>
-                  <li>
+                    </li>
+                  </ol>
+                </li>
+                <li>
 Return <em>bnodeIdMap</em>.
-                  </li>
                 </li>
               </ol>
             </li>
@@ -1187,30 +1185,28 @@ return a blank node identifier map, <em>bnodeIdMap</em> as output. Set the
 function's implementation to:
               <ol class="algorithm">
                 <li>
-                  <li>
 Generate a new empty bnode identifier map, <em>bnodeIdMap</em>.
-                  </li>
-                  <li>
+                </li>
+                <li>
 For each map entry, <em>entry</em>, in <var>canonicalIdMap</var>:
-                    <ol class="algorithm">
-                      <li>
+                  <ol class="algorithm">
+                    <li>
 HMAC the canonical identifier from the value in <em>entry</em> to get an HMAC
 digest, <em>digest</em>.
-                      </li>
-                      <li>
+                    </li>
+                    <li>
 Generate a new string value, <em>b64urlDigest</em>, and initialize it to "u"
 followed by appending a base64url-no-pad encoded version of the <em>digest</em>
 value.
-                      </li>
-                      <li>
+                    </li>
+                    <li>
 Add a new entry, <var>newEntry</var>, to <em>bnodeIdMap</em> using the key
 from <em>entry</em> and <em>b64urlDigest</em> as the value.
-                      </li>
-                    </ol>
-                  </li>
-                  <li>
+                    </li>
+                  </ol>
+                </li>
+                <li>
 Return <em>bnodeIdMap</em>.
-                  </li>
                 </li>
               </ol>
             </li>
@@ -1369,6 +1365,7 @@ Append <var>skolemizedNode</var> to <var>skolemizedExpandedDocument</var>.
                 </li>
               </ol>
             </li>
+            <li>
 Return <var>skolemizedExpandedDocument</var>.
             </li>
           </ol>
@@ -1740,9 +1737,10 @@ Initialize <var>nquads</var> to the result of the algorithm
 in Section <a href="#relabelblanknodes"></a> passing
 <var>deskolemizedNQuads</var> as <var>nquads</var> and <var>labelMap</var>.
             </li>
+            <li>
 Return an object containing <var>selectionDocument</var>,
 <var>deskolemizedNQuads</var>, and <var>nquads</var>.
-            <li>
+            </li>
           </ol>
         </section>
 
@@ -1852,6 +1850,7 @@ Set <var>name</var> in <var>groups</var> to an object containing
                 </li>
               </ol>
             </li>
+            <li>
 Return an object containing <var>groups</var>,
 <var>skolemizedExpandedDocument</var>, <var>skolemizedCompactDocument</var>,
 <var>deskolemizedNQuads</var>, <var>labelMap</var>, and <var>nquads</var>.
@@ -2039,7 +2038,7 @@ and value of `combinedPointers`.
             <li>
 Initialize `groups` and `labelMap` to their associated values in the result
 of calling the algorithm in Section
-<a href="#canonicalizeAndGroup"></a>, passing `document`,
+<a href="#canonicalizeandgroup"></a>, passing `document`,
 `labelMapFactoryFunction`, `groupDefinitions`, and any custom
 JSON-LD API options as parameters. Note: This step transforms the document into
 an array of canonical N-Quad strings with pseudorandom blank node identifiers
@@ -2421,7 +2420,7 @@ Initialize `groupDefinitions` to a map with an entry with a key of the string
             </li>
             <li>
 Initialize `groups` to the result of calling the algorithm in Section
-<a href="#canonicalizeAndGroup"></a>, passing `unsecuredDocument` as `document`,
+<a href="#canonicalizeandgroup"></a>, passing `unsecuredDocument` as `document`,
 `labelMapFactoryFunction`, `groupDefinitions`, and any custom JSON-LD API
 options. Note: This step transforms the document into an array of canonical
 N-Quads with pseudorandom blank node identifiers based on `hmac` and groups
