@@ -1046,7 +1046,7 @@ cryptographic suites that perform selective disclosure.
         </p>
 
         <section>
-          <h4>labelReplacementCanonizeNQuads</h4>
+          <h4>labelReplacementCanonicalizeNQuads</h4>
 
           <p>
 The following algorithm canonizes a JSON-LD document and replaces any blank
@@ -1089,12 +1089,12 @@ Return <em>labelMap</em> and <em>canonicalNQuads</em>.
         </section>
 
         <section>
-          <h4>labelReplacementCanonizeJsonLd</h4>
+          <h4>labelReplacementCanonicalizeJsonLd</h4>
 
           <p>
 The following algorithm deserializes a JSON-LD document to RDF and returns
 the result of calling the algorithm in Section
-<a href="#labelReplacementCanonizeNQuads"></a>. The required inputs are an
+<a href="#labelReplacementCanonicalizeNQuads"></a>. The required inputs are an
 array of N-Quad strings (<var>nquads</var>), a label map factory functon
 (<var>labelMapFactoryFunction</var>). Any custom options can also be passed. An
 N-Quads representation of the <em>canonized result</em>, with the replaced
@@ -1114,7 +1114,7 @@ Serialize <var>rdf</var> to an array of N-Quad strings, <var>nquads</var>.
             </li>
             <li>
 Return the result of calling the algorithm in Section
-<a href="#labelReplacementCanonizeNQuads"></a>, passing <var>nquads</var>,
+<a href="#labelReplacementCanonicalizeNQuads"></a>, passing <var>nquads</var>,
 <var>labelMapFactoryFunction</var>, and any custom options.
             </li>
           </ol>
@@ -1747,73 +1747,114 @@ Return an object containing <var>selectionDocument</var>,
         </section>
 
         <section>
-          <h4>groupNquads</h4>
+          <h4>canonicalizeAndGroup</h4>
 
           <p>
-The following algorithm groups N-Quads into matching and non-matching groups.
-The inputs are an array of N-Quads (<var>nquads</var>, an optional skolemized
-JSON-LD document (<var>skolemizedDocument</var>), an optional JSON-LD frame
-(<var>frame</var>) , and any options, such as a document loader, to be passed to
-JSON-LD APIs. Each of the output groups (matching and non-matching) are
-expressed as a map that maps an index into <var>nquads<var> to the N-Quad value.
-This algorithm uses a JSON-LD frame to match specific N-Quads in the array of
-given <var>nquads</var>. It internally skolemizes and then deskolemizes any
-blank nodes around the framing operation to ensure blank node identifiers do not
-change, preventing the matching operation from working properly.
-An object containing a <em>matching</em> and <em>nonmatching</em> arrays of
-N-Quads are generated as output.
+The following algorithm is used to output canonical N-Quad strings that match
+custom selections of a compact JSON-LD document. It does this by canonicalizing
+a compact JSON-LD document (replacing any blank node identifiers using a label
+map) and grouping the resulting canonical N-Quad strings according to
+the selection associated with each group. Each group will be defined using an
+assigned name and array of JSON pointers. The JSON pointers will be used to
+select portions of the skolemized document, such that the output can be
+converted to canonical N-Quads to perform group matching.
+          </p>
+
+          <p>
+The required inputs are a compact JSON-LD document (<var>document</var>),
+a label map factory function (<var>labelMapFactoryFunction</var>), a map
+of named group definitions (<var>groupDefinitions</var>). Additional custom
+options (such as a document loader) can be passed. The <var>document</var> is
+assumed to use a JSON-LD context that aliases "@id" and "@type" to "id" and
+"type", respectively, and to use only one <em>@context</em> property at the top
+level of the document. An object containing the created groups
+(<var>groups</var>), the skolemized, compact JSON-LD document
+(<var>skolemizedCompactDocument</var>) the skolemized, expanded JSON-LD
+document (<var>skolemizedExpandedDocument</var>), the deskolemized N-Quad
+strings (<var>deskolemizedNQuads</var>), the blank node label map
+(<var>labelMap</var>), and the canonical N-Quad strings <var>nquads</var> is
+produced as output.
           </p>
 
           <ol class="algorithm">
             <li>
-Initialize `matching` to an empty map.
+Initialize <var>skolemizedExpandedDocument</var> and
+<var>skolemizedCompactDocument</var> to their associated values in the
+result of the algorithm in Section <a href="#skolemizecompactjsonld"></a>,
+passing <var>document</var> and any custom options.
             </li>
             <li>
-Initialize `nonMatching` to an empty map.
+Initialize <var>deskolemizedNQuads</var> to the result of the
+algorithm in Section <a href="#todeskolemizednquads"></a>, passing
+<var>skolemizedExpandedDocument</var> and any custom options.
             </li>
             <li>
-If `frame` is not given or `null`, then there are no matches so:
+Initialize <var>nquads</var> and <var>labelMap</var> to their associated
+values in the result of the algorithm in Section
+<a href="#labelreplacementcanonicalizenquads"></a>, passing
+<var>deskolemizedNQuads</var> as <var>nquads</var>,
+<var>labelMapFactoryFunction</var>, and any custom options.
+            </li>
+            <li>
+Initialize <var>selections</var> to a new map.
+            </li>
+            <li>
+For each key (<var>name</var>) and value (<var>pointers</var>) entry in
+<var>groupDefinitions</var>:
               <ol class="algorithm">
                 <li>
-Add each entry (index, element) in `nquads` to `nonMatching`.
+Add an entry with a key of <var>name</var> and a value that is the result
+of the algorithm in Section <a href="#selectcanonicalnquads"></a>, passing
+<var>skolemizedCompactDocument</var> as <var>document</var>,
+<var>pointers</var>, <var>labelMap</var>, and any custom options.
                 </li>
                 <li>
-Return an object with "matching" set to `matching` and "nonMatching" set to
-`nonMatching`.
-                </li>
               </ol>
             </li>
             <li>
-If `skolemizedDocument` has not been given: Set `skolemizedDocument` to the
-result of calling "createSkolemizedDocument", passing `nquads` and any custom
-JSON-LD API options (such as a document loader).
+Initialize <var>groups</var> to an empty object.
             </li>
             <li>
-Initialize `framed` to the result of calling "strictFrame", passing
-`skolemizedDocument`, `frame`, and any custom JSON-LD API options. Note: This
-step filters the skolemized document to get only data that matches the frame as
-a new JSON-LD document.
-            </li>
-            <li>
-Initialize `matchingDeskolemized` to the result of calling "toDeskolemizedRDF",
-passing `framed` and any custom JSON-LD API options. Note: This step converts
-any matching data back to deskolemized N-Quads, matching their original
-expression.
-            </li>
-            <li>
-For each entry (`index`, `nq`) in `nquads`:
+For each key (<var>name</var>) and value (<var>selectionResult</var>) entry in
+<var>selections</var>:
               <ol class="algorithm">
                 <li>
-If `matchingDeskolemized` includes `nq`, add the entry to `matching`.
+Initialize <var>matching</var> to an empty map.
                 </li>
                 <li>
-Otherwise, add the entry to `nonMatching`.
+Initialize <var>nonMatching</var> to an empty map.
+                </li>
+                <li>
+Initialize <var>selectedNQuads</var> to <em>nquads</em> from
+<var>selectionResult</var>.
+                </li>
+                <li>
+Initialize <var>selectedDeskolemizedNQuads</var> from
+<em>deskolemizedNQuads</em> from <var>selectionResult</var>.
+                </li>
+                <li>
+For each element (<var>nq</var>) and index (<var>index</var>) in
+<var>nquads</var>:
+                  <ol class="algorithm">
+                    <li>
+Create a map entry, <var>entry</var>, with a key of <var>index</var> and a
+value of <var>nq</var>.
+                    </li>
+                    <li>
+If <var>selectedNQuads</var> includes <var>nq</var> then add <var>entry</var>
+to <var>matching</var>, otherwise add <var>entry</var> to <var>nonMatching</var>.
+                    </li>
+                  </ol>
+                </li>
+Set <var>name</var> in <var>groups</var> to an object containing
+<var>matching</var>, <var>nonMatching</var>, and
+<var>selectedDeskolemizedNQuads</var> as <var>deskolemizedNQuads</var>.
                 </li>
               </ol>
             </li>
-            <li>
-Return an object with "matching" set to `matching` and "nonMatching" set to
-`nonMatching`.
+Return an object containing <var>groups</var>,
+<var>skolemizedExpandedDocument</var>, <var>skolemizedCompactDocument</var>,
+<var>deskolemizedNQuads</var>, <var>labelMap</var>, and <var>nquads</var>.
             </li>
           </ol>
         </section>
@@ -2446,7 +2487,7 @@ function. i.e., SHA-256 for a P-256 curve.
             </li>
             <li>
 Initialize `nquads` to the result of calling the algorithm in Section
-<a href="#labelreplacementcanonize"></a>, passing `unsecuredDocument`, the
+<a href="#labelreplacementcanonicalize"></a>, passing `unsecuredDocument`, the
 result of calling the algorithm in Section
 <a href="#labelmapcanonize"></a> (passing `hmac`) as the
 `labelReplacementFunction`, and any custom JSON-LD API options. Note: This step
