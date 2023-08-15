@@ -1049,24 +1049,17 @@ cryptographic suites that perform selective disclosure.
           <h4>labelReplacementCanonicalizeNQuads</h4>
 
           <p>
-The following algorithm canonicalizes a JSON-LD document and replaces any blank
-node identifiers in the canonicalized document using a label map factory
-function, <var>labelMapFactoryFunction</var>. The required inputs are a JSON-LD
-document (<var>document</var>) and a label map factory functon
-(<var>labelMapFactoryFunction</var>). Any JSON-LD custom options (such as
-a document loader) can also be passed. A N-Quads representation of the
-<em>canonicalNQuads</em> as an array of N-Quad strings, with the replaced
-blank node labels, and a map from the old blank node IDs to the new blank node
-IDs, <em>labelMap</em>, is produced as output.
+The following algorithm canonicalizes an array of N-Quad strings and replaces
+any blank node identifiers in the canonicalized result using a label map
+factory function, <var>labelMapFactoryFunction</var>. The required inputs are
+an array of N-Quad strings (<var>nquads</var>), a label map factory functon
+(<var>labelMapFactoryFunction</var>). Any custom options can also be passed. An
+N-Quads representation of the <em>canonicalNQuads</em> as an array of N-Quad
+strings, with the replaced blank node labels, and a map from the old blank node
+IDs to the new blank node IDs, <em>labelMap</em>, is produced as output.
           </p>
 
           <ol class="algorithm">
-            <li>
-Deserialize the JSON-LD document to RDF, <var>rdf</var>, using the <a
-href="https://www.w3.org/TR/json-ld11-api/#deserialize-json-ld-to-rdf-algorithm">
-JSON-LD Deserialize to RDF algorithm</a>, passing any custom options (such
-as a document loader).
-            </li>
             <li>
 Run the RDF Dataset Canonicalization Algorithm [[RDF-CANON]] on
 <var>rdf</var>, passing any custom options, and get the canonicalized dataset
@@ -1082,7 +1075,7 @@ Use the canonicalized dataset and <em>labelMap</em> to produce canonical
 N-Quads representation as an array of N-Quad strings, <em>canonicalNQuads</em>.
             </li>
             <li>
-Return <em>labelMap</em> and <em>canonicalNQuads</em>.
+Return an object containing <em>labelMap</em> and <em>canonicalNQuads</em>.
             </li>
           </ol>
 
@@ -1092,12 +1085,13 @@ Return <em>labelMap</em> and <em>canonicalNQuads</em>.
           <h4>labelReplacementCanonicalizeJsonLd</h4>
 
           <p>
-The following algorithm deserializes a JSON-LD document to RDF and returns
-the result of calling the algorithm in Section
-<a href="#labelreplacementcanonicalizenquads"></a>. The required inputs are an
-array of N-Quad strings (<var>nquads</var>), a label map factory functon
-(<var>labelMapFactoryFunction</var>). Any custom options can also be passed. An
-N-Quads representation of the <em>canonicalized result</em>, with the replaced
+The following algorithm canonicalizes a JSON-LD document and replaces any blank
+node identifiers in the canonicalized result using a label map factory
+function, <var>labelMapFactoryFunction</var>. The required inputs are a JSON-LD
+document (<var>document</var>) and a label map factory functon
+(<var>labelMapFactoryFunction</var>). Additional custom options (such as
+a document loader) can also be passed. An N-Quads representation of the
+<em>canonicalNQuads</em> as an array of N-Quad strings, with the replaced
 blank node labels, and a map from the old blank node IDs to the new blank node
 IDs, <em>labelMap</em>, is produced as output.
           </p>
