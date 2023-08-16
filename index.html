@@ -1720,20 +1720,19 @@ is produced as output.
           <ol class="algorithm">
             <li>
 Initialize <var>selectionDocument</var> to the result of the algorithm
-in Section <a href="#selectjsonld"></a>, passing
-<var>skolemizedCompactDocument</var> as <em>document</em>, with
-<var>pointers</var>.
+in Section <a href="#selectjsonld"></a>, passing <var>pointers</var>,
+and <var>skolemizedCompactDocument</var> as <em>document</em>.
             </li>
             <li>
 Initialize <var>deskolemizedNQuads</var> to the result of the algorithm
 in Section <a href="#todeskolemizednquads"></a>, passing
-<var>selectionDocument</var> as <var>skolemizedCompactDocument</var>, with
+<var>selectionDocument</var> as <var>skolemizedCompactDocument</var>, and
 any custom options.
             </li>
             <li>
 Initialize <var>nquads</var> to the result of the algorithm
-in Section <a href="#relabelblanknodes"></a> passing
-<var>deskolemizedNQuads</var> as <var>nquads</var> and <var>labelMap</var>.
+in Section <a href="#relabelblanknodes"></a>, passing <var>labelMap</var>,
+and <var>deskolemizedNQuads</var> as <var>nquads</var>.
             </li>
             <li>
 Return an object containing <var>selectionDocument</var>,
@@ -1788,8 +1787,8 @@ algorithm in Section <a href="#todeskolemizednquads"></a>, passing
 Initialize <var>nquads</var> and <var>labelMap</var> to their associated
 values in the result of the algorithm in Section
 <a href="#labelreplacementcanonicalizenquads"></a>, passing
-<var>deskolemizedNQuads</var> as <var>nquads</var>,
-<var>labelMapFactoryFunction</var>, and any custom options.
+<var>labelMapFactoryFunction</var>, <var>deskolemizedNQuads</var> as
+<var>nquads</var>, and any custom options.
             </li>
             <li>
 Initialize <var>selections</var> to a new map.
@@ -1801,8 +1800,8 @@ For each key (<var>name</var>) and value (<var>pointers</var>) entry in
                 <li>
 Add an entry with a key of <var>name</var> and a value that is the result
 of the algorithm in Section <a href="#selectcanonicalnquads"></a>, passing
-<var>skolemizedCompactDocument</var> as <var>document</var>,
-<var>pointers</var>, <var>labelMap</var>, and any custom options.
+<var>pointers</var>, <var>labelMap</var>, <var>skolemizedCompactDocument</var>
+as <var>document</var>, and any custom options.
                 </li>
               </ol>
             </li>
@@ -2093,7 +2092,7 @@ Increment `index`.
             </li>
             <li>
 Initialize <var>revealDocument</var> to the result of the "selectJsonLd"
-algorithm, passing `document`, with `combinedPointers` as `pointers`.
+algorithm, passing `document`, and `combinedPointers` as `pointers`.
             </li>
             <li>
 Run the RDF Dataset Canonicalization Algorithm [[RDF-CANON]] on
@@ -2421,9 +2420,9 @@ Initialize `groupDefinitions` to a map with an entry with a key of the string
             </li>
             <li>
 Initialize `groups` to the result of calling the algorithm in Section
-<a href="#canonicalizeandgroup"></a>, passing `unsecuredDocument` as `document`,
-`labelMapFactoryFunction`, `groupDefinitions`, and any custom JSON-LD API
-options. Note: This step transforms the document into an array of canonical
+<a href="#canonicalizeandgroup"></a>, passing `labelMapFactoryFunction`,
+`groupDefinitions`, `unsecuredDocument` as `document`, and any custom JSON-LD
+API options. Note: This step transforms the document into an array of canonical
 N-Quads with pseudorandom blank node identifiers based on `hmac`, and groups
 the N-Quad strings according to selections based on JSON pointers.
             </li>
