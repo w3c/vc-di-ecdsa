@@ -2527,32 +2527,41 @@ Return `verificationResult` as <em>verification result</em>.
     </section>
     <section class="informative">
       <h2>Security Considerations</h2>
-      <p>
-The security (integrity/authenticity) of a verifiable credential
-signed by a digital signature algorithm is dependent on a number of factors
-including:
+
+      <p class="advisement">
+Before reading this section, readers are urged to familiarize themselves
+with general security advice provided in the
+<a href="https://www.w3.org/TR/vc-data-integrity/#security-considerations">
+Security Considerations section of the Data Integrity specification</a>.
       </p>
+
+      <p>
+The integrity and authenticity of a secured document that is protected by
+this cryptographic suite is dependent on a number of factors including:
+      </p>
+
       <ul>
         <li>
-the correct application of the signature algorithm to a verifiable
-credential (this specification)
+the correct application of a digital signature to a document,
         </li>
         <li>
-the choice of signature algorithm (ECDSA) and its parameters (P-256, P-384)
+the choice of signature algorithm (ECDSA) and its parameters (P-256, P-384),
         </li>
         <li>
-the correct implementation and usage of the signature algorithm,
-particularly with respect to well-known problem areas
+the correct implementation and usage of the digital signature algorithm,
+particularly with respect to well-known problem areas, and
         </li>
         <li>
 the proper management of the private and public keys used for
-signing and verification
+signing and verification.
         </li>
       </ul>
+
       <p>
 In the following sections, we review these important points and direct
 the reader to additional information.
       </p>
+
       <section class="informative">
         <h3>Choice of ECDSA and Parameters</h3>
         <p>
