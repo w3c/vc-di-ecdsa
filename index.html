@@ -407,8 +407,9 @@ match the verification relationship expressed by the verification method
 `controller`.
           </p>
           <p>
-The `proofValue` property of the proof MUST be an ECDSA or deterministic ECDSA
-signature produced according to [[FIPS-186-5]] using the curves and hashes as
+The `proofValue` property of the proof MUST be an ECDSA signature, in general,
+and SHOULD be a <em>deterministic</em> ECDSA signature, specific variant,
+produced according to [[FIPS-186-5]] using the curves and hashes as
 specified in section <a href="#algorithms"></a>, encoded according to section 7
 of [[RFC4754]] (sometimes referred to as the IEEE P1363 format), and serialized
 according to [[MULTIBASE]] using the base58-btc base encoding.
@@ -446,6 +447,8 @@ according to [[MULTIBASE]] using the base58-btc base encoding.
       <p>
 The following section describes multiple Data Integrity cryptographic suites
 that utilize the Elliptic Curve Digital Signature Algorithm (ECDSA) [[FIPS-186-5]].
+When generating ECDSA signatures the <em>deterministic</em> ECDSA algorithm
+variant SHOULD be used.
       </p>
 
       <p class="advisement">
@@ -2813,9 +2816,13 @@ The failure to properly generate this <em>k</em> value has lead to some highly
 publicized integrity breaches in widely deployed systems. To counter this problem,
 a hash-based method of determining the secret number <em>k</em>, called
 <em>Deterministic ECDSA</em>, is given in [[FIPS-186-5]] and [[RFC6979]].
+        </p>
+        <p>
 Verification of a ECDSA signature is independent of the method of generating
 <em>k</em>. Hence it is generally recommended to use <em>Deterministic
-ECDSA</em> unless other requirements dictate otherwise.
+ECDSA</em> unless other requirements dictate otherwise. For example, using
+different <em>k</em> values results in different signature values for the same
+document which may be a desirable property in some privacy enhancing situations.
         </p>
       </section>
       <section class="informative">
