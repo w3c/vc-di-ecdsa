@@ -449,6 +449,22 @@ The following section describes multiple Data Integrity cryptographic suites
 that utilize the Elliptic Curve Digital Signature Algorithm (ECDSA) [[FIPS-186-5]].
       </p>
 
+      <p>
+Implementations SHOULD fetch and cache <a>verification method</a> information as
+early as possible when adding or verifying proofs. Parameters passed to
+functions in this section utilize information from the <a>verification
+method</a>, such as the public key size, to determine function parameters, such
+as the cryptographic hashing algorithm to utilize.
+      </p>
+
+      <p>
+When the RDF Dataset Canonicalization Algorithm [[RDF-CANON]] is used with ECDSA
+algorithms, the cryptographic hashing function that is passed to the algorithm
+MUST be determined by the size of the associated public key. For P-256 keys,
+SHA-2 with 256 bits of output is utilized. For P-384 keys, SHA-2 with 384-bits
+of output is utilized.
+      </p>
+
       <p class="advisement">
 When the RDF Dataset Canonicalization Algorithm [[RDF-CANON]] is used,
 implementations of that algorithm will detect
