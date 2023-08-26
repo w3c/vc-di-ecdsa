@@ -449,6 +449,13 @@ The following section describes multiple Data Integrity cryptographic suites
 that utilize the Elliptic Curve Digital Signature Algorithm (ECDSA) [[FIPS-186-5]].
       </p>
 
+      <p class="advisement">
+When the RDF Dataset Canonicalization Algorithm [[RDF-CANON]] is used,
+implementations of that algorithm will detect
+<a data-cite="RDF-CANON#dataset-poisoning">dataset poisoning</a>
+by default, and abort processing upon detection.
+      </p>
+
       <section>
         <h3>ecdsa-rdfc-2019</h3>
 
@@ -458,13 +465,6 @@ the document using the Universal RDF Dataset Canonicalization Algorithm
 [[RDF-CANON]], and then cryptographically hashes and signs the output
 resulting in the production of a data integrity proof. The algorithms in this
 section also include the verification of such a data integrity proof.
-        </p>
-
-        <p class="advisement">
-When the RDF Dataset Canonicalization Algorithm [[RDF-CANON]] is used,
-implementations of that algorithm will detect
-<a data-cite="RDF-CANON#dataset-poisoning">dataset poisoning</a>
-by default, and abort processing upon detection.
         </p>
 
         <section>
