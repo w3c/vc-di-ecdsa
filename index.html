@@ -380,8 +380,8 @@ key. Implementations of this specification will raise errors in the event of a
             The 34-byte value is then encoded using base58-btc (`z`) as the prefix.
 
             The encoding of a P-384 secret key is the two-byte prefix `0x8726` (the varint
-            expression of `0x8726`) followed by the 32-byte secret key data.
-            The 34-byte value is then encoded using base58-btc (`z`) as the prefix. Any
+            expression of `0x1307`) followed by the 48-byte secret key data.
+            The 50-byte value is then encoded using base58-btc (`z`) as the prefix. Any
             other encodings MUST NOT be allowed.
           </p>
 
