@@ -3226,6 +3226,53 @@ option document.
       </section>
     </section>
 
+    <section class="informative">
+      <h2>Revision History</h2>
+
+      <p>
+This section contains the substantive changes that have been made to this
+specification over time.
+      </p>
+
+      <p>
+Changes since the
+<a href="https://www.w3.org/TR/2023/WD-vc-di-ecdsa-20230418/">
+First Public Working Draft</a>:
+      </p>
+
+      <ul>
+        <li>
+Added cryptography suite that uses JSON Canonicalization Scheme.
+        </li>
+        <li>
+Added test vectors for ECDSA (rdfc and jcs).
+        </li>
+        <li>
+Moved normative definition of Multikey to Data Integrity specification.
+        </li>
+        <li>
+Added selective disclosure functions.
+        </li>
+        <li>
+Added cryptography suite for ecdsa-sd-2023.
+        </li>
+        <li>
+Mitigated poison datasets in ECDSA when canonicalizing.
+        </li>
+        <li>
+Renamed cryptosuite names to align across all cryptosuites.
+        </li>
+        <li>
+Ensured that strong guidance to use Deterministic ECDSA is used, if available.
+        </li>
+        <li>
+Specify how to send cryptographic hash function to [[?RDF-CANON]] if used.
+        </li>
+        <li>
+Add `secretKeymultibase` representation.
+        </li>
+      </ul>
+    </section>
 
   </body>
 </html>
