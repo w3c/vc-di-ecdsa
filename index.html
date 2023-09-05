@@ -3224,6 +3224,103 @@ option document.
         <pre class="example nohighlight" title="Signed Credential"
         data-include="TestVectors/ecdsa-jcs-2019-p384/signedJCSECDSAP384.json" data-include-format="text"></pre>
       </section>
+      <section>
+        <h3>Representation: ecdsa-sd-2023</h3>
+        <section>
+          <h4>Add Base Proof</h4>
+          <p>
+In order to add a selective disclosure base proof to a document the issuer needs
+the following cryptographic key material:
+          </p>
+          <ol>
+            <li>
+The issuers private/public key pair, i.e., the key pair corresponding to the
+verification method that will be part of the proof.
+            </li>
+            <li>
+A per proof private/public key pair created by the issuer just for this proof.
+This is an ephemeral, single use key pair where the private key is not kept
+after the proof has been generated.
+            </li>
+            <li>
+An HMAC key. This used to randomize the order of the blank node ids to avoid
+potential information leakage from the blank node id ordering. This is used only
+once and is shared between issuer and holder. The HMAC in this case is
+functioning as a pseudorandom function (PRF).
+            </li>
+          </ol>
+          <p>
+The key material used for generating the add base proof test vectors is shown
+below. Multibase representation is use for the P-256 key pairs and the HMAC key
+is given as a hexadecimal string.
+          </p>
+          <pre class="example nohighlight" title="Private and Public keys for Signature"
+          data-include="TestVectors/ecdsa-sd-2023/SDKeyMaterial.json"
+          data-include-format="text">
+          </pre>
+          <p>
+In our scenario a sailor is registering with a race organizer for a series of
+windsurfing races to be held over a number of days on Maui. The organizer will
+inspect the sailors equipment to certify that what has been declared is
+ accurate. The sailors unsigned equipment inventory is shown below.
+          </p>
+          <pre class="example nohighlight" title="Credential without Proof" data-include="TestVectors/ecdsa-sd-2023/windDoc.json"
+          data-include-format="text"></pre>
+          <p>
+In addition to let other sailors know what kinds of equipment their competitors
+maybe sailing on each sailor must disclose the year of their most recent
+windsurfing board and full details on two of their sails. Note that all sailors
+are identified by a sail number that is printed on all their equipment. This
+information is specified via an array of JSON pointers as shown below.
+          </p>
+          <pre class="example nohighlight" title="Mandatory Pointers" data-include="TestVectors/ecdsa-sd-2023/windMandatory.json"
+          data-include-format="text"></pre>
+          <p>
+The result of applying the above JSON pointers to the sailors equipment document
+is shown below.
+          </p>
+          <pre class="example nohighlight" title="JSON Pointers and Values" data-include="TestVectors/ecdsa-sd-2023/addPointerValues.json"
+          data-include-format="text"></pre>
+          <p>
+Transformation of the unsigned document begins with canonicalizing the document
+as shown below.
+          </p>
+          <pre class="example nohighlight" title="Canonical Document" data-include="TestVectors/ecdsa-sd-2023/addBaseDocCanon.json"
+          data-include-format="text"></pre>
+          <p>
+To prevent possible information leakage from the ordering of the blank node ids
+these are processed through a PRF, i.e., the HMAC to give the canonized HMAC
+document shown below. This represents an ordered list of statements that will be
+subject to mandatory and selective disclosure, i.e., it is from this list that
+statements are grouped.
+          </p>
+          <pre class="example nohighlight" title="Canonical HMAC Document" data-include="TestVectors/ecdsa-sd-2023/addBaseDocHMACCanon.json"
+          data-include-format="text"></pre>
+          <p>
+Now the above canonical document gets grouped in to mandatory and non-mandatory
+statements. The final output of the selective disclosure transformation process
+is shown below. Each statement is now grouped as mandatory and non-mandatory and
+its index in the previous list of statements is remembered.
+          </p>
+          <pre class="example nohighlight" title="Add Base Transformation" data-include="TestVectors/ecdsa-sd-2023/addBaseTransform.json"
+          data-include-format="text"></pre>
+          <p>
+To do: proof config
+          </p>
+          <p>
+To do: hashing
+          </p>
+          <p>
+To do: signatures
+          </p>
+          <p>
+To do: final serialization and signed document
+          </p>
+        </section>
+        <section>
+          <h4>Add Derived Proof</h4>
+        </section>
+      </section>
     </section>
 
     <section class="informative">
