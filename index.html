@@ -3297,7 +3297,7 @@ statements are grouped.
           <pre class="example nohighlight" title="Canonical HMAC Document" data-include="TestVectors/ecdsa-sd-2023/addBaseDocHMACCanon.json"
           data-include-format="text"></pre>
           <p>
-Now the above canonical document gets grouped in to mandatory and non-mandatory
+The above canonical document gets grouped in to mandatory and non-mandatory
 statements. The final output of the selective disclosure transformation process
 is shown below. Each statement is now grouped as mandatory and non-mandatory and
 its index in the previous list of statements is remembered.
@@ -3305,17 +3305,38 @@ its index in the previous list of statements is remembered.
           <pre class="example nohighlight" title="Add Base Transformation" data-include="TestVectors/ecdsa-sd-2023/addBaseTransform.json"
           data-include-format="text"></pre>
           <p>
-To do: proof config
+The next step is to create the base proof configuration and canonicalize it.
+This is shown in the following two examples.
           </p>
+          <pre class="example nohighlight" title="Base Proof Configuration" data-include="TestVectors/ecdsa-sd-2023/addProofConfig.json"
+          data-include-format="text"></pre>
+          <pre class="example nohighlight" title="Canonical Base Proof Configuration" data-include="TestVectors/ecdsa-sd-2023/addProofConfigCanon.txt"
+          data-include-format="text"></pre>
           <p>
-To do: hashing
+In the hashing step we compute the SHA-256 hash of the canonicalized proof
+options to produce the `proofHash` and we compute the SHA-256 hash of the join of
+all the mandatory nquads to produce the `mandatoryHash`. These are shown below
+in hexadecimal format.
           </p>
+          <pre class="example nohighlight" title="Add Base Hashes" data-include="TestVectors/ecdsa-sd-2023/addHashData.json"
+          data-include-format="text"></pre>
           <p>
-To do: signatures
+We compute the `baseSignature` over the concatenation of the `proofHash`,
+`proofPublicKey`, and `mandatoryHash` using the issuers long term `privateKey`.
+We compute the `signatures` array by signing each non-mandatory nquad using the
+per `proofPrivateKey`. These signatures, the `proofPublicKey`, and
+`mandatoryPointers` which are fed to the final serialization step are
+shown below.
           </p>
+          <pre class="example nohighlight" title="Add Base Signing" data-include="TestVectors/ecdsa-sd-2023/addRawBaseSignatureInfo.json"
+          data-include-format="text"></pre>
           <p>
-To do: final serialization and signed document
+Finally, the values above are run through the algorithm of Section
+<a href="#serializebaseproofvalue"></a> to produce the `proofValue` which is
+used in the signed based document shown below.
           </p>
+          <pre class="example nohighlight" title="Signed Base Document" data-include="TestVectors/ecdsa-sd-2023/addSignedSDBase.json"
+          data-include-format="text"></pre>
         </section>
         <section>
           <h4>Add Derived Proof</h4>
