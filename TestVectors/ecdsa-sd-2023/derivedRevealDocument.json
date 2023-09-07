@@ -1,0 +1,44 @@
+{
+  "@context": [
+    "https://www.w3.org/ns/credentials/v2",
+    {
+      "@vocab": "https://windsurf.grotto-networking.com/selective#"
+    }
+  ],
+  "type": [
+    "VerifiableCredential"
+  ],
+  "sailNumber": "Earth101",
+  "sails": [
+    {
+      "size": 6.1,
+      "sailName": "Lahaina",
+      "year": 2023
+    },
+    {
+      "size": 7,
+      "sailName": "Lahaina",
+      "year": 2020
+    }
+  ],
+  "boards": [
+    {
+      "year": 2022,
+      "boardName": "CompFoil170",
+      "brand": "Wailea"
+    },
+    {
+      "boardName": "Kanaha Custom",
+      "brand": "Wailea",
+      "year": 2019
+    }
+  ],
+  "proof": {
+    "type": "DataIntegrityProof",
+    "cryptosuite": "ecdsa-sd-2023",
+    "created": "2023-08-15T23:36:38Z",
+    "verificationMethod": "did:key:zDnaepBuvsQ8cpsWrVKw8fbpGpvPeNSjVPTWoq6cRqaYzBKVP#zDnaepBuvsQ8cpsWrVKw8fbpGpvPeNSjVPTWoq6cRqaYzBKVP",
+    "proofPurpose": "assertionMethod",
+    "proofValue": "u2V0BhVhAWibkVjFQTPQvRFt1HwFnfVxLM9ibkNZ1BCkQOox8pUqByjZQedlncpIKNeVh72Y4gvvU6J1NEMyrDOeMX32RA1gjgCQCKnLOGbY_FuM-ASpSkkOxsIR2E8n7Ml2q1UQ6tEwzi5OGWEBtAwxySlwwASjXlYLoLwyjdsIRYUa05OQzE0P4skx1-QJKi8HtGcJHtJfOTn7RhWKC0nkXODvUAChvnKDVY02TWEClAeVhEaVRWS_5ZfU6MlgnX07DuKm9XBS-b3RKfciM1Eu7L2mvkMebfBWVUw9WkuqNL4Tz-MkN4lXmljRt8r8DWEA78ePS_Gy4lnOlUa2CgworZmUYq-Etff-9QK90v4xOWzNWvaILdcmkJs5zwH9b86f5yxos_NRK-VIO015zVlWTWEB2bYe3iy_95zezUdGp66X77IQbHhKunDI1BF0trlkrIkOCqviH4S1U3Nz4n5WWW8qsc3zAEq1Spquojg2mevHtWEA5EwtdjPeXn07NztIOTZ6PtyWt6v0Gfp5oFRAbvvcCpDnptz6gZd56Z6TBkI0eMUs4RI2g2rup607wVFuIUdvgWEC9Jb2rzxEtn2VZ2DZl4r5x_5wWVT8-OrHVtRUBcwdDe1_gl-PYhQ26vLcTN87eyPdVhft0O-URO1PQdifev4NKpQBYIOGCDmZ9TBxEtWeCI9oVmRt0eHRGAaoOXx08gxL2IQt_AVggk0AeXgJ4e6m1XsV5-xFud0L_1mUjZ9Mffhg5aZGTyDkCWCBWRS4GuU5oQsZVBYkPgz-pbltwoQdYY1s6s8D-oA4orANYIJEdvfdRibsv05I3pv8e6S1aUuAuBpGQHLhrYj4QX0knBFggQ-qOZUDlozRsGk46ux9gp9fjT28Fy3g3nctmMoqi_U2MAgMEBQkKDA0ODxAR"
+  }
+}
