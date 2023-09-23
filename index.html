@@ -1342,10 +1342,11 @@ Return <em>deskolemizedNQuads</em>.
 
           <p>
 The following algorithm replaces all blank node identifiers in an expanded
-JSON-LD document with custom-scheme URNs. The required inputs are an expanded
-JSON-LD document (<var>expanded</var>), a custom URN scheme
-(<var>urnScheme</var>), a UUID string or other comparably random string
-(<var>random</var>), and reference to a shared integer (<var>count</var>).
+JSON-LD document with custom-scheme URNs and assigns custom-scheme identifiers to
+blank nodes. The required inputs are an expanded JSON-LD document
+(<var>expanded</var>), a custom blank node prefix
+(<var>bnPrefix</var>), a UUID string or other comparably random string
+(<var>randomString</var>), and reference to a shared integer (<var>count</var>).
 Any additional custom options (such as a document loader) can also be passed.
 It produces the expanded form of the skolemized JSON-LD document
 (<var>skolemizedExpandedDocument</var> as output. The skolemization used in this
@@ -1355,7 +1356,7 @@ Section <a href="#todeskolemizednquads"></a>.
 
           <ol class="algorithm">
             <li>
-Initialize <var>skomelizedExpanded</var> to an empty array.
+Initialize <var>skolemizedExpandedDocument</var> to an empty array.
             </li>
             <li>
 For each <var>element</var> in <var>expanded</var>:
@@ -1387,15 +1388,15 @@ and keeping the other parameters the same.
                 <li>
 If <var>skolemizedNode</var> has no <em>@id</em> property, set the value of
 the <em>@id</em> property in <var>skolemizedNode</var> to the concatenation
-of "urn:", <var>urnScheme</var>, <var>random</var>, "_" and the value of
+of <var>bnPrefix</var>, "_",  <var>randomString</var>, "_" and the value of
 <var>count</var>, incrementing the value of <var>count</var> afterwards.
                 </li>
                 <li>
 Otherwise, if the value of the <em>@id</em> property in
 <var>skolemizedNode</var> starts with "_:", preserve the existing blank node
 identifier when skolemizing by setting the value of the <em>@id</em> property
-in <var>skolemizedNode</var> to the concatenation of "urn:",
-<var>urnScheme</var>, and the existing value of the <em>@id</em> property.
+in <var>skolemizedNode</var> to the concatenation of
+<var>bnPrefix</var>, and the existing value of the <em>@id</em> property.
                 </li>
                 <li>
 Append <var>skolemizedNode</var> to <var>skolemizedExpandedDocument</var>.
