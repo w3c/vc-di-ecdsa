@@ -1540,13 +1540,13 @@ JSON-LD object (<var>source</var>). A JSON-LD document fragment object
 Initialize <var>selection</var> to an empty object.
             </li>
             <li>
-If <var>value</var> has an `id` that is not a blank node identifier, set
+If <var>source</var> has an `id` that is not a blank node identifier, set
 `selection.id` to its value. Note: All non-blank node identifiers in the path of
 any JSON Pointer MUST be included in the selection, this includes any root
 document identifier.
             </li>
             <li>
-If <var>value</var>.`type` is set, set <var>selection</var>.`type` to its value.
+If <var>source</var>.`type` is set, set <var>selection</var>.`type` to its value.
 Note: The selection MUST include all `type`s in the path of any JSON Pointer,
 including any root document `type`.
             </li>
