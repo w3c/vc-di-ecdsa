@@ -399,7 +399,7 @@ key. Implementations of this specification will raise errors in the event of a
         <h3>Proof Representations</h3>
 
         <p>
-This suite relies on detached digital signatures represented using [[MULTIBASE]]
+This suite relies on detached digital signatures represented using [[?MULTIBASE]]
 and [[?MULTICODEC]].
         </p>
 
@@ -434,7 +434,10 @@ according to [[FIPS-186-5]] and SHOULD use the <em>deterministic</em> ECDSA
 signature variant, produced according to [[FIPS-186-5]] using the curves and
 hashes as specified in section <a href="#algorithms"></a>, encoded according to
 section 7 of [[RFC4754]] (sometimes referred to as the IEEE P1363 format), and
-serialized according to [[MULTIBASE]] using the base58-btc base encoding.
+encoded according to [[?MULTIBASE]] using the base-58-btc header and alphabet
+as described in the
+<a href="https://www.w3.org/TR/vc-data-integrity/#multibase-0">
+Multibase section</a> of [[VC-DATA-INTEGRITY]].
           </p>
 
           <pre class="example nohighlight"
@@ -1986,9 +1989,12 @@ Initialize `components` to an array with five elements containing the values of:
 CBOR-encode `components` and append it to `proofValue`.
             </li>
             <li>
-Initialize `baseProof` to a string with the multibase-base64url-no-pad-encoding
-of `proofValue`. That is, return a string starting with "u" and ending with the
-base64url-no-pad-encoded value of `proofValue`.
+Initialize `baseProof` to a string with the [[?MULTIBASE]]
+base64url-no-pad-encoding of `proofValue` as described as described in the
+<a href="https://www.w3.org/TR/vc-data-integrity/#multibase-0">
+Multibase section</a> of [[VC-DATA-INTEGRITY]]. That is, return a string
+starting with "u" and ending with the base64url-no-pad-encoded value of
+`proofValue`.
             </li>
             <li>
 Return `baseProof` as <em>base proof</em>.
@@ -2257,7 +2263,9 @@ CBOR-encode `components` and append it to `proofValue`.
             </li>
             <li>
 Return the <em>derived proof</em> as a string with the
-multibase-base64url-no-pad-encoding of `proofValue`. That is, return a string
+[[?MULTIBASE]] base64url-no-pad-encoding of `proofValue` as described in the
+<a href="https://www.w3.org/TR/vc-data-integrity/#multibase-0">
+Multibase section</a> of [[VC-DATA-INTEGRITY]]. That is, return a string
 starting with "u" and ending with the base64url-no-pad-encoded value of
 `proofValue`.
             </li>
@@ -2946,7 +2954,7 @@ implementation was validated against the test vectors in [[RFC6979]].
         <p>
 The signer needs to generate a private/public key pair with the private key used
 for signing and the public key made available for verification. The
-[[MULTIBASE]]/[[?MULTICODEC]] representation for the public key, <code>p256-pub</code>,
+[[?MULTIBASE]]/[[?MULTICODEC]] representation for the public key, <code>p256-pub</code>,
 and the representation for the private key, <code>p256-priv</code>, are shown below.
         </p>
         <pre class="example nohighlight" title="Private and Public keys for Signature"
@@ -3017,7 +3025,7 @@ option document.
         <p>
 The signer needs to generate a private/public key pair with the private key used
 for signing and the public key made available for verification. The
-[[MULTIBASE]]/[[?MULTICODEC]] representation for the public key, <code>p384-pub</code>,
+[[?MULTIBASE]]/[[?MULTICODEC]] representation for the public key, <code>p384-pub</code>,
 and the representation for the private key, <code>p384-priv</code>, are shown below.
         </p>
         <pre class="example nohighlight" title="Private and Public keys for Signature"
@@ -3088,7 +3096,7 @@ option document.
         <p>
 The signer needs to generate a private/public key pair with the private key used
 for signing and the public key made available for verification. The
-[[MULTIBASE]]/[[?MULTICODEC]] representation for the public key, <code>p256-pub</code>,
+[[?MULTIBASE]]/[[?MULTICODEC]] representation for the public key, <code>p256-pub</code>,
 and the representation for the private key, <code>p256-priv</code>, are shown below.
         </p>
         <pre class="example nohighlight" title="Private and Public keys for Signature"
@@ -3159,7 +3167,7 @@ option document.
         <p>
 The signer needs to generate a private/public key pair with the private key used
 for signing and the public key made available for verification. The
-[[MULTIBASE]]/[[?MULTICODEC]] representation for the public key, <code>p384-pub</code>,
+[[?MULTIBASE]]/[[?MULTICODEC]] representation for the public key, <code>p384-pub</code>,
 and the representation for the private key, <code>p384-priv</code>, are shown below.
         </p>
         <pre class="example nohighlight" title="Private and Public keys for Signature"
