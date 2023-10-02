@@ -1342,7 +1342,8 @@ Return <em>deskolemizedNQuads</em>.
 
           <p>
 The following algorithm replaces all blank node identifiers in an expanded
-JSON-LD document with custom-scheme URNs. The required inputs are an expanded JSON-LD document
+JSON-LD document with custom-scheme URNs, including assigning such URNs to
+blank nodes that are unlabeled. The required inputs are an expanded JSON-LD document
 (<var>expanded</var>), a custom URN scheme
 (<var>urnScheme</var>), a UUID string or other comparably random string
 (<var>randomString</var>), and reference to a shared integer (<var>count</var>).
