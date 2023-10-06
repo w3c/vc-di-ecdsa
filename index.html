@@ -298,20 +298,33 @@ suites defined in this specification.
 
           <p>
 The `publicKeyMultibase` property represents a Multibase-encoded Multikey
-expression of a P-256 or P-384 public key. The encoding of a P-256 public key is
-the two-byte prefix `0x8024` (the varint expression of `0x1200`) followed
-by the 33-byte compressed public key data.
-The 35-byte value is then encoded using base58-btc (`z`) as the prefix. The
-encoding of a P-384 public key is the two-byte prefix `0x8124` (the varint
-expression of `0x1201`) followed by the 49-byte compressed public key data.
-The 51-byte value is then encoded using base58-btc (`z`) as the prefix. Any
-other encodings MUST NOT be allowed.
+expression of a P-256 or P-384 public key.
+          </p>
+
+          <p>
+The Multikey encoding of a P-256
+public key MUST start with the two-byte prefix `0x8024` (the varint expression
+of `0x1200`) followed by the 33-byte compressed public key data. The resulting
+35-byte value MUST then be encoded using the base-58-btc alphabet, according to
+the <a data-cite="VC-DATA-INTEGRITY#multibase-0">Multibase</a> section in the
+[[VC-DATA-INTEGRITY]] specification, and then prepended with the base-58-btc
+Multibase header (`z`).
+          </p>
+
+          <p>
+The encoding of a P-384 public key MUST start with the
+two-byte prefix `0x8124` (the varint expression of `0x1201`) followed by the
+49-byte compressed public key data. The resulting 51-byte value is then encoded
+using the base-58-btc alphabet, according to the
+<a data-cite="VC-DATA-INTEGRITY#multibase-0">Multibase</a> section in the
+[[VC-DATA-INTEGRITY]] specification, and then prepended with the base-58-btc
+Multibase header (`z`). Any other encodings MUST NOT be allowed.
           </p>
 
           <p class="advisement">
 Developers are advised to not accidentally publish a representation of a private
 key. Implementations of this specification will raise errors in the event of a
-[[?MULTICODEC]] value other than `0x1200` or `0x1201` being used in a
+Multicodec value other than `0x1200` or `0x1201` being used in a
 `publicKeyMultibase` value.
           </p>
 
@@ -372,17 +385,25 @@ key. Implementations of this specification will raise errors in the event of a
           </pre>
 
           <p>
-            The `secretKeyMultibase` property represents a Multibase-encoded Multikey
-            expression of a P-256 or P-384 secret key (also sometimes referred to
-            as a private key). The encoding of a P-256 secret key is
-            the two-byte prefix `0x8626` (the varint expression of `0x1306`) followed
-            by the 32-byte secret key data.
-            The 34-byte value is then base58-btc encoded and `z` is added as the prefix.
-
-            The encoding of a P-384 secret key is the two-byte prefix `0x8726` (the varint
-            expression of `0x1307`) followed by the 48-byte secret key data.
-            The 50-byte value is then base58-btc encoded and `z` is added as the prefix. Any
-            other encodings MUST NOT be allowed.
+The `secretKeyMultibase` property represents a Multibase-encoded Multikey
+expression of a P-256 or P-384 secret key (also sometimes referred to as a
+private key).
+          </p>
+          <p>
+The encoding of a P-256 secret key MUST start with the two-byte prefix `0x8626`
+(the varint expression of `0x1306`) followed by the 32-byte secret key data. The
+34-byte value MUST then be encoded using the base-58-btc alphabet, according to
+the <a data-cite="VC-DATA-INTEGRITY#multibase-0">Multibase</a> section in the
+[[VC-DATA-INTEGRITY]] specification, and then prepended with the base-58-btc
+Multibase header (`z`). Any other encodings MUST NOT be allowed.
+          </p>
+          <p>
+The encoding of a P-384 secret key is the two-byte prefix `0x8726` (the varint
+expression of `0x1307`) followed by the 48-byte secret key data. The 50-byte
+value MUST then be encoded using the base-58-btc alphabet, according to the
+<a data-cite="VC-DATA-INTEGRITY#multibase-0">Multibase</a> section in the
+[[VC-DATA-INTEGRITY]] specification, and then prepended with the base-58-btc
+Multibase header (`z`). Any other encodings MUST NOT be allowed.
           </p>
 
           <p class="advisement">
@@ -399,8 +420,8 @@ key. Implementations of this specification will raise errors in the event of a
         <h3>Proof Representations</h3>
 
         <p>
-This suite relies on detached digital signatures represented using [[?MULTIBASE]]
-and [[?MULTICODEC]].
+This section details the proof representation formats that are defined by
+this specification.
         </p>
 
         <section>
@@ -429,13 +450,13 @@ match the verification relationship expressed by the verification method
 `controller`.
           </p>
           <p>
-The value of the `proofValue` property of the proof MUST be an ECDSA signature produced
-according to [[FIPS-186-5]] and SHOULD use the <em>deterministic</em> ECDSA
-signature variant, produced according to [[FIPS-186-5]] using the curves and
-hashes as specified in section <a href="#algorithms"></a>, encoded according to
-section 7 of [[RFC4754]] (sometimes referred to as the IEEE P1363 format), and
-encoded according to [[?MULTIBASE]] using the base-58-btc header and alphabet
-as described in the
+The value of the `proofValue` property of the proof MUST be an ECDSA signature
+produced according to [[FIPS-186-5]] and SHOULD use the <em>deterministic</em>
+ECDSA signature variant, produced according to [[FIPS-186-5]] using the curves
+and hashes as specified in section <a href="#algorithms"></a>, encoded according
+to section 7 of [[RFC4754]] (sometimes referred to as the IEEE P1363 format),
+and encoded using the base-58-btc header and
+alphabet as described in the
 <a href="https://www.w3.org/TR/vc-data-integrity/#multibase-0">
 Multibase section</a> of [[VC-DATA-INTEGRITY]].
           </p>
@@ -1988,8 +2009,8 @@ Initialize `components` to an array with five elements containing the values of:
 CBOR-encode `components` and append it to `proofValue`.
             </li>
             <li>
-Initialize `baseProof` to a string with the [[?MULTIBASE]]
-base64url-no-pad-encoding of `proofValue` as described as described in the
+Initialize `baseProof` to a string with the Multibase
+base64url-no-pad-encoding of `proofValue` as described in the
 <a href="https://www.w3.org/TR/vc-data-integrity/#multibase-0">
 Multibase section</a> of [[VC-DATA-INTEGRITY]]. That is, return a string
 starting with "`u`" and ending with the base64url-no-pad-encoded value of
@@ -2262,7 +2283,7 @@ CBOR-encode `components` and append it to `proofValue`.
             </li>
             <li>
 Return the <em>derived proof</em> as a string with the
-[[?MULTIBASE]] base64url-no-pad-encoding of `proofValue` as described in the
+base64url-no-pad-encoding of `proofValue` as described in the
 <a href="https://www.w3.org/TR/vc-data-integrity/#multibase-0">
 Multibase section</a> of [[VC-DATA-INTEGRITY]]. That is, return a string
 starting with "`u`" and ending with the base64url-no-pad-encoded value of
@@ -2953,8 +2974,8 @@ implementation was validated against the test vectors in [[RFC6979]].
         <p>
 The signer needs to generate a private/public key pair with the private key used
 for signing and the public key made available for verification. The
-[[?MULTIBASE]]/[[?MULTICODEC]] representation of the public key, <code>p256-pub</code>,
-and the representation of the private key, <code>p256-priv</code>, are shown below.
+representation of the public key,
+and the representation of the private key, are shown below.
         </p>
         <pre class="example nohighlight" title="Private and Public keys for Signature"
         data-include="TestVectors/p256KeyPair.json"
@@ -2992,7 +3013,7 @@ and obtain its hash, as shown in the next three examples.
 
         <p>
 Finally, we concatenate the hash of the proof options followed by the hash of the credential without proof, use the private key with the combined hash to
-compute the ECDSA signature, and then base58-btc encode the signature.
+compute the ECDSA signature, and then base-58-btc encode the signature.
         </p>
 
         <pre class="example nohighlight" title="Combine hashes of Proof Options and Credential (hex)"
@@ -3001,13 +3022,13 @@ compute the ECDSA signature, and then base58-btc encode the signature.
         <pre class="example nohighlight" title="Signature of Combined Hashes (hex)"
         data-include="TestVectors/ecdsa-rdfc-2019-p256/sigHexECDSAP256.txt" data-include-format="text"></pre>
 
-        <pre class="example nohighlight" title="Signature of Combined Hashes base58-btc"
+        <pre class="example nohighlight" title="Signature of Combined Hashes base-58-btc"
         data-include="TestVectors/ecdsa-rdfc-2019-p256/sigBTC58ECDSAP256.txt" data-include-format="text"></pre>
 
         <p>Assemble the signed credential with the following two steps:</p>
         <ol>
           <li>
-Add the <code>proofValue</code> field with the previously computed base58-btc
+Add the <code>proofValue</code> field with the previously computed base-58-btc
 value to the proof options document.
           </li>
           <li>
@@ -3024,8 +3045,8 @@ option document.
         <p>
 The signer needs to generate a private/public key pair with the private key used
 for signing and the public key made available for verification. The
-[[?MULTIBASE]]/[[?MULTICODEC]] representation of the public key, <code>p384-pub</code>,
-and the representation of the private key, <code>p384-priv</code>, are shown below.
+representation of the public key,
+and the representation of the private key, are shown below.
         </p>
         <pre class="example nohighlight" title="Private and Public keys for Signature"
         data-include="TestVectors/p384KeyPair.json"
@@ -3063,7 +3084,7 @@ and obtain its hash, as shown in the next three examples.
 
         <p>
 Finally, we concatenate the hash of the proof options followed by the hash of the credential without proof, use the private key with the combined hash to
-compute the ECDSA signature, and then base58-btc encode the signature.
+compute the ECDSA signature, and then base-58-btc encode the signature.
         </p>
 
         <pre class="example nohighlight" title="Combine hashes of Proof Options and Credential (hex)"
@@ -3072,13 +3093,13 @@ compute the ECDSA signature, and then base58-btc encode the signature.
         <pre class="example nohighlight" title="Signature of Combined Hashes (hex)"
         data-include="TestVectors/ecdsa-rdfc-2019-p384/sigHexECDSAP384.txt" data-include-format="text"></pre>
 
-        <pre class="example nohighlight" title="Signature of Combined Hashes base58-btc"
+        <pre class="example nohighlight" title="Signature of Combined Hashes base-58-btc"
         data-include="TestVectors/ecdsa-rdfc-2019-p384/sigBTC58ECDSAP384.txt" data-include-format="text"></pre>
 
         <p>Assemble the signed credential with the following two steps:</p>
         <ol>
           <li>
-Add the <code>proofValue</code> field with the previously computed base58-btc
+Add the <code>proofValue</code> field with the previously computed base-58-btc
 value to the proof options document.
           </li>
           <li>
@@ -3095,8 +3116,8 @@ option document.
         <p>
 The signer needs to generate a private/public key pair with the private key used
 for signing and the public key made available for verification. The
-[[?MULTIBASE]]/[[?MULTICODEC]] representation of the public key, <code>p256-pub</code>,
-and the representation of the private key, <code>p256-priv</code>, are shown below.
+representation of the public key,
+and the representation of the private key, are shown below.
         </p>
         <pre class="example nohighlight" title="Private and Public keys for Signature"
         data-include="TestVectors/p256KeyPair.json"
@@ -3134,7 +3155,7 @@ and obtain its hash, as shown in the next three examples.
 
         <p>
 Finally, we concatenate the hash of the proof options followed by the hash of the credential without proof, use the private key with the combined hash to
-compute the ECDSA signature, and then base58-btc encode the signature.
+compute the ECDSA signature, and then base-58-btc encode the signature.
         </p>
 
         <pre class="example nohighlight" title="Combine hashes of Proof Options and Credential (hex)"
@@ -3143,13 +3164,13 @@ compute the ECDSA signature, and then base58-btc encode the signature.
         <pre class="example nohighlight" title="Signature of Combined Hashes (hex)"
         data-include="TestVectors/ecdsa-jcs-2019-p256/sigHexJCSECDSAP256.txt" data-include-format="text"></pre>
 
-        <pre class="example nohighlight" title="Signature of Combined Hashes base58-btc"
+        <pre class="example nohighlight" title="Signature of Combined Hashes base-58-btc"
         data-include="TestVectors/ecdsa-jcs-2019-p256/sigBTC58JCSECDSAP256.txt" data-include-format="text"></pre>
 
         <p>Assemble the signed credential with the following two steps:</p>
         <ol>
           <li>
-Add the <code>proofValue</code> field with the previously computed base58-btc
+Add the <code>proofValue</code> field with the previously computed base-58-btc
 value to the proof options document.
           </li>
           <li>
@@ -3166,8 +3187,8 @@ option document.
         <p>
 The signer needs to generate a private/public key pair with the private key used
 for signing and the public key made available for verification. The
-[[?MULTIBASE]]/[[?MULTICODEC]] representation of the public key, <code>p384-pub</code>,
-and the representation of the private key, <code>p384-priv</code>, are shown below.
+representation of the public key,
+and the representation of the private key, are shown below.
         </p>
         <pre class="example nohighlight" title="Private and Public keys for Signature"
         data-include="TestVectors/p384KeyPair.json"
@@ -3205,7 +3226,7 @@ and obtain its hash, as shown in the next three examples.
 
         <p>
 Finally, we concatenate the hash of the proof options followed by the hash of the credential without proof, use the private key with the combined hash to
-compute the ECDSA signature, and then base58-btc encode the signature.
+compute the ECDSA signature, and then base-58-btc encode the signature.
         </p>
 
         <pre class="example nohighlight" title="Combine hashes of Proof Options and Credential (hex)"
@@ -3214,13 +3235,13 @@ compute the ECDSA signature, and then base58-btc encode the signature.
         <pre class="example nohighlight" title="Signature of Combined Hashes (hex)"
         data-include="TestVectors/ecdsa-jcs-2019-p384/sigHexJCSECDSAP384.txt" data-include-format="text"></pre>
 
-        <pre class="example nohighlight" title="Signature of Combined Hashes base58-btc"
+        <pre class="example nohighlight" title="Signature of Combined Hashes base-58-btc"
         data-include="TestVectors/ecdsa-jcs-2019-p384/sigBTC58JCSECDSAP384.txt" data-include-format="text"></pre>
 
         <p>Assemble the signed credential with the following two steps:</p>
         <ol>
           <li>
-Add the <code>proofValue</code> field with the previously computed base58-btc
+Add the <code>proofValue</code> field with the previously computed base-58-btc
 value to the proof options document.
           </li>
           <li>
