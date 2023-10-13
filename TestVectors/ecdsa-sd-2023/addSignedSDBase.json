@@ -8,47 +8,49 @@
   "type": [
     "VerifiableCredential"
   ],
-  "sailNumber": "Earth101",
-  "sails": [
-    {
-      "size": 5.5,
-      "sailName": "Kihei",
-      "year": 2023
-    },
-    {
-      "size": 6.1,
-      "sailName": "Lahaina",
-      "year": 2023
-    },
-    {
-      "size": 7,
-      "sailName": "Lahaina",
-      "year": 2020
-    },
-    {
-      "size": 7.8,
-      "sailName": "Lahaina",
-      "year": 2023
-    }
-  ],
-  "boards": [
-    {
-      "boardName": "CompFoil170",
-      "brand": "Wailea",
-      "year": 2022
-    },
-    {
-      "boardName": "Kanaha Custom",
-      "brand": "Wailea",
-      "year": 2019
-    }
-  ],
+  "credentialSubject": {
+    "sailNumber": "Earth101",
+    "sails": [
+      {
+        "size": 5.5,
+        "sailName": "Kihei",
+        "year": 2023
+      },
+      {
+        "size": 6.1,
+        "sailName": "Lahaina",
+        "year": 2023
+      },
+      {
+        "size": 7,
+        "sailName": "Lahaina",
+        "year": 2020
+      },
+      {
+        "size": 7.8,
+        "sailName": "Lahaina",
+        "year": 2023
+      }
+    ],
+    "boards": [
+      {
+        "boardName": "CompFoil170",
+        "brand": "Wailea",
+        "year": 2022
+      },
+      {
+        "boardName": "Kanaha Custom",
+        "brand": "Wailea",
+        "year": 2019
+      }
+    ]
+  },
   "proof": {
     "type": "DataIntegrityProof",
     "cryptosuite": "ecdsa-sd-2023",
     "created": "2023-08-15T23:36:38Z",
     "verificationMethod": "did:key:zDnaepBuvsQ8cpsWrVKw8fbpGpvPeNSjVPTWoq6cRqaYzBKVP#zDnaepBuvsQ8cpsWrVKw8fbpGpvPeNSjVPTWoq6cRqaYzBKVP",
     "proofPurpose": "assertionMethod",
-    "proofValue": "u2V0AhdhAWEBaJuRWMVBM9C9EW3UfAWd9XEsz2JuQ1nUEKRA6jHylSoHKNlB52Wdykgo15WHvZjiC-9TonU0QzKsM54xffZED2EBYI4AkAipyzhm2PxbjPgEqUpJDsbCEdhPJ-zJdqtVEOrRMM4uT2EBYIAARIjNEVWZ3iJmqu8zd7v8AESIzRFVmd4iZqrvM3e7_jthAWEApVgozbnQMNw1Y5hClSZgLVnk1mElHCJ7y9VR6_3hAay3zdaGhbv9QzolQuwqM1UePFmVlDKi83jHDUz-aGfpM2EBYQLKjEoM9BHmj3tB5qOUjdSTWZgo4mfgjSQeEnJsiuOrO4Q6LTWbhh8ShmgBQuNztBcXCnlAveqv8_TxnheQt1aXYQFhAmeoEU8I1ZzxFyR-QMxwoSkqRG9E8_CaSrhH8TD2t-tV32HKAC4hJkKl6xHuz6XL2G-V0cm6d_rWozjhmmVaMjdhAWEBtAwxySlwwASjXlYLoLwyjdsIRYUa05OQzE0P4skx1-QJKi8HtGcJHtJfOTn7RhWKC0nkXODvUAChvnKDVY02T2EBYQKUB5WERpVFZL_ll9ToyWCdfTsO4qb1cFL5vdEp9yIzUS7svaa-Qx5t8FZVTD1aS6o0vhPP4yQ3iVeaWNG3yvwPYQFhAO_Hj0vxsuJZzpVGtgoMKK2ZlGKvhLX3_vUCvdL-MTlszVr2iC3XJpCbOc8B_W_On-csaLPzUSvlSDtNec1ZVk9hAWEB2bYe3iy_95zezUdGp66X77IQbHhKunDI1BF0trlkrIkOCqviH4S1U3Nz4n5WWW8qsc3zAEq1Spquojg2mevHt2EBYQDkTC12M95efTs3O0g5Nno-3Ja3q_QZ-nmgVEBu-9wKkOem3PqBl3npnpMGQjR4xSzhEjaDau6nrTvBUW4hR2-DYQFhAW-otSFVlUPFmg119n3TeSE7up5hBS34AqP2TGUQA5pDGyOTetrf8qq3bWj1lpCu1Z6yEZJlQ6nrLiCoaNVhpL9hAWEDXBb8eGxM9R9SWoxfpkywt6byFtZoV7-tkOk-nk03Ta8wcicOM7UafQGtdTJUAydNjd8asOOy7LawaAzNH5ujX2EBYQLzhklx-dXkaAlrVfS5aWQ9dIsdCLrlQp2reX0cVO4ahrNAMzNPZBrJrgzEY6MKedcYYhSd4jGoyDjoVlIT8RwrYQFhAvSW9q88RLZ9lWdg2ZeK-cf-cFlU_Pjqx1bUVAXMHQ3tf4Jfj2IUNury3EzfO3sj3VYX7dDvlETtT0HYn3r-DSthAWEDn3XTeqxsj1QjNxTdgSloHCmeICfKN6bD_sRo83d_fuyIfv1HCiXq1_vbpBQ9SJqs3KaCFJl5e8huOnGqUrP5Q2EBYQEMJNELryBxVHKwGR6_t62L32c2s8M2CUAqTmHOFF9z3BQcVbciO1PT4nlDjYvNxCxVQN9YKJsS3AmLp--fda32Eay9zYWlsTnVtYmVyaC9zYWlscy8xbi9ib2FyZHMvMC95ZWFyaC9zYWlscy8y"
+    "proofValue": "u2V0AhdhAWECql7UfnVlTiPZmpE0_46MDRzUXs9n_uidA-299Jsre3v1MMVGZeFF8EaZNIr1Fo9_54UMqdYoKbOdgTWVEydVI2EBYI4AkAipyzhm2PxbjPgEqUpJDsbCEdhPJ-zJdqtVEOrRMM4uT2EBYIAARIjNEVWZ3iJmqu8zd7v8AESIzRFVmd4iZqrvM3e7_jthAWEApVgozbnQMNw1Y5hClSZgLVnk1mElHCJ7y9VR6_3hAay3zdaGhbv9QzolQuwqM1UePFmVlDKi83jHDUz-aGfpM2EBYQLKjEoM9BHmj3tB5qOUjdSTWZgo4mfgjSQeEnJsiuOrO4Q6LTWbhh8ShmgBQuNztBcXCnlAveqv8_TxnheQt1aXYQFhAmeoEU8I1ZzxFyR-QMxwoSkqRG9E8_CaSrhH8TD2t-tV32HKAC4hJkKl6xHuz6XL2G-V0cm6d_rWozjhmmVaMjdhAWEBtAwxySlwwASjXlYLoLwyjdsIRYUa05OQzE0P4skx1-QJKi8HtGcJHtJfOTn7RhWKC0nkXODvUAChvnKDVY02T2EBYQKUB5WERpVFZL_ll9ToyWCdfTsO4qb1cFL5vdEp9yIzUS7svaa-Qx5t8FZVTD1aS6o0vhPP4yQ3iVeaWNG3yvwPYQFhAiPvR9iMFnW7HBmpQWw6Y7wIgZDGxCm2i-TY7VIYSJf51ihFQrZ2XBOUz72xHqa24Hn53V-kWI2U3yD38MIZYUNhAWEDyZdk6OW3WG_U8gb4isAVxvcD18fNMtGRnb5Nu5nx2Og0MhSYt6JU_cjuWoBf37cU6tWr85y3xUGe0spFbpLNK2EBYQLUc0kHbTcq8a8kxaq2LhNH6rMtWSRfTdh62qFtZuKXhmNR_mXrdp8-hrGHetdrWUUwzUSHkLtGz8yz_h7R5TiHYQFhAqLTdVe1JKRlqP3GEI6ondyEGsRO7C5NgA5ioxHDXufWPIvmpjYcDjHtNT807xj4pPst4Xy9LewBllOoJiY_QPNhAWEDn3XTeqxsj1QjNxTdgSloHCmeICfKN6bD_sRo83d_fuyIfv1HCiXq1_vbpBQ9SJqs3KaCFJl5e8huOnGqUrP5Q2EBYQJukwZcINwPaVsgR8zgpqWU30uqFhI7DxMEGfeY4f9luLunpBYyyVrUCoEUJM3mM46VKTc9yA4VGwbnHNVFLK2jYQFhAgSH2fTA7q8QpkRd-U-vzb1vfEZmKDpKD05IimG_n97MtqOMIn0kCVrCvjuvFdH_D2zbR60or-OrlzeCpucY4AdhAWEC04_N1PU_2Rm_um09A0Uo_8faTQHmC7EztbVb-l9PczRklfhqWlGvkz8bAGzDT2YO-ZDYMZ8NMkXs2YukTH3772EBYQIHAVz5aR78l9NR11yz58WRa5yr9Z2raD1HSrzDDLJeBA--9Ui4YQbetx0IrvQuf_rnExpSCrfcayIUKYZCzQo-EeB0vY3JlZGVudGlhbFN1YmplY3Qvc2FpbE51bWJlcngaL2NyZWRlbnRpYWxTdWJqZWN0L3NhaWxzLzF4IC9jcmVkZW50aWFsU3ViamVjdC9ib2FyZHMvMC95ZWFyeBovY3JlZGVudGlhbFN1YmplY3Qvc2FpbHMvMg"
   }
 }

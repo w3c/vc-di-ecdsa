@@ -1,10 +1,10 @@
 [
   {
-    "pointer": "/sailNumber",
+    "pointer": "/credentialSubject/sailNumber",
     "value": "Earth101"
   },
   {
-    "pointer": "/sails/1",
+    "pointer": "/credentialSubject/sails/1",
     "value": {
       "size": 6.1,
       "sailName": "Lahaina",
@@ -12,11 +12,11 @@
     }
   },
   {
-    "pointer": "/boards/0/year",
+    "pointer": "/credentialSubject/boards/0/year",
     "value": 2022
   },
   {
-    "pointer": "/sails/2",
+    "pointer": "/credentialSubject/sails/2",
     "value": {
       "size": 7,
       "sailName": "Lahaina",
