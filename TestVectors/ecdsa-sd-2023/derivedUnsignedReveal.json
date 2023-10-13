@@ -8,29 +8,31 @@
   "type": [
     "VerifiableCredential"
   ],
-  "sailNumber": "Earth101",
-  "sails": [
-    {
-      "size": 6.1,
-      "sailName": "Lahaina",
-      "year": 2023
-    },
-    {
-      "size": 7,
-      "sailName": "Lahaina",
-      "year": 2020
-    }
-  ],
-  "boards": [
-    {
-      "year": 2022,
-      "boardName": "CompFoil170",
-      "brand": "Wailea"
-    },
-    {
-      "boardName": "Kanaha Custom",
-      "brand": "Wailea",
-      "year": 2019
-    }
-  ]
+  "credentialSubject": {
+    "sailNumber": "Earth101",
+    "sails": [
+      {
+        "size": 6.1,
+        "sailName": "Lahaina",
+        "year": 2023
+      },
+      {
+        "size": 7,
+        "sailName": "Lahaina",
+        "year": 2020
+      }
+    ],
+    "boards": [
+      {
+        "year": 2022,
+        "boardName": "CompFoil170",
+        "brand": "Wailea"
+      },
+      {
+        "boardName": "Kanaha Custom",
+        "brand": "Wailea",
+        "year": 2019
+      }
+    ]
+  }
 }
