@@ -1,6 +1,6 @@
 <!DOCTYPE html><html lang="en" dir="ltr"><head>
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
-<meta name="generator" content="ReSpec 34.1.6">
+<meta name="generator" content="ReSpec 34.1.8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <style>
 span.example-title{text-transform:none}
@@ -164,7 +164,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
   "group": "vc",
   "specStatus": "CR",
   "shortName": "vc-di-ecdsa",
-  "publishDate": "2023-09-28",
+  "publishDate": "2023-11-07",
   "edDraftURI": "https://w3c.github.io/vc-di-ecdsa/",
   "implementationReportURI": "https://w3c.github.io/vc-data-integrity/implementations/",
   "crEnd": "2023-11-30",
@@ -240,13 +240,11 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
   "localBiblio": {
     "MULTIBASE": {
       "title": "Multibase",
-      "href": "https://datatracker.ietf.org/doc/html/draft-multiformats-multibase-01",
-      "id": "multibase"
+      "href": "https://datatracker.ietf.org/doc/html/draft-multiformats-multibase-01"
     },
     "MULTICODEC": {
       "title": "Multicodec",
-      "href": "https://github.com/multiformats/multicodec/",
-      "id": "multicodec"
+      "href": "https://github.com/multiformats/multicodec/"
     },
     "SECG2": {
       "title": "SEC 2: Recommended Elliptic Curve Domain Parameters",
@@ -285,20 +283,20 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
   "postProcess": [
     null
   ],
-  "publishISODate": "2023-09-28T00:00:00.000Z",
-  "generatedSubtitle": "W3C Candidate Recommendation Snapshot 28 September 2023"
+  "publishISODate": "2023-11-07T00:00:00.000Z",
+  "generatedSubtitle": "W3C Candidate Recommendation Snapshot 07 November 2023"
 }</script>
 <link rel="stylesheet" href="https://www.w3.org/StyleSheets/TR/2021/W3C-CR"></head>
   <body class="h-entry"><div class="head">
     <p class="logos"><a class="logo" href="https://www.w3.org/"><img crossorigin="" alt="W3C" height="48" src="https://www.w3.org/StyleSheets/TR/2021/logos/W3C" width="72">
   </a></p>
     <h1 id="title" class="title">Data Integrity ECDSA Cryptosuites v1.0</h1> <h2 id="subtitle" class="subtitle">Achieving Data Integrity using ECDSA with NIST-compliant curves</h2>
-    <p id="w3c-state"><a href="https://www.w3.org/standards/types#CR">W3C Candidate Recommendation Snapshot</a> <time class="dt-published" datetime="2023-09-28">28 September 2023</time></p>
+    <p id="w3c-state"><a href="https://www.w3.org/standards/types#CR">W3C Candidate Recommendation Snapshot</a> <time class="dt-published" datetime="2023-11-07">07 November 2023</time></p>
     <details open="">
       <summary>More details about this document</summary>
       <dl>
         <dt>This version:</dt><dd>
-                <a class="u-url" href="https://www.w3.org/TR/2023/CR-vc-di-ecdsa-20230928/">https://www.w3.org/TR/2023/CR-vc-di-ecdsa-20230928/</a>
+                <a class="u-url" href="https://www.w3.org/TR/2023/CR-vc-di-ecdsa-20231107/">https://www.w3.org/TR/2023/CR-vc-di-ecdsa-20231107/</a>
               </dd>
         <dt>Latest published version:</dt><dd>
                 <a href="https://www.w3.org/TR/vc-di-ecdsa/">https://www.w3.org/TR/vc-di-ecdsa/</a>
@@ -416,7 +414,7 @@ is not fit for production deployment.
   </p><p>
                   This document is governed by the
                   <a id="w3c_process_revision" href="https://www.w3.org/2023/Process-20230612/">12 June 2023 <abbr title="World Wide Web Consortium">W3C</abbr> Process Document</a>.
-                </p></section><nav id="toc"><h2 class="introductory" id="table-of-contents">Table of Contents</h2><ol class="toc"><li class="tocline"><a class="tocxref" href="#abstract">Abstract</a></li><li class="tocline"><a class="tocxref" href="#sotd">Status of This Document</a></li><li class="tocline"><a class="tocxref" href="#introduction"><bdi class="secno">1. </bdi>Introduction</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#terminology"><bdi class="secno">1.1 </bdi>Terminology</a></li><li class="tocline"><a class="tocxref" href="#conformance"><bdi class="secno">1.2 </bdi>Conformance</a></li></ol></li><li class="tocline"><a class="tocxref" href="#data-model"><bdi class="secno">2. </bdi>Data Model</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#verification-methods"><bdi class="secno">2.1 </bdi>Verification Methods</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#multikey"><bdi class="secno">2.1.1 </bdi>Multikey</a></li></ol></li><li class="tocline"><a class="tocxref" href="#proof-representations"><bdi class="secno">2.2 </bdi>Proof Representations</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#dataintegrityproof"><bdi class="secno">2.2.1 </bdi>DataIntegrityProof</a></li></ol></li></ol></li><li class="tocline"><a class="tocxref" href="#algorithms"><bdi class="secno">3. </bdi>Algorithms</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#ecdsa-rdfc-2019"><bdi class="secno">3.1 </bdi>ecdsa-rdfc-2019</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#add-proof-ecdsa-rdfc-2019"><bdi class="secno">3.1.1 </bdi>Add Proof (ecdsa-rdfc-2019)</a></li><li class="tocline"><a class="tocxref" href="#verify-proof-ecdsa-rdfc-2019"><bdi class="secno">3.1.2 </bdi>Verify Proof (ecdsa-rdfc-2019)</a></li><li class="tocline"><a class="tocxref" href="#transformation-ecdsa-rdfc-2019"><bdi class="secno">3.1.3 </bdi>Transformation (ecdsa-rdfc-2019)</a></li><li class="tocline"><a class="tocxref" href="#hashing-ecdsa-rdfc-2019"><bdi class="secno">3.1.4 </bdi>Hashing (ecdsa-rdfc-2019)</a></li><li class="tocline"><a class="tocxref" href="#proof-configuration-ecdsa-rdfc-2019"><bdi class="secno">3.1.5 </bdi>Proof Configuration (ecdsa-rdfc-2019)</a></li><li class="tocline"><a class="tocxref" href="#proof-serialization-ecdsa-rdfc-2019"><bdi class="secno">3.1.6 </bdi>Proof Serialization (ecdsa-rdfc-2019)</a></li><li class="tocline"><a class="tocxref" href="#proof-verification-ecdsa-rdfc-2019"><bdi class="secno">3.1.7 </bdi>Proof Verification (ecdsa-rdfc-2019)</a></li></ol></li><li class="tocline"><a class="tocxref" href="#ecdsa-jcs-2019"><bdi class="secno">3.2 </bdi>ecdsa-jcs-2019</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#add-proof-ecdsa-jcs-2019"><bdi class="secno">3.2.1 </bdi>Add Proof (ecdsa-jcs-2019)</a></li><li class="tocline"><a class="tocxref" href="#verify-proof-ecdsa-jcs-2019"><bdi class="secno">3.2.2 </bdi>Verify Proof (ecdsa-jcs-2019)</a></li><li class="tocline"><a class="tocxref" href="#transformation-ecdsa-jcs-2019"><bdi class="secno">3.2.3 </bdi>Transformation (ecdsa-jcs-2019)</a></li><li class="tocline"><a class="tocxref" href="#hashing-ecdsa-jcs-2019"><bdi class="secno">3.2.4 </bdi>Hashing (ecdsa-jcs-2019)</a></li><li class="tocline"><a class="tocxref" href="#proof-configuration-ecdsa-jcs-2019"><bdi class="secno">3.2.5 </bdi>Proof Configuration (ecdsa-jcs-2019)</a></li><li class="tocline"><a class="tocxref" href="#proof-serialization-ecdsa-jcs-2019"><bdi class="secno">3.2.6 </bdi>Proof Serialization (ecdsa-jcs-2019)</a></li><li class="tocline"><a class="tocxref" href="#proof-verification-ecdsa-jcs-2019"><bdi class="secno">3.2.7 </bdi>Proof Verification (ecdsa-jcs-2019)</a></li></ol></li><li class="tocline"><a class="tocxref" href="#selective-disclosure-functions"><bdi class="secno">3.3 </bdi>Selective Disclosure Functions</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#labelreplacementcanonicalizenquads"><bdi class="secno">3.3.1 </bdi>labelReplacementCanonicalizeNQuads</a></li><li class="tocline"><a class="tocxref" href="#labelreplacementcanonicalizejsonld"><bdi class="secno">3.3.2 </bdi>labelReplacementCanonicalizeJsonLd</a></li><li class="tocline"><a class="tocxref" href="#createlabelmapfunction"><bdi class="secno">3.3.3 </bdi>createLabelMapFunction</a></li><li class="tocline"><a class="tocxref" href="#createhmacidlabelmapfunction"><bdi class="secno">3.3.4 </bdi>createHmacIdLabelMapFunction</a></li><li class="tocline"><a class="tocxref" href="#skolemizenquads"><bdi class="secno">3.3.5 </bdi>skolemizeNQuads</a></li><li class="tocline"><a class="tocxref" href="#deskolemizenquads"><bdi class="secno">3.3.6 </bdi>deskolemizeNQuads</a></li><li class="tocline"><a class="tocxref" href="#skolemizeexpandedjsonld"><bdi class="secno">3.3.7 </bdi>skolemizeExpandedJsonLd</a></li><li class="tocline"><a class="tocxref" href="#skolemizecompactjsonld"><bdi class="secno">3.3.8 </bdi>skolemizeCompactJsonLd</a></li><li class="tocline"><a class="tocxref" href="#todeskolemizednquads"><bdi class="secno">3.3.9 </bdi>toDeskolemizedNQuads</a></li><li class="tocline"><a class="tocxref" href="#jsonpointertopaths"><bdi class="secno">3.3.10 </bdi>jsonPointerToPaths</a></li><li class="tocline"><a class="tocxref" href="#createinitialselection"><bdi class="secno">3.3.11 </bdi>createInitialSelection</a></li><li class="tocline"><a class="tocxref" href="#selectpaths"><bdi class="secno">3.3.12 </bdi>selectPaths</a></li><li class="tocline"><a class="tocxref" href="#selectjsonld"><bdi class="secno">3.3.13 </bdi>selectJsonLd</a></li><li class="tocline"><a class="tocxref" href="#relabelblanknodes"><bdi class="secno">3.3.14 </bdi>relabelBlankNodes</a></li><li class="tocline"><a class="tocxref" href="#selectcanonicalnquads"><bdi class="secno">3.3.15 </bdi>selectCanonicalNQuads</a></li><li class="tocline"><a class="tocxref" href="#canonicalizeandgroup"><bdi class="secno">3.3.16 </bdi>canonicalizeAndGroup</a></li><li class="tocline"><a class="tocxref" href="#hashmandatorynquads"><bdi class="secno">3.3.17 </bdi>hashMandatoryNQuads</a></li></ol></li><li class="tocline"><a class="tocxref" href="#ecdsa-sd-2023-functions"><bdi class="secno">3.4 </bdi>ecdsa-sd-2023 Functions</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#serializesigndata"><bdi class="secno">3.4.1 </bdi>serializeSignData</a></li><li class="tocline"><a class="tocxref" href="#serializebaseproofvalue"><bdi class="secno">3.4.2 </bdi>serializeBaseProofValue</a></li><li class="tocline"><a class="tocxref" href="#parsebaseproofvalue"><bdi class="secno">3.4.3 </bdi>parseBaseProofValue</a></li><li class="tocline"><a class="tocxref" href="#createdisclosuredata"><bdi class="secno">3.4.4 </bdi>createDisclosureData</a></li><li class="tocline"><a class="tocxref" href="#compresslabelmap"><bdi class="secno">3.4.5 </bdi>compressLabelMap</a></li><li class="tocline"><a class="tocxref" href="#decompresslabelmap"><bdi class="secno">3.4.6 </bdi>decompressLabelMap</a></li><li class="tocline"><a class="tocxref" href="#serializederivedproofvalue"><bdi class="secno">3.4.7 </bdi>serializeDerivedProofValue</a></li><li class="tocline"><a class="tocxref" href="#parsederivedproofvalue"><bdi class="secno">3.4.8 </bdi>parseDerivedProofValue</a></li><li class="tocline"><a class="tocxref" href="#createverifydata"><bdi class="secno">3.4.9 </bdi>createVerifyData</a></li></ol></li><li class="tocline"><a class="tocxref" href="#ecdsa-sd-2023"><bdi class="secno">3.5 </bdi>ecdsa-sd-2023</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#add-base-proof-ecdsa-sd-2023"><bdi class="secno">3.5.1 </bdi>Add Base Proof (ecdsa-sd-2023)</a></li><li class="tocline"><a class="tocxref" href="#base-proof-transformation-ecdsa-sd-2023"><bdi class="secno">3.5.2 </bdi>Base Proof Transformation (ecdsa-sd-2023)</a></li><li class="tocline"><a class="tocxref" href="#base-proof-hashing-ecdsa-sd-2023"><bdi class="secno">3.5.3 </bdi>Base Proof Hashing (ecdsa-sd-2023)</a></li><li class="tocline"><a class="tocxref" href="#base-proof-configuration-ecdsa-sd-2023"><bdi class="secno">3.5.4 </bdi>Base Proof Configuration (ecdsa-sd-2023)</a></li><li class="tocline"><a class="tocxref" href="#base-proof-serialization-ecdsa-sd-2023"><bdi class="secno">3.5.5 </bdi>Base Proof Serialization (ecdsa-sd-2023)</a></li><li class="tocline"><a class="tocxref" href="#add-derived-proof-ecdsa-sd-2023"><bdi class="secno">3.5.6 </bdi>Add Derived Proof (ecdsa-sd-2023)</a></li><li class="tocline"><a class="tocxref" href="#verify-derived-proof-ecdsa-sd-2023"><bdi class="secno">3.5.7 </bdi>Verify Derived Proof (ecdsa-sd-2023)</a></li></ol></li></ol></li><li class="tocline"><a class="tocxref" href="#security-considerations"><bdi class="secno">4. </bdi>Security Considerations</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#choice-of-ecdsa-and-parameters"><bdi class="secno">4.1 </bdi>Choice of ECDSA and Parameters</a></li><li class="tocline"><a class="tocxref" href="#implementation-considerations-for-ecdsa-algorithms"><bdi class="secno">4.2 </bdi>Implementation Considerations for ECDSA Algorithms</a></li><li class="tocline"><a class="tocxref" href="#key-management"><bdi class="secno">4.3 </bdi>Key Management</a></li><li class="tocline"><a class="tocxref" href="#split-key-formats-from-cryptosuites"><bdi class="secno">4.4 </bdi>Split Key Formats From Cryptosuites</a></li></ol></li><li class="tocline"><a class="tocxref" href="#privacy-considerations"><bdi class="secno">5. </bdi>Privacy Considerations</a></li><li class="tocline"><a class="tocxref" href="#test-vectors"><bdi class="secno">A. </bdi>Test Vectors</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#representation-ecdsa-rdfc-2019-with-curve-p-256"><bdi class="secno">A.1 </bdi>Representation: ecdsa-rdfc-2019, with curve P-256</a></li><li class="tocline"><a class="tocxref" href="#representation-ecdsa-rdfc-2019-with-curve-p-384"><bdi class="secno">A.2 </bdi>Representation: ecdsa-rdfc-2019, with curve P-384</a></li><li class="tocline"><a class="tocxref" href="#representation-ecdsa-jcs-2019-with-curve-p-256"><bdi class="secno">A.3 </bdi>Representation: ecdsa-jcs-2019 with curve P-256</a></li><li class="tocline"><a class="tocxref" href="#representation-ecdsa-jcs-2019-with-curve-p-384"><bdi class="secno">A.4 </bdi>Representation: ecdsa-jcs-2019 with curve P-384</a></li></ol></li><li class="tocline"><a class="tocxref" href="#revision-history"><bdi class="secno">B. </bdi>Revision History</a></li><li class="tocline"><a class="tocxref" href="#references"><bdi class="secno">C. </bdi>References</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#normative-references"><bdi class="secno">C.1 </bdi>Normative references</a></li><li class="tocline"><a class="tocxref" href="#informative-references"><bdi class="secno">C.2 </bdi>Informative references</a></li></ol></li></ol></nav>
+                </p></section><nav id="toc"><h2 class="introductory" id="table-of-contents">Table of Contents</h2><ol class="toc"><li class="tocline"><a class="tocxref" href="#abstract">Abstract</a></li><li class="tocline"><a class="tocxref" href="#sotd">Status of This Document</a></li><li class="tocline"><a class="tocxref" href="#introduction"><bdi class="secno">1. </bdi>Introduction</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#terminology"><bdi class="secno">1.1 </bdi>Terminology</a></li><li class="tocline"><a class="tocxref" href="#conformance"><bdi class="secno">1.2 </bdi>Conformance</a></li></ol></li><li class="tocline"><a class="tocxref" href="#data-model"><bdi class="secno">2. </bdi>Data Model</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#verification-methods"><bdi class="secno">2.1 </bdi>Verification Methods</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#multikey"><bdi class="secno">2.1.1 </bdi>Multikey</a></li></ol></li><li class="tocline"><a class="tocxref" href="#proof-representations"><bdi class="secno">2.2 </bdi>Proof Representations</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#dataintegrityproof"><bdi class="secno">2.2.1 </bdi>DataIntegrityProof</a></li></ol></li></ol></li><li class="tocline"><a class="tocxref" href="#algorithms"><bdi class="secno">3. </bdi>Algorithms</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#ecdsa-rdfc-2019"><bdi class="secno">3.1 </bdi>ecdsa-rdfc-2019</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#add-proof-ecdsa-rdfc-2019"><bdi class="secno">3.1.1 </bdi>Add Proof (ecdsa-rdfc-2019)</a></li><li class="tocline"><a class="tocxref" href="#verify-proof-ecdsa-rdfc-2019"><bdi class="secno">3.1.2 </bdi>Verify Proof (ecdsa-rdfc-2019)</a></li><li class="tocline"><a class="tocxref" href="#transformation-ecdsa-rdfc-2019"><bdi class="secno">3.1.3 </bdi>Transformation (ecdsa-rdfc-2019)</a></li><li class="tocline"><a class="tocxref" href="#hashing-ecdsa-rdfc-2019"><bdi class="secno">3.1.4 </bdi>Hashing (ecdsa-rdfc-2019)</a></li><li class="tocline"><a class="tocxref" href="#proof-configuration-ecdsa-rdfc-2019"><bdi class="secno">3.1.5 </bdi>Proof Configuration (ecdsa-rdfc-2019)</a></li><li class="tocline"><a class="tocxref" href="#proof-serialization-ecdsa-rdfc-2019"><bdi class="secno">3.1.6 </bdi>Proof Serialization (ecdsa-rdfc-2019)</a></li><li class="tocline"><a class="tocxref" href="#proof-verification-ecdsa-rdfc-2019"><bdi class="secno">3.1.7 </bdi>Proof Verification (ecdsa-rdfc-2019)</a></li></ol></li><li class="tocline"><a class="tocxref" href="#ecdsa-jcs-2019"><bdi class="secno">3.2 </bdi>ecdsa-jcs-2019</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#add-proof-ecdsa-jcs-2019"><bdi class="secno">3.2.1 </bdi>Add Proof (ecdsa-jcs-2019)</a></li><li class="tocline"><a class="tocxref" href="#verify-proof-ecdsa-jcs-2019"><bdi class="secno">3.2.2 </bdi>Verify Proof (ecdsa-jcs-2019)</a></li><li class="tocline"><a class="tocxref" href="#transformation-ecdsa-jcs-2019"><bdi class="secno">3.2.3 </bdi>Transformation (ecdsa-jcs-2019)</a></li><li class="tocline"><a class="tocxref" href="#hashing-ecdsa-jcs-2019"><bdi class="secno">3.2.4 </bdi>Hashing (ecdsa-jcs-2019)</a></li><li class="tocline"><a class="tocxref" href="#proof-configuration-ecdsa-jcs-2019"><bdi class="secno">3.2.5 </bdi>Proof Configuration (ecdsa-jcs-2019)</a></li><li class="tocline"><a class="tocxref" href="#proof-serialization-ecdsa-jcs-2019"><bdi class="secno">3.2.6 </bdi>Proof Serialization (ecdsa-jcs-2019)</a></li><li class="tocline"><a class="tocxref" href="#proof-verification-ecdsa-jcs-2019"><bdi class="secno">3.2.7 </bdi>Proof Verification (ecdsa-jcs-2019)</a></li></ol></li><li class="tocline"><a class="tocxref" href="#selective-disclosure-functions"><bdi class="secno">3.3 </bdi>Selective Disclosure Functions</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#labelreplacementcanonicalizenquads"><bdi class="secno">3.3.1 </bdi>labelReplacementCanonicalizeNQuads</a></li><li class="tocline"><a class="tocxref" href="#labelreplacementcanonicalizejsonld"><bdi class="secno">3.3.2 </bdi>labelReplacementCanonicalizeJsonLd</a></li><li class="tocline"><a class="tocxref" href="#createlabelmapfunction"><bdi class="secno">3.3.3 </bdi>createLabelMapFunction</a></li><li class="tocline"><a class="tocxref" href="#createhmacidlabelmapfunction"><bdi class="secno">3.3.4 </bdi>createHmacIdLabelMapFunction</a></li><li class="tocline"><a class="tocxref" href="#skolemizenquads"><bdi class="secno">3.3.5 </bdi>skolemizeNQuads</a></li><li class="tocline"><a class="tocxref" href="#deskolemizenquads"><bdi class="secno">3.3.6 </bdi>deskolemizeNQuads</a></li><li class="tocline"><a class="tocxref" href="#skolemizeexpandedjsonld"><bdi class="secno">3.3.7 </bdi>skolemizeExpandedJsonLd</a></li><li class="tocline"><a class="tocxref" href="#skolemizecompactjsonld"><bdi class="secno">3.3.8 </bdi>skolemizeCompactJsonLd</a></li><li class="tocline"><a class="tocxref" href="#todeskolemizednquads"><bdi class="secno">3.3.9 </bdi>toDeskolemizedNQuads</a></li><li class="tocline"><a class="tocxref" href="#jsonpointertopaths"><bdi class="secno">3.3.10 </bdi>jsonPointerToPaths</a></li><li class="tocline"><a class="tocxref" href="#createinitialselection"><bdi class="secno">3.3.11 </bdi>createInitialSelection</a></li><li class="tocline"><a class="tocxref" href="#selectpaths"><bdi class="secno">3.3.12 </bdi>selectPaths</a></li><li class="tocline"><a class="tocxref" href="#selectjsonld"><bdi class="secno">3.3.13 </bdi>selectJsonLd</a></li><li class="tocline"><a class="tocxref" href="#relabelblanknodes"><bdi class="secno">3.3.14 </bdi>relabelBlankNodes</a></li><li class="tocline"><a class="tocxref" href="#selectcanonicalnquads"><bdi class="secno">3.3.15 </bdi>selectCanonicalNQuads</a></li><li class="tocline"><a class="tocxref" href="#canonicalizeandgroup"><bdi class="secno">3.3.16 </bdi>canonicalizeAndGroup</a></li><li class="tocline"><a class="tocxref" href="#hashmandatorynquads"><bdi class="secno">3.3.17 </bdi>hashMandatoryNQuads</a></li></ol></li><li class="tocline"><a class="tocxref" href="#ecdsa-sd-2023-functions"><bdi class="secno">3.4 </bdi>ecdsa-sd-2023 Functions</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#serializesigndata"><bdi class="secno">3.4.1 </bdi>serializeSignData</a></li><li class="tocline"><a class="tocxref" href="#serializebaseproofvalue"><bdi class="secno">3.4.2 </bdi>serializeBaseProofValue</a></li><li class="tocline"><a class="tocxref" href="#parsebaseproofvalue"><bdi class="secno">3.4.3 </bdi>parseBaseProofValue</a></li><li class="tocline"><a class="tocxref" href="#createdisclosuredata"><bdi class="secno">3.4.4 </bdi>createDisclosureData</a></li><li class="tocline"><a class="tocxref" href="#compresslabelmap"><bdi class="secno">3.4.5 </bdi>compressLabelMap</a></li><li class="tocline"><a class="tocxref" href="#decompresslabelmap"><bdi class="secno">3.4.6 </bdi>decompressLabelMap</a></li><li class="tocline"><a class="tocxref" href="#serializederivedproofvalue"><bdi class="secno">3.4.7 </bdi>serializeDerivedProofValue</a></li><li class="tocline"><a class="tocxref" href="#parsederivedproofvalue"><bdi class="secno">3.4.8 </bdi>parseDerivedProofValue</a></li><li class="tocline"><a class="tocxref" href="#createverifydata"><bdi class="secno">3.4.9 </bdi>createVerifyData</a></li></ol></li><li class="tocline"><a class="tocxref" href="#ecdsa-sd-2023"><bdi class="secno">3.5 </bdi>ecdsa-sd-2023</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#add-base-proof-ecdsa-sd-2023"><bdi class="secno">3.5.1 </bdi>Add Base Proof (ecdsa-sd-2023)</a></li><li class="tocline"><a class="tocxref" href="#base-proof-transformation-ecdsa-sd-2023"><bdi class="secno">3.5.2 </bdi>Base Proof Transformation (ecdsa-sd-2023)</a></li><li class="tocline"><a class="tocxref" href="#base-proof-hashing-ecdsa-sd-2023"><bdi class="secno">3.5.3 </bdi>Base Proof Hashing (ecdsa-sd-2023)</a></li><li class="tocline"><a class="tocxref" href="#base-proof-configuration-ecdsa-sd-2023"><bdi class="secno">3.5.4 </bdi>Base Proof Configuration (ecdsa-sd-2023)</a></li><li class="tocline"><a class="tocxref" href="#base-proof-serialization-ecdsa-sd-2023"><bdi class="secno">3.5.5 </bdi>Base Proof Serialization (ecdsa-sd-2023)</a></li><li class="tocline"><a class="tocxref" href="#add-derived-proof-ecdsa-sd-2023"><bdi class="secno">3.5.6 </bdi>Add Derived Proof (ecdsa-sd-2023)</a></li><li class="tocline"><a class="tocxref" href="#verify-derived-proof-ecdsa-sd-2023"><bdi class="secno">3.5.7 </bdi>Verify Derived Proof (ecdsa-sd-2023)</a></li></ol></li></ol></li><li class="tocline"><a class="tocxref" href="#security-considerations"><bdi class="secno">4. </bdi>Security Considerations</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#choice-of-ecdsa-and-parameters"><bdi class="secno">4.1 </bdi>Choice of ECDSA and Parameters</a></li><li class="tocline"><a class="tocxref" href="#implementation-considerations-for-ecdsa-algorithms"><bdi class="secno">4.2 </bdi>Implementation Considerations for ECDSA Algorithms</a></li><li class="tocline"><a class="tocxref" href="#key-management"><bdi class="secno">4.3 </bdi>Key Management</a></li><li class="tocline"><a class="tocxref" href="#split-key-formats-from-cryptosuites"><bdi class="secno">4.4 </bdi>Split Key Formats From Cryptosuites</a></li></ol></li><li class="tocline"><a class="tocxref" href="#privacy-considerations"><bdi class="secno">5. </bdi>Privacy Considerations</a></li><li class="tocline"><a class="tocxref" href="#test-vectors"><bdi class="secno">A. </bdi>Test Vectors</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#representation-ecdsa-rdfc-2019-with-curve-p-256"><bdi class="secno">A.1 </bdi>Representation: ecdsa-rdfc-2019, with curve P-256</a></li><li class="tocline"><a class="tocxref" href="#representation-ecdsa-rdfc-2019-with-curve-p-384"><bdi class="secno">A.2 </bdi>Representation: ecdsa-rdfc-2019, with curve P-384</a></li><li class="tocline"><a class="tocxref" href="#representation-ecdsa-jcs-2019-with-curve-p-256"><bdi class="secno">A.3 </bdi>Representation: ecdsa-jcs-2019 with curve P-256</a></li><li class="tocline"><a class="tocxref" href="#representation-ecdsa-jcs-2019-with-curve-p-384"><bdi class="secno">A.4 </bdi>Representation: ecdsa-jcs-2019 with curve P-384</a></li><li class="tocline"><a class="tocxref" href="#representation-ecdsa-sd-2023"><bdi class="secno">A.5 </bdi>Representation: ecdsa-sd-2023</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#base-proof"><bdi class="secno">A.5.1 </bdi>Base Proof</a></li><li class="tocline"><a class="tocxref" href="#derived-proof"><bdi class="secno">A.5.2 </bdi>Derived Proof</a></li></ol></li></ol></li><li class="tocline"><a class="tocxref" href="#revision-history"><bdi class="secno">B. </bdi>Revision History</a></li><li class="tocline"><a class="tocxref" href="#references"><bdi class="secno">C. </bdi>References</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#normative-references"><bdi class="secno">C.1 </bdi>Normative references</a></li><li class="tocline"><a class="tocxref" href="#informative-references"><bdi class="secno">C.2 </bdi>Informative references</a></li></ol></li></ol></nav>
 
     <section id="introduction"><div class="header-wrapper"><h2 id="x1-introduction"><bdi class="secno">1. </bdi>Introduction</h2><a class="self-link" href="#introduction" aria-label="Permalink for Section 1."></a></div>
       
@@ -649,20 +647,33 @@ suites defined in this specification.
 
           <p>
 The <code>publicKeyMultibase</code> property represents a Multibase-encoded Multikey
-expression of a P-256 or P-384 public key. The encoding of a P-256 public key is
-the two-byte prefix <code>0x8024</code> (the varint expression of <code>0x1200</code>) followed
-by the 33-byte compressed public key data.
-The 35-byte value is then encoded using base58-btc (<code>z</code>) as the prefix. The
-encoding of a P-384 public key is the two-byte prefix <code>0x8124</code> (the varint
-expression of <code>0x1201</code>) followed by the 49-byte compressed public key data.
-The 51-byte value is then encoded using base58-btc (<code>z</code>) as the prefix. Any
-other encodings <em class="rfc2119">MUST NOT</em> be allowed.
+expression of a P-256 or P-384 public key.
+          </p>
+
+          <p>
+The Multikey encoding of a P-256
+public key <em class="rfc2119">MUST</em> start with the two-byte prefix <code>0x8024</code> (the varint expression
+of <code>0x1200</code>) followed by the 33-byte compressed public key data. The resulting
+35-byte value <em class="rfc2119">MUST</em> then be encoded using the base-58-btc alphabet, according to
+the <a href="https://www.w3.org/TR/vc-data-integrity/#multibase-0">Multibase</a> section in the
+[<cite><a class="bibref" data-link-type="biblio" href="#bib-vc-data-integrity" title="Verifiable Credential Data Integrity 1.0">VC-DATA-INTEGRITY</a></cite>] specification, and then prepended with the base-58-btc
+Multibase header (<code>z</code>).
+          </p>
+
+          <p>
+The encoding of a P-384 public key <em class="rfc2119">MUST</em> start with the
+two-byte prefix <code>0x8124</code> (the varint expression of <code>0x1201</code>) followed by the
+49-byte compressed public key data. The resulting 51-byte value is then encoded
+using the base-58-btc alphabet, according to the
+<a href="https://www.w3.org/TR/vc-data-integrity/#multibase-0">Multibase</a> section in the
+[<cite><a class="bibref" data-link-type="biblio" href="#bib-vc-data-integrity" title="Verifiable Credential Data Integrity 1.0">VC-DATA-INTEGRITY</a></cite>] specification, and then prepended with the base-58-btc
+Multibase header (<code>z</code>). Any other encodings <em class="rfc2119">MUST NOT</em> be allowed.
           </p>
 
           <p class="advisement">
 Developers are advised to not accidentally publish a representation of a private
 key. Implementations of this specification will raise errors in the event of a
-[<cite><a class="bibref" data-link-type="biblio" href="#bib-multicodec" title="Multicodec">MULTICODEC</a></cite>] value other than <code>0x1200</code> or <code>0x1201</code> being used in a
+Multicodec value other than <code>0x1200</code> or <code>0x1201</code> being used in a
 <code>publicKeyMultibase</code> value.
           </p>
 
@@ -727,17 +738,25 @@ key. Implementations of this specification will raise errors in the event of a
       </div>
 
           <p>
-            The <code>secretKeyMultibase</code> property represents a Multibase-encoded Multikey
-            expression of a P-256 or P-384 secret key (also sometimes referred to
-            as a private key). The encoding of a P-256 secret key is
-            the two-byte prefix <code>0x8626</code> (the varint expression of <code>0x1306</code>) followed
-            by the 32-byte secret key data.
-            The 34-byte value is then base58-btc encoded and <code>z</code> is added as the prefix.
-
-            The encoding of a P-384 secret key is the two-byte prefix <code>0x8726</code> (the varint
-            expression of <code>0x1307</code>) followed by the 48-byte secret key data.
-            The 50-byte value is then base58-btc encoded and <code>z</code> is added as the prefix. Any
-            other encodings <em class="rfc2119">MUST NOT</em> be allowed.
+The <code>secretKeyMultibase</code> property represents a Multibase-encoded Multikey
+expression of a P-256 or P-384 secret key (also sometimes referred to as a
+private key).
+          </p>
+          <p>
+The encoding of a P-256 secret key <em class="rfc2119">MUST</em> start with the two-byte prefix <code>0x8626</code>
+(the varint expression of <code>0x1306</code>) followed by the 32-byte secret key data. The
+34-byte value <em class="rfc2119">MUST</em> then be encoded using the base-58-btc alphabet, according to
+the <a href="https://www.w3.org/TR/vc-data-integrity/#multibase-0">Multibase</a> section in the
+[<cite><a class="bibref" data-link-type="biblio" href="#bib-vc-data-integrity" title="Verifiable Credential Data Integrity 1.0">VC-DATA-INTEGRITY</a></cite>] specification, and then prepended with the base-58-btc
+Multibase header (<code>z</code>). Any other encodings <em class="rfc2119">MUST NOT</em> be allowed.
+          </p>
+          <p>
+The encoding of a P-384 secret key is the two-byte prefix <code>0x8726</code> (the varint
+expression of <code>0x1307</code>) followed by the 48-byte secret key data. The 50-byte
+value <em class="rfc2119">MUST</em> then be encoded using the base-58-btc alphabet, according to the
+<a href="https://www.w3.org/TR/vc-data-integrity/#multibase-0">Multibase</a> section in the
+[<cite><a class="bibref" data-link-type="biblio" href="#bib-vc-data-integrity" title="Verifiable Credential Data Integrity 1.0">VC-DATA-INTEGRITY</a></cite>] specification, and then prepended with the base-58-btc
+Multibase header (<code>z</code>). Any other encodings <em class="rfc2119">MUST NOT</em> be allowed.
           </p>
 
           <p class="advisement">
@@ -754,8 +773,8 @@ key. Implementations of this specification will raise errors in the event of a
         
 
         <p>
-This suite relies on detached digital signatures represented using [<cite><a class="bibref" data-link-type="biblio" href="#bib-multibase" title="Multibase">MULTIBASE</a></cite>]
-and [<cite><a class="bibref" data-link-type="biblio" href="#bib-multicodec" title="Multicodec">MULTICODEC</a></cite>].
+This section details the proof representation formats that are defined by
+this specification.
         </p>
 
         <section id="dataintegrityproof"><div class="header-wrapper"><h4 id="x2-2-1-dataintegrityproof"><bdi class="secno">2.2.1 </bdi>DataIntegrityProof</h4><a class="self-link" href="#dataintegrityproof" aria-label="Permalink for Section 2.2.1"></a></div>
@@ -784,12 +803,15 @@ match the verification relationship expressed by the verification method
 <code>controller</code>.
           </p>
           <p>
-The value of the <code>proofValue</code> property of the proof <em class="rfc2119">MUST</em> be an ECDSA signature produced
-according to [<cite><a class="bibref" data-link-type="biblio" href="#bib-fips-186-5" title="FIPS PUB 186-5: Digital Signature Standard (DSS)">FIPS-186-5</a></cite>] and <em class="rfc2119">SHOULD</em> use the <em>deterministic</em> ECDSA
-signature variant, produced according to [<cite><a class="bibref" data-link-type="biblio" href="#bib-fips-186-5" title="FIPS PUB 186-5: Digital Signature Standard (DSS)">FIPS-186-5</a></cite>] using the curves and
-hashes as specified in section <a href="#algorithms" class="sec-ref"><bdi class="secno">3. </bdi>Algorithms</a>, encoded according to
-section 7 of [<cite><a class="bibref" data-link-type="biblio" href="#bib-rfc4754" title="IKE and IKEv2 Authentication Using the Elliptic Curve Digital Signature Algorithm (ECDSA)">RFC4754</a></cite>] (sometimes referred to as the IEEE P1363 format), and
-serialized according to [<cite><a class="bibref" data-link-type="biblio" href="#bib-multibase" title="Multibase">MULTIBASE</a></cite>] using the base58-btc base encoding.
+The value of the <code>proofValue</code> property of the proof <em class="rfc2119">MUST</em> be an ECDSA signature
+produced according to [<cite><a class="bibref" data-link-type="biblio" href="#bib-fips-186-5" title="FIPS PUB 186-5: Digital Signature Standard (DSS)">FIPS-186-5</a></cite>] and <em class="rfc2119">SHOULD</em> use the <em>deterministic</em>
+ECDSA signature variant, produced according to [<cite><a class="bibref" data-link-type="biblio" href="#bib-fips-186-5" title="FIPS PUB 186-5: Digital Signature Standard (DSS)">FIPS-186-5</a></cite>] using the curves
+and hashes as specified in section <a href="#algorithms" class="sec-ref"><bdi class="secno">3. </bdi>Algorithms</a>, encoded according
+to section 7 of [<cite><a class="bibref" data-link-type="biblio" href="#bib-rfc4754" title="IKE and IKEv2 Authentication Using the Elliptic Curve Digital Signature Algorithm (ECDSA)">RFC4754</a></cite>] (sometimes referred to as the IEEE P1363 format),
+and encoded using the base-58-btc header and
+alphabet as described in the
+<a href="https://www.w3.org/TR/vc-data-integrity/#multibase-0">
+Multibase section</a> of [<cite><a class="bibref" data-link-type="biblio" href="#bib-vc-data-integrity" title="Verifiable Credential Data Integrity 1.0">VC-DATA-INTEGRITY</a></cite>].
           </p>
 
           <div class="example" id="example-an-ecdsa-p-256-digital-signature-expressed-as-a-dataintegrityproof">
@@ -1697,10 +1719,11 @@ Return <em>deskolemizedNQuads</em>.
 
           <p>
 The following algorithm replaces all blank node identifiers in an expanded
-JSON-LD document with custom-scheme URNs. The required inputs are an expanded
-JSON-LD document (<var>expanded</var>), a custom URN scheme
+JSON-LD document with custom-scheme URNs, including assigning such URNs to
+blank nodes that are unlabeled. The required inputs are an expanded JSON-LD document
+(<var>expanded</var>), a custom URN scheme
 (<var>urnScheme</var>), a UUID string or other comparably random string
-(<var>random</var>), and reference to a shared integer (<var>count</var>).
+(<var>randomString</var>), and reference to a shared integer (<var>count</var>).
 Any additional custom options (such as a document loader) can also be passed.
 It produces the expanded form of the skolemized JSON-LD document
 (<var>skolemizedExpandedDocument</var> as output. The skolemization used in this
@@ -1710,7 +1733,7 @@ Section <a href="#todeskolemizednquads" class="sec-ref"><bdi class="secno">3.3.9
 
           <ol class="algorithm">
             <li>
-Initialize <var>skomelizedExpanded</var> to an empty array.
+Initialize <var>skolemizedExpandedDocument</var> to an empty array.
             </li>
             <li>
 For each <var>element</var> in <var>expanded</var>:
@@ -1742,7 +1765,7 @@ and keeping the other parameters the same.
                 <li>
 If <var>skolemizedNode</var> has no <em>@id</em> property, set the value of
 the <em>@id</em> property in <var>skolemizedNode</var> to the concatenation
-of "urn:", <var>urnScheme</var>, <var>random</var>, "_" and the value of
+of "urn:", <var>urnScheme</var>, "_",  <var>randomString</var>, "_" and the value of
 <var>count</var>, incrementing the value of <var>count</var> afterwards.
                 </li>
                 <li>
@@ -1895,13 +1918,13 @@ JSON-LD object (<var>source</var>). A JSON-LD document fragment object
 Initialize <var>selection</var> to an empty object.
             </li>
             <li>
-If <var>value</var> has an <code>id</code> that is not a blank node identifier, set
+If <var>source</var> has an <code>id</code> that is not a blank node identifier, set
 <code>selection.id</code> to its value. Note: All non-blank node identifiers in the path of
 any JSON Pointer <em class="rfc2119">MUST</em> be included in the selection, this includes any root
 document identifier.
             </li>
             <li>
-If <var>value</var>.<code>type</code> is set, set <var>selection</var>.<code>type</code> to its value.
+If <var>source</var>.<code>type</code> is set, set <var>selection</var>.<code>type</code> to its value.
 Note: The selection <em class="rfc2119">MUST</em> include all <code>type</code>s in the path of any JSON Pointer,
 including any root document <code>type</code>.
             </li>
@@ -2340,9 +2363,12 @@ Initialize <code>components</code> to an array with five elements containing the
 CBOR-encode <code>components</code> and append it to <code>proofValue</code>.
             </li>
             <li>
-Initialize <code>baseProof</code> to a string with the multibase-base64url-no-pad-encoding
-of <code>proofValue</code>. That is, return a string starting with "u" and ending with the
-base64url-no-pad-encoded value of <code>proofValue</code>.
+Initialize <code>baseProof</code> to a string with the Multibase
+base64url-no-pad-encoding of <code>proofValue</code> as described in the
+<a href="https://www.w3.org/TR/vc-data-integrity/#multibase-0">
+Multibase section</a> of [<cite><a class="bibref" data-link-type="biblio" href="#bib-vc-data-integrity" title="Verifiable Credential Data Integrity 1.0">VC-DATA-INTEGRITY</a></cite>]. That is, return a string
+starting with "<code>u</code>" and ending with the base64url-no-pad-encoded value of
+<code>proofValue</code>.
             </li>
             <li>
 Return <code>baseProof</code> as <em>base proof</em>.
@@ -2611,8 +2637,10 @@ CBOR-encode <code>components</code> and append it to <code>proofValue</code>.
             </li>
             <li>
 Return the <em>derived proof</em> as a string with the
-multibase-base64url-no-pad-encoding of <code>proofValue</code>. That is, return a string
-starting with "u" and ending with the base64url-no-pad-encoded value of
+base64url-no-pad-encoding of <code>proofValue</code> as described in the
+<a href="https://www.w3.org/TR/vc-data-integrity/#multibase-0">
+Multibase section</a> of [<cite><a class="bibref" data-link-type="biblio" href="#bib-vc-data-integrity" title="Verifiable Credential Data Integrity 1.0">VC-DATA-INTEGRITY</a></cite>]. That is, return a string
+starting with "<code>u</code>" and ending with the base64url-no-pad-encoded value of
 <code>proofValue</code>.
             </li>
           </ol>
@@ -3300,8 +3328,8 @@ implementation was validated against the test vectors in [<cite><a class="bibref
         <p>
 The signer needs to generate a private/public key pair with the private key used
 for signing and the public key made available for verification. The
-[<cite><a class="bibref" data-link-type="biblio" href="#bib-multibase" title="Multibase">MULTIBASE</a></cite>]/[<cite><a class="bibref" data-link-type="biblio" href="#bib-multicodec" title="Multicodec">MULTICODEC</a></cite>] representation for the public key, <code>p256-pub</code>,
-and the representation for the private key, <code>p256-priv</code>, are shown below.
+representation of the public key,
+and the representation of the private key, are shown below.
         </p>
         <div class="example" id="example-private-and-public-keys-for-signature">
         <div class="marker">
@@ -3397,7 +3425,7 @@ _:c14n0 &lt;https://w3id.org/security#verificationMethod&gt; &lt;https://vc.exam
 
         <p>
 Finally, we concatenate the hash of the proof options followed by the hash of the credential without proof, use the private key with the combined hash to
-compute the ECDSA signature, and then base58-btc encode the signature.
+compute the ECDSA signature, and then base-58-btc encode the signature.
         </p>
 
         <div class="example" id="example-combine-hashes-of-proof-options-and-credential-hex">
@@ -3412,16 +3440,16 @@ compute the ECDSA signature, and then base58-btc encode the signature.
   </div> <pre class="nohighlight">5167a7a92a1b99393d81d2fe170fc24c2d15abd1c96309489c8544fad0db33e4e3b887fbda754998e94bc8c403f93af2a383c0238ef91d30d9df33732156c2ab</pre>
       </div>
 
-        <div class="example" id="example-signature-of-combined-hashes-base58-btc">
+        <div class="example" id="example-signature-of-combined-hashes-base-58-btc">
         <div class="marker">
-    <a class="self-link" href="#example-signature-of-combined-hashes-base58-btc">Example<bdi> 14</bdi></a><span class="example-title">: Signature of Combined Hashes base58-btc</span>
+    <a class="self-link" href="#example-signature-of-combined-hashes-base-58-btc">Example<bdi> 14</bdi></a><span class="example-title">: Signature of Combined Hashes base-58-btc</span>
   </div> <pre class="nohighlight">z2dQ4WQiprJY22UexKSS9JBAwerKBrdmP2ZbBGAbFDa4GMuXLqEDcBYWhgt281y7vb2KdHD9mV6CPTggUQsJoFB7x</pre>
       </div>
 
         <p>Assemble the signed credential with the following two steps:</p>
         <ol>
           <li>
-Add the <code>proofValue</code> field with the previously computed base58-btc
+Add the <code>proofValue</code> field with the previously computed base-58-btc
 value to the proof options document.
           </li>
           <li>
@@ -3467,8 +3495,8 @@ option document.
         <p>
 The signer needs to generate a private/public key pair with the private key used
 for signing and the public key made available for verification. The
-[<cite><a class="bibref" data-link-type="biblio" href="#bib-multibase" title="Multibase">MULTIBASE</a></cite>]/[<cite><a class="bibref" data-link-type="biblio" href="#bib-multicodec" title="Multicodec">MULTICODEC</a></cite>] representation for the public key, <code>p384-pub</code>,
-and the representation for the private key, <code>p384-priv</code>, are shown below.
+representation of the public key,
+and the representation of the private key, are shown below.
         </p>
         <div class="example" id="example-private-and-public-keys-for-signature-0">
         <div class="marker">
@@ -3564,7 +3592,7 @@ _:c14n0 &lt;https://w3id.org/security#verificationMethod&gt; &lt;https://vc.exam
 
         <p>
 Finally, we concatenate the hash of the proof options followed by the hash of the credential without proof, use the private key with the combined hash to
-compute the ECDSA signature, and then base58-btc encode the signature.
+compute the ECDSA signature, and then base-58-btc encode the signature.
         </p>
 
         <div class="example" id="example-combine-hashes-of-proof-options-and-credential-hex-0">
@@ -3579,16 +3607,16 @@ compute the ECDSA signature, and then base58-btc encode the signature.
   </div> <pre class="nohighlight">f58f2083b62989d6d23a0861e14101d5f8ae6423e56dec5bf07ed0c10c85ef6355cc19cf849a7e17a98ba1b138f1a9998f303cd18decb375b62d4107363b9a310fe39be9879d122eda73bf97a786ec49e0761b35405939dcd00b4e1a28aef7ce</pre>
       </div>
 
-        <div class="example" id="example-signature-of-combined-hashes-base58-btc-0">
+        <div class="example" id="example-signature-of-combined-hashes-base-58-btc-0">
         <div class="marker">
-    <a class="self-link" href="#example-signature-of-combined-hashes-base58-btc-0">Example<bdi> 25</bdi></a><span class="example-title">: Signature of Combined Hashes base58-btc</span>
+    <a class="self-link" href="#example-signature-of-combined-hashes-base-58-btc-0">Example<bdi> 25</bdi></a><span class="example-title">: Signature of Combined Hashes base-58-btc</span>
   </div> <pre class="nohighlight">z2TbABGK6hv4svEB3z97iSHb53AAgkpdF29ufhjftTdcAHsbif9E98qZwu3qePHBnBwE283o5ph6EgBHJYSmvtfweL7xyCaoJ6NDWWCyqxz6M2MumKaMXUuaoHihsRpuKaTtH</pre>
       </div>
 
         <p>Assemble the signed credential with the following two steps:</p>
         <ol>
           <li>
-Add the <code>proofValue</code> field with the previously computed base58-btc
+Add the <code>proofValue</code> field with the previously computed base-58-btc
 value to the proof options document.
           </li>
           <li>
@@ -3634,8 +3662,8 @@ option document.
         <p>
 The signer needs to generate a private/public key pair with the private key used
 for signing and the public key made available for verification. The
-[<cite><a class="bibref" data-link-type="biblio" href="#bib-multibase" title="Multibase">MULTIBASE</a></cite>]/[<cite><a class="bibref" data-link-type="biblio" href="#bib-multicodec" title="Multicodec">MULTICODEC</a></cite>] representation for the public key, <code>p256-pub</code>,
-and the representation for the private key, <code>p256-priv</code>, are shown below.
+representation of the public key,
+and the representation of the private key, are shown below.
         </p>
         <div class="example" id="example-private-and-public-keys-for-signature-1">
         <div class="marker">
@@ -3716,7 +3744,7 @@ and obtain its hash, as shown in the next three examples.
 
         <p>
 Finally, we concatenate the hash of the proof options followed by the hash of the credential without proof, use the private key with the combined hash to
-compute the ECDSA signature, and then base58-btc encode the signature.
+compute the ECDSA signature, and then base-58-btc encode the signature.
         </p>
 
         <div class="example" id="example-combine-hashes-of-proof-options-and-credential-hex-1">
@@ -3731,16 +3759,16 @@ compute the ECDSA signature, and then base58-btc encode the signature.
   </div> <pre class="nohighlight">05e27fa5aa9cc1bb37c18794e35c35d588d30b839e4f7f59c81bfbd81047c9c66d1d31063135b38860e66265586582f6521550aa4f22fa9558666532439a38cd</pre>
       </div>
 
-        <div class="example" id="example-signature-of-combined-hashes-base58-btc-1">
+        <div class="example" id="example-signature-of-combined-hashes-base-58-btc-1">
         <div class="marker">
-    <a class="self-link" href="#example-signature-of-combined-hashes-base58-btc-1">Example<bdi> 36</bdi></a><span class="example-title">: Signature of Combined Hashes base58-btc</span>
+    <a class="self-link" href="#example-signature-of-combined-hashes-base-58-btc-1">Example<bdi> 36</bdi></a><span class="example-title">: Signature of Combined Hashes base-58-btc</span>
   </div> <pre class="nohighlight">z7pnwfec5k9N26YDUjjDxjJEijAdEoAbJY2n3CTx3CYvzzRxcV5UkmECmLmQcA8eYTsDQ6GHCFDSk7Yb1hd4uN5a</pre>
       </div>
 
         <p>Assemble the signed credential with the following two steps:</p>
         <ol>
           <li>
-Add the <code>proofValue</code> field with the previously computed base58-btc
+Add the <code>proofValue</code> field with the previously computed base-58-btc
 value to the proof options document.
           </li>
           <li>
@@ -3786,8 +3814,8 @@ option document.
         <p>
 The signer needs to generate a private/public key pair with the private key used
 for signing and the public key made available for verification. The
-[<cite><a class="bibref" data-link-type="biblio" href="#bib-multibase" title="Multibase">MULTIBASE</a></cite>]/[<cite><a class="bibref" data-link-type="biblio" href="#bib-multicodec" title="Multicodec">MULTICODEC</a></cite>] representation for the public key, <code>p384-pub</code>,
-and the representation for the private key, <code>p384-priv</code>, are shown below.
+representation of the public key,
+and the representation of the private key, are shown below.
         </p>
         <div class="example" id="example-private-and-public-keys-for-signature-2">
         <div class="marker">
@@ -3868,7 +3896,7 @@ and obtain its hash, as shown in the next three examples.
 
         <p>
 Finally, we concatenate the hash of the proof options followed by the hash of the credential without proof, use the private key with the combined hash to
-compute the ECDSA signature, and then base58-btc encode the signature.
+compute the ECDSA signature, and then base-58-btc encode the signature.
         </p>
 
         <div class="example" id="example-combine-hashes-of-proof-options-and-credential-hex-2">
@@ -3883,16 +3911,16 @@ compute the ECDSA signature, and then base58-btc encode the signature.
   </div> <pre class="nohighlight">2a3a6157c6d26ed20574155b6884916d0528b2057d89b7b855e40ee471708058d0bd7e39559bc0586e6b460f74f69d5d85d5dcee2cdbaea3febf8241ef425e974a9486025fca0c1dc1c7b1fedd25a17032d98bae98bd23e6962865c2fb1d7b19</pre>
       </div>
 
-        <div class="example" id="example-signature-of-combined-hashes-base58-btc-2">
+        <div class="example" id="example-signature-of-combined-hashes-base-58-btc-2">
         <div class="marker">
-    <a class="self-link" href="#example-signature-of-combined-hashes-base58-btc-2">Example<bdi> 47</bdi></a><span class="example-title">: Signature of Combined Hashes base58-btc</span>
+    <a class="self-link" href="#example-signature-of-combined-hashes-base-58-btc-2">Example<bdi> 47</bdi></a><span class="example-title">: Signature of Combined Hashes base-58-btc</span>
   </div> <pre class="nohighlight">zFYhRwKuucKxM7dnL69VpnwmU9UD2wc5HfFjXfxKH82pEybv18EfxaT8m53kyMfrDQneYnsLCZ35UE2KwZTkd4zN7vNHdVseyjW5apJJ9NkfpUiTGUayG2yaZvWu6Gd8EDYk</pre>
       </div>
 
         <p>Assemble the signed credential with the following two steps:</p>
         <ol>
           <li>
-Add the <code>proofValue</code> field with the previously computed base58-btc
+Add the <code>proofValue</code> field with the previously computed base-58-btc
 value to the proof options document.
           </li>
           <li>
@@ -3932,6 +3960,766 @@ option document.
   }
 }</pre>
       </div>
+      </section>
+      <section id="representation-ecdsa-sd-2023"><div class="header-wrapper"><h3 id="a-5-representation-ecdsa-sd-2023"><bdi class="secno">A.5 </bdi>Representation: ecdsa-sd-2023</h3><a class="self-link" href="#representation-ecdsa-sd-2023" aria-label="Permalink for Appendix A.5"></a></div>
+        
+        <p>
+To demonstrate selective disclosure features including mandatory disclosure,
+selective disclosure, and overlap between mandatory and selective disclosure
+requires an input credential document with more content than previous test
+vectors. To avoid excessively long test vectors the starting document test
+vector is based on a purely ficticious windsurfing (sailing) competition
+scenario. In addition we break the test vectors into two groups based on those
+that would be generated by the issuer (base proof) and those that would be
+generated by the holder (derived proof).
+        </p>
+        <section id="base-proof"><div class="header-wrapper"><h4 id="a-5-1-base-proof"><bdi class="secno">A.5.1 </bdi>Base Proof</h4><a class="self-link" href="#base-proof" aria-label="Permalink for Appendix A.5.1"></a></div>
+          
+          <p>
+In order to add a selective disclosure base proof to a document the issuer needs
+the following cryptographic key material:
+          </p>
+          <ol>
+            <li>
+The issuers private/public key pair, i.e., the key pair corresponding to the
+verification method that will be part of the proof.
+            </li>
+            <li>
+A per proof private/public key pair created by the issuer just for this proof.
+This is an ephemeral, single use key pair where the private key is not kept
+after the proof has been generated.
+            </li>
+            <li>
+An HMAC key. This used to randomize the order of the blank node ids to avoid
+potential information leakage from the blank node id ordering. This is used only
+once and is shared between issuer and holder. The HMAC in this case is
+functioning as a pseudorandom function (PRF).
+            </li>
+          </ol>
+          <p>
+The key material used for generating the add base proof test vectors is shown
+below. Multibase representation is use for the P-256 key pairs and the HMAC key
+is given as a hexadecimal string.
+          </p>
+          <div class="example" id="example-private-and-public-keys-for-signature-3">
+        <div class="marker">
+    <a class="self-link" href="#example-private-and-public-keys-for-signature-3">Example<bdi> 49</bdi></a><span class="example-title">: Private and Public keys for Signature</span>
+  </div> <pre class="nohighlight">{
+  "baseKeyPair": {
+    "publicKeyMultibase": "zDnaepBuvsQ8cpsWrVKw8fbpGpvPeNSjVPTWoq6cRqaYzBKVP",
+    "secretKeyMultibase": "z42twTcNeSYcnqg1FLuSFs2bsGH3ZqbRHFmvS9XMsYhjxvHN"
+  },
+  "proofKeyPair": {
+    "publicKeyMultibase": "zDnaeTHfhmSaQKBc7CmdL3K7oYg3D6SC7yowe2eBeVd2DH32r",
+    "secretKeyMultibase": "z42tqvNGyzyXRzotAYn43UhcFtzDUVdxJ7461fwrfhBPLmfY"
+  },
+  "hmacKeyString": "00112233445566778899AABBCCDDEEFF00112233445566778899AABBCCDDEEFF"
+}</pre>
+      </div>
+          <p>
+In our scenario a sailor is registering with a race organizer for a series of
+windsurfing races to be held over a number of days on Maui. The organizer will
+inspect the sailors equipment to certify that what has been declared is
+ accurate. The sailors unsigned equipment inventory is shown below.
+          </p>
+          <div class="example" id="example-credential-without-proof-3">
+        <div class="marker">
+    <a class="self-link" href="#example-credential-without-proof-3">Example<bdi> 50</bdi></a><span class="example-title">: Credential without Proof</span>
+  </div> <pre class="nohighlight">{
+  "@context": [
+    "https://www.w3.org/ns/credentials/v2",
+    {"@vocab": "https://windsurf.grotto-networking.com/selective#"}
+  ],
+  "type": [
+    "VerifiableCredential"
+  ],
+  "sailNumber": "Earth101",
+  "sails": [
+    {
+      "size": 5.5,
+      "sailName": "Kihei",
+      "year": 2023
+    },
+    {
+      "size": 6.1,
+      "sailName": "Lahaina",
+      "year": 2023
+    },
+    {
+      "size": 7.0,
+      "sailName": "Lahaina",
+      "year": 2020
+    },
+    {
+      "size": 7.8,
+      "sailName": "Lahaina",
+      "year": 2023
+    }
+  ],
+  "boards": [
+    {
+      "boardName": "CompFoil170",
+      "brand": "Wailea",
+      "year": 2022
+    },
+    {
+      "boardName": "Kanaha Custom",
+      "brand": "Wailea",
+      "year": 2019
+    }
+  ]
+}</pre>
+      </div>
+          <p>
+In addition to let other sailors know what kinds of equipment their competitors
+maybe sailing on it is mandatory that each sailor disclose the year of their
+most recent windsurfing board and full details on two of their sails. Note that
+all sailors are identified by a sail number that is printed on all their
+equipment. This mandatory information is specified via an array of JSON pointers
+as shown below.
+          </p>
+          <div class="example" id="example-mandatory-pointers">
+        <div class="marker">
+    <a class="self-link" href="#example-mandatory-pointers">Example<bdi> 51</bdi></a><span class="example-title">: Mandatory Pointers</span>
+  </div> <pre class="nohighlight">["/sailNumber", "/sails/1", "/boards/0/year", "/sails/2"]</pre>
+      </div>
+          <p>
+The result of applying the above JSON pointers to the sailors equipment document
+is shown below.
+          </p>
+          <div class="example" id="example-json-pointers-and-values">
+        <div class="marker">
+    <a class="self-link" href="#example-json-pointers-and-values">Example<bdi> 52</bdi></a><span class="example-title">: JSON Pointers and Values</span>
+  </div> <pre class="nohighlight">[
+  {
+    "pointer": "/sailNumber",
+    "value": "Earth101"
+  },
+  {
+    "pointer": "/sails/1",
+    "value": {
+      "size": 6.1,
+      "sailName": "Lahaina",
+      "year": 2023
+    }
+  },
+  {
+    "pointer": "/boards/0/year",
+    "value": 2022
+  },
+  {
+    "pointer": "/sails/2",
+    "value": {
+      "size": 7,
+      "sailName": "Lahaina",
+      "year": 2020
+    }
+  }
+]</pre>
+      </div>
+          <p>
+Transformation of the unsigned document begins with canonicalizing the document
+as shown below.
+          </p>
+          <div class="example" id="example-canonical-document">
+        <div class="marker">
+    <a class="self-link" href="#example-canonical-document">Example<bdi> 53</bdi></a><span class="example-title">: Canonical Document</span>
+  </div> <pre class="nohighlight">[
+  "_:c14n0 &lt;https://windsurf.grotto-networking.com/selective#boardName&gt; \"CompFoil170\" .\n",
+  "_:c14n0 &lt;https://windsurf.grotto-networking.com/selective#brand&gt; \"Wailea\" .\n",
+  "_:c14n0 &lt;https://windsurf.grotto-networking.com/selective#year&gt; \"2022\"^^&lt;http://www.w3.org/2001/XMLSchema#integer&gt; .\n",
+  "_:c14n1 &lt;https://windsurf.grotto-networking.com/selective#sailName&gt; \"Lahaina\" .\n",
+  "_:c14n1 &lt;https://windsurf.grotto-networking.com/selective#size&gt; \"7.8E0\"^^&lt;http://www.w3.org/2001/XMLSchema#double&gt; .\n",
+  "_:c14n1 &lt;https://windsurf.grotto-networking.com/selective#year&gt; \"2023\"^^&lt;http://www.w3.org/2001/XMLSchema#integer&gt; .\n",
+  "_:c14n2 &lt;https://windsurf.grotto-networking.com/selective#boardName&gt; \"Kanaha Custom\" .\n",
+  "_:c14n2 &lt;https://windsurf.grotto-networking.com/selective#brand&gt; \"Wailea\" .\n",
+  "_:c14n2 &lt;https://windsurf.grotto-networking.com/selective#year&gt; \"2019\"^^&lt;http://www.w3.org/2001/XMLSchema#integer&gt; .\n",
+  "_:c14n3 &lt;https://windsurf.grotto-networking.com/selective#sailName&gt; \"Lahaina\" .\n",
+  "_:c14n3 &lt;https://windsurf.grotto-networking.com/selective#size&gt; \"7\"^^&lt;http://www.w3.org/2001/XMLSchema#integer&gt; .\n",
+  "_:c14n3 &lt;https://windsurf.grotto-networking.com/selective#year&gt; \"2020\"^^&lt;http://www.w3.org/2001/XMLSchema#integer&gt; .\n",
+  "_:c14n4 &lt;https://windsurf.grotto-networking.com/selective#sailName&gt; \"Kihei\" .\n",
+  "_:c14n4 &lt;https://windsurf.grotto-networking.com/selective#size&gt; \"5.5E0\"^^&lt;http://www.w3.org/2001/XMLSchema#double&gt; .\n",
+  "_:c14n4 &lt;https://windsurf.grotto-networking.com/selective#year&gt; \"2023\"^^&lt;http://www.w3.org/2001/XMLSchema#integer&gt; .\n",
+  "_:c14n5 &lt;https://windsurf.grotto-networking.com/selective#sailName&gt; \"Lahaina\" .\n",
+  "_:c14n5 &lt;https://windsurf.grotto-networking.com/selective#size&gt; \"6.1E0\"^^&lt;http://www.w3.org/2001/XMLSchema#double&gt; .\n",
+  "_:c14n5 &lt;https://windsurf.grotto-networking.com/selective#year&gt; \"2023\"^^&lt;http://www.w3.org/2001/XMLSchema#integer&gt; .\n",
+  "_:c14n6 &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt; &lt;https://www.w3.org/2018/credentials#VerifiableCredential&gt; .\n",
+  "_:c14n6 &lt;https://windsurf.grotto-networking.com/selective#boards&gt; _:c14n0 .\n",
+  "_:c14n6 &lt;https://windsurf.grotto-networking.com/selective#boards&gt; _:c14n2 .\n",
+  "_:c14n6 &lt;https://windsurf.grotto-networking.com/selective#sailNumber&gt; \"Earth101\" .\n",
+  "_:c14n6 &lt;https://windsurf.grotto-networking.com/selective#sails&gt; _:c14n1 .\n",
+  "_:c14n6 &lt;https://windsurf.grotto-networking.com/selective#sails&gt; _:c14n3 .\n",
+  "_:c14n6 &lt;https://windsurf.grotto-networking.com/selective#sails&gt; _:c14n4 .\n",
+  "_:c14n6 &lt;https://windsurf.grotto-networking.com/selective#sails&gt; _:c14n5 .\n"
+]</pre>
+      </div>
+          <p>
+To prevent possible information leakage from the ordering of the blank node ids
+these are processed through a PRF, i.e., the HMAC to give the canonized HMAC
+document shown below. This represents an ordered list of statements that will be
+subject to mandatory and selective disclosure, i.e., it is from this list that
+statements are grouped.
+          </p>
+          <div class="example" id="example-canonical-hmac-document">
+        <div class="marker">
+    <a class="self-link" href="#example-canonical-hmac-document">Example<bdi> 54</bdi></a><span class="example-title">: Canonical HMAC Document</span>
+  </div> <pre class="nohighlight">[
+  "_:u3Lv2QpFgo-YAegc1cQQKWJFW2sEjQF6FfuZ0VEoMKHg &lt;https://windsurf.grotto-networking.com/selective#sailName&gt; \"Lahaina\" .\n",
+  "_:u3Lv2QpFgo-YAegc1cQQKWJFW2sEjQF6FfuZ0VEoMKHg &lt;https://windsurf.grotto-networking.com/selective#size&gt; \"7.8E0\"^^&lt;http://www.w3.org/2001/XMLSchema#double&gt; .\n",
+  "_:u3Lv2QpFgo-YAegc1cQQKWJFW2sEjQF6FfuZ0VEoMKHg &lt;https://windsurf.grotto-networking.com/selective#year&gt; \"2023\"^^&lt;http://www.w3.org/2001/XMLSchema#integer&gt; .\n",
+  "_:u4YIOZn1MHES1Z4Ij2hWZG3R4dEYBqg5fHTyDEvYhC38 &lt;https://windsurf.grotto-networking.com/selective#boardName&gt; \"CompFoil170\" .\n",
+  "_:u4YIOZn1MHES1Z4Ij2hWZG3R4dEYBqg5fHTyDEvYhC38 &lt;https://windsurf.grotto-networking.com/selective#brand&gt; \"Wailea\" .\n",
+  "_:u4YIOZn1MHES1Z4Ij2hWZG3R4dEYBqg5fHTyDEvYhC38 &lt;https://windsurf.grotto-networking.com/selective#year&gt; \"2022\"^^&lt;http://www.w3.org/2001/XMLSchema#integer&gt; .\n",
+  "_:uQ-qOZUDlozRsGk46ux9gp9fjT28Fy3g3nctmMoqi_U0 &lt;https://windsurf.grotto-networking.com/selective#sailName&gt; \"Lahaina\" .\n",
+  "_:uQ-qOZUDlozRsGk46ux9gp9fjT28Fy3g3nctmMoqi_U0 &lt;https://windsurf.grotto-networking.com/selective#size&gt; \"6.1E0\"^^&lt;http://www.w3.org/2001/XMLSchema#double&gt; .\n",
+  "_:uQ-qOZUDlozRsGk46ux9gp9fjT28Fy3g3nctmMoqi_U0 &lt;https://windsurf.grotto-networking.com/selective#year&gt; \"2023\"^^&lt;http://www.w3.org/2001/XMLSchema#integer&gt; .\n",
+  "_:uVkUuBrlOaELGVQWJD4M_qW5bcKEHWGNbOrPA_qAOKKw &lt;https://windsurf.grotto-networking.com/selective#boardName&gt; \"Kanaha Custom\" .\n",
+  "_:uVkUuBrlOaELGVQWJD4M_qW5bcKEHWGNbOrPA_qAOKKw &lt;https://windsurf.grotto-networking.com/selective#brand&gt; \"Wailea\" .\n",
+  "_:uVkUuBrlOaELGVQWJD4M_qW5bcKEHWGNbOrPA_qAOKKw &lt;https://windsurf.grotto-networking.com/selective#year&gt; \"2019\"^^&lt;http://www.w3.org/2001/XMLSchema#integer&gt; .\n",
+  "_:ufUWJRHQ9j1jmUKHLL8k6m0CZ8g4v73gOpaM5kL3ZACQ &lt;https://windsurf.grotto-networking.com/selective#sailName&gt; \"Kihei\" .\n",
+  "_:ufUWJRHQ9j1jmUKHLL8k6m0CZ8g4v73gOpaM5kL3ZACQ &lt;https://windsurf.grotto-networking.com/selective#size&gt; \"5.5E0\"^^&lt;http://www.w3.org/2001/XMLSchema#double&gt; .\n",
+  "_:ufUWJRHQ9j1jmUKHLL8k6m0CZ8g4v73gOpaM5kL3ZACQ &lt;https://windsurf.grotto-networking.com/selective#year&gt; \"2023\"^^&lt;http://www.w3.org/2001/XMLSchema#integer&gt; .\n",
+  "_:uk0AeXgJ4e6m1XsV5-xFud0L_1mUjZ9Mffhg5aZGTyDk &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt; &lt;https://www.w3.org/2018/credentials#VerifiableCredential&gt; .\n",
+  "_:uk0AeXgJ4e6m1XsV5-xFud0L_1mUjZ9Mffhg5aZGTyDk &lt;https://windsurf.grotto-networking.com/selective#boards&gt; _:u4YIOZn1MHES1Z4Ij2hWZG3R4dEYBqg5fHTyDEvYhC38 .\n",
+  "_:uk0AeXgJ4e6m1XsV5-xFud0L_1mUjZ9Mffhg5aZGTyDk &lt;https://windsurf.grotto-networking.com/selective#boards&gt; _:uVkUuBrlOaELGVQWJD4M_qW5bcKEHWGNbOrPA_qAOKKw .\n",
+  "_:uk0AeXgJ4e6m1XsV5-xFud0L_1mUjZ9Mffhg5aZGTyDk &lt;https://windsurf.grotto-networking.com/selective#sailNumber&gt; \"Earth101\" .\n",
+  "_:uk0AeXgJ4e6m1XsV5-xFud0L_1mUjZ9Mffhg5aZGTyDk &lt;https://windsurf.grotto-networking.com/selective#sails&gt; _:u3Lv2QpFgo-YAegc1cQQKWJFW2sEjQF6FfuZ0VEoMKHg .\n",
+  "_:uk0AeXgJ4e6m1XsV5-xFud0L_1mUjZ9Mffhg5aZGTyDk &lt;https://windsurf.grotto-networking.com/selective#sails&gt; _:uQ-qOZUDlozRsGk46ux9gp9fjT28Fy3g3nctmMoqi_U0 .\n",
+  "_:uk0AeXgJ4e6m1XsV5-xFud0L_1mUjZ9Mffhg5aZGTyDk &lt;https://windsurf.grotto-networking.com/selective#sails&gt; _:ufUWJRHQ9j1jmUKHLL8k6m0CZ8g4v73gOpaM5kL3ZACQ .\n",
+  "_:uk0AeXgJ4e6m1XsV5-xFud0L_1mUjZ9Mffhg5aZGTyDk &lt;https://windsurf.grotto-networking.com/selective#sails&gt; _:ukR2991GJuy_Tkjem_x7pLVpS4C4GkZAcuGtiPhBfSSc .\n",
+  "_:ukR2991GJuy_Tkjem_x7pLVpS4C4GkZAcuGtiPhBfSSc &lt;https://windsurf.grotto-networking.com/selective#sailName&gt; \"Lahaina\" .\n",
+  "_:ukR2991GJuy_Tkjem_x7pLVpS4C4GkZAcuGtiPhBfSSc &lt;https://windsurf.grotto-networking.com/selective#size&gt; \"7\"^^&lt;http://www.w3.org/2001/XMLSchema#integer&gt; .\n",
+  "_:ukR2991GJuy_Tkjem_x7pLVpS4C4GkZAcuGtiPhBfSSc &lt;https://windsurf.grotto-networking.com/selective#year&gt; \"2020\"^^&lt;http://www.w3.org/2001/XMLSchema#integer&gt; .\n"
+]</pre>
+      </div>
+          <p>
+The above canonical document gets grouped in to mandatory and non-mandatory
+statements. The final output of the selective disclosure transformation process
+is shown below. Each statement is now grouped as mandatory and non-mandatory and
+its index in the previous list of statements is remembered.
+          </p>
+          <div class="example" id="example-add-base-transformation">
+        <div class="marker">
+    <a class="self-link" href="#example-add-base-transformation">Example<bdi> 55</bdi></a><span class="example-title">: Add Base Transformation</span>
+  </div> <pre class="nohighlight">{
+  "mandatoryPointers": [
+    "/sailNumber",
+    "/sails/1",
+    "/boards/0/year",
+    "/sails/2"
+  ],
+  "mandatory": {
+    "dataType": "Map",
+    "value": [
+      [
+        5,
+        "_:u4YIOZn1MHES1Z4Ij2hWZG3R4dEYBqg5fHTyDEvYhC38 &lt;https://windsurf.grotto-networking.com/selective#year&gt; \"2022\"^^&lt;http://www.w3.org/2001/XMLSchema#integer&gt; .\n"
+      ],
+      [
+        6,
+        "_:uQ-qOZUDlozRsGk46ux9gp9fjT28Fy3g3nctmMoqi_U0 &lt;https://windsurf.grotto-networking.com/selective#sailName&gt; \"Lahaina\" .\n"
+      ],
+      [
+        7,
+        "_:uQ-qOZUDlozRsGk46ux9gp9fjT28Fy3g3nctmMoqi_U0 &lt;https://windsurf.grotto-networking.com/selective#size&gt; \"6.1E0\"^^&lt;http://www.w3.org/2001/XMLSchema#double&gt; .\n"
+      ],
+      [
+        8,
+        "_:uQ-qOZUDlozRsGk46ux9gp9fjT28Fy3g3nctmMoqi_U0 &lt;https://windsurf.grotto-networking.com/selective#year&gt; \"2023\"^^&lt;http://www.w3.org/2001/XMLSchema#integer&gt; .\n"
+      ],
+      [
+        15,
+        "_:uk0AeXgJ4e6m1XsV5-xFud0L_1mUjZ9Mffhg5aZGTyDk &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt; &lt;https://www.w3.org/2018/credentials#VerifiableCredential&gt; .\n"
+      ],
+      [
+        16,
+        "_:uk0AeXgJ4e6m1XsV5-xFud0L_1mUjZ9Mffhg5aZGTyDk &lt;https://windsurf.grotto-networking.com/selective#boards&gt; _:u4YIOZn1MHES1Z4Ij2hWZG3R4dEYBqg5fHTyDEvYhC38 .\n"
+      ],
+      [
+        18,
+        "_:uk0AeXgJ4e6m1XsV5-xFud0L_1mUjZ9Mffhg5aZGTyDk &lt;https://windsurf.grotto-networking.com/selective#sailNumber&gt; \"Earth101\" .\n"
+      ],
+      [
+        20,
+        "_:uk0AeXgJ4e6m1XsV5-xFud0L_1mUjZ9Mffhg5aZGTyDk &lt;https://windsurf.grotto-networking.com/selective#sails&gt; _:uQ-qOZUDlozRsGk46ux9gp9fjT28Fy3g3nctmMoqi_U0 .\n"
+      ],
+      [
+        22,
+        "_:uk0AeXgJ4e6m1XsV5-xFud0L_1mUjZ9Mffhg5aZGTyDk &lt;https://windsurf.grotto-networking.com/selective#sails&gt; _:ukR2991GJuy_Tkjem_x7pLVpS4C4GkZAcuGtiPhBfSSc .\n"
+      ],
+      [
+        23,
+        "_:ukR2991GJuy_Tkjem_x7pLVpS4C4GkZAcuGtiPhBfSSc &lt;https://windsurf.grotto-networking.com/selective#sailName&gt; \"Lahaina\" .\n"
+      ],
+      [
+        24,
+        "_:ukR2991GJuy_Tkjem_x7pLVpS4C4GkZAcuGtiPhBfSSc &lt;https://windsurf.grotto-networking.com/selective#size&gt; \"7\"^^&lt;http://www.w3.org/2001/XMLSchema#integer&gt; .\n"
+      ],
+      [
+        25,
+        "_:ukR2991GJuy_Tkjem_x7pLVpS4C4GkZAcuGtiPhBfSSc &lt;https://windsurf.grotto-networking.com/selective#year&gt; \"2020\"^^&lt;http://www.w3.org/2001/XMLSchema#integer&gt; .\n"
+      ]
+    ]
+  },
+  "nonMandatory": {
+    "dataType": "Map",
+    "value": [
+      [
+        0,
+        "_:u3Lv2QpFgo-YAegc1cQQKWJFW2sEjQF6FfuZ0VEoMKHg &lt;https://windsurf.grotto-networking.com/selective#sailName&gt; \"Lahaina\" .\n"
+      ],
+      [
+        1,
+        "_:u3Lv2QpFgo-YAegc1cQQKWJFW2sEjQF6FfuZ0VEoMKHg &lt;https://windsurf.grotto-networking.com/selective#size&gt; \"7.8E0\"^^&lt;http://www.w3.org/2001/XMLSchema#double&gt; .\n"
+      ],
+      [
+        2,
+        "_:u3Lv2QpFgo-YAegc1cQQKWJFW2sEjQF6FfuZ0VEoMKHg &lt;https://windsurf.grotto-networking.com/selective#year&gt; \"2023\"^^&lt;http://www.w3.org/2001/XMLSchema#integer&gt; .\n"
+      ],
+      [
+        3,
+        "_:u4YIOZn1MHES1Z4Ij2hWZG3R4dEYBqg5fHTyDEvYhC38 &lt;https://windsurf.grotto-networking.com/selective#boardName&gt; \"CompFoil170\" .\n"
+      ],
+      [
+        4,
+        "_:u4YIOZn1MHES1Z4Ij2hWZG3R4dEYBqg5fHTyDEvYhC38 &lt;https://windsurf.grotto-networking.com/selective#brand&gt; \"Wailea\" .\n"
+      ],
+      [
+        9,
+        "_:uVkUuBrlOaELGVQWJD4M_qW5bcKEHWGNbOrPA_qAOKKw &lt;https://windsurf.grotto-networking.com/selective#boardName&gt; \"Kanaha Custom\" .\n"
+      ],
+      [
+        10,
+        "_:uVkUuBrlOaELGVQWJD4M_qW5bcKEHWGNbOrPA_qAOKKw &lt;https://windsurf.grotto-networking.com/selective#brand&gt; \"Wailea\" .\n"
+      ],
+      [
+        11,
+        "_:uVkUuBrlOaELGVQWJD4M_qW5bcKEHWGNbOrPA_qAOKKw &lt;https://windsurf.grotto-networking.com/selective#year&gt; \"2019\"^^&lt;http://www.w3.org/2001/XMLSchema#integer&gt; .\n"
+      ],
+      [
+        12,
+        "_:ufUWJRHQ9j1jmUKHLL8k6m0CZ8g4v73gOpaM5kL3ZACQ &lt;https://windsurf.grotto-networking.com/selective#sailName&gt; \"Kihei\" .\n"
+      ],
+      [
+        13,
+        "_:ufUWJRHQ9j1jmUKHLL8k6m0CZ8g4v73gOpaM5kL3ZACQ &lt;https://windsurf.grotto-networking.com/selective#size&gt; \"5.5E0\"^^&lt;http://www.w3.org/2001/XMLSchema#double&gt; .\n"
+      ],
+      [
+        14,
+        "_:ufUWJRHQ9j1jmUKHLL8k6m0CZ8g4v73gOpaM5kL3ZACQ &lt;https://windsurf.grotto-networking.com/selective#year&gt; \"2023\"^^&lt;http://www.w3.org/2001/XMLSchema#integer&gt; .\n"
+      ],
+      [
+        17,
+        "_:uk0AeXgJ4e6m1XsV5-xFud0L_1mUjZ9Mffhg5aZGTyDk &lt;https://windsurf.grotto-networking.com/selective#boards&gt; _:uVkUuBrlOaELGVQWJD4M_qW5bcKEHWGNbOrPA_qAOKKw .\n"
+      ],
+      [
+        19,
+        "_:uk0AeXgJ4e6m1XsV5-xFud0L_1mUjZ9Mffhg5aZGTyDk &lt;https://windsurf.grotto-networking.com/selective#sails&gt; _:u3Lv2QpFgo-YAegc1cQQKWJFW2sEjQF6FfuZ0VEoMKHg .\n"
+      ],
+      [
+        21,
+        "_:uk0AeXgJ4e6m1XsV5-xFud0L_1mUjZ9Mffhg5aZGTyDk &lt;https://windsurf.grotto-networking.com/selective#sails&gt; _:ufUWJRHQ9j1jmUKHLL8k6m0CZ8g4v73gOpaM5kL3ZACQ .\n"
+      ]
+    ]
+  },
+  "hmacKeyString": "00112233445566778899AABBCCDDEEFF00112233445566778899AABBCCDDEEFF"
+}</pre>
+      </div>
+          <p>
+The next step is to create the base proof configuration and canonicalize it.
+This is shown in the following two examples.
+          </p>
+          <div class="example" id="example-base-proof-configuration">
+        <div class="marker">
+    <a class="self-link" href="#example-base-proof-configuration">Example<bdi> 56</bdi></a><span class="example-title">: Base Proof Configuration</span>
+  </div> <pre class="nohighlight">{
+  "type": "DataIntegrityProof",
+  "cryptosuite": "ecdsa-sd-2023",
+  "created": "2023-08-15T23:36:38Z",
+  "verificationMethod": "did:key:zDnaepBuvsQ8cpsWrVKw8fbpGpvPeNSjVPTWoq6cRqaYzBKVP#zDnaepBuvsQ8cpsWrVKw8fbpGpvPeNSjVPTWoq6cRqaYzBKVP",
+  "proofPurpose": "assertionMethod",
+  "@context": [
+    "https://www.w3.org/ns/credentials/v2",
+    {
+      "@vocab": "https://windsurf.grotto-networking.com/selective#"
+    }
+  ]
+}</pre>
+      </div>
+          <div class="example" id="example-canonical-base-proof-configuration">
+        <div class="marker">
+    <a class="self-link" href="#example-canonical-base-proof-configuration">Example<bdi> 57</bdi></a><span class="example-title">: Canonical Base Proof Configuration</span>
+  </div> <pre class="nohighlight">_:c14n0 &lt;http://purl.org/dc/terms/created&gt; "2023-08-15T23:36:38Z"^^&lt;http://www.w3.org/2001/XMLSchema#dateTime&gt; .
+_:c14n0 &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt; &lt;https://w3id.org/security#DataIntegrityProof&gt; .
+_:c14n0 &lt;https://w3id.org/security#cryptosuite&gt; "ecdsa-sd-2023" .
+_:c14n0 &lt;https://w3id.org/security#proofPurpose&gt; &lt;https://w3id.org/security#assertionMethod&gt; .
+_:c14n0 &lt;https://w3id.org/security#verificationMethod&gt; &lt;did:key:zDnaepBuvsQ8cpsWrVKw8fbpGpvPeNSjVPTWoq6cRqaYzBKVP#zDnaepBuvsQ8cpsWrVKw8fbpGpvPeNSjVPTWoq6cRqaYzBKVP&gt; .</pre>
+      </div>
+          <p>
+In the hashing step we compute the SHA-256 hash of the canonicalized proof
+options to produce the <code>proofHash</code> and we compute the SHA-256 hash of the join of
+all the mandatory nquads to produce the <code>mandatoryHash</code>. These are shown below
+in hexadecimal format.
+          </p>
+          <div class="example" id="example-add-base-hashes">
+        <div class="marker">
+    <a class="self-link" href="#example-add-base-hashes">Example<bdi> 58</bdi></a><span class="example-title">: Add Base Hashes</span>
+  </div> <pre class="nohighlight">{
+  "proofHash": "ac14ce7c9c545ea6147cfce51db41d20b483c6890150bfbfcf0fd865436b02b3",
+  "mandatoryHash": "fa6da5724940bee8864209827c06340496ef7a0b22061d6df3bcb5ab49262fe7"
+}</pre>
+      </div>
+          <p>
+We compute the <code>baseSignature</code> over the concatenation of the <code>proofHash</code>,
+<code>proofPublicKey</code>, and <code>mandatoryHash</code> using the issuers long term <code>privateKey</code>.
+We compute the <code>signatures</code> array by signing each non-mandatory nquad using the
+per <code>proofPrivateKey</code>. These signatures, the <code>proofPublicKey</code>, and
+<code>mandatoryPointers</code> which are fed to the final serialization step are
+shown below.
+          </p>
+          <div class="example" id="example-add-base-signing">
+        <div class="marker">
+    <a class="self-link" href="#example-add-base-signing">Example<bdi> 59</bdi></a><span class="example-title">: Add Base Signing</span>
+  </div> <pre class="nohighlight">{
+  "baseSignature": "5a26e45631504cf42f445b751f01677d5c4b33d89b90d6750429103a8c7ca54a81ca365079d96772920a35e561ef663882fbd4e89d4d10ccab0ce78c5f7d9103",
+  "publicKey": "zDnaeTHfhmSaQKBc7CmdL3K7oYg3D6SC7yowe2eBeVd2DH32r",
+  "signatures": [
+    "29560a336e740c370d58e610a549980b567935984947089ef2f5547aff78406b2df375a1a16eff50ce8950bb0a8cd5478f1665650ca8bcde31c3533f9a19fa4c",
+    "b2a312833d0479a3ded079a8e5237524d6660a3899f8234907849c9b22b8eacee10e8b4d66e187c4a19a0050b8dced05c5c29e502f7aabfcfd3c6785e42dd5a5",
+    "99ea0453c235673c45c91f90331c284a4a911bd13cfc2692ae11fc4c3dadfad577d872800b884990a97ac47bb3e972f61be574726e9dfeb5a8ce386699568c8d",
+    "6d030c724a5c300128d79582e82f0ca376c2116146b4e4e4331343f8b24c75f9024a8bc1ed19c247b497ce4e7ed1856282d27917383bd400286f9ca0d5634d93",
+    "a501e56111a551592ff965f53a3258275f4ec3b8a9bd5c14be6f744a7dc88cd44bbb2f69af90c79b7c1595530f5692ea8d2f84f3f8c90de255e696346df2bf03",
+    "3bf1e3d2fc6cb89673a551ad82830a2b666518abe12d7dffbd40af74bf8c4e5b3356bda20b75c9a426ce73c07f5bf3a7f9cb1a2cfcd44af9520ed35e73565593",
+    "766d87b78b2ffde737b351d1a9eba5fbec841b1e12ae9c3235045d2dae592b224382aaf887e12d54dcdcf89f95965bcaac737cc012ad52a6aba88e0da67af1ed",
+    "39130b5d8cf7979f4ecdced20e4d9e8fb725adeafd067e9e6815101bbef702a439e9b73ea065de7a67a4c1908d1e314b38448da0dabba9eb4ef0545b8851dbe0",
+    "5bea2d48556550f166835d7d9f74de484eeea798414b7e00a8fd93194400e690c6c8e4deb6b7fcaaaddb5a3d65a42bb567ac84649950ea7acb882a1a3558692f",
+    "d705bf1e1b133d47d496a317e9932c2de9bc85b59a15efeb643a4fa7934dd36bcc1c89c38ced469f406b5d4c9500c9d36377c6ac38ecbb2dac1a033347e6e8d7",
+    "bce1925c7e75791a025ad57d2e5a590f5d22c7422eb950a76ade5f47153b86a1acd00cccd3d906b26b833118e8c29e75c6188527788c6a320e3a159484fc470a",
+    "bd25bdabcf112d9f6559d83665e2be71ff9c16553f3e3ab1d5b515017307437b5fe097e3d8850dbabcb71337cedec8f75585fb743be5113b53d07627debf834a",
+    "e7dd74deab1b23d508cdc537604a5a070a678809f28de9b0ffb11a3cdddfdfbb221fbf51c2897ab5fef6e9050f5226ab3729a085265e5ef21b8e9c6a94acfe50",
+    "43093442ebc81c551cac0647afedeb62f7d9cdacf0cd82500a9398738517dcf70507156dc88ed4f4f89e50e362f3710b155037d60a26c4b70262e9fbe7dd6b7d"
+  ],
+  "mandatoryPointers": [
+    "/sailNumber",
+    "/sails/1",
+    "/boards/0/year",
+    "/sails/2"
+  ]
+}</pre>
+      </div>
+          <p>
+Finally, the values above are run through the algorithm of Section
+<a href="#serializebaseproofvalue" class="sec-ref"><bdi class="secno">3.4.2 </bdi>serializeBaseProofValue</a> to produce the <code>proofValue</code> which is
+used in the signed based document shown below.
+          </p>
+          <div class="example" id="example-signed-base-document">
+        <div class="marker">
+    <a class="self-link" href="#example-signed-base-document">Example<bdi> 60</bdi></a><span class="example-title">: Signed Base Document</span>
+  </div> <pre class="nohighlight">{
+  "@context": [
+    "https://www.w3.org/ns/credentials/v2",
+    {
+      "@vocab": "https://windsurf.grotto-networking.com/selective#"
+    }
+  ],
+  "type": [
+    "VerifiableCredential"
+  ],
+  "sailNumber": "Earth101",
+  "sails": [
+    {
+      "size": 5.5,
+      "sailName": "Kihei",
+      "year": 2023
+    },
+    {
+      "size": 6.1,
+      "sailName": "Lahaina",
+      "year": 2023
+    },
+    {
+      "size": 7,
+      "sailName": "Lahaina",
+      "year": 2020
+    },
+    {
+      "size": 7.8,
+      "sailName": "Lahaina",
+      "year": 2023
+    }
+  ],
+  "boards": [
+    {
+      "boardName": "CompFoil170",
+      "brand": "Wailea",
+      "year": 2022
+    },
+    {
+      "boardName": "Kanaha Custom",
+      "brand": "Wailea",
+      "year": 2019
+    }
+  ],
+  "proof": {
+    "type": "DataIntegrityProof",
+    "cryptosuite": "ecdsa-sd-2023",
+    "created": "2023-08-15T23:36:38Z",
+    "verificationMethod": "did:key:zDnaepBuvsQ8cpsWrVKw8fbpGpvPeNSjVPTWoq6cRqaYzBKVP#zDnaepBuvsQ8cpsWrVKw8fbpGpvPeNSjVPTWoq6cRqaYzBKVP",
+    "proofPurpose": "assertionMethod",
+    "proofValue": "u2V0AhdhAWEBaJuRWMVBM9C9EW3UfAWd9XEsz2JuQ1nUEKRA6jHylSoHKNlB52Wdykgo15WHvZjiC-9TonU0QzKsM54xffZED2EBYI4AkAipyzhm2PxbjPgEqUpJDsbCEdhPJ-zJdqtVEOrRMM4uT2EBYIAARIjNEVWZ3iJmqu8zd7v8AESIzRFVmd4iZqrvM3e7_jthAWEApVgozbnQMNw1Y5hClSZgLVnk1mElHCJ7y9VR6_3hAay3zdaGhbv9QzolQuwqM1UePFmVlDKi83jHDUz-aGfpM2EBYQLKjEoM9BHmj3tB5qOUjdSTWZgo4mfgjSQeEnJsiuOrO4Q6LTWbhh8ShmgBQuNztBcXCnlAveqv8_TxnheQt1aXYQFhAmeoEU8I1ZzxFyR-QMxwoSkqRG9E8_CaSrhH8TD2t-tV32HKAC4hJkKl6xHuz6XL2G-V0cm6d_rWozjhmmVaMjdhAWEBtAwxySlwwASjXlYLoLwyjdsIRYUa05OQzE0P4skx1-QJKi8HtGcJHtJfOTn7RhWKC0nkXODvUAChvnKDVY02T2EBYQKUB5WERpVFZL_ll9ToyWCdfTsO4qb1cFL5vdEp9yIzUS7svaa-Qx5t8FZVTD1aS6o0vhPP4yQ3iVeaWNG3yvwPYQFhAO_Hj0vxsuJZzpVGtgoMKK2ZlGKvhLX3_vUCvdL-MTlszVr2iC3XJpCbOc8B_W_On-csaLPzUSvlSDtNec1ZVk9hAWEB2bYe3iy_95zezUdGp66X77IQbHhKunDI1BF0trlkrIkOCqviH4S1U3Nz4n5WWW8qsc3zAEq1Spquojg2mevHt2EBYQDkTC12M95efTs3O0g5Nno-3Ja3q_QZ-nmgVEBu-9wKkOem3PqBl3npnpMGQjR4xSzhEjaDau6nrTvBUW4hR2-DYQFhAW-otSFVlUPFmg119n3TeSE7up5hBS34AqP2TGUQA5pDGyOTetrf8qq3bWj1lpCu1Z6yEZJlQ6nrLiCoaNVhpL9hAWEDXBb8eGxM9R9SWoxfpkywt6byFtZoV7-tkOk-nk03Ta8wcicOM7UafQGtdTJUAydNjd8asOOy7LawaAzNH5ujX2EBYQLzhklx-dXkaAlrVfS5aWQ9dIsdCLrlQp2reX0cVO4ahrNAMzNPZBrJrgzEY6MKedcYYhSd4jGoyDjoVlIT8RwrYQFhAvSW9q88RLZ9lWdg2ZeK-cf-cFlU_Pjqx1bUVAXMHQ3tf4Jfj2IUNury3EzfO3sj3VYX7dDvlETtT0HYn3r-DSthAWEDn3XTeqxsj1QjNxTdgSloHCmeICfKN6bD_sRo83d_fuyIfv1HCiXq1_vbpBQ9SJqs3KaCFJl5e8huOnGqUrP5Q2EBYQEMJNELryBxVHKwGR6_t62L32c2s8M2CUAqTmHOFF9z3BQcVbciO1PT4nlDjYvNxCxVQN9YKJsS3AmLp--fda32Eay9zYWlsTnVtYmVyaC9zYWlscy8xbi9ib2FyZHMvMC95ZWFyaC9zYWlscy8y"
+  }
+}</pre>
+      </div>
+        </section>
+        <section id="derived-proof"><div class="header-wrapper"><h4 id="a-5-2-derived-proof"><bdi class="secno">A.5.2 </bdi>Derived Proof</h4><a class="self-link" href="#derived-proof" aria-label="Permalink for Appendix A.5.2"></a></div>
+          
+          <p>
+In order to create a derived proof a holder starts with a signed document
+containing a base proof. The base document we will use for these test vectors is
+the final example from Section <a href="#base-proof" class="sec-ref"><bdi class="secno">A.5.1 </bdi>Base Proof</a> above. The first
+step is to run the algorithm of Section <a href="#parsebaseproofvalue" class="sec-ref"><bdi class="secno">3.4.3 </bdi>parseBaseProofValue</a> to
+recover <code>baseSignature</code>, <code>publicKey</code>, <code>hmacKey</code>, <code>signatures</code>, and
+<code>mandatoryPointers</code> as shown below.
+          </p>
+          <div class="example" id="example-recovered-base-signature-data">
+        <div class="marker">
+    <a class="self-link" href="#example-recovered-base-signature-data">Example<bdi> 61</bdi></a><span class="example-title">: Recovered Base Signature Data</span>
+  </div> <pre class="nohighlight">{
+  "baseSignature": "5a26e45631504cf42f445b751f01677d5c4b33d89b90d6750429103a8c7ca54a81ca365079d96772920a35e561ef663882fbd4e89d4d10ccab0ce78c5f7d9103",
+  "proofPublicKey": "zDnaeTHfhmSaQKBc7CmdL3K7oYg3D6SC7yowe2eBeVd2DH32r",
+  "hmacKey": "00112233445566778899aabbccddeeff00112233445566778899aabbccddeeff",
+  "signatures": [
+    "29560a336e740c370d58e610a549980b567935984947089ef2f5547aff78406b2df375a1a16eff50ce8950bb0a8cd5478f1665650ca8bcde31c3533f9a19fa4c",
+    "b2a312833d0479a3ded079a8e5237524d6660a3899f8234907849c9b22b8eacee10e8b4d66e187c4a19a0050b8dced05c5c29e502f7aabfcfd3c6785e42dd5a5",
+    "99ea0453c235673c45c91f90331c284a4a911bd13cfc2692ae11fc4c3dadfad577d872800b884990a97ac47bb3e972f61be574726e9dfeb5a8ce386699568c8d",
+    "6d030c724a5c300128d79582e82f0ca376c2116146b4e4e4331343f8b24c75f9024a8bc1ed19c247b497ce4e7ed1856282d27917383bd400286f9ca0d5634d93",
+    "a501e56111a551592ff965f53a3258275f4ec3b8a9bd5c14be6f744a7dc88cd44bbb2f69af90c79b7c1595530f5692ea8d2f84f3f8c90de255e696346df2bf03",
+    "3bf1e3d2fc6cb89673a551ad82830a2b666518abe12d7dffbd40af74bf8c4e5b3356bda20b75c9a426ce73c07f5bf3a7f9cb1a2cfcd44af9520ed35e73565593",
+    "766d87b78b2ffde737b351d1a9eba5fbec841b1e12ae9c3235045d2dae592b224382aaf887e12d54dcdcf89f95965bcaac737cc012ad52a6aba88e0da67af1ed",
+    "39130b5d8cf7979f4ecdced20e4d9e8fb725adeafd067e9e6815101bbef702a439e9b73ea065de7a67a4c1908d1e314b38448da0dabba9eb4ef0545b8851dbe0",
+    "5bea2d48556550f166835d7d9f74de484eeea798414b7e00a8fd93194400e690c6c8e4deb6b7fcaaaddb5a3d65a42bb567ac84649950ea7acb882a1a3558692f",
+    "d705bf1e1b133d47d496a317e9932c2de9bc85b59a15efeb643a4fa7934dd36bcc1c89c38ced469f406b5d4c9500c9d36377c6ac38ecbb2dac1a033347e6e8d7",
+    "bce1925c7e75791a025ad57d2e5a590f5d22c7422eb950a76ade5f47153b86a1acd00cccd3d906b26b833118e8c29e75c6188527788c6a320e3a159484fc470a",
+    "bd25bdabcf112d9f6559d83665e2be71ff9c16553f3e3ab1d5b515017307437b5fe097e3d8850dbabcb71337cedec8f75585fb743be5113b53d07627debf834a",
+    "e7dd74deab1b23d508cdc537604a5a070a678809f28de9b0ffb11a3cdddfdfbb221fbf51c2897ab5fef6e9050f5226ab3729a085265e5ef21b8e9c6a94acfe50",
+    "43093442ebc81c551cac0647afedeb62f7d9cdacf0cd82500a9398738517dcf70507156dc88ed4f4f89e50e362f3710b155037d60a26c4b70262e9fbe7dd6b7d"
+  ],
+  "mandatoryPointers": [
+    "/sailNumber",
+    "/sails/1",
+    "/boards/0/year",
+    "/sails/2"
+  ]
+}</pre>
+      </div>
+          <p>
+Next, the holder needs to indicate what, if anything else, they wish to reveal
+to the verifiers by specifying JSON pointers for selective disclosure. In our
+windsurfing competition scenario a sailor (the holder) has just completed their
+first day of racing and wishes to reveal to the general public (the verifiers)
+all the details of the windsurfing boards they used in the competition. These
+are shown below. Note that this slightly overlaps with the mandatory disclosed
+information which included only the year of their most recent board.
+          </p>
+          <div class="example" id="example-selective-disclosure-pointers">
+        <div class="marker">
+    <a class="self-link" href="#example-selective-disclosure-pointers">Example<bdi> 62</bdi></a><span class="example-title">: Selective Disclosure Pointers</span>
+  </div> <pre class="nohighlight">["/boards/0", "/boards/1"]</pre>
+      </div>
+          <p>
+To produce the <code>revealDocument</code>, i.e., the unsigned document that will
+eventually be signed and sent to the verifier, we append the selective pointers
+to the mandatory pointers and input these combined pointers along with the
+document without proof to the algorithm of Section <a href="#selectjsonld" class="sec-ref"><bdi class="secno">3.3.13 </bdi>selectJsonLd</a>
+to give the result shown below.
+          </p>
+          <div class="example" id="example-unsigned-reveal-document">
+        <div class="marker">
+    <a class="self-link" href="#example-unsigned-reveal-document">Example<bdi> 63</bdi></a><span class="example-title">: Unsigned Reveal Document</span>
+  </div> <pre class="nohighlight">{
+  "@context": [
+    "https://www.w3.org/ns/credentials/v2",
+    {
+      "@vocab": "https://windsurf.grotto-networking.com/selective#"
+    }
+  ],
+  "type": [
+    "VerifiableCredential"
+  ],
+  "sailNumber": "Earth101",
+  "sails": [
+    {
+      "size": 6.1,
+      "sailName": "Lahaina",
+      "year": 2023
+    },
+    {
+      "size": 7,
+      "sailName": "Lahaina",
+      "year": 2020
+    }
+  ],
+  "boards": [
+    {
+      "year": 2022,
+      "boardName": "CompFoil170",
+      "brand": "Wailea"
+    },
+    {
+      "boardName": "Kanaha Custom",
+      "brand": "Wailea",
+      "year": 2019
+    }
+  ]
+}</pre>
+      </div>
+          <p>
+Now that we know what the revealed document looks like, we need to furnish
+appropriately updated information to the verifier on which statements are
+mandatory, the signatures for the selected non-mandatory statements, and the
+mapping between canonical blank node ids for the reveal document and a subset of
+the HMAC blank node ids. Running step 6 of the
+<a href="#createdisclosuredata" class="sec-ref"><bdi class="secno">3.4.4 </bdi>createDisclosureData</a> yields an abundance of information about
+various statement groups relative to the original document. Below we show a
+portion of the indexes for those groups.
+          </p>
+          <div class="example" id="example-derived-group-indexes">
+        <div class="marker">
+    <a class="self-link" href="#example-derived-group-indexes">Example<bdi> 64</bdi></a><span class="example-title">: Derived Group Indexes</span>
+  </div> <pre class="nohighlight">{
+  "combinedIndexes": [ 3, 4, 5, 6, 7, 8, 9, 10, 11, 15, 16, 17, 18, 20, 22, 23, 24, 25 ],
+  "mandatoryIndexes": [ 5, 6, 7, 8, 15, 16, 18, 20, 22, 23, 24, 25 ],
+  "nonMandatoryIndexes": [ 0, 1, 2, 3, 4, 9, 10, 11, 12, 13, 14, 17, 19, 21 ],
+  "selectiveIndexes": [ 3, 4, 5, 9, 10, 11, 15, 16, 17 ]
+}</pre>
+      </div>
+          <p>
+The verifier needs to be able to aggregate and hash the mandatory statements. To
+enable this we furnish them with a list of indexes of the mandatory statements
+adjusted to their positions in the reveal document. In the previous example the
+<code>combinedIndexes</code> show the indexes of all the original nquads (statements) that
+make up the reveal document, in order. To come up with the adjusted mandatory
+indexes shown below we obtain the index of each of original mandatory indexes
+relative to the <code>combinedIndexes</code> as shown below.
+          </p>
+          <div class="example" id="example-adjusted-mandatory-indexes">
+        <div class="marker">
+    <a class="self-link" href="#example-adjusted-mandatory-indexes">Example<bdi> 65</bdi></a><span class="example-title">: Adjusted Mandatory Indexes</span>
+  </div> <pre class="nohighlight">{
+    "adjMandatoryIndexes":[2, 3, 4, 5, 9, 10, 12, 13, 14, 15, 16, 17]
+}</pre>
+      </div>
+          <p>
+We have to furnish the verifier with a list of signatures for those selective
+statements (nquads) that are not mandatory. The original list of signatures
+corresponds to every non-mandatory statement and the indexes of these in the
+original document are given above. We now compute a list of adjusted signature
+indexes by computing the index of each selective index in the non-mandatory
+index list, ignoring any selective index not present in the list. We then use
+the adjusted signature indexes to obtain the filtered signature list. These
+lists are shown below.
+          </p>
+          <div class="example" id="example-filtered-signatures">
+        <div class="marker">
+    <a class="self-link" href="#example-filtered-signatures">Example<bdi> 66</bdi></a><span class="example-title">: Filtered Signatures</span>
+  </div> <pre class="nohighlight">{
+    "adjSignatureIndexes":[3, 4, 5, 6, 7, 11],
+    "filteredSignatures":[
+        "6d030c724a5c300128d79582e82f0ca376c2116146b4e4e4331343f8b24c75f9024a8bc1ed19c247b497ce4e7ed1856282d27917383bd400286f9ca0d5634d93",
+        "a501e56111a551592ff965f53a3258275f4ec3b8a9bd5c14be6f744a7dc88cd44bbb2f69af90c79b7c1595530f5692ea8d2f84f3f8c90de255e696346df2bf03",
+        "3bf1e3d2fc6cb89673a551ad82830a2b666518abe12d7dffbd40af74bf8c4e5b3356bda20b75c9a426ce73c07f5bf3a7f9cb1a2cfcd44af9520ed35e73565593",
+        "766d87b78b2ffde737b351d1a9eba5fbec841b1e12ae9c3235045d2dae592b224382aaf887e12d54dcdcf89f95965bcaac737cc012ad52a6aba88e0da67af1ed",
+        "39130b5d8cf7979f4ecdced20e4d9e8fb725adeafd067e9e6815101bbef702a439e9b73ea065de7a67a4c1908d1e314b38448da0dabba9eb4ef0545b8851dbe0",
+        "bd25bdabcf112d9f6559d83665e2be71ff9c16553f3e3ab1d5b515017307437b5fe097e3d8850dbabcb71337cedec8f75585fb743be5113b53d07627debf834a"]
+}</pre>
+      </div>
+          <p>
+The last important piece of disclosure data is a mapping of canonical blank node
+ids to HMAC based ids, the <code>labelMap</code>, computed according to Section
+<a href="#createdisclosuredata" class="sec-ref"><bdi class="secno">3.4.4 </bdi>createDisclosureData</a> steps 12-14. This is shown below along with
+the rest of the disclosure data minus the reveal document.
+          </p>
+          <div class="example" id="example-disclosure-data">
+        <div class="marker">
+    <a class="self-link" href="#example-disclosure-data">Example<bdi> 67</bdi></a><span class="example-title">: Disclosure Data</span>
+  </div> <pre class="nohighlight">{
+  "baseSignature": "5a26e45631504cf42f445b751f01677d5c4b33d89b90d6750429103a8c7ca54a81ca365079d96772920a35e561ef663882fbd4e89d4d10ccab0ce78c5f7d9103",
+  "publicKey": "zDnaeTHfhmSaQKBc7CmdL3K7oYg3D6SC7yowe2eBeVd2DH32r",
+  "signatures": [
+    "6d030c724a5c300128d79582e82f0ca376c2116146b4e4e4331343f8b24c75f9024a8bc1ed19c247b497ce4e7ed1856282d27917383bd400286f9ca0d5634d93",
+    "a501e56111a551592ff965f53a3258275f4ec3b8a9bd5c14be6f744a7dc88cd44bbb2f69af90c79b7c1595530f5692ea8d2f84f3f8c90de255e696346df2bf03",
+    "3bf1e3d2fc6cb89673a551ad82830a2b666518abe12d7dffbd40af74bf8c4e5b3356bda20b75c9a426ce73c07f5bf3a7f9cb1a2cfcd44af9520ed35e73565593",
+    "766d87b78b2ffde737b351d1a9eba5fbec841b1e12ae9c3235045d2dae592b224382aaf887e12d54dcdcf89f95965bcaac737cc012ad52a6aba88e0da67af1ed",
+    "39130b5d8cf7979f4ecdced20e4d9e8fb725adeafd067e9e6815101bbef702a439e9b73ea065de7a67a4c1908d1e314b38448da0dabba9eb4ef0545b8851dbe0",
+    "bd25bdabcf112d9f6559d83665e2be71ff9c16553f3e3ab1d5b515017307437b5fe097e3d8850dbabcb71337cedec8f75585fb743be5113b53d07627debf834a"
+  ],
+  "labelMap": {
+    "dataType": "Map",
+    "value": [
+      ["c14n0", "u4YIOZn1MHES1Z4Ij2hWZG3R4dEYBqg5fHTyDEvYhC38"],
+      ["c14n1", "uk0AeXgJ4e6m1XsV5-xFud0L_1mUjZ9Mffhg5aZGTyDk"],
+      ["c14n2", "uVkUuBrlOaELGVQWJD4M_qW5bcKEHWGNbOrPA_qAOKKw"],
+      ["c14n3", "ukR2991GJuy_Tkjem_x7pLVpS4C4GkZAcuGtiPhBfSSc"],
+      ["c14n4", "uQ-qOZUDlozRsGk46ux9gp9fjT28Fy3g3nctmMoqi_U0"]
+    ]
+  },
+  "mandatoryIndexes": [2, 3, 4, 5, 9, 10, 12, 13, 14, 15, 16, 17]
+}</pre>
+      </div>
+          <p>
+Finally using the disclosure data above with the algorithm of Section
+<a href="#serializederivedproofvalue" class="sec-ref"><bdi class="secno">3.4.7 </bdi>serializeDerivedProofValue</a> we obtain the signed derived (reveal)
+document shown below.
+          </p>
+          <div class="example" id="example-signed-derived-document">
+        <div class="marker">
+    <a class="self-link" href="#example-signed-derived-document">Example<bdi> 68</bdi></a><span class="example-title">: Signed Derived Document</span>
+  </div> <pre class="nohighlight">{
+  "@context": [
+    "https://www.w3.org/ns/credentials/v2",
+    {
+      "@vocab": "https://windsurf.grotto-networking.com/selective#"
+    }
+  ],
+  "type": [
+    "VerifiableCredential"
+  ],
+  "sailNumber": "Earth101",
+  "sails": [
+    {
+      "size": 6.1,
+      "sailName": "Lahaina",
+      "year": 2023
+    },
+    {
+      "size": 7,
+      "sailName": "Lahaina",
+      "year": 2020
+    }
+  ],
+  "boards": [
+    {
+      "year": 2022,
+      "boardName": "CompFoil170",
+      "brand": "Wailea"
+    },
+    {
+      "boardName": "Kanaha Custom",
+      "brand": "Wailea",
+      "year": 2019
+    }
+  ],
+  "proof": {
+    "type": "DataIntegrityProof",
+    "cryptosuite": "ecdsa-sd-2023",
+    "created": "2023-08-15T23:36:38Z",
+    "verificationMethod": "did:key:zDnaepBuvsQ8cpsWrVKw8fbpGpvPeNSjVPTWoq6cRqaYzBKVP#zDnaepBuvsQ8cpsWrVKw8fbpGpvPeNSjVPTWoq6cRqaYzBKVP",
+    "proofPurpose": "assertionMethod",
+    "proofValue": "u2V0BhVhAWibkVjFQTPQvRFt1HwFnfVxLM9ibkNZ1BCkQOox8pUqByjZQedlncpIKNeVh72Y4gvvU6J1NEMyrDOeMX32RA1gjgCQCKnLOGbY_FuM-ASpSkkOxsIR2E8n7Ml2q1UQ6tEwzi5OGWEBtAwxySlwwASjXlYLoLwyjdsIRYUa05OQzE0P4skx1-QJKi8HtGcJHtJfOTn7RhWKC0nkXODvUAChvnKDVY02TWEClAeVhEaVRWS_5ZfU6MlgnX07DuKm9XBS-b3RKfciM1Eu7L2mvkMebfBWVUw9WkuqNL4Tz-MkN4lXmljRt8r8DWEA78ePS_Gy4lnOlUa2CgworZmUYq-Etff-9QK90v4xOWzNWvaILdcmkJs5zwH9b86f5yxos_NRK-VIO015zVlWTWEB2bYe3iy_95zezUdGp66X77IQbHhKunDI1BF0trlkrIkOCqviH4S1U3Nz4n5WWW8qsc3zAEq1Spquojg2mevHtWEA5EwtdjPeXn07NztIOTZ6PtyWt6v0Gfp5oFRAbvvcCpDnptz6gZd56Z6TBkI0eMUs4RI2g2rup607wVFuIUdvgWEC9Jb2rzxEtn2VZ2DZl4r5x_5wWVT8-OrHVtRUBcwdDe1_gl-PYhQ26vLcTN87eyPdVhft0O-URO1PQdifev4NKpQBYIOGCDmZ9TBxEtWeCI9oVmRt0eHRGAaoOXx08gxL2IQt_AVggk0AeXgJ4e6m1XsV5-xFud0L_1mUjZ9Mffhg5aZGTyDkCWCBWRS4GuU5oQsZVBYkPgz-pbltwoQdYY1s6s8D-oA4orANYIJEdvfdRibsv05I3pv8e6S1aUuAuBpGQHLhrYj4QX0knBFggQ-qOZUDlozRsGk46ux9gp9fjT28Fy3g3nctmMoqi_U2MAgMEBQkKDA0ODxAR"
+  }
+}</pre>
+      </div>
+        </section>
       </section>
     </section>
 
@@ -3987,18 +4775,12 @@ Add <code>secretKeymultibase</code> representation.
 
 <section id="references" class="appendix"><div class="header-wrapper"><h2 id="c-references"><bdi class="secno">C. </bdi>References</h2><a class="self-link" href="#references" aria-label="Permalink for Appendix C."></a></div><section id="normative-references"><div class="header-wrapper"><h3 id="c-1-normative-references"><bdi class="secno">C.1 </bdi>Normative references</h3><a class="self-link" href="#normative-references" aria-label="Permalink for Appendix C.1"></a></div>
     
-    <dl class="bibliography"><dt id="bib-did-core">[DID-CORE]</dt><dd>
-      <a href="https://www.w3.org/TR/did-core/"><cite>Decentralized Identifiers (DIDs) v1.0</cite></a>. Manu Sporny; Amy Guy; Markus Sabadello; Drummond Reed.  W3C. 19 July 2022. W3C Recommendation. URL: <a href="https://www.w3.org/TR/did-core/">https://www.w3.org/TR/did-core/</a>
-    </dd><dt id="bib-fips-186-5">[FIPS-186-5]</dt><dd>
+    <dl class="bibliography"><dt id="bib-fips-186-5">[FIPS-186-5]</dt><dd>
       <a href="https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.186-5.pdf"><cite>FIPS PUB 186-5: Digital Signature Standard (DSS)</cite></a>.  U.S. Department of Commerce/National Institute of Standards and Technology. 3 February 2023. National Standard. URL: <a href="https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.186-5.pdf">https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.186-5.pdf</a>
-    </dd><dt id="bib-multibase">[MULTIBASE]</dt><dd>
-      <a href="https://datatracker.ietf.org/doc/html/draft-multiformats-multibase-01"><cite>Multibase</cite></a>. URL: <a href="https://datatracker.ietf.org/doc/html/draft-multiformats-multibase-01">https://datatracker.ietf.org/doc/html/draft-multiformats-multibase-01</a>
-    </dd><dt id="bib-multicodec">[MULTICODEC]</dt><dd>
-      <a href="https://github.com/multiformats/multicodec/"><cite>Multicodec</cite></a>. URL: <a href="https://github.com/multiformats/multicodec/">https://github.com/multiformats/multicodec/</a>
     </dd><dt id="bib-nist-sp-800-186">[NIST-SP-800-186]</dt><dd>
       <cite>Recommendations for Discrete Logarithm-based Cryptography: Elliptic Curve Domain Parameters</cite>. Lily Chen; Dustin Moody; Karen Randall; Andrew Regenscheid; Angela Robinson.  National Institute of Standards and Technology. February 2023. 
     </dd><dt id="bib-rdf-canon">[RDF-CANON]</dt><dd>
-      <a href="https://www.w3.org/TR/rdf-canon/"><cite>RDF Dataset Canonicalization</cite></a>. Dave Longley; Gregg Kellogg; Dan Yamamoto.  W3C. 1 September 2023. W3C Working Draft. URL: <a href="https://www.w3.org/TR/rdf-canon/">https://www.w3.org/TR/rdf-canon/</a>
+      <a href="https://www.w3.org/TR/rdf-canon/"><cite>RDF Dataset Canonicalization</cite></a>. Dave Longley; Gregg Kellogg; Dan Yamamoto.  W3C. 4 October 2023. W3C Working Draft. URL: <a href="https://www.w3.org/TR/rdf-canon/">https://www.w3.org/TR/rdf-canon/</a>
     </dd><dt id="bib-rfc2119">[RFC2119]</dt><dd>
       <a href="https://www.rfc-editor.org/rfc/rfc2119"><cite>Key words for use in RFCs to Indicate Requirement Levels</cite></a>. S. Bradner.  IETF. March 1997. Best Current Practice. URL: <a href="https://www.rfc-editor.org/rfc/rfc2119">https://www.rfc-editor.org/rfc/rfc2119</a>
     </dd><dt id="bib-rfc3986">[RFC3986]</dt><dd>
@@ -4016,18 +4798,20 @@ Add <code>secretKeymultibase</code> representation.
     </dd><dt id="bib-rfc8785">[RFC8785]</dt><dd>
       <a href="https://www.rfc-editor.org/rfc/rfc8785"><cite>JSON Canonicalization Scheme (JCS)</cite></a>. A. Rundgren; B. Jordan; S. Erdtman.  IETF. June 2020. Informational. URL: <a href="https://www.rfc-editor.org/rfc/rfc8785">https://www.rfc-editor.org/rfc/rfc8785</a>
     </dd><dt id="bib-vc-data-integrity">[VC-DATA-INTEGRITY]</dt><dd>
-      <a href="https://www.w3.org/TR/vc-data-integrity/"><cite>Verifiable Credential Data Integrity 1.0</cite></a>. Manu Sporny; Dave Longley; Greg Bernstein; Dmitri Zagidulin; Sebastian Crane.  W3C. 2 September 2023. W3C Working Draft. URL: <a href="https://www.w3.org/TR/vc-data-integrity/">https://www.w3.org/TR/vc-data-integrity/</a>
+      <a href="https://www.w3.org/TR/vc-data-integrity/"><cite>Verifiable Credential Data Integrity 1.0</cite></a>. Manu Sporny; Dave Longley; Greg Bernstein; Dmitri Zagidulin; Sebastian Crane.  W3C. 12 October 2023. W3C Working Draft. URL: <a href="https://www.w3.org/TR/vc-data-integrity/">https://www.w3.org/TR/vc-data-integrity/</a>
     </dd><dt id="bib-xmlschema11-2">[XMLSCHEMA11-2]</dt><dd>
       <a href="https://www.w3.org/TR/xmlschema11-2/"><cite>W3C XML Schema Definition Language (XSD) 1.1 Part 2: Datatypes</cite></a>. David Peterson; Sandy Gao; Ashok Malhotra; Michael Sperberg-McQueen; Henry Thompson; Paul V. Biron et al.  W3C. 5 April 2012. W3C Recommendation. URL: <a href="https://www.w3.org/TR/xmlschema11-2/">https://www.w3.org/TR/xmlschema11-2/</a>
     </dd></dl>
   </section><section id="informative-references"><div class="header-wrapper"><h3 id="c-2-informative-references"><bdi class="secno">C.2 </bdi>Informative references</h3><a class="self-link" href="#informative-references" aria-label="Permalink for Appendix C.2"></a></div>
     
-    <dl class="bibliography"><dt id="bib-nist-sp-800-57-part-1">[NIST-SP-800-57-Part-1]</dt><dd>
+    <dl class="bibliography"><dt id="bib-did-core">[DID-CORE]</dt><dd>
+      <a href="https://www.w3.org/TR/did-core/"><cite>Decentralized Identifiers (DIDs) v1.0</cite></a>. Manu Sporny; Amy Guy; Markus Sabadello; Drummond Reed.  W3C. 19 July 2022. W3C Recommendation. URL: <a href="https://www.w3.org/TR/did-core/">https://www.w3.org/TR/did-core/</a>
+    </dd><dt id="bib-nist-sp-800-57-part-1">[NIST-SP-800-57-Part-1]</dt><dd>
       <a href="https://doi.org/10.6028/NIST.SP.800-57pt1r5"><cite>Recommendation for Key Management: Part 1 – General</cite></a>. Elaine Barker.  National Institute of Standards and Technology. May 2020. URL: <a href="https://doi.org/10.6028/NIST.SP.800-57pt1r5">https://doi.org/10.6028/NIST.SP.800-57pt1r5</a>
     </dd><dt id="bib-secg2">[SECG2]</dt><dd>
       <a href="http://www.secg.org/sec2-v2.pdf"><cite>SEC 2: Recommended Elliptic Curve Domain Parameters</cite></a>.  Certicom Research. January 27, 2010. URL: <a href="http://www.secg.org/sec2-v2.pdf">http://www.secg.org/sec2-v2.pdf</a>
     </dd><dt id="bib-vc-data-model-2.0">[VC-DATA-MODEL-2.0]</dt><dd>
-      <a href="https://www.w3.org/TR/vc-data-model-2.0/"><cite>Verifiable Credentials Data Model v2.0</cite></a>. Manu Sporny; Orie Steele; Michael Jones; Gabe Cohen; Oliver Terbu.  W3C. 31 August 2023. W3C Working Draft. URL: <a href="https://www.w3.org/TR/vc-data-model-2.0/">https://www.w3.org/TR/vc-data-model-2.0/</a>
+      <a href="https://www.w3.org/TR/vc-data-model-2.0/"><cite>Verifiable Credentials Data Model v2.0</cite></a>. Manu Sporny; Orie Steele; Michael Jones; Gabe Cohen; Oliver Terbu.  W3C. 12 October 2023. W3C Working Draft. URL: <a href="https://www.w3.org/TR/vc-data-model-2.0/">https://www.w3.org/TR/vc-data-model-2.0/</a>
     </dd></dl>
   </section></section><p role="navigation" id="back-to-top">
     <a href="#title"><abbr title="Back to Top">↑</abbr></a>
