@@ -827,10 +827,10 @@ Multibase section</a> of [<cite><a class="bibref" data-link-type="biblio" href="
               DataIntegrityProof</span>
   </div> <pre class="nohighlight">{
   "@context": [
-    {"title": "https://schema.org/title"},
+    {"myWebsite": "https://vocabulary.example/myWebsite"},
     "https://www.w3.org/ns/credentials/v2"
   ],
-  "title": "Hello world!",
+  "myWebsite": "https://hello.world.example/",
   "proof": {
     "type": "DataIntegrityProof",
     "cryptosuite": "ecdsa-rdfc-2019",
@@ -3419,7 +3419,7 @@ and obtain its hash, as shown in the next three examples.
     <a class="self-link" href="#example-canonical-proof-options-document">Example<bdi> 10</bdi></a><span class="example-title">: Canonical Proof Options Document</span>
   </div> <pre class="nohighlight">_:c14n0 &lt;http://purl.org/dc/terms/created&gt; "2023-02-24T23:36:38Z"^^&lt;http://www.w3.org/2001/XMLSchema#dateTime&gt; .
 _:c14n0 &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt; &lt;https://w3id.org/security#DataIntegrityProof&gt; .
-_:c14n0 &lt;https://w3id.org/security#cryptosuite&gt; "ecdsa-rdfc-2019" .
+_:c14n0 &lt;https://w3id.org/security#cryptosuite&gt; "ecdsa-rdfc-2019"^^&lt;https://w3id.org/security#cryptosuiteString&gt; .
 _:c14n0 &lt;https://w3id.org/security#proofPurpose&gt; &lt;https://w3id.org/security#assertionMethod&gt; .
 _:c14n0 &lt;https://w3id.org/security#verificationMethod&gt; &lt;https://vc.example/issuers/5678#zDnaepBuvsQ8cpsWrVKw8fbpGpvPeNSjVPTWoq6cRqaYzBKVP&gt; .</pre>
       </div>
@@ -3427,7 +3427,7 @@ _:c14n0 &lt;https://w3id.org/security#verificationMethod&gt; &lt;https://vc.exam
         <div class="example" id="example-hash-of-canonical-proof-options-document-hex">
         <div class="marker">
     <a class="self-link" href="#example-hash-of-canonical-proof-options-document-hex">Example<bdi> 11</bdi></a><span class="example-title">: Hash of Canonical Proof Options Document (hex)</span>
-  </div> <pre class="nohighlight">fd3a373a9e58c9e8ba14d5cdc0d8eb73447da529ff412943623af9a309994698</pre>
+  </div> <pre class="nohighlight">1e00437865de4485028892c7da6f5e95de2fefe6ad72d684d2bec55e870ba9a0</pre>
       </div>
 
         <p>
@@ -3438,19 +3438,19 @@ compute the ECDSA signature, and then base-58-btc encode the signature.
         <div class="example" id="example-combine-hashes-of-proof-options-and-credential-hex">
         <div class="marker">
     <a class="self-link" href="#example-combine-hashes-of-proof-options-and-credential-hex">Example<bdi> 12</bdi></a><span class="example-title">: Combine hashes of Proof Options and Credential (hex)</span>
-  </div> <pre class="nohighlight">fd3a373a9e58c9e8ba14d5cdc0d8eb73447da529ff412943623af9a309994698517744132ae165a5349155bef0bb0cf2258fff99dfe1dbd914b938d775a36017</pre>
+  </div> <pre class="nohighlight">1e00437865de4485028892c7da6f5e95de2fefe6ad72d684d2bec55e870ba9a0517744132ae165a5349155bef0bb0cf2258fff99dfe1dbd914b938d775a36017</pre>
       </div>
 
         <div class="example" id="example-signature-of-combined-hashes-hex">
         <div class="marker">
     <a class="self-link" href="#example-signature-of-combined-hashes-hex">Example<bdi> 13</bdi></a><span class="example-title">: Signature of Combined Hashes (hex)</span>
-  </div> <pre class="nohighlight">5167a7a92a1b99393d81d2fe170fc24c2d15abd1c96309489c8544fad0db33e4e3b887fbda754998e94bc8c403f93af2a383c0238ef91d30d9df33732156c2ab</pre>
+  </div> <pre class="nohighlight">a5d86febb7125f5e964de2be5a49048c5fdbca1516b3c41cca836199d645a1b4105a9af3525893ba09cff76e5c43b2b4dcb61e2018fa3c47d646510b15824a6d</pre>
       </div>
 
         <div class="example" id="example-signature-of-combined-hashes-base-58-btc">
         <div class="marker">
     <a class="self-link" href="#example-signature-of-combined-hashes-base-58-btc">Example<bdi> 14</bdi></a><span class="example-title">: Signature of Combined Hashes base-58-btc</span>
-  </div> <pre class="nohighlight">z2dQ4WQiprJY22UexKSS9JBAwerKBrdmP2ZbBGAbFDa4GMuXLqEDcBYWhgt281y7vb2KdHD9mV6CPTggUQsJoFB7x</pre>
+  </div> <pre class="nohighlight">z4KKHqaD4F7GHyLA6f3wK9Ehxtogv5jQRFpQBM4sXkSf7Bozd7bAf7dF6UkfM2aSCBMm24mPvaFXmzQmimzaEC3SL</pre>
       </div>
 
         <p>Assemble the signed credential with the following two steps:</p>
@@ -3492,7 +3492,7 @@ option document.
     "created": "2023-02-24T23:36:38Z",
     "verificationMethod": "https://vc.example/issuers/5678#zDnaepBuvsQ8cpsWrVKw8fbpGpvPeNSjVPTWoq6cRqaYzBKVP",
     "proofPurpose": "assertionMethod",
-    "proofValue": "z2dQ4WQiprJY22UexKSS9JBAwerKBrdmP2ZbBGAbFDa4GMuXLqEDcBYWhgt281y7vb2KdHD9mV6CPTggUQsJoFB7x"
+    "proofValue": "z4KKHqaD4F7GHyLA6f3wK9Ehxtogv5jQRFpQBM4sXkSf7Bozd7bAf7dF6UkfM2aSCBMm24mPvaFXmzQmimzaEC3SL"
   }
 }</pre>
       </div>
@@ -3586,7 +3586,7 @@ and obtain its hash, as shown in the next three examples.
     <a class="self-link" href="#example-canonical-proof-options-document-0">Example<bdi> 21</bdi></a><span class="example-title">: Canonical Proof Options Document</span>
   </div> <pre class="nohighlight">_:c14n0 &lt;http://purl.org/dc/terms/created&gt; "2023-02-24T23:36:38Z"^^&lt;http://www.w3.org/2001/XMLSchema#dateTime&gt; .
 _:c14n0 &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt; &lt;https://w3id.org/security#DataIntegrityProof&gt; .
-_:c14n0 &lt;https://w3id.org/security#cryptosuite&gt; "ecdsa-rdfc-2019" .
+_:c14n0 &lt;https://w3id.org/security#cryptosuite&gt; "ecdsa-rdfc-2019"^^&lt;https://w3id.org/security#cryptosuiteString&gt; .
 _:c14n0 &lt;https://w3id.org/security#proofPurpose&gt; &lt;https://w3id.org/security#assertionMethod&gt; .
 _:c14n0 &lt;https://w3id.org/security#verificationMethod&gt; &lt;https://vc.example/issuers/5678#z82LkuBieyGShVBhvtE2zoiD6Kma4tJGFtkAhxR5pfkp5QPw4LutoYWhvQCnGjdVn14kujQ&gt; .</pre>
       </div>
@@ -3594,7 +3594,7 @@ _:c14n0 &lt;https://w3id.org/security#verificationMethod&gt; &lt;https://vc.exam
         <div class="example" id="example-hash-of-canonical-proof-options-document-hex-0">
         <div class="marker">
     <a class="self-link" href="#example-hash-of-canonical-proof-options-document-hex-0">Example<bdi> 22</bdi></a><span class="example-title">: Hash of Canonical Proof Options Document (hex)</span>
-  </div> <pre class="nohighlight">a94decfdc216eb453ab52929f550269a08823c0e2ec1a98d1aa9da10bdfea699e69e565290106a73727120a8f06a6742</pre>
+  </div> <pre class="nohighlight">496154e093b85e177b218821cb7f0307fe7062d0aec5b7d31bad9c44c4e6c32c4943f18cb81b9b515412636b715e43e0</pre>
       </div>
 
         <p>
@@ -3605,19 +3605,19 @@ compute the ECDSA signature, and then base-58-btc encode the signature.
         <div class="example" id="example-combine-hashes-of-proof-options-and-credential-hex-0">
         <div class="marker">
     <a class="self-link" href="#example-combine-hashes-of-proof-options-and-credential-hex-0">Example<bdi> 23</bdi></a><span class="example-title">: Combine hashes of Proof Options and Credential (hex)</span>
-  </div> <pre class="nohighlight">a94decfdc216eb453ab52929f550269a08823c0e2ec1a98d1aa9da10bdfea699e69e565290106a73727120a8f06a67428bf6e01df72c5b62f91b685231915ac4b8c58ea95f002c6b8f6bfafa1b251df476b56b8e01518e317dab099d3ecbff96</pre>
+  </div> <pre class="nohighlight">496154e093b85e177b218821cb7f0307fe7062d0aec5b7d31bad9c44c4e6c32c4943f18cb81b9b515412636b715e43e08bf6e01df72c5b62f91b685231915ac4b8c58ea95f002c6b8f6bfafa1b251df476b56b8e01518e317dab099d3ecbff96</pre>
       </div>
 
         <div class="example" id="example-signature-of-combined-hashes-hex-0">
         <div class="marker">
     <a class="self-link" href="#example-signature-of-combined-hashes-hex-0">Example<bdi> 24</bdi></a><span class="example-title">: Signature of Combined Hashes (hex)</span>
-  </div> <pre class="nohighlight">f58f2083b62989d6d23a0861e14101d5f8ae6423e56dec5bf07ed0c10c85ef6355cc19cf849a7e17a98ba1b138f1a9998f303cd18decb375b62d4107363b9a310fe39be9879d122eda73bf97a786ec49e0761b35405939dcd00b4e1a28aef7ce</pre>
+  </div> <pre class="nohighlight">8b0de12071420d74ea7f88e95f3b29048372dfbba62003d2384e1b960a3197b99316d4af8488358f8409570397867be8cc4190892b8e12b157d5edf335aa051a9c0bf5df5e4ffe1cfd7b9577e6ef8b5b034234963b8ae7688888835cb15b08a2</pre>
       </div>
 
         <div class="example" id="example-signature-of-combined-hashes-base-58-btc-0">
         <div class="marker">
     <a class="self-link" href="#example-signature-of-combined-hashes-base-58-btc-0">Example<bdi> 25</bdi></a><span class="example-title">: Signature of Combined Hashes base-58-btc</span>
-  </div> <pre class="nohighlight">z2TbABGK6hv4svEB3z97iSHb53AAgkpdF29ufhjftTdcAHsbif9E98qZwu3qePHBnBwE283o5ph6EgBHJYSmvtfweL7xyCaoJ6NDWWCyqxz6M2MumKaMXUuaoHihsRpuKaTtH</pre>
+  </div> <pre class="nohighlight">zpuEu1cJ7Wpb453b4RiV3ex7SKGYm3fdAd4WUTVpR8Me3ZXkCCVUfd4M4TvHF9Wv1tRNWe5SkZhQTGYLUxdugFRGC2uyYRNTnimS6UMN6wkenTViRK1Mei7DooSBpumHHjYu</pre>
       </div>
 
         <p>Assemble the signed credential with the following two steps:</p>
@@ -3659,7 +3659,7 @@ option document.
     "created": "2023-02-24T23:36:38Z",
     "verificationMethod": "https://vc.example/issuers/5678#z82LkuBieyGShVBhvtE2zoiD6Kma4tJGFtkAhxR5pfkp5QPw4LutoYWhvQCnGjdVn14kujQ",
     "proofPurpose": "assertionMethod",
-    "proofValue": "z2TbABGK6hv4svEB3z97iSHb53AAgkpdF29ufhjftTdcAHsbif9E98qZwu3qePHBnBwE283o5ph6EgBHJYSmvtfweL7xyCaoJ6NDWWCyqxz6M2MumKaMXUuaoHihsRpuKaTtH"
+    "proofValue": "zpuEu1cJ7Wpb453b4RiV3ex7SKGYm3fdAd4WUTVpR8Me3ZXkCCVUfd4M4TvHF9Wv1tRNWe5SkZhQTGYLUxdugFRGC2uyYRNTnimS6UMN6wkenTViRK1Mei7DooSBpumHHjYu"
   }
 }</pre>
       </div>
@@ -4035,46 +4035,50 @@ inspect the sailors equipment to certify that what has been declared is
   </div> <pre class="nohighlight">{
   "@context": [
     "https://www.w3.org/ns/credentials/v2",
-    {"@vocab": "https://windsurf.grotto-networking.com/selective#"}
+    {
+      "@vocab": "https://windsurf.grotto-networking.com/selective#"
+    }
   ],
   "type": [
     "VerifiableCredential"
   ],
-  "sailNumber": "Earth101",
-  "sails": [
-    {
-      "size": 5.5,
-      "sailName": "Kihei",
-      "year": 2023
-    },
-    {
-      "size": 6.1,
-      "sailName": "Lahaina",
-      "year": 2023
-    },
-    {
-      "size": 7.0,
-      "sailName": "Lahaina",
-      "year": 2020
-    },
-    {
-      "size": 7.8,
-      "sailName": "Lahaina",
-      "year": 2023
-    }
-  ],
-  "boards": [
-    {
-      "boardName": "CompFoil170",
-      "brand": "Wailea",
-      "year": 2022
-    },
-    {
-      "boardName": "Kanaha Custom",
-      "brand": "Wailea",
-      "year": 2019
-    }
-  ]
+  "credentialSubject": {
+    "sailNumber": "Earth101",
+    "sails": [
+      {
+        "size": 5.5,
+        "sailName": "Kihei",
+        "year": 2023
+      },
+      {
+        "size": 6.1,
+        "sailName": "Lahaina",
+        "year": 2023
+      },
+      {
+        "size": 7.0,
+        "sailName": "Lahaina",
+        "year": 2020
+      },
+      {
+        "size": 7.8,
+        "sailName": "Lahaina",
+        "year": 2023
+      }
+    ],
+    "boards": [
+      {
+        "boardName": "CompFoil170",
+        "brand": "Wailea",
+        "year": 2022
+      },
+      {
+        "boardName": "Kanaha Custom",
+        "brand": "Wailea",
+        "year": 2019
+      }
+    ]
+  }
 }</pre>
       </div>
           <p>
@@ -4088,7 +4092,7 @@ as shown below.
           <div class="example" id="example-mandatory-pointers">
         <div class="marker">
     <a class="self-link" href="#example-mandatory-pointers">Example<bdi> 51</bdi></a><span class="example-title">: Mandatory Pointers</span>
-  </div> <pre class="nohighlight">["/sailNumber", "/sails/1", "/boards/0/year", "/sails/2"]</pre>
+  </div> <pre class="nohighlight">["/credentialSubject/sailNumber", "/credentialSubject/sails/1", "/credentialSubject/boards/0/year", "/credentialSubject/sails/2"]</pre>
       </div>
           <p>
 The result of applying the above JSON pointers to the sailors equipment document
@@ -4099,11 +4103,11 @@ is shown below.
     <a class="self-link" href="#example-json-pointers-and-values">Example<bdi> 52</bdi></a><span class="example-title">: JSON Pointers and Values</span>
   </div> <pre class="nohighlight">[
   {
-    "pointer": "/sailNumber",
+    "pointer": "/credentialSubject/sailNumber",
     "value": "Earth101"
   },
   {
-    "pointer": "/sails/1",
+    "pointer": "/credentialSubject/sails/1",
     "value": {
       "size": 6.1,
       "sailName": "Lahaina",
@@ -4111,11 +4115,11 @@ is shown below.
     }
   },
   {
-    "pointer": "/boards/0/year",
+    "pointer": "/credentialSubject/boards/0/year",
     "value": 2022
   },
   {
-    "pointer": "/sails/2",
+    "pointer": "/credentialSubject/sails/2",
     "value": {
       "size": 7,
       "sailName": "Lahaina",
@@ -4138,26 +4142,27 @@ as shown below.
   "_:c14n1 &lt;https://windsurf.grotto-networking.com/selective#sailName&gt; \"Lahaina\" .\n",
   "_:c14n1 &lt;https://windsurf.grotto-networking.com/selective#size&gt; \"7.8E0\"^^&lt;http://www.w3.org/2001/XMLSchema#double&gt; .\n",
   "_:c14n1 &lt;https://windsurf.grotto-networking.com/selective#year&gt; \"2023\"^^&lt;http://www.w3.org/2001/XMLSchema#integer&gt; .\n",
-  "_:c14n2 &lt;https://windsurf.grotto-networking.com/selective#boardName&gt; \"Kanaha Custom\" .\n",
-  "_:c14n2 &lt;https://windsurf.grotto-networking.com/selective#brand&gt; \"Wailea\" .\n",
-  "_:c14n2 &lt;https://windsurf.grotto-networking.com/selective#year&gt; \"2019\"^^&lt;http://www.w3.org/2001/XMLSchema#integer&gt; .\n",
-  "_:c14n3 &lt;https://windsurf.grotto-networking.com/selective#sailName&gt; \"Lahaina\" .\n",
-  "_:c14n3 &lt;https://windsurf.grotto-networking.com/selective#size&gt; \"7\"^^&lt;http://www.w3.org/2001/XMLSchema#integer&gt; .\n",
-  "_:c14n3 &lt;https://windsurf.grotto-networking.com/selective#year&gt; \"2020\"^^&lt;http://www.w3.org/2001/XMLSchema#integer&gt; .\n",
-  "_:c14n4 &lt;https://windsurf.grotto-networking.com/selective#sailName&gt; \"Kihei\" .\n",
-  "_:c14n4 &lt;https://windsurf.grotto-networking.com/selective#size&gt; \"5.5E0\"^^&lt;http://www.w3.org/2001/XMLSchema#double&gt; .\n",
-  "_:c14n4 &lt;https://windsurf.grotto-networking.com/selective#year&gt; \"2023\"^^&lt;http://www.w3.org/2001/XMLSchema#integer&gt; .\n",
-  "_:c14n5 &lt;https://windsurf.grotto-networking.com/selective#sailName&gt; \"Lahaina\" .\n",
-  "_:c14n5 &lt;https://windsurf.grotto-networking.com/selective#size&gt; \"6.1E0\"^^&lt;http://www.w3.org/2001/XMLSchema#double&gt; .\n",
+  "_:c14n2 &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt; &lt;https://www.w3.org/2018/credentials#VerifiableCredential&gt; .\n",
+  "_:c14n2 &lt;https://www.w3.org/2018/credentials#credentialSubject&gt; _:c14n6 .\n",
+  "_:c14n3 &lt;https://windsurf.grotto-networking.com/selective#boardName&gt; \"Kanaha Custom\" .\n",
+  "_:c14n3 &lt;https://windsurf.grotto-networking.com/selective#brand&gt; \"Wailea\" .\n",
+  "_:c14n3 &lt;https://windsurf.grotto-networking.com/selective#year&gt; \"2019\"^^&lt;http://www.w3.org/2001/XMLSchema#integer&gt; .\n",
+  "_:c14n4 &lt;https://windsurf.grotto-networking.com/selective#sailName&gt; \"Lahaina\" .\n",
+  "_:c14n4 &lt;https://windsurf.grotto-networking.com/selective#size&gt; \"7\"^^&lt;http://www.w3.org/2001/XMLSchema#integer&gt; .\n",
+  "_:c14n4 &lt;https://windsurf.grotto-networking.com/selective#year&gt; \"2020\"^^&lt;http://www.w3.org/2001/XMLSchema#integer&gt; .\n",
+  "_:c14n5 &lt;https://windsurf.grotto-networking.com/selective#sailName&gt; \"Kihei\" .\n",
+  "_:c14n5 &lt;https://windsurf.grotto-networking.com/selective#size&gt; \"5.5E0\"^^&lt;http://www.w3.org/2001/XMLSchema#double&gt; .\n",
   "_:c14n5 &lt;https://windsurf.grotto-networking.com/selective#year&gt; \"2023\"^^&lt;http://www.w3.org/2001/XMLSchema#integer&gt; .\n",
-  "_:c14n6 &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt; &lt;https://www.w3.org/2018/credentials#VerifiableCredential&gt; .\n",
   "_:c14n6 &lt;https://windsurf.grotto-networking.com/selective#boards&gt; _:c14n0 .\n",
-  "_:c14n6 &lt;https://windsurf.grotto-networking.com/selective#boards&gt; _:c14n2 .\n",
+  "_:c14n6 &lt;https://windsurf.grotto-networking.com/selective#boards&gt; _:c14n3 .\n",
   "_:c14n6 &lt;https://windsurf.grotto-networking.com/selective#sailNumber&gt; \"Earth101\" .\n",
   "_:c14n6 &lt;https://windsurf.grotto-networking.com/selective#sails&gt; _:c14n1 .\n",
-  "_:c14n6 &lt;https://windsurf.grotto-networking.com/selective#sails&gt; _:c14n3 .\n",
   "_:c14n6 &lt;https://windsurf.grotto-networking.com/selective#sails&gt; _:c14n4 .\n",
-  "_:c14n6 &lt;https://windsurf.grotto-networking.com/selective#sails&gt; _:c14n5 .\n"
+  "_:c14n6 &lt;https://windsurf.grotto-networking.com/selective#sails&gt; _:c14n5 .\n",
+  "_:c14n6 &lt;https://windsurf.grotto-networking.com/selective#sails&gt; _:c14n7 .\n",
+  "_:c14n7 &lt;https://windsurf.grotto-networking.com/selective#sailName&gt; \"Lahaina\" .\n",
+  "_:c14n7 &lt;https://windsurf.grotto-networking.com/selective#size&gt; \"6.1E0\"^^&lt;http://www.w3.org/2001/XMLSchema#double&gt; .\n",
+  "_:c14n7 &lt;https://windsurf.grotto-networking.com/selective#year&gt; \"2023\"^^&lt;http://www.w3.org/2001/XMLSchema#integer&gt; .\n"
 ]</pre>
       </div>
           <p>
@@ -4171,32 +4176,33 @@ statements are grouped.
         <div class="marker">
     <a class="self-link" href="#example-canonical-hmac-document">Example<bdi> 54</bdi></a><span class="example-title">: Canonical HMAC Document</span>
   </div> <pre class="nohighlight">[
+  "_:u2IE-HtO6PyHQsGnuqhO1mX6V7RkRREhF0d0sWZlxNOY &lt;https://windsurf.grotto-networking.com/selective#sailName&gt; \"Lahaina\" .\n",
+  "_:u2IE-HtO6PyHQsGnuqhO1mX6V7RkRREhF0d0sWZlxNOY &lt;https://windsurf.grotto-networking.com/selective#size&gt; \"6.1E0\"^^&lt;http://www.w3.org/2001/XMLSchema#double&gt; .\n",
+  "_:u2IE-HtO6PyHQsGnuqhO1mX6V7RkRREhF0d0sWZlxNOY &lt;https://windsurf.grotto-networking.com/selective#year&gt; \"2023\"^^&lt;http://www.w3.org/2001/XMLSchema#integer&gt; .\n",
   "_:u3Lv2QpFgo-YAegc1cQQKWJFW2sEjQF6FfuZ0VEoMKHg &lt;https://windsurf.grotto-networking.com/selective#sailName&gt; \"Lahaina\" .\n",
   "_:u3Lv2QpFgo-YAegc1cQQKWJFW2sEjQF6FfuZ0VEoMKHg &lt;https://windsurf.grotto-networking.com/selective#size&gt; \"7.8E0\"^^&lt;http://www.w3.org/2001/XMLSchema#double&gt; .\n",
   "_:u3Lv2QpFgo-YAegc1cQQKWJFW2sEjQF6FfuZ0VEoMKHg &lt;https://windsurf.grotto-networking.com/selective#year&gt; \"2023\"^^&lt;http://www.w3.org/2001/XMLSchema#integer&gt; .\n",
   "_:u4YIOZn1MHES1Z4Ij2hWZG3R4dEYBqg5fHTyDEvYhC38 &lt;https://windsurf.grotto-networking.com/selective#boardName&gt; \"CompFoil170\" .\n",
   "_:u4YIOZn1MHES1Z4Ij2hWZG3R4dEYBqg5fHTyDEvYhC38 &lt;https://windsurf.grotto-networking.com/selective#brand&gt; \"Wailea\" .\n",
   "_:u4YIOZn1MHES1Z4Ij2hWZG3R4dEYBqg5fHTyDEvYhC38 &lt;https://windsurf.grotto-networking.com/selective#year&gt; \"2022\"^^&lt;http://www.w3.org/2001/XMLSchema#integer&gt; .\n",
-  "_:uQ-qOZUDlozRsGk46ux9gp9fjT28Fy3g3nctmMoqi_U0 &lt;https://windsurf.grotto-networking.com/selective#sailName&gt; \"Lahaina\" .\n",
-  "_:uQ-qOZUDlozRsGk46ux9gp9fjT28Fy3g3nctmMoqi_U0 &lt;https://windsurf.grotto-networking.com/selective#size&gt; \"6.1E0\"^^&lt;http://www.w3.org/2001/XMLSchema#double&gt; .\n",
+  "_:uQ-qOZUDlozRsGk46ux9gp9fjT28Fy3g3nctmMoqi_U0 &lt;https://windsurf.grotto-networking.com/selective#sailName&gt; \"Kihei\" .\n",
+  "_:uQ-qOZUDlozRsGk46ux9gp9fjT28Fy3g3nctmMoqi_U0 &lt;https://windsurf.grotto-networking.com/selective#size&gt; \"5.5E0\"^^&lt;http://www.w3.org/2001/XMLSchema#double&gt; .\n",
   "_:uQ-qOZUDlozRsGk46ux9gp9fjT28Fy3g3nctmMoqi_U0 &lt;https://windsurf.grotto-networking.com/selective#year&gt; \"2023\"^^&lt;http://www.w3.org/2001/XMLSchema#integer&gt; .\n",
-  "_:uVkUuBrlOaELGVQWJD4M_qW5bcKEHWGNbOrPA_qAOKKw &lt;https://windsurf.grotto-networking.com/selective#boardName&gt; \"Kanaha Custom\" .\n",
-  "_:uVkUuBrlOaELGVQWJD4M_qW5bcKEHWGNbOrPA_qAOKKw &lt;https://windsurf.grotto-networking.com/selective#brand&gt; \"Wailea\" .\n",
-  "_:uVkUuBrlOaELGVQWJD4M_qW5bcKEHWGNbOrPA_qAOKKw &lt;https://windsurf.grotto-networking.com/selective#year&gt; \"2019\"^^&lt;http://www.w3.org/2001/XMLSchema#integer&gt; .\n",
-  "_:ufUWJRHQ9j1jmUKHLL8k6m0CZ8g4v73gOpaM5kL3ZACQ &lt;https://windsurf.grotto-networking.com/selective#sailName&gt; \"Kihei\" .\n",
-  "_:ufUWJRHQ9j1jmUKHLL8k6m0CZ8g4v73gOpaM5kL3ZACQ &lt;https://windsurf.grotto-networking.com/selective#size&gt; \"5.5E0\"^^&lt;http://www.w3.org/2001/XMLSchema#double&gt; .\n",
-  "_:ufUWJRHQ9j1jmUKHLL8k6m0CZ8g4v73gOpaM5kL3ZACQ &lt;https://windsurf.grotto-networking.com/selective#year&gt; \"2023\"^^&lt;http://www.w3.org/2001/XMLSchema#integer&gt; .\n",
-  "_:uk0AeXgJ4e6m1XsV5-xFud0L_1mUjZ9Mffhg5aZGTyDk &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt; &lt;https://www.w3.org/2018/credentials#VerifiableCredential&gt; .\n",
+  "_:uVkUuBrlOaELGVQWJD4M_qW5bcKEHWGNbOrPA_qAOKKw &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt; &lt;https://www.w3.org/2018/credentials#VerifiableCredential&gt; .\n",
+  "_:uVkUuBrlOaELGVQWJD4M_qW5bcKEHWGNbOrPA_qAOKKw &lt;https://www.w3.org/2018/credentials#credentialSubject&gt; _:uk0AeXgJ4e6m1XsV5-xFud0L_1mUjZ9Mffhg5aZGTyDk .\n",
+  "_:ufUWJRHQ9j1jmUKHLL8k6m0CZ8g4v73gOpaM5kL3ZACQ &lt;https://windsurf.grotto-networking.com/selective#sailName&gt; \"Lahaina\" .\n",
+  "_:ufUWJRHQ9j1jmUKHLL8k6m0CZ8g4v73gOpaM5kL3ZACQ &lt;https://windsurf.grotto-networking.com/selective#size&gt; \"7\"^^&lt;http://www.w3.org/2001/XMLSchema#integer&gt; .\n",
+  "_:ufUWJRHQ9j1jmUKHLL8k6m0CZ8g4v73gOpaM5kL3ZACQ &lt;https://windsurf.grotto-networking.com/selective#year&gt; \"2020\"^^&lt;http://www.w3.org/2001/XMLSchema#integer&gt; .\n",
   "_:uk0AeXgJ4e6m1XsV5-xFud0L_1mUjZ9Mffhg5aZGTyDk &lt;https://windsurf.grotto-networking.com/selective#boards&gt; _:u4YIOZn1MHES1Z4Ij2hWZG3R4dEYBqg5fHTyDEvYhC38 .\n",
-  "_:uk0AeXgJ4e6m1XsV5-xFud0L_1mUjZ9Mffhg5aZGTyDk &lt;https://windsurf.grotto-networking.com/selective#boards&gt; _:uVkUuBrlOaELGVQWJD4M_qW5bcKEHWGNbOrPA_qAOKKw .\n",
+  "_:uk0AeXgJ4e6m1XsV5-xFud0L_1mUjZ9Mffhg5aZGTyDk &lt;https://windsurf.grotto-networking.com/selective#boards&gt; _:ukR2991GJuy_Tkjem_x7pLVpS4C4GkZAcuGtiPhBfSSc .\n",
   "_:uk0AeXgJ4e6m1XsV5-xFud0L_1mUjZ9Mffhg5aZGTyDk &lt;https://windsurf.grotto-networking.com/selective#sailNumber&gt; \"Earth101\" .\n",
+  "_:uk0AeXgJ4e6m1XsV5-xFud0L_1mUjZ9Mffhg5aZGTyDk &lt;https://windsurf.grotto-networking.com/selective#sails&gt; _:u2IE-HtO6PyHQsGnuqhO1mX6V7RkRREhF0d0sWZlxNOY .\n",
   "_:uk0AeXgJ4e6m1XsV5-xFud0L_1mUjZ9Mffhg5aZGTyDk &lt;https://windsurf.grotto-networking.com/selective#sails&gt; _:u3Lv2QpFgo-YAegc1cQQKWJFW2sEjQF6FfuZ0VEoMKHg .\n",
   "_:uk0AeXgJ4e6m1XsV5-xFud0L_1mUjZ9Mffhg5aZGTyDk &lt;https://windsurf.grotto-networking.com/selective#sails&gt; _:uQ-qOZUDlozRsGk46ux9gp9fjT28Fy3g3nctmMoqi_U0 .\n",
   "_:uk0AeXgJ4e6m1XsV5-xFud0L_1mUjZ9Mffhg5aZGTyDk &lt;https://windsurf.grotto-networking.com/selective#sails&gt; _:ufUWJRHQ9j1jmUKHLL8k6m0CZ8g4v73gOpaM5kL3ZACQ .\n",
-  "_:uk0AeXgJ4e6m1XsV5-xFud0L_1mUjZ9Mffhg5aZGTyDk &lt;https://windsurf.grotto-networking.com/selective#sails&gt; _:ukR2991GJuy_Tkjem_x7pLVpS4C4GkZAcuGtiPhBfSSc .\n",
-  "_:ukR2991GJuy_Tkjem_x7pLVpS4C4GkZAcuGtiPhBfSSc &lt;https://windsurf.grotto-networking.com/selective#sailName&gt; \"Lahaina\" .\n",
-  "_:ukR2991GJuy_Tkjem_x7pLVpS4C4GkZAcuGtiPhBfSSc &lt;https://windsurf.grotto-networking.com/selective#size&gt; \"7\"^^&lt;http://www.w3.org/2001/XMLSchema#integer&gt; .\n",
-  "_:ukR2991GJuy_Tkjem_x7pLVpS4C4GkZAcuGtiPhBfSSc &lt;https://windsurf.grotto-networking.com/selective#year&gt; \"2020\"^^&lt;http://www.w3.org/2001/XMLSchema#integer&gt; .\n"
+  "_:ukR2991GJuy_Tkjem_x7pLVpS4C4GkZAcuGtiPhBfSSc &lt;https://windsurf.grotto-networking.com/selective#boardName&gt; \"Kanaha Custom\" .\n",
+  "_:ukR2991GJuy_Tkjem_x7pLVpS4C4GkZAcuGtiPhBfSSc &lt;https://windsurf.grotto-networking.com/selective#brand&gt; \"Wailea\" .\n",
+  "_:ukR2991GJuy_Tkjem_x7pLVpS4C4GkZAcuGtiPhBfSSc &lt;https://windsurf.grotto-networking.com/selective#year&gt; \"2019\"^^&lt;http://www.w3.org/2001/XMLSchema#integer&gt; .\n"
 ]</pre>
       </div>
           <p>
@@ -4210,61 +4216,65 @@ its index in the previous list of statements is remembered.
     <a class="self-link" href="#example-add-base-transformation">Example<bdi> 55</bdi></a><span class="example-title">: Add Base Transformation</span>
   </div> <pre class="nohighlight">{
   "mandatoryPointers": [
-    "/sailNumber",
-    "/sails/1",
-    "/boards/0/year",
-    "/sails/2"
+    "/credentialSubject/sailNumber",
+    "/credentialSubject/sails/1",
+    "/credentialSubject/boards/0/year",
+    "/credentialSubject/sails/2"
   ],
   "mandatory": {
     "dataType": "Map",
     "value": [
       [
-        5,
-        "_:u4YIOZn1MHES1Z4Ij2hWZG3R4dEYBqg5fHTyDEvYhC38 &lt;https://windsurf.grotto-networking.com/selective#year&gt; \"2022\"^^&lt;http://www.w3.org/2001/XMLSchema#integer&gt; .\n"
+        0,
+        "_:u2IE-HtO6PyHQsGnuqhO1mX6V7RkRREhF0d0sWZlxNOY &lt;https://windsurf.grotto-networking.com/selective#sailName&gt; \"Lahaina\" .\n"
       ],
       [
-        6,
-        "_:uQ-qOZUDlozRsGk46ux9gp9fjT28Fy3g3nctmMoqi_U0 &lt;https://windsurf.grotto-networking.com/selective#sailName&gt; \"Lahaina\" .\n"
+        1,
+        "_:u2IE-HtO6PyHQsGnuqhO1mX6V7RkRREhF0d0sWZlxNOY &lt;https://windsurf.grotto-networking.com/selective#size&gt; \"6.1E0\"^^&lt;http://www.w3.org/2001/XMLSchema#double&gt; .\n"
       ],
       [
-        7,
-        "_:uQ-qOZUDlozRsGk46ux9gp9fjT28Fy3g3nctmMoqi_U0 &lt;https://windsurf.grotto-networking.com/selective#size&gt; \"6.1E0\"^^&lt;http://www.w3.org/2001/XMLSchema#double&gt; .\n"
+        2,
+        "_:u2IE-HtO6PyHQsGnuqhO1mX6V7RkRREhF0d0sWZlxNOY &lt;https://windsurf.grotto-networking.com/selective#year&gt; \"2023\"^^&lt;http://www.w3.org/2001/XMLSchema#integer&gt; .\n"
       ],
       [
         8,
-        "_:uQ-qOZUDlozRsGk46ux9gp9fjT28Fy3g3nctmMoqi_U0 &lt;https://windsurf.grotto-networking.com/selective#year&gt; \"2023\"^^&lt;http://www.w3.org/2001/XMLSchema#integer&gt; .\n"
+        "_:u4YIOZn1MHES1Z4Ij2hWZG3R4dEYBqg5fHTyDEvYhC38 &lt;https://windsurf.grotto-networking.com/selective#year&gt; \"2022\"^^&lt;http://www.w3.org/2001/XMLSchema#integer&gt; .\n"
+      ],
+      [
+        12,
+        "_:uVkUuBrlOaELGVQWJD4M_qW5bcKEHWGNbOrPA_qAOKKw &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt; &lt;https://www.w3.org/2018/credentials#VerifiableCredential&gt; .\n"
+      ],
+      [
+        13,
+        "_:uVkUuBrlOaELGVQWJD4M_qW5bcKEHWGNbOrPA_qAOKKw &lt;https://www.w3.org/2018/credentials#credentialSubject&gt; _:uk0AeXgJ4e6m1XsV5-xFud0L_1mUjZ9Mffhg5aZGTyDk .\n"
+      ],
+      [
+        14,
+        "_:ufUWJRHQ9j1jmUKHLL8k6m0CZ8g4v73gOpaM5kL3ZACQ &lt;https://windsurf.grotto-networking.com/selective#sailName&gt; \"Lahaina\" .\n"
       ],
       [
         15,
-        "_:uk0AeXgJ4e6m1XsV5-xFud0L_1mUjZ9Mffhg5aZGTyDk &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt; &lt;https://www.w3.org/2018/credentials#VerifiableCredential&gt; .\n"
+        "_:ufUWJRHQ9j1jmUKHLL8k6m0CZ8g4v73gOpaM5kL3ZACQ &lt;https://windsurf.grotto-networking.com/selective#size&gt; \"7\"^^&lt;http://www.w3.org/2001/XMLSchema#integer&gt; .\n"
       ],
       [
         16,
+        "_:ufUWJRHQ9j1jmUKHLL8k6m0CZ8g4v73gOpaM5kL3ZACQ &lt;https://windsurf.grotto-networking.com/selective#year&gt; \"2020\"^^&lt;http://www.w3.org/2001/XMLSchema#integer&gt; .\n"
+      ],
+      [
+        17,
         "_:uk0AeXgJ4e6m1XsV5-xFud0L_1mUjZ9Mffhg5aZGTyDk &lt;https://windsurf.grotto-networking.com/selective#boards&gt; _:u4YIOZn1MHES1Z4Ij2hWZG3R4dEYBqg5fHTyDEvYhC38 .\n"
       ],
       [
-        18,
+        19,
         "_:uk0AeXgJ4e6m1XsV5-xFud0L_1mUjZ9Mffhg5aZGTyDk &lt;https://windsurf.grotto-networking.com/selective#sailNumber&gt; \"Earth101\" .\n"
       ],
       [
         20,
-        "_:uk0AeXgJ4e6m1XsV5-xFud0L_1mUjZ9Mffhg5aZGTyDk &lt;https://windsurf.grotto-networking.com/selective#sails&gt; _:uQ-qOZUDlozRsGk46ux9gp9fjT28Fy3g3nctmMoqi_U0 .\n"
-      ],
-      [
-        22,
-        "_:uk0AeXgJ4e6m1XsV5-xFud0L_1mUjZ9Mffhg5aZGTyDk &lt;https://windsurf.grotto-networking.com/selective#sails&gt; _:ukR2991GJuy_Tkjem_x7pLVpS4C4GkZAcuGtiPhBfSSc .\n"
+        "_:uk0AeXgJ4e6m1XsV5-xFud0L_1mUjZ9Mffhg5aZGTyDk &lt;https://windsurf.grotto-networking.com/selective#sails&gt; _:u2IE-HtO6PyHQsGnuqhO1mX6V7RkRREhF0d0sWZlxNOY .\n"
       ],
       [
         23,
-        "_:ukR2991GJuy_Tkjem_x7pLVpS4C4GkZAcuGtiPhBfSSc &lt;https://windsurf.grotto-networking.com/selective#sailName&gt; \"Lahaina\" .\n"
-      ],
-      [
-        24,
-        "_:ukR2991GJuy_Tkjem_x7pLVpS4C4GkZAcuGtiPhBfSSc &lt;https://windsurf.grotto-networking.com/selective#size&gt; \"7\"^^&lt;http://www.w3.org/2001/XMLSchema#integer&gt; .\n"
-      ],
-      [
-        25,
-        "_:ukR2991GJuy_Tkjem_x7pLVpS4C4GkZAcuGtiPhBfSSc &lt;https://windsurf.grotto-networking.com/selective#year&gt; \"2020\"^^&lt;http://www.w3.org/2001/XMLSchema#integer&gt; .\n"
+        "_:uk0AeXgJ4e6m1XsV5-xFud0L_1mUjZ9Mffhg5aZGTyDk &lt;https://windsurf.grotto-networking.com/selective#sails&gt; _:ufUWJRHQ9j1jmUKHLL8k6m0CZ8g4v73gOpaM5kL3ZACQ .\n"
       ]
     ]
   },
@@ -4272,60 +4282,60 @@ its index in the previous list of statements is remembered.
     "dataType": "Map",
     "value": [
       [
-        0,
+        3,
         "_:u3Lv2QpFgo-YAegc1cQQKWJFW2sEjQF6FfuZ0VEoMKHg &lt;https://windsurf.grotto-networking.com/selective#sailName&gt; \"Lahaina\" .\n"
       ],
       [
-        1,
+        4,
         "_:u3Lv2QpFgo-YAegc1cQQKWJFW2sEjQF6FfuZ0VEoMKHg &lt;https://windsurf.grotto-networking.com/selective#size&gt; \"7.8E0\"^^&lt;http://www.w3.org/2001/XMLSchema#double&gt; .\n"
       ],
       [
-        2,
+        5,
         "_:u3Lv2QpFgo-YAegc1cQQKWJFW2sEjQF6FfuZ0VEoMKHg &lt;https://windsurf.grotto-networking.com/selective#year&gt; \"2023\"^^&lt;http://www.w3.org/2001/XMLSchema#integer&gt; .\n"
       ],
       [
-        3,
+        6,
         "_:u4YIOZn1MHES1Z4Ij2hWZG3R4dEYBqg5fHTyDEvYhC38 &lt;https://windsurf.grotto-networking.com/selective#boardName&gt; \"CompFoil170\" .\n"
       ],
       [
-        4,
+        7,
         "_:u4YIOZn1MHES1Z4Ij2hWZG3R4dEYBqg5fHTyDEvYhC38 &lt;https://windsurf.grotto-networking.com/selective#brand&gt; \"Wailea\" .\n"
       ],
       [
         9,
-        "_:uVkUuBrlOaELGVQWJD4M_qW5bcKEHWGNbOrPA_qAOKKw &lt;https://windsurf.grotto-networking.com/selective#boardName&gt; \"Kanaha Custom\" .\n"
+        "_:uQ-qOZUDlozRsGk46ux9gp9fjT28Fy3g3nctmMoqi_U0 &lt;https://windsurf.grotto-networking.com/selective#sailName&gt; \"Kihei\" .\n"
       ],
       [
         10,
-        "_:uVkUuBrlOaELGVQWJD4M_qW5bcKEHWGNbOrPA_qAOKKw &lt;https://windsurf.grotto-networking.com/selective#brand&gt; \"Wailea\" .\n"
+        "_:uQ-qOZUDlozRsGk46ux9gp9fjT28Fy3g3nctmMoqi_U0 &lt;https://windsurf.grotto-networking.com/selective#size&gt; \"5.5E0\"^^&lt;http://www.w3.org/2001/XMLSchema#double&gt; .\n"
       ],
       [
         11,
-        "_:uVkUuBrlOaELGVQWJD4M_qW5bcKEHWGNbOrPA_qAOKKw &lt;https://windsurf.grotto-networking.com/selective#year&gt; \"2019\"^^&lt;http://www.w3.org/2001/XMLSchema#integer&gt; .\n"
+        "_:uQ-qOZUDlozRsGk46ux9gp9fjT28Fy3g3nctmMoqi_U0 &lt;https://windsurf.grotto-networking.com/selective#year&gt; \"2023\"^^&lt;http://www.w3.org/2001/XMLSchema#integer&gt; .\n"
       ],
       [
-        12,
-        "_:ufUWJRHQ9j1jmUKHLL8k6m0CZ8g4v73gOpaM5kL3ZACQ &lt;https://windsurf.grotto-networking.com/selective#sailName&gt; \"Kihei\" .\n"
-      ],
-      [
-        13,
-        "_:ufUWJRHQ9j1jmUKHLL8k6m0CZ8g4v73gOpaM5kL3ZACQ &lt;https://windsurf.grotto-networking.com/selective#size&gt; \"5.5E0\"^^&lt;http://www.w3.org/2001/XMLSchema#double&gt; .\n"
-      ],
-      [
-        14,
-        "_:ufUWJRHQ9j1jmUKHLL8k6m0CZ8g4v73gOpaM5kL3ZACQ &lt;https://windsurf.grotto-networking.com/selective#year&gt; \"2023\"^^&lt;http://www.w3.org/2001/XMLSchema#integer&gt; .\n"
-      ],
-      [
-        17,
-        "_:uk0AeXgJ4e6m1XsV5-xFud0L_1mUjZ9Mffhg5aZGTyDk &lt;https://windsurf.grotto-networking.com/selective#boards&gt; _:uVkUuBrlOaELGVQWJD4M_qW5bcKEHWGNbOrPA_qAOKKw .\n"
-      ],
-      [
-        19,
-        "_:uk0AeXgJ4e6m1XsV5-xFud0L_1mUjZ9Mffhg5aZGTyDk &lt;https://windsurf.grotto-networking.com/selective#sails&gt; _:u3Lv2QpFgo-YAegc1cQQKWJFW2sEjQF6FfuZ0VEoMKHg .\n"
+        18,
+        "_:uk0AeXgJ4e6m1XsV5-xFud0L_1mUjZ9Mffhg5aZGTyDk &lt;https://windsurf.grotto-networking.com/selective#boards&gt; _:ukR2991GJuy_Tkjem_x7pLVpS4C4GkZAcuGtiPhBfSSc .\n"
       ],
       [
         21,
-        "_:uk0AeXgJ4e6m1XsV5-xFud0L_1mUjZ9Mffhg5aZGTyDk &lt;https://windsurf.grotto-networking.com/selective#sails&gt; _:ufUWJRHQ9j1jmUKHLL8k6m0CZ8g4v73gOpaM5kL3ZACQ .\n"
+        "_:uk0AeXgJ4e6m1XsV5-xFud0L_1mUjZ9Mffhg5aZGTyDk &lt;https://windsurf.grotto-networking.com/selective#sails&gt; _:u3Lv2QpFgo-YAegc1cQQKWJFW2sEjQF6FfuZ0VEoMKHg .\n"
+      ],
+      [
+        22,
+        "_:uk0AeXgJ4e6m1XsV5-xFud0L_1mUjZ9Mffhg5aZGTyDk &lt;https://windsurf.grotto-networking.com/selective#sails&gt; _:uQ-qOZUDlozRsGk46ux9gp9fjT28Fy3g3nctmMoqi_U0 .\n"
+      ],
+      [
+        24,
+        "_:ukR2991GJuy_Tkjem_x7pLVpS4C4GkZAcuGtiPhBfSSc &lt;https://windsurf.grotto-networking.com/selective#boardName&gt; \"Kanaha Custom\" .\n"
+      ],
+      [
+        25,
+        "_:ukR2991GJuy_Tkjem_x7pLVpS4C4GkZAcuGtiPhBfSSc &lt;https://windsurf.grotto-networking.com/selective#brand&gt; \"Wailea\" .\n"
+      ],
+      [
+        26,
+        "_:ukR2991GJuy_Tkjem_x7pLVpS4C4GkZAcuGtiPhBfSSc &lt;https://windsurf.grotto-networking.com/selective#year&gt; \"2019\"^^&lt;http://www.w3.org/2001/XMLSchema#integer&gt; .\n"
       ]
     ]
   },
@@ -4358,7 +4368,7 @@ This is shown in the following two examples.
     <a class="self-link" href="#example-canonical-base-proof-configuration">Example<bdi> 57</bdi></a><span class="example-title">: Canonical Base Proof Configuration</span>
   </div> <pre class="nohighlight">_:c14n0 &lt;http://purl.org/dc/terms/created&gt; "2023-08-15T23:36:38Z"^^&lt;http://www.w3.org/2001/XMLSchema#dateTime&gt; .
 _:c14n0 &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt; &lt;https://w3id.org/security#DataIntegrityProof&gt; .
-_:c14n0 &lt;https://w3id.org/security#cryptosuite&gt; "ecdsa-sd-2023" .
+_:c14n0 &lt;https://w3id.org/security#cryptosuite&gt; "ecdsa-sd-2023"^^&lt;https://w3id.org/security#cryptosuiteString&gt; .
 _:c14n0 &lt;https://w3id.org/security#proofPurpose&gt; &lt;https://w3id.org/security#assertionMethod&gt; .
 _:c14n0 &lt;https://w3id.org/security#verificationMethod&gt; &lt;did:key:zDnaepBuvsQ8cpsWrVKw8fbpGpvPeNSjVPTWoq6cRqaYzBKVP#zDnaepBuvsQ8cpsWrVKw8fbpGpvPeNSjVPTWoq6cRqaYzBKVP&gt; .</pre>
       </div>
@@ -4372,8 +4382,8 @@ in hexadecimal format.
         <div class="marker">
     <a class="self-link" href="#example-add-base-hashes">Example<bdi> 58</bdi></a><span class="example-title">: Add Base Hashes</span>
   </div> <pre class="nohighlight">{
-  "proofHash": "ac14ce7c9c545ea6147cfce51db41d20b483c6890150bfbfcf0fd865436b02b3",
-  "mandatoryHash": "fa6da5724940bee8864209827c06340496ef7a0b22061d6df3bcb5ab49262fe7"
+  "proofHash": "9c5c9b189f06cfa9d9f21a838ccb9b04316f07ad1a517bfd4955ee28c6a8229c",
+  "mandatoryHash": "68046f063278f8c5aa1b3880d96bb9c41fc259e7538ca7a4ffa47143739465a4"
 }</pre>
       </div>
           <p>
@@ -4388,7 +4398,7 @@ shown below.
         <div class="marker">
     <a class="self-link" href="#example-add-base-signing">Example<bdi> 59</bdi></a><span class="example-title">: Add Base Signing</span>
   </div> <pre class="nohighlight">{
-  "baseSignature": "5a26e45631504cf42f445b751f01677d5c4b33d89b90d6750429103a8c7ca54a81ca365079d96772920a35e561ef663882fbd4e89d4d10ccab0ce78c5f7d9103",
+  "baseSignature": "aa97b51f9d595388f666a44d3fe3a303473517b3d9ffba2740fb6f7d26cadedefd4c31519978517c11a64d22bd45a3dff9e1432a758a0a6ce7604d6544c9d548",
   "publicKey": "zDnaeTHfhmSaQKBc7CmdL3K7oYg3D6SC7yowe2eBeVd2DH32r",
   "signatures": [
     "29560a336e740c370d58e610a549980b567935984947089ef2f5547aff78406b2df375a1a16eff50ce8950bb0a8cd5478f1665650ca8bcde31c3533f9a19fa4c",
@@ -4396,21 +4406,21 @@ shown below.
     "99ea0453c235673c45c91f90331c284a4a911bd13cfc2692ae11fc4c3dadfad577d872800b884990a97ac47bb3e972f61be574726e9dfeb5a8ce386699568c8d",
     "6d030c724a5c300128d79582e82f0ca376c2116146b4e4e4331343f8b24c75f9024a8bc1ed19c247b497ce4e7ed1856282d27917383bd400286f9ca0d5634d93",
     "a501e56111a551592ff965f53a3258275f4ec3b8a9bd5c14be6f744a7dc88cd44bbb2f69af90c79b7c1595530f5692ea8d2f84f3f8c90de255e696346df2bf03",
-    "3bf1e3d2fc6cb89673a551ad82830a2b666518abe12d7dffbd40af74bf8c4e5b3356bda20b75c9a426ce73c07f5bf3a7f9cb1a2cfcd44af9520ed35e73565593",
-    "766d87b78b2ffde737b351d1a9eba5fbec841b1e12ae9c3235045d2dae592b224382aaf887e12d54dcdcf89f95965bcaac737cc012ad52a6aba88e0da67af1ed",
-    "39130b5d8cf7979f4ecdced20e4d9e8fb725adeafd067e9e6815101bbef702a439e9b73ea065de7a67a4c1908d1e314b38448da0dabba9eb4ef0545b8851dbe0",
-    "5bea2d48556550f166835d7d9f74de484eeea798414b7e00a8fd93194400e690c6c8e4deb6b7fcaaaddb5a3d65a42bb567ac84649950ea7acb882a1a3558692f",
-    "d705bf1e1b133d47d496a317e9932c2de9bc85b59a15efeb643a4fa7934dd36bcc1c89c38ced469f406b5d4c9500c9d36377c6ac38ecbb2dac1a033347e6e8d7",
-    "bce1925c7e75791a025ad57d2e5a590f5d22c7422eb950a76ade5f47153b86a1acd00cccd3d906b26b833118e8c29e75c6188527788c6a320e3a159484fc470a",
-    "bd25bdabcf112d9f6559d83665e2be71ff9c16553f3e3ab1d5b515017307437b5fe097e3d8850dbabcb71337cedec8f75585fb743be5113b53d07627debf834a",
+    "88fbd1f623059d6ec7066a505b0e98ef02206431b10a6da2f9363b54861225fe758a1150ad9d9704e533ef6c47a9adb81e7e7757e916236537c83dfc30865850",
+    "f265d93a396dd61bf53c81be22b00571bdc0f5f1f34cb464676f936ee67c763a0d0c85262de8953f723b96a017f7edc53ab56afce72df15067b4b2915ba4b34a",
+    "b51cd241db4dcabc6bc9316aad8b84d1faaccb564917d3761eb6a85b59b8a5e198d47f997adda7cfa1ac61deb5dad6514c335121e42ed1b3f32cff87b4794e21",
+    "a8b4dd55ed4929196a3f718423aa27772106b113bb0b93600398a8c470d7b9f58f22f9a98d87038c7b4d4fcd3bc63e293ecb785f2f4b7b006594ea09898fd03c",
     "e7dd74deab1b23d508cdc537604a5a070a678809f28de9b0ffb11a3cdddfdfbb221fbf51c2897ab5fef6e9050f5226ab3729a085265e5ef21b8e9c6a94acfe50",
-    "43093442ebc81c551cac0647afedeb62f7d9cdacf0cd82500a9398738517dcf70507156dc88ed4f4f89e50e362f3710b155037d60a26c4b70262e9fbe7dd6b7d"
+    "9ba4c197083703da56c811f33829a96537d2ea85848ec3c4c1067de6387fd96e2ee9e9058cb256b502a0450933798ce3a54a4dcf72038546c1b9c735514b2b68",
+    "8121f67d303babc42991177e53ebf36f5bdf11998a0e9283d39222986fe7f7b32da8e3089f490256b0af8eebc5747fc3db36d1eb4a2bf8eae5cde0a9b9c63801",
+    "b4e3f3753d4ff6466fee9b4f40d14a3ff1f693407982ec4ced6d56fe97d3dccd19257e1a96946be4cfc6c01b30d3d983be64360c67c34c917b3662e9131f7efb",
+    "81c0573e5a47bf25f4d475d72cf9f1645ae72afd676ada0f51d2af30c32c978103efbd522e1841b7adc7422bbd0b9ffeb9c4c69482adf71ac8850a6190b3428f"
   ],
   "mandatoryPointers": [
-    "/sailNumber",
-    "/sails/1",
-    "/boards/0/year",
-    "/sails/2"
+    "/credentialSubject/sailNumber",
+    "/credentialSubject/sails/1",
+    "/credentialSubject/boards/0/year",
+    "/credentialSubject/sails/2"
   ]
 }</pre>
       </div>
@@ -4432,48 +4442,50 @@ used in the signed based document shown below.
   "type": [
     "VerifiableCredential"
   ],
-  "sailNumber": "Earth101",
-  "sails": [
-    {
-      "size": 5.5,
-      "sailName": "Kihei",
-      "year": 2023
-    },
-    {
-      "size": 6.1,
-      "sailName": "Lahaina",
-      "year": 2023
-    },
-    {
-      "size": 7,
-      "sailName": "Lahaina",
-      "year": 2020
-    },
-    {
-      "size": 7.8,
-      "sailName": "Lahaina",
-      "year": 2023
-    }
-  ],
-  "boards": [
-    {
-      "boardName": "CompFoil170",
-      "brand": "Wailea",
-      "year": 2022
-    },
-    {
-      "boardName": "Kanaha Custom",
-      "brand": "Wailea",
-      "year": 2019
-    }
-  ],
+  "credentialSubject": {
+    "sailNumber": "Earth101",
+    "sails": [
+      {
+        "size": 5.5,
+        "sailName": "Kihei",
+        "year": 2023
+      },
+      {
+        "size": 6.1,
+        "sailName": "Lahaina",
+        "year": 2023
+      },
+      {
+        "size": 7,
+        "sailName": "Lahaina",
+        "year": 2020
+      },
+      {
+        "size": 7.8,
+        "sailName": "Lahaina",
+        "year": 2023
+      }
+    ],
+    "boards": [
+      {
+        "boardName": "CompFoil170",
+        "brand": "Wailea",
+        "year": 2022
+      },
+      {
+        "boardName": "Kanaha Custom",
+        "brand": "Wailea",
+        "year": 2019
+      }
+    ]
+  },
   "proof": {
     "type": "DataIntegrityProof",
     "cryptosuite": "ecdsa-sd-2023",
     "created": "2023-08-15T23:36:38Z",
     "verificationMethod": "did:key:zDnaepBuvsQ8cpsWrVKw8fbpGpvPeNSjVPTWoq6cRqaYzBKVP#zDnaepBuvsQ8cpsWrVKw8fbpGpvPeNSjVPTWoq6cRqaYzBKVP",
     "proofPurpose": "assertionMethod",
-    "proofValue": "u2V0AhdhAWEBaJuRWMVBM9C9EW3UfAWd9XEsz2JuQ1nUEKRA6jHylSoHKNlB52Wdykgo15WHvZjiC-9TonU0QzKsM54xffZED2EBYI4AkAipyzhm2PxbjPgEqUpJDsbCEdhPJ-zJdqtVEOrRMM4uT2EBYIAARIjNEVWZ3iJmqu8zd7v8AESIzRFVmd4iZqrvM3e7_jthAWEApVgozbnQMNw1Y5hClSZgLVnk1mElHCJ7y9VR6_3hAay3zdaGhbv9QzolQuwqM1UePFmVlDKi83jHDUz-aGfpM2EBYQLKjEoM9BHmj3tB5qOUjdSTWZgo4mfgjSQeEnJsiuOrO4Q6LTWbhh8ShmgBQuNztBcXCnlAveqv8_TxnheQt1aXYQFhAmeoEU8I1ZzxFyR-QMxwoSkqRG9E8_CaSrhH8TD2t-tV32HKAC4hJkKl6xHuz6XL2G-V0cm6d_rWozjhmmVaMjdhAWEBtAwxySlwwASjXlYLoLwyjdsIRYUa05OQzE0P4skx1-QJKi8HtGcJHtJfOTn7RhWKC0nkXODvUAChvnKDVY02T2EBYQKUB5WERpVFZL_ll9ToyWCdfTsO4qb1cFL5vdEp9yIzUS7svaa-Qx5t8FZVTD1aS6o0vhPP4yQ3iVeaWNG3yvwPYQFhAO_Hj0vxsuJZzpVGtgoMKK2ZlGKvhLX3_vUCvdL-MTlszVr2iC3XJpCbOc8B_W_On-csaLPzUSvlSDtNec1ZVk9hAWEB2bYe3iy_95zezUdGp66X77IQbHhKunDI1BF0trlkrIkOCqviH4S1U3Nz4n5WWW8qsc3zAEq1Spquojg2mevHt2EBYQDkTC12M95efTs3O0g5Nno-3Ja3q_QZ-nmgVEBu-9wKkOem3PqBl3npnpMGQjR4xSzhEjaDau6nrTvBUW4hR2-DYQFhAW-otSFVlUPFmg119n3TeSE7up5hBS34AqP2TGUQA5pDGyOTetrf8qq3bWj1lpCu1Z6yEZJlQ6nrLiCoaNVhpL9hAWEDXBb8eGxM9R9SWoxfpkywt6byFtZoV7-tkOk-nk03Ta8wcicOM7UafQGtdTJUAydNjd8asOOy7LawaAzNH5ujX2EBYQLzhklx-dXkaAlrVfS5aWQ9dIsdCLrlQp2reX0cVO4ahrNAMzNPZBrJrgzEY6MKedcYYhSd4jGoyDjoVlIT8RwrYQFhAvSW9q88RLZ9lWdg2ZeK-cf-cFlU_Pjqx1bUVAXMHQ3tf4Jfj2IUNury3EzfO3sj3VYX7dDvlETtT0HYn3r-DSthAWEDn3XTeqxsj1QjNxTdgSloHCmeICfKN6bD_sRo83d_fuyIfv1HCiXq1_vbpBQ9SJqs3KaCFJl5e8huOnGqUrP5Q2EBYQEMJNELryBxVHKwGR6_t62L32c2s8M2CUAqTmHOFF9z3BQcVbciO1PT4nlDjYvNxCxVQN9YKJsS3AmLp--fda32Eay9zYWlsTnVtYmVyaC9zYWlscy8xbi9ib2FyZHMvMC95ZWFyaC9zYWlscy8y"
+    "proofValue": "u2V0AhdhAWECql7UfnVlTiPZmpE0_46MDRzUXs9n_uidA-299Jsre3v1MMVGZeFF8EaZNIr1Fo9_54UMqdYoKbOdgTWVEydVI2EBYI4AkAipyzhm2PxbjPgEqUpJDsbCEdhPJ-zJdqtVEOrRMM4uT2EBYIAARIjNEVWZ3iJmqu8zd7v8AESIzRFVmd4iZqrvM3e7_jthAWEApVgozbnQMNw1Y5hClSZgLVnk1mElHCJ7y9VR6_3hAay3zdaGhbv9QzolQuwqM1UePFmVlDKi83jHDUz-aGfpM2EBYQLKjEoM9BHmj3tB5qOUjdSTWZgo4mfgjSQeEnJsiuOrO4Q6LTWbhh8ShmgBQuNztBcXCnlAveqv8_TxnheQt1aXYQFhAmeoEU8I1ZzxFyR-QMxwoSkqRG9E8_CaSrhH8TD2t-tV32HKAC4hJkKl6xHuz6XL2G-V0cm6d_rWozjhmmVaMjdhAWEBtAwxySlwwASjXlYLoLwyjdsIRYUa05OQzE0P4skx1-QJKi8HtGcJHtJfOTn7RhWKC0nkXODvUAChvnKDVY02T2EBYQKUB5WERpVFZL_ll9ToyWCdfTsO4qb1cFL5vdEp9yIzUS7svaa-Qx5t8FZVTD1aS6o0vhPP4yQ3iVeaWNG3yvwPYQFhAiPvR9iMFnW7HBmpQWw6Y7wIgZDGxCm2i-TY7VIYSJf51ihFQrZ2XBOUz72xHqa24Hn53V-kWI2U3yD38MIZYUNhAWEDyZdk6OW3WG_U8gb4isAVxvcD18fNMtGRnb5Nu5nx2Og0MhSYt6JU_cjuWoBf37cU6tWr85y3xUGe0spFbpLNK2EBYQLUc0kHbTcq8a8kxaq2LhNH6rMtWSRfTdh62qFtZuKXhmNR_mXrdp8-hrGHetdrWUUwzUSHkLtGz8yz_h7R5TiHYQFhAqLTdVe1JKRlqP3GEI6ondyEGsRO7C5NgA5ioxHDXufWPIvmpjYcDjHtNT807xj4pPst4Xy9LewBllOoJiY_QPNhAWEDn3XTeqxsj1QjNxTdgSloHCmeICfKN6bD_sRo83d_fuyIfv1HCiXq1_vbpBQ9SJqs3KaCFJl5e8huOnGqUrP5Q2EBYQJukwZcINwPaVsgR8zgpqWU30uqFhI7DxMEGfeY4f9luLunpBYyyVrUCoEUJM3mM46VKTc9yA4VGwbnHNVFLK2jYQFhAgSH2fTA7q8QpkRd-U-vzb1vfEZmKDpKD05IimG_n97MtqOMIn0kCVrCvjuvFdH_D2zbR60or-OrlzeCpucY4AdhAWEC04_N1PU_2Rm_um09A0Uo_8faTQHmC7EztbVb-l9PczRklfhqWlGvkz8bAGzDT2YO-ZDYMZ8NMkXs2YukTH3772EBYQIHAVz5aR78l9NR11yz58WRa5yr9Z2raD1HSrzDDLJeBA--9Ui4YQbetx0IrvQuf_rnExpSCrfcayIUKYZCzQo-EeB0vY3JlZGVudGlhbFN1YmplY3Qvc2FpbE51bWJlcngaL2NyZWRlbnRpYWxTdWJqZWN0L3NhaWxzLzF4IC9jcmVkZW50aWFsU3ViamVjdC9ib2FyZHMvMC95ZWFyeBovY3JlZGVudGlhbFN1YmplY3Qvc2FpbHMvMg"
   }
 }</pre>
       </div>
@@ -4492,7 +4504,7 @@ recover <code>baseSignature</code>, <code>publicKey</code>, <code>hmacKey</code>
         <div class="marker">
     <a class="self-link" href="#example-recovered-base-signature-data">Example<bdi> 61</bdi></a><span class="example-title">: Recovered Base Signature Data</span>
   </div> <pre class="nohighlight">{
-  "baseSignature": "5a26e45631504cf42f445b751f01677d5c4b33d89b90d6750429103a8c7ca54a81ca365079d96772920a35e561ef663882fbd4e89d4d10ccab0ce78c5f7d9103",
+  "baseSignature": "aa97b51f9d595388f666a44d3fe3a303473517b3d9ffba2740fb6f7d26cadedefd4c31519978517c11a64d22bd45a3dff9e1432a758a0a6ce7604d6544c9d548",
   "proofPublicKey": "zDnaeTHfhmSaQKBc7CmdL3K7oYg3D6SC7yowe2eBeVd2DH32r",
   "hmacKey": "00112233445566778899aabbccddeeff00112233445566778899aabbccddeeff",
   "signatures": [
@@ -4501,21 +4513,21 @@ recover <code>baseSignature</code>, <code>publicKey</code>, <code>hmacKey</code>
     "99ea0453c235673c45c91f90331c284a4a911bd13cfc2692ae11fc4c3dadfad577d872800b884990a97ac47bb3e972f61be574726e9dfeb5a8ce386699568c8d",
     "6d030c724a5c300128d79582e82f0ca376c2116146b4e4e4331343f8b24c75f9024a8bc1ed19c247b497ce4e7ed1856282d27917383bd400286f9ca0d5634d93",
     "a501e56111a551592ff965f53a3258275f4ec3b8a9bd5c14be6f744a7dc88cd44bbb2f69af90c79b7c1595530f5692ea8d2f84f3f8c90de255e696346df2bf03",
-    "3bf1e3d2fc6cb89673a551ad82830a2b666518abe12d7dffbd40af74bf8c4e5b3356bda20b75c9a426ce73c07f5bf3a7f9cb1a2cfcd44af9520ed35e73565593",
-    "766d87b78b2ffde737b351d1a9eba5fbec841b1e12ae9c3235045d2dae592b224382aaf887e12d54dcdcf89f95965bcaac737cc012ad52a6aba88e0da67af1ed",
-    "39130b5d8cf7979f4ecdced20e4d9e8fb725adeafd067e9e6815101bbef702a439e9b73ea065de7a67a4c1908d1e314b38448da0dabba9eb4ef0545b8851dbe0",
-    "5bea2d48556550f166835d7d9f74de484eeea798414b7e00a8fd93194400e690c6c8e4deb6b7fcaaaddb5a3d65a42bb567ac84649950ea7acb882a1a3558692f",
-    "d705bf1e1b133d47d496a317e9932c2de9bc85b59a15efeb643a4fa7934dd36bcc1c89c38ced469f406b5d4c9500c9d36377c6ac38ecbb2dac1a033347e6e8d7",
-    "bce1925c7e75791a025ad57d2e5a590f5d22c7422eb950a76ade5f47153b86a1acd00cccd3d906b26b833118e8c29e75c6188527788c6a320e3a159484fc470a",
-    "bd25bdabcf112d9f6559d83665e2be71ff9c16553f3e3ab1d5b515017307437b5fe097e3d8850dbabcb71337cedec8f75585fb743be5113b53d07627debf834a",
+    "88fbd1f623059d6ec7066a505b0e98ef02206431b10a6da2f9363b54861225fe758a1150ad9d9704e533ef6c47a9adb81e7e7757e916236537c83dfc30865850",
+    "f265d93a396dd61bf53c81be22b00571bdc0f5f1f34cb464676f936ee67c763a0d0c85262de8953f723b96a017f7edc53ab56afce72df15067b4b2915ba4b34a",
+    "b51cd241db4dcabc6bc9316aad8b84d1faaccb564917d3761eb6a85b59b8a5e198d47f997adda7cfa1ac61deb5dad6514c335121e42ed1b3f32cff87b4794e21",
+    "a8b4dd55ed4929196a3f718423aa27772106b113bb0b93600398a8c470d7b9f58f22f9a98d87038c7b4d4fcd3bc63e293ecb785f2f4b7b006594ea09898fd03c",
     "e7dd74deab1b23d508cdc537604a5a070a678809f28de9b0ffb11a3cdddfdfbb221fbf51c2897ab5fef6e9050f5226ab3729a085265e5ef21b8e9c6a94acfe50",
-    "43093442ebc81c551cac0647afedeb62f7d9cdacf0cd82500a9398738517dcf70507156dc88ed4f4f89e50e362f3710b155037d60a26c4b70262e9fbe7dd6b7d"
+    "9ba4c197083703da56c811f33829a96537d2ea85848ec3c4c1067de6387fd96e2ee9e9058cb256b502a0450933798ce3a54a4dcf72038546c1b9c735514b2b68",
+    "8121f67d303babc42991177e53ebf36f5bdf11998a0e9283d39222986fe7f7b32da8e3089f490256b0af8eebc5747fc3db36d1eb4a2bf8eae5cde0a9b9c63801",
+    "b4e3f3753d4ff6466fee9b4f40d14a3ff1f693407982ec4ced6d56fe97d3dccd19257e1a96946be4cfc6c01b30d3d983be64360c67c34c917b3662e9131f7efb",
+    "81c0573e5a47bf25f4d475d72cf9f1645ae72afd676ada0f51d2af30c32c978103efbd522e1841b7adc7422bbd0b9ffeb9c4c69482adf71ac8850a6190b3428f"
   ],
   "mandatoryPointers": [
-    "/sailNumber",
-    "/sails/1",
-    "/boards/0/year",
-    "/sails/2"
+    "/credentialSubject/sailNumber",
+    "/credentialSubject/sails/1",
+    "/credentialSubject/boards/0/year",
+    "/credentialSubject/sails/2"
   ]
 }</pre>
       </div>
@@ -4531,7 +4543,7 @@ information which included only the year of their most recent board.
           <div class="example" id="example-selective-disclosure-pointers">
         <div class="marker">
     <a class="self-link" href="#example-selective-disclosure-pointers">Example<bdi> 62</bdi></a><span class="example-title">: Selective Disclosure Pointers</span>
-  </div> <pre class="nohighlight">["/boards/0", "/boards/1"]</pre>
+  </div> <pre class="nohighlight">["/credentialSubject/boards/0", "/credentialSubject/boards/1"]</pre>
       </div>
           <p>
 To produce the <code>revealDocument</code>, i.e., the unsigned document that will
@@ -4553,31 +4565,33 @@ to give the result shown below.
   "type": [
     "VerifiableCredential"
   ],
-  "sailNumber": "Earth101",
-  "sails": [
-    {
-      "size": 6.1,
-      "sailName": "Lahaina",
-      "year": 2023
-    },
-    {
-      "size": 7,
-      "sailName": "Lahaina",
-      "year": 2020
-    }
-  ],
-  "boards": [
-    {
-      "year": 2022,
-      "boardName": "CompFoil170",
-      "brand": "Wailea"
-    },
-    {
-      "boardName": "Kanaha Custom",
-      "brand": "Wailea",
-      "year": 2019
-    }
-  ]
+  "credentialSubject": {
+    "sailNumber": "Earth101",
+    "sails": [
+      {
+        "size": 6.1,
+        "sailName": "Lahaina",
+        "year": 2023
+      },
+      {
+        "size": 7,
+        "sailName": "Lahaina",
+        "year": 2020
+      }
+    ],
+    "boards": [
+      {
+        "year": 2022,
+        "boardName": "CompFoil170",
+        "brand": "Wailea"
+      },
+      {
+        "boardName": "Kanaha Custom",
+        "brand": "Wailea",
+        "year": 2019
+      }
+    ]
+  }
 }</pre>
       </div>
           <p>
@@ -4594,10 +4608,10 @@ portion of the indexes for those groups.
         <div class="marker">
     <a class="self-link" href="#example-derived-group-indexes">Example<bdi> 64</bdi></a><span class="example-title">: Derived Group Indexes</span>
   </div> <pre class="nohighlight">{
-  "combinedIndexes": [ 3, 4, 5, 6, 7, 8, 9, 10, 11, 15, 16, 17, 18, 20, 22, 23, 24, 25 ],
-  "mandatoryIndexes": [ 5, 6, 7, 8, 15, 16, 18, 20, 22, 23, 24, 25 ],
-  "nonMandatoryIndexes": [ 0, 1, 2, 3, 4, 9, 10, 11, 12, 13, 14, 17, 19, 21 ],
-  "selectiveIndexes": [ 3, 4, 5, 9, 10, 11, 15, 16, 17 ]
+ "combinedIndexes": [0, 1, 2, 6, 7, 8, 12, 13, 14, 15, 16, 17, 18, 19, 20, 23, 24, 25, 26],
+ "mandatoryIndexes": [0, 1, 2, 8, 12, 13, 14, 15, 16, 17, 19, 20, 23],
+ "nonMandatoryIndexes": [3, 4, 5, 6, 7, 9, 10, 11, 18, 21, 22, 24, 25, 26],
+ "selectiveIndexes": [6, 7, 8, 12, 13, 17, 18, 24, 25, 26]
 }</pre>
       </div>
           <p>
@@ -4612,9 +4626,7 @@ relative to the <code>combinedIndexes</code> as shown below.
           <div class="example" id="example-adjusted-mandatory-indexes">
         <div class="marker">
     <a class="self-link" href="#example-adjusted-mandatory-indexes">Example<bdi> 65</bdi></a><span class="example-title">: Adjusted Mandatory Indexes</span>
-  </div> <pre class="nohighlight">{
-    "adjMandatoryIndexes":[2, 3, 4, 5, 9, 10, 12, 13, 14, 15, 16, 17]
-}</pre>
+  </div> <pre class="nohighlight">{"adjMandatoryIndexes":[0,1,2,5,6,7,8,9,10,11,13,14,15]}</pre>
       </div>
           <p>
 We have to furnish the verifier with a list of signatures for those selective
@@ -4629,16 +4641,7 @@ lists are shown below.
           <div class="example" id="example-filtered-signatures">
         <div class="marker">
     <a class="self-link" href="#example-filtered-signatures">Example<bdi> 66</bdi></a><span class="example-title">: Filtered Signatures</span>
-  </div> <pre class="nohighlight">{
-    "adjSignatureIndexes":[3, 4, 5, 6, 7, 11],
-    "filteredSignatures":[
-        "6d030c724a5c300128d79582e82f0ca376c2116146b4e4e4331343f8b24c75f9024a8bc1ed19c247b497ce4e7ed1856282d27917383bd400286f9ca0d5634d93",
-        "a501e56111a551592ff965f53a3258275f4ec3b8a9bd5c14be6f744a7dc88cd44bbb2f69af90c79b7c1595530f5692ea8d2f84f3f8c90de255e696346df2bf03",
-        "3bf1e3d2fc6cb89673a551ad82830a2b666518abe12d7dffbd40af74bf8c4e5b3356bda20b75c9a426ce73c07f5bf3a7f9cb1a2cfcd44af9520ed35e73565593",
-        "766d87b78b2ffde737b351d1a9eba5fbec841b1e12ae9c3235045d2dae592b224382aaf887e12d54dcdcf89f95965bcaac737cc012ad52a6aba88e0da67af1ed",
-        "39130b5d8cf7979f4ecdced20e4d9e8fb725adeafd067e9e6815101bbef702a439e9b73ea065de7a67a4c1908d1e314b38448da0dabba9eb4ef0545b8851dbe0",
-        "bd25bdabcf112d9f6559d83665e2be71ff9c16553f3e3ab1d5b515017307437b5fe097e3d8850dbabcb71337cedec8f75585fb743be5113b53d07627debf834a"]
-}</pre>
+  </div> <pre class="nohighlight">{"adjSignatureIndexes":[3,4,8,11,12,13],"filteredSignatures":["6d030c724a5c300128d79582e82f0ca376c2116146b4e4e4331343f8b24c75f9024a8bc1ed19c247b497ce4e7ed1856282d27917383bd400286f9ca0d5634d93","a501e56111a551592ff965f53a3258275f4ec3b8a9bd5c14be6f744a7dc88cd44bbb2f69af90c79b7c1595530f5692ea8d2f84f3f8c90de255e696346df2bf03","a8b4dd55ed4929196a3f718423aa27772106b113bb0b93600398a8c470d7b9f58f22f9a98d87038c7b4d4fcd3bc63e293ecb785f2f4b7b006594ea09898fd03c","8121f67d303babc42991177e53ebf36f5bdf11998a0e9283d39222986fe7f7b32da8e3089f490256b0af8eebc5747fc3db36d1eb4a2bf8eae5cde0a9b9c63801","b4e3f3753d4ff6466fee9b4f40d14a3ff1f693407982ec4ced6d56fe97d3dccd19257e1a96946be4cfc6c01b30d3d983be64360c67c34c917b3662e9131f7efb","81c0573e5a47bf25f4d475d72cf9f1645ae72afd676ada0f51d2af30c32c978103efbd522e1841b7adc7422bbd0b9ffeb9c4c69482adf71ac8850a6190b3428f"]}</pre>
       </div>
           <p>
 The last important piece of disclosure data is a mapping of canonical blank node
@@ -4650,27 +4653,60 @@ the rest of the disclosure data minus the reveal document.
         <div class="marker">
     <a class="self-link" href="#example-disclosure-data">Example<bdi> 67</bdi></a><span class="example-title">: Disclosure Data</span>
   </div> <pre class="nohighlight">{
-  "baseSignature": "5a26e45631504cf42f445b751f01677d5c4b33d89b90d6750429103a8c7ca54a81ca365079d96772920a35e561ef663882fbd4e89d4d10ccab0ce78c5f7d9103",
+  "baseSignature": "aa97b51f9d595388f666a44d3fe3a303473517b3d9ffba2740fb6f7d26cadedefd4c31519978517c11a64d22bd45a3dff9e1432a758a0a6ce7604d6544c9d548",
   "publicKey": "zDnaeTHfhmSaQKBc7CmdL3K7oYg3D6SC7yowe2eBeVd2DH32r",
   "signatures": [
     "6d030c724a5c300128d79582e82f0ca376c2116146b4e4e4331343f8b24c75f9024a8bc1ed19c247b497ce4e7ed1856282d27917383bd400286f9ca0d5634d93",
     "a501e56111a551592ff965f53a3258275f4ec3b8a9bd5c14be6f744a7dc88cd44bbb2f69af90c79b7c1595530f5692ea8d2f84f3f8c90de255e696346df2bf03",
-    "3bf1e3d2fc6cb89673a551ad82830a2b666518abe12d7dffbd40af74bf8c4e5b3356bda20b75c9a426ce73c07f5bf3a7f9cb1a2cfcd44af9520ed35e73565593",
-    "766d87b78b2ffde737b351d1a9eba5fbec841b1e12ae9c3235045d2dae592b224382aaf887e12d54dcdcf89f95965bcaac737cc012ad52a6aba88e0da67af1ed",
-    "39130b5d8cf7979f4ecdced20e4d9e8fb725adeafd067e9e6815101bbef702a439e9b73ea065de7a67a4c1908d1e314b38448da0dabba9eb4ef0545b8851dbe0",
-    "bd25bdabcf112d9f6559d83665e2be71ff9c16553f3e3ab1d5b515017307437b5fe097e3d8850dbabcb71337cedec8f75585fb743be5113b53d07627debf834a"
+    "a8b4dd55ed4929196a3f718423aa27772106b113bb0b93600398a8c470d7b9f58f22f9a98d87038c7b4d4fcd3bc63e293ecb785f2f4b7b006594ea09898fd03c",
+    "8121f67d303babc42991177e53ebf36f5bdf11998a0e9283d39222986fe7f7b32da8e3089f490256b0af8eebc5747fc3db36d1eb4a2bf8eae5cde0a9b9c63801",
+    "b4e3f3753d4ff6466fee9b4f40d14a3ff1f693407982ec4ced6d56fe97d3dccd19257e1a96946be4cfc6c01b30d3d983be64360c67c34c917b3662e9131f7efb",
+    "81c0573e5a47bf25f4d475d72cf9f1645ae72afd676ada0f51d2af30c32c978103efbd522e1841b7adc7422bbd0b9ffeb9c4c69482adf71ac8850a6190b3428f"
   ],
   "labelMap": {
     "dataType": "Map",
     "value": [
-      ["c14n0", "u4YIOZn1MHES1Z4Ij2hWZG3R4dEYBqg5fHTyDEvYhC38"],
-      ["c14n1", "uk0AeXgJ4e6m1XsV5-xFud0L_1mUjZ9Mffhg5aZGTyDk"],
-      ["c14n2", "uVkUuBrlOaELGVQWJD4M_qW5bcKEHWGNbOrPA_qAOKKw"],
-      ["c14n3", "ukR2991GJuy_Tkjem_x7pLVpS4C4GkZAcuGtiPhBfSSc"],
-      ["c14n4", "uQ-qOZUDlozRsGk46ux9gp9fjT28Fy3g3nctmMoqi_U0"]
+      [
+        "c14n0",
+        "u4YIOZn1MHES1Z4Ij2hWZG3R4dEYBqg5fHTyDEvYhC38"
+      ],
+      [
+        "c14n1",
+        "uVkUuBrlOaELGVQWJD4M_qW5bcKEHWGNbOrPA_qAOKKw"
+      ],
+      [
+        "c14n2",
+        "ukR2991GJuy_Tkjem_x7pLVpS4C4GkZAcuGtiPhBfSSc"
+      ],
+      [
+        "c14n3",
+        "uk0AeXgJ4e6m1XsV5-xFud0L_1mUjZ9Mffhg5aZGTyDk"
+      ],
+      [
+        "c14n4",
+        "ufUWJRHQ9j1jmUKHLL8k6m0CZ8g4v73gOpaM5kL3ZACQ"
+      ],
+      [
+        "c14n5",
+        "u2IE-HtO6PyHQsGnuqhO1mX6V7RkRREhF0d0sWZlxNOY"
+      ]
     ]
   },
-  "mandatoryIndexes": [2, 3, 4, 5, 9, 10, 12, 13, 14, 15, 16, 17]
+  "mandatoryIndexes": [
+    0,
+    1,
+    2,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    13,
+    14,
+    15
+  ]
 }</pre>
       </div>
           <p>
@@ -4691,38 +4727,40 @@ document shown below.
   "type": [
     "VerifiableCredential"
   ],
-  "sailNumber": "Earth101",
-  "sails": [
-    {
-      "size": 6.1,
-      "sailName": "Lahaina",
-      "year": 2023
-    },
-    {
-      "size": 7,
-      "sailName": "Lahaina",
-      "year": 2020
-    }
-  ],
-  "boards": [
-    {
-      "year": 2022,
-      "boardName": "CompFoil170",
-      "brand": "Wailea"
-    },
-    {
-      "boardName": "Kanaha Custom",
-      "brand": "Wailea",
-      "year": 2019
-    }
-  ],
+  "credentialSubject": {
+    "sailNumber": "Earth101",
+    "sails": [
+      {
+        "size": 6.1,
+        "sailName": "Lahaina",
+        "year": 2023
+      },
+      {
+        "size": 7,
+        "sailName": "Lahaina",
+        "year": 2020
+      }
+    ],
+    "boards": [
+      {
+        "year": 2022,
+        "boardName": "CompFoil170",
+        "brand": "Wailea"
+      },
+      {
+        "boardName": "Kanaha Custom",
+        "brand": "Wailea",
+        "year": 2019
+      }
+    ]
+  },
   "proof": {
     "type": "DataIntegrityProof",
     "cryptosuite": "ecdsa-sd-2023",
     "created": "2023-08-15T23:36:38Z",
     "verificationMethod": "did:key:zDnaepBuvsQ8cpsWrVKw8fbpGpvPeNSjVPTWoq6cRqaYzBKVP#zDnaepBuvsQ8cpsWrVKw8fbpGpvPeNSjVPTWoq6cRqaYzBKVP",
     "proofPurpose": "assertionMethod",
-    "proofValue": "u2V0BhVhAWibkVjFQTPQvRFt1HwFnfVxLM9ibkNZ1BCkQOox8pUqByjZQedlncpIKNeVh72Y4gvvU6J1NEMyrDOeMX32RA1gjgCQCKnLOGbY_FuM-ASpSkkOxsIR2E8n7Ml2q1UQ6tEwzi5OGWEBtAwxySlwwASjXlYLoLwyjdsIRYUa05OQzE0P4skx1-QJKi8HtGcJHtJfOTn7RhWKC0nkXODvUAChvnKDVY02TWEClAeVhEaVRWS_5ZfU6MlgnX07DuKm9XBS-b3RKfciM1Eu7L2mvkMebfBWVUw9WkuqNL4Tz-MkN4lXmljRt8r8DWEA78ePS_Gy4lnOlUa2CgworZmUYq-Etff-9QK90v4xOWzNWvaILdcmkJs5zwH9b86f5yxos_NRK-VIO015zVlWTWEB2bYe3iy_95zezUdGp66X77IQbHhKunDI1BF0trlkrIkOCqviH4S1U3Nz4n5WWW8qsc3zAEq1Spquojg2mevHtWEA5EwtdjPeXn07NztIOTZ6PtyWt6v0Gfp5oFRAbvvcCpDnptz6gZd56Z6TBkI0eMUs4RI2g2rup607wVFuIUdvgWEC9Jb2rzxEtn2VZ2DZl4r5x_5wWVT8-OrHVtRUBcwdDe1_gl-PYhQ26vLcTN87eyPdVhft0O-URO1PQdifev4NKpQBYIOGCDmZ9TBxEtWeCI9oVmRt0eHRGAaoOXx08gxL2IQt_AVggk0AeXgJ4e6m1XsV5-xFud0L_1mUjZ9Mffhg5aZGTyDkCWCBWRS4GuU5oQsZVBYkPgz-pbltwoQdYY1s6s8D-oA4orANYIJEdvfdRibsv05I3pv8e6S1aUuAuBpGQHLhrYj4QX0knBFggQ-qOZUDlozRsGk46ux9gp9fjT28Fy3g3nctmMoqi_U2MAgMEBQkKDA0ODxAR"
+    "proofValue": "u2V0BhdhAWECql7UfnVlTiPZmpE0_46MDRzUXs9n_uidA-299Jsre3v1MMVGZeFF8EaZNIr1Fo9_54UMqdYoKbOdgTWVEydVI2EBYI4AkAipyzhm2PxbjPgEqUpJDsbCEdhPJ-zJdqtVEOrRMM4uThthAWEBtAwxySlwwASjXlYLoLwyjdsIRYUa05OQzE0P4skx1-QJKi8HtGcJHtJfOTn7RhWKC0nkXODvUAChvnKDVY02T2EBYQKUB5WERpVFZL_ll9ToyWCdfTsO4qb1cFL5vdEp9yIzUS7svaa-Qx5t8FZVTD1aS6o0vhPP4yQ3iVeaWNG3yvwPYQFhAqLTdVe1JKRlqP3GEI6ondyEGsRO7C5NgA5ioxHDXufWPIvmpjYcDjHtNT807xj4pPst4Xy9LewBllOoJiY_QPNhAWECBIfZ9MDurxCmRF35T6_NvW98RmYoOkoPTkiKYb-f3sy2o4wifSQJWsK-O68V0f8PbNtHrSiv46uXN4Km5xjgB2EBYQLTj83U9T_ZGb-6bT0DRSj_x9pNAeYLsTO1tVv6X09zNGSV-GpaUa-TPxsAbMNPZg75kNgxnw0yRezZi6RMffvvYQFhAgcBXPlpHvyX01HXXLPnxZFrnKv1natoPUdKvMMMsl4ED771SLhhBt63HQiu9C5_-ucTGlIKt9xrIhQphkLNCj6YA2EBYIOGCDmZ9TBxEtWeCI9oVmRt0eHRGAaoOXx08gxL2IQt_AdhAWCBWRS4GuU5oQsZVBYkPgz-pbltwoQdYY1s6s8D-oA4orALYQFggkR2991GJuy_Tkjem_x7pLVpS4C4GkZAcuGtiPhBfSScD2EBYIJNAHl4CeHuptV7FefsRbndC_9ZlI2fTH34YOWmRk8g5BNhAWCB9RYlEdD2PWOZQocsvyTqbQJnyDi_veA6lozmQvdkAJAXYQFgg2IE-HtO6PyHQsGnuqhO1mX6V7RkRREhF0d0sWZlxNOaNAAECBQYHCAkKCw0ODw"
   }
 }</pre>
       </div>
@@ -4805,7 +4843,7 @@ Add <code>secretKeymultibase</code> representation.
     </dd><dt id="bib-rfc8785">[RFC8785]</dt><dd>
       <a href="https://www.rfc-editor.org/rfc/rfc8785"><cite>JSON Canonicalization Scheme (JCS)</cite></a>. A. Rundgren; B. Jordan; S. Erdtman.  IETF. June 2020. Informational. URL: <a href="https://www.rfc-editor.org/rfc/rfc8785">https://www.rfc-editor.org/rfc/rfc8785</a>
     </dd><dt id="bib-vc-data-integrity">[VC-DATA-INTEGRITY]</dt><dd>
-      <a href="https://www.w3.org/TR/vc-data-integrity/"><cite>Verifiable Credential Data Integrity 1.0</cite></a>. Manu Sporny; Dave Longley; Greg Bernstein; Dmitri Zagidulin; Sebastian Crane.  W3C. 17 October 2023. W3C Working Draft. URL: <a href="https://www.w3.org/TR/vc-data-integrity/">https://www.w3.org/TR/vc-data-integrity/</a>
+      <a href="https://www.w3.org/TR/vc-data-integrity/"><cite>Verifiable Credential Data Integrity 1.0</cite></a>. Manu Sporny; Dave Longley; Greg Bernstein; Dmitri Zagidulin; Sebastian Crane.  W3C. 21 October 2023. W3C Working Draft. URL: <a href="https://www.w3.org/TR/vc-data-integrity/">https://www.w3.org/TR/vc-data-integrity/</a>
     </dd><dt id="bib-xmlschema11-2">[XMLSCHEMA11-2]</dt><dd>
       <a href="https://www.w3.org/TR/xmlschema11-2/"><cite>W3C XML Schema Definition Language (XSD) 1.1 Part 2: Datatypes</cite></a>. David Peterson; Sandy Gao; Ashok Malhotra; Michael Sperberg-McQueen; Henry Thompson; Paul V. Biron et al.  W3C. 5 April 2012. W3C Recommendation. URL: <a href="https://www.w3.org/TR/xmlschema11-2/">https://www.w3.org/TR/xmlschema11-2/</a>
     </dd></dl>
