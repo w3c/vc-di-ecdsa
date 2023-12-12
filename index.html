@@ -1427,7 +1427,8 @@ Otherwise, if the value of the <em>@id</em> property in
 <var>skolemizedNode</var> starts with "_:", preserve the existing blank node
 identifier when skolemizing by setting the value of the <em>@id</em> property
 in <var>skolemizedNode</var> to the concatenation of "urn:",
-<var>urnScheme</var>, and the existing value of the <em>@id</em> property.
+<var>urnScheme</var>, and the blank node identifier (i.e., existing value of
+the <em>@id</em> property without the "_:" prefix).
                 </li>
                 <li>
 Append <var>skolemizedNode</var> to <var>skolemizedExpandedDocument</var>.
