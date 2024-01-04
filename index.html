@@ -691,33 +691,17 @@ object is produced as output.
 
           <ol class="algorithm">
             <li>
-Let <var>proofConfig</var> be an empty object.
+Let <var>proofConfig</var> be a clone of the <var>options</var> object.
             </li>
             <li>
-Set <var>proofConfig</var>.<var>type</var> to
-<var>options</var>.<var>type</var>.
-            </li>
-            <li>
-If <var>options</var>.<var>cryptosuite</var> is set, set
-<var>proofConfig</var>.<var>cryptosuite</var> to its value.
-            </li>
-            <li>
-If <var>options</var>.<var>type</var> is not set to `DataIntegrityProof` and
+If <var>proofConfig</var>.<var>type</var> is not set to `DataIntegrityProof` and
 <var>proofConfig</var>.<var>cryptosuite</var> is not set to `ecdsa-rdfc-2019`, an
 `INVALID_PROOF_CONFIGURATION` error MUST be raised.
             </li>
             <li>
-Set <var>proofConfig</var>.<var>created</var> to
-<var>options</var>.<var>created</var>. If the value is not a valid
-[[XMLSCHEMA11-2]] datetime, an `INVALID_PROOF_DATETIME` error MUST be raised.
-            </li>
-            <li>
-Set <var>proofConfig</var>.<var>verificationMethod</var> to
-<var>options</var>.<var>verificationMethod</var>.
-            </li>
-            <li>
-Set <var>proofConfig</var>.<var>proofPurpose</var> to
-<var>options</var>.<var>proofPurpose</var>.
+If <var>proofConfig</var>.<var>created</var> is set and if the value is not a
+valid [[XMLSCHEMA11-2]] datetime, an `INVALID_PROOF_DATETIME` error MUST be
+raised.
             </li>
             <li>
 Set <var>proofConfig</var>.<var>@context</var> to
@@ -979,33 +963,17 @@ object is produced as output.
 
           <ol class="algorithm">
             <li>
-Let <var>proofConfig</var> be an empty object.
+Let <var>proofConfig</var> be a clone of the <var>options</var> object.
             </li>
             <li>
-Set <var>proofConfig</var>.<var>type</var> to
-<var>options</var>.<var>type</var>.
-            </li>
-            <li>
-If <var>options</var>.<var>cryptosuite</var> is set, set
-<var>proofConfig</var>.<var>cryptosuite</var> to its value.
-            </li>
-            <li>
-If <var>options</var>.<var>type</var> is not set to `DataIntegrityProof` and
+If <var>proofConfig</var>.<var>type</var> is not set to `DataIntegrityProof` and
 <var>proofConfig</var>.<var>cryptosuite</var> is not set to `ecdsa-jcs-2019`, an
 `INVALID_PROOF_CONFIGURATION` error MUST be raised.
             </li>
             <li>
-Set <var>proofConfig</var>.<var>created</var> to
-<var>options</var>.<var>created</var>. If the value is not a valid
-[[XMLSCHEMA11-2]] datetime, an `INVALID_PROOF_DATETIME` error MUST be raised.
-            </li>
-            <li>
-Set <var>proofConfig</var>.<var>verificationMethod</var> to
-<var>options</var>.<var>verificationMethod</var>.
-            </li>
-            <li>
-Set <var>proofConfig</var>.<var>proofPurpose</var> to
-<var>options</var>.<var>proofPurpose</var>.
+If <var>proofConfig</var>.<var>created</var> is set and if the value is not a
+valid [[XMLSCHEMA11-2]] datetime, an `INVALID_PROOF_DATETIME` error MUST be
+raised.
             </li>
             <li>
 Let <var>canonicalProofConfig</var> be the result of applying the
@@ -2590,33 +2558,17 @@ object is produced as output.
 
           <ol class="algorithm">
             <li>
-Let <var>proofConfig</var> be an empty object.
+Let <var>proofConfig</var> be a clone of the <var>options</var> object.
             </li>
             <li>
-Set <var>proofConfig</var>.<var>type</var> to
-<var>options</var>.<var>type</var>.
-            </li>
-            <li>
-If <var>options</var>.<var>cryptosuite</var> is set, set
-<var>proofConfig</var>.<var>cryptosuite</var> to its value.
-            </li>
-            <li>
-If <var>options</var>.<var>type</var> is not set to `DataIntegrityProof` and
+If <var>proofConfig</var>.<var>type</var> is not set to `DataIntegrityProof` and
 <var>proofConfig</var>.<var>cryptosuite</var> is not set to `ecdsa-sd-2023`, an
 `INVALID_PROOF_CONFIGURATION` error MUST be raised.
             </li>
             <li>
-Set <var>proofConfig</var>.<var>created</var> to
-<var>options</var>.<var>created</var>. If the value is not a valid
-[[XMLSCHEMA11-2]] datetime, an `INVALID_PROOF_DATETIME` error MUST be raised.
-            </li>
-            <li>
-Set <var>proofConfig</var>.<var>verificationMethod</var> to
-<var>options</var>.<var>verificationMethod</var>.
-            </li>
-            <li>
-Set <var>proofConfig</var>.<var>proofPurpose</var> to
-<var>options</var>.<var>proofPurpose</var>.
+If <var>proofConfig</var>.<var>created</var> is set and if the value is not a
+valid [[XMLSCHEMA11-2]] datetime, an `INVALID_PROOF_DATETIME` error MUST be
+raised.
             </li>
             <li>
 Set <var>proofConfig</var>.<var>@context</var> to
