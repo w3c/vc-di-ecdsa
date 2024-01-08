@@ -746,11 +746,9 @@ represented as series of bytes is produced as output.
           <ol class="algorithm">
             <li>
 Let <var>privateKeyBytes</var> be the result of retrieving the
-private key bytes associated with the
-<var>options</var>.<var>verificationMethod</var> value as described in the
-Data Integrity [[VC-DATA-INTEGRITY]] specification,
-<a data-cite="vc-data-integrity#algorithms">
-Section 4: Retrieving Cryptographic Material</a>.
+private key bytes (or a signing interface enabling the use of the private key
+bytes) associated with the verification method identified by the
+<var>options</var>.<var>verificationMethod</var> value.
             </li>
             <li>
 Let <var>proofBytes</var> be the result of applying the Elliptic Curve Digital
