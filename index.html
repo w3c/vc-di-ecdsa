@@ -140,6 +140,7 @@
           }
         },
         lint: {"no-unused-dfns": false},
+        xref: ["infra", "VC-DATA-MODEL-2.0"],
         postProcess: [],
         otherLinks: [{
           key: "Related Specifications",
@@ -522,6 +523,111 @@ by default, and abort processing upon detection.
       </p>
 
       <section>
+        <h3>Suite Selection Algorithm</h3>
+
+        <p>
+This algorithm is used to configure a cryptographic suite to be used by the
+<a href="https://www.w3.org/TR/vc-data-integrity/#add-proof">Add Proof</a> and
+<a href="https://www.w3.org/TR/vc-data-integrity/#verify-proof">Verify Proof</a>
+functions in [[[VC-DATA-INTEGRITY]]]. The algorithm takes an options object
+([=map=] |options|) as input and returns a cryptosuite
+([=struct=] |cryptosuite|).
+        </p>
+
+        <ol class="algorithm">
+          <li>
+Initialize |cryptosuite| to an empty [=struct=].
+          </li>
+          <li>
+If |options|.|type| is `DataIntegrityProof` and |options|.|cryptosuite| is
+`ecdsa-rdfc-2019` then:
+            <ol class="algorithm">
+              <li>
+Set |cryptosuite|.|transform| to the algorithm in Section
+<a href="#transformation-ecdsa-rdfc-2019"></a>.
+              </li>
+              <li>
+Set |cryptosuite|.|hash| to the algorithm in Section
+<a href="#hashing-ecdsa-rdfc-2019"></a>.
+              </li>
+              <li>
+Set |cryptosuite|.|createProofConfig| to the algorithm in Section
+<a href="#proof-configuration-ecdsa-rdfc-2019"></a>.
+              </li>
+              <li>
+Set |cryptosuite|.|serializeProof| to the algorithm in Section
+<a href="#proof-serialization-ecdsa-rdfc-2019"></a>.
+              </li>
+              <li>
+Set |cryptosuite|.|verifyProof| to the algorithm in Section
+<a href="#proof-verification-ecdsa-rdfc-2019"></a>.
+              </li>
+            </ol>
+          </li>
+          <li>
+If |options|.|type| is `DataIntegrityProof` and |options|.|cryptosuite| is
+`ecdsa-jcs-2019` then:
+            <ol class="algorithm">
+              <li>
+Set |cryptosuite|.|transform| to the algorithm in Section
+<a href="#transformation-ecdsa-jcs-2019"></a>.
+              </li>
+              <li>
+Set |cryptosuite|.|hash| to the algorithm in Section
+<a href="#hashing-ecdsa-jcs-2019"></a>.
+              </li>
+              <li>
+Set |cryptosuite|.|createProofConfig| to the algorithm in Section
+<a href="#proof-configuration-ecdsa-jcs-2019"></a>.
+              </li>
+              <li>
+Set |cryptosuite|.|serializeProof| to the algorithm in Section
+<a href="#proof-serialization-ecdsa-jcs-2019"></a>.
+              </li>
+              <li>
+Set |cryptosuite|.|verifyProof| to the algorithm in Section
+<a href="#proof-verification-ecdsa-jcs-2019"></a>.
+              </li>
+            </ol>
+          </li>
+          <li>
+If |options|.|type| is `DataIntegrityProof` and |options|.|cryptosuite| is
+`ecdsa-sd-2023` then:
+            <ol class="algorithm">
+              <li>
+Set |cryptosuite|.|transform| to the algorithm in Section
+<a href="#base-proof-transformation-ecdsa-sd-2023"></a>.
+              </li>
+              <li>
+Set |cryptosuite|.|hash| to the algorithm in Section
+<a href="#base-proof-hashing-ecdsa-sd-2023"></a>.
+              </li>
+              <li>
+Set |cryptosuite|.|createProofConfig| to the algorithm in Section
+<a href="#base-proof-configuration-ecdsa-sd-2023"></a>.
+              </li>
+              <li>
+Set |cryptosuite|.|serializeProof| to the algorithm in Section
+<a href="#base-proof-serialization-ecdsa-sd-2023"></a>.
+              </li>
+              <li>
+Set |cryptosuite|.|deriveProof| to the algorithm in Section
+<a href="#add-derived-proof-ecdsa-sd-2023"></a>.
+              </li>
+              <li>
+Set |cryptosuite|.|verifyProof| to the algorithm in Section
+<a href="#verify-derived-proof-ecdsa-sd-2023"></a>.
+              </li>
+            </ol>
+          </li>
+          <li>
+Return |cryptosuite|.
+          </li>
+        </ol>
+
+      </section>
+
+      <section>
         <h3>ecdsa-rdfc-2019</h3>
 
         <p>
@@ -540,16 +646,6 @@ To generate a proof, the algorithm in
 <a href="https://www.w3.org/TR/vc-data-integrity/#add-proof">
 Section 4.1: Add Proof</a> in the Data Integrity
 [[VC-DATA-INTEGRITY]] specification MUST be executed.
-For that algorithm, the cryptographic suite specific
-<a href="https://www.w3.org/TR/vc-data-integrity/#dfn-transformation-algorithm">
-transformation algorithm</a> is defined in Section
-<a href="#transformation-ecdsa-rdfc-2019"></a>, the
-<a href="https://www.w3.org/TR/vc-data-integrity/#dfn-hashing-algorithm">
-hashing algorithm</a> is defined in Section <a href="#hashing-ecdsa-rdfc-2019"></a>,
-and the
-<a href="https://www.w3.org/TR/vc-data-integrity/#dfn-proof-serialization-algorithm">
-proof serialization algorithm</a> is defined in Section
-<a href="#proof-serialization-ecdsa-rdfc-2019"></a>.
           </p>
         </section>
 
@@ -561,16 +657,6 @@ To verify a proof, the algorithm in
 <a href="https://www.w3.org/TR/vc-data-integrity/#verify-proof">
 Section 4.2: Verify Proof</a> in the Data Integrity
 [[VC-DATA-INTEGRITY]] specification MUST be executed.
-For that algorithm, the cryptographic suite specific
-<a href="https://www.w3.org/TR/vc-data-integrity/#dfn-transformation-algorithm">
-transformation algorithm</a> is defined in Section
-<a href="#transformation-ecdsa-rdfc-2019"></a>, the
-<a href="https://www.w3.org/TR/vc-data-integrity/#dfn-hashing-algorithm">
-hashing algorithm</a> is defined in Section <a href="#hashing-ecdsa-rdfc-2019"></a>,
-and the
-<a href="https://www.w3.org/TR/vc-data-integrity/#dfn-proof-serialization-algorithm">
-proof verification algorithm</a> is defined in Section
-<a href="#proof-verification-ecdsa-rdfc-2019"></a>.
           </p>
         </section>
 
@@ -811,16 +897,6 @@ To generate a proof, the algorithm in
 <a href="https://www.w3.org/TR/vc-data-integrity/#add-proof">
 Section 4.1: Add Proof</a> of the Data Integrity
 [[VC-DATA-INTEGRITY]] specification MUST be executed.
-For that algorithm, the cryptographic suite-specific
-<a href="https://www.w3.org/TR/vc-data-integrity/#dfn-transformation-algorithm">
-transformation algorithm</a> is defined in Section
-<a href="#transformation-ecdsa-jcs-2019"></a>, the
-<a href="https://www.w3.org/TR/vc-data-integrity/#dfn-hashing-algorithm">
-hashing algorithm</a> is defined in Section <a href="#hashing-ecdsa-jcs-2019"></a>,
-and the
-<a href="https://www.w3.org/TR/vc-data-integrity/#dfn-proof-serialization-algorithm">
-proof serialization algorithm</a> is defined in Section
-<a href="#proof-serialization-ecdsa-jcs-2019"></a>.
           </p>
         </section>
 
@@ -832,16 +908,6 @@ To verify a proof, the algorithm in
 <a href="https://www.w3.org/TR/vc-data-integrity/#verify-proof">
 Section 4.2: Verify Proof</a> of the Data Integrity
 [[VC-DATA-INTEGRITY]] specification MUST be executed.
-For that algorithm, the cryptographic suite-specific
-<a href="https://www.w3.org/TR/vc-data-integrity/#dfn-transformation-algorithm">
-transformation algorithm</a> is defined in Section
-<a href="#transformation-ecdsa-jcs-2019"></a>, the
-<a href="https://www.w3.org/TR/vc-data-integrity/#dfn-hashing-algorithm">
-hashing algorithm</a> is defined in Section <a href="#hashing-ecdsa-jcs-2019"></a>,
-and the
-<a href="https://www.w3.org/TR/vc-data-integrity/#dfn-proof-serialization-algorithm">
-proof verification algorithm</a> is defined in Section
-<a href="#proof-verification-ecdsa-jcs-2019"></a>.
           </p>
         </section>
 
@@ -2406,16 +2472,6 @@ To generate a base proof, the algorithm in
 <a href="https://www.w3.org/TR/vc-data-integrity/#add-proof">
 Section 4.1: Add Proof</a> in the Data Integrity
 [[VC-DATA-INTEGRITY]] specification MUST be executed.
-For that algorithm, the cryptographic suite specific
-<a href="https://www.w3.org/TR/vc-data-integrity/#dfn-transformation-algorithm">
-transformation algorithm</a> is defined in Section
-<a href="#base-proof-transformation-ecdsa-sd-2023"></a>, the
-<a href="https://www.w3.org/TR/vc-data-integrity/#dfn-hashing-algorithm">
-hashing algorithm</a> is defined in Section <a href="#base-proof-hashing-ecdsa-sd-2023"></a>,
-and the
-<a href="https://www.w3.org/TR/vc-data-integrity/#dfn-proof-serialization-algorithm">
-proof serialization algorithm</a> is defined in Section
-<a href="#base-proof-serialization-ecdsa-sd-2023"></a>.
           </p>
         </section>
 
