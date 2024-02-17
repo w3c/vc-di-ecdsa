@@ -523,14 +523,14 @@ by default, and abort processing upon detection.
       </p>
 
       <section>
-        <h3>Suite Selection Algorithm</h3>
+        <h3>Instantiate Cryptosuite</h3>
 
         <p>
 This algorithm is used to configure a cryptographic suite to be used by the
-<a href="https://www.w3.org/TR/vc-data-integrity/#add-proof">Add Proof</a> and
-<a href="https://www.w3.org/TR/vc-data-integrity/#verify-proof">Verify Proof</a>
+<a data-cite="VC-DATA-INTEGRITY#add-proof">Add Proof</a> and
+<a href="VC-DATA-INTEGRITY#verify-proof">Verify Proof</a>
 functions in [[[VC-DATA-INTEGRITY]]]. The algorithm takes an options object
-([=map=] |options|) as input and returns a cryptosuite
+([=map=] |options|) as input and returns a [=cryptosuite instance=]
 ([=struct=] |cryptosuite|).
         </p>
 
@@ -539,24 +539,15 @@ functions in [[[VC-DATA-INTEGRITY]]]. The algorithm takes an options object
 Initialize |cryptosuite| to an empty [=struct=].
           </li>
           <li>
-If |options|.|type| is `DataIntegrityProof` and |options|.|cryptosuite| is
-`ecdsa-rdfc-2019` then:
+If |options|.|type| does not equal `DataIntegrityProof`, an
+`INVALID_PROOF_CONFIGURATION` error MUST be raised.
+          </li>
+          <li>
+If |options|.|cryptosuite| is `ecdsa-rdfc-2019` then:
             <ol class="algorithm">
               <li>
-Set |cryptosuite|.|transform| to the algorithm in Section
-<a href="#transformation-ecdsa-rdfc-2019"></a>.
-              </li>
-              <li>
-Set |cryptosuite|.|hash| to the algorithm in Section
-<a href="#hashing-ecdsa-rdfc-2019"></a>.
-              </li>
-              <li>
-Set |cryptosuite|.|createProofConfig| to the algorithm in Section
-<a href="#proof-configuration-ecdsa-rdfc-2019"></a>.
-              </li>
-              <li>
-Set |cryptosuite|.|serializeProof| to the algorithm in Section
-<a href="#proof-serialization-ecdsa-rdfc-2019"></a>.
+Set |cryptosuite|.|createProof| to the algorithm in Section
+<a href="#create-proof-ecdsa-rdfc-2019"></a>.
               </li>
               <li>
 Set |cryptosuite|.|verifyProof| to the algorithm in Section
@@ -565,24 +556,11 @@ Set |cryptosuite|.|verifyProof| to the algorithm in Section
             </ol>
           </li>
           <li>
-If |options|.|type| is `DataIntegrityProof` and |options|.|cryptosuite| is
-`ecdsa-jcs-2019` then:
+If |options|.|cryptosuite| is `ecdsa-jcs-2019` then:
             <ol class="algorithm">
               <li>
-Set |cryptosuite|.|transform| to the algorithm in Section
-<a href="#transformation-ecdsa-jcs-2019"></a>.
-              </li>
-              <li>
-Set |cryptosuite|.|hash| to the algorithm in Section
-<a href="#hashing-ecdsa-jcs-2019"></a>.
-              </li>
-              <li>
-Set |cryptosuite|.|createProofConfig| to the algorithm in Section
-<a href="#proof-configuration-ecdsa-jcs-2019"></a>.
-              </li>
-              <li>
-Set |cryptosuite|.|serializeProof| to the algorithm in Section
-<a href="#proof-serialization-ecdsa-jcs-2019"></a>.
+Set |cryptosuite|.|createProof| to the algorithm in Section
+<a href="#create-proof-ecdsa-jcs-2019"></a>.
               </li>
               <li>
 Set |cryptosuite|.|verifyProof| to the algorithm in Section
@@ -591,28 +569,11 @@ Set |cryptosuite|.|verifyProof| to the algorithm in Section
             </ol>
           </li>
           <li>
-If |options|.|type| is `DataIntegrityProof` and |options|.|cryptosuite| is
-`ecdsa-sd-2023` then:
+If |options|.|cryptosuite| is `ecdsa-sd-2023` then:
             <ol class="algorithm">
               <li>
-Set |cryptosuite|.|transform| to the algorithm in Section
-<a href="#base-proof-transformation-ecdsa-sd-2023"></a>.
-              </li>
-              <li>
-Set |cryptosuite|.|hash| to the algorithm in Section
-<a href="#base-proof-hashing-ecdsa-sd-2023"></a>.
-              </li>
-              <li>
-Set |cryptosuite|.|createProofConfig| to the algorithm in Section
-<a href="#base-proof-configuration-ecdsa-sd-2023"></a>.
-              </li>
-              <li>
-Set |cryptosuite|.|serializeProof| to the algorithm in Section
-<a href="#base-proof-serialization-ecdsa-sd-2023"></a>.
-              </li>
-              <li>
-Set |cryptosuite|.|deriveProof| to the algorithm in Section
-<a href="#add-derived-proof-ecdsa-sd-2023"></a>.
+Set |cryptosuite|.|createProof| to the algorithm in Section
+<a href="#create-base-proof-ecdsa-sd-2023"></a>.
               </li>
               <li>
 Set |cryptosuite|.|verifyProof| to the algorithm in Section
@@ -984,7 +945,7 @@ section also include the verification of such a data integrity proof.
         </p>
 
         <section>
-          <h4>Add Proof (ecdsa-jcs-2019)</h4>
+          <h4>Create Proof (ecdsa-jcs-2019)</h4>
 
           <p>
 To generate a proof, the algorithm in
@@ -2559,7 +2520,7 @@ section also include the verification of such a data integrity proof.
         </p>
 
         <section>
-          <h4>Add Base Proof (ecdsa-sd-2023)</h4>
+          <h4>Create Base Proof (ecdsa-sd-2023)</h4>
 
           <p>
 To generate a base proof, the algorithm in
