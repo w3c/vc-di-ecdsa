@@ -103,7 +103,6 @@
         /*preProcess: [ webpayments.preProcess ],
         alternateFormats: [ {uri: "diff-20111214.html", label: "diff to previous version"} ],
         */
-        xref: ["INFRA", "VC-DATA-INTEGRITY", "VC-DATA-MODEL-2.0"],
         localBiblio: {
           MULTIBASE: {
             title: "Multibase",
@@ -139,9 +138,7 @@
             href: "https://doi.org/10.6028/NIST.SP.800-57pt1r5"
           }
         },
-        lint: {"no-unused-dfns": false},
         xref: ["INFRA", "VC-DATA-MODEL-2.0", "VC-DATA-INTEGRITY"],
-        postProcess: [],
         otherLinks: [{
           key: "Related Specifications",
           data: [{
@@ -530,8 +527,8 @@ This algorithm is used to configure a cryptographic suite to be used by the
 <a data-cite="VC-DATA-INTEGRITY#add-proof">Add Proof</a> and
 <a href="VC-DATA-INTEGRITY#verify-proof">Verify Proof</a>
 functions in [[[VC-DATA-INTEGRITY]]]. The algorithm takes an options object
-([=map=] |options|) as input and returns a [=cryptosuite instance=]
-([=struct=] |cryptosuite|).
+([=map=] |options|) as input and returns a [=data integrity cryptographic suite
+instance|cryptosuite instance=] ([=struct=] |cryptosuite|).
         </p>
 
         <ol class="algorithm">
