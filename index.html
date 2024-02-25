@@ -103,6 +103,7 @@
         /*preProcess: [ webpayments.preProcess ],
         alternateFormats: [ {uri: "diff-20111214.html", label: "diff to previous version"} ],
         */
+        xref: ["INFRA", "VC-DATA-INTEGRITY", "VC-DATA-MODEL-2.0"],
         localBiblio: {
           MULTIBASE: {
             title: "Multibase",
@@ -139,7 +140,7 @@
           }
         },
         lint: {"no-unused-dfns": false},
-        postProcess: [restrictRefs],
+        postProcess: [],
         otherLinks: [{
           key: "Related Specifications",
           data: [{
@@ -243,7 +244,11 @@ addition, this notation is sometimes used in ECDSA software libraries.
       <section id="terminology">
         <h3>Terminology</h3>
 
-        <div data-include="https://w3c.github.io/vc-data-integrity/terms.html"></div>
+        <p>
+Terminology used throughout this document is defined in the
+<a data-cite="VC-DATA-INTEGRITY#terminology">Terminology</a> section of the
+[[[VC-DATA-INTEGRITY]]] specification.
+        </p>
 
       </section>
 
@@ -259,7 +264,7 @@ of this document MUST be enforced.
         <p>
 A <dfn class="lint-ignore">conforming processor</dfn> is any algorithm realized
 as software and/or hardware that generates or consumes a
-<a>conforming proof</a>. Conforming processors MUST produce errors when
+[=conforming proof=]. Conforming processors MUST produce errors when
 non-conforming documents are consumed.
         </p>
 	<p>
@@ -488,17 +493,17 @@ Multibase section</a> of [[VC-DATA-INTEGRITY]].
 
       <p>
 The following section describes multiple Data Integrity cryptographic suites
-that utilize the Elliptic Curve Digital Signature Algorithm (ECDSA) [[FIPS-186-5]].
-When generating ECDSA signatures, the <em>deterministic</em> ECDSA algorithm
-variant SHOULD be used.
+that utilize the Elliptic Curve Digital Signature Algorithm (ECDSA)
+[[FIPS-186-5]]. When generating ECDSA signatures, the <em>deterministic</em>
+ECDSA algorithm variant SHOULD be used.
       </p>
 
       <p>
-Implementations SHOULD fetch and cache <a>verification method</a> information as
+Implementations SHOULD fetch and cache verification method information as
 early as possible when adding or verifying proofs. Parameters passed to
-functions in this section use information from the <a>verification
-method</a> — such as the public key size — to determine function parameters — such
-as the cryptographic hashing algorithm.
+functions in this section use information from the verification method
+&mdash; such as the public key size &mdash; to determine function parameters
+&mdash; such as the cryptographic hashing algorithm.
       </p>
 
       <p>
@@ -2310,7 +2315,7 @@ elements, using the names "baseSignature", "publicKey", "signatures",
 
           <p>
 The following algorithm creates the data needed to perform verification of an
-ECDSA-SD-protected <a>verifiable credential</a>. The inputs include a JSON-LD
+ECDSA-SD-protected [=verifiable credential=]. The inputs include a JSON-LD
 document (<var>document</var>), an ECDSA-SD disclosure proof (<var>proof</var>),
 and any custom JSON-LD API options, such as a document loader. A single
 <em>verify data</em> object value is produced as output containing the following
@@ -2651,8 +2656,8 @@ Return `proofValue` as <em>digital proof</em>.
 
           <p>
 The following algorithm creates a selective disclosure derived proof; called by
-a holder of an `ecdsa-sd-2023`-protected <a>verifiable credential</a>.
-The derived proof is to be given to the <a>verifier</a>. The inputs include a
+a holder of an `ecdsa-sd-2023`-protected [=verifiable credential=].
+The derived proof is to be given to the [=verifier=]. The inputs include a
 JSON-LD document (<var>document</var>), an ECDSA-SD base proof
 (<var>proof</var>), an array of JSON pointers to use to selectively disclose
 statements (<var>selectivePointers</var>), and any custom JSON-LD API options,
@@ -2693,7 +2698,7 @@ Return `revealDocument` as the <em>selectively revealed document</em>.
           <p>
 The following algorithm attempts verification of an `ecdsa-sd-2023` derived
 proof. This algorithm is called by a verifier of an ECDSA-SD-protected
-<a>verifiable credential</a>. The inputs include a JSON-LD document
+[=verifiable credential=]. The inputs include a JSON-LD document
 (<var>document</var>), an ECDSA-SD disclosure proof (<var>proof</var>), and any
 custom JSON-LD API options, such as a document loader. A single boolean
 <em>verification result</em> value is produced as output.
