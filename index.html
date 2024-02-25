@@ -608,17 +608,17 @@ or an error, is produced as output.
 
         <ol class="algorithm">
           <li>
-Let |proof| be an empty [=map=].
+Let |proof| be a clone of the proof options, |options|.
           </li>
           <li>
-Let |proof| be the result of running the algorithm in
+Let |proofConfig| be the result of running the algorithm in
 Section <a href="#proof-configuration-ecdsa-rdfc-2019"></a> with
 |options| passed as a parameter.
           </li>
           <li>
 Let |transformedData| be the result of running the algorithm in Section <a
-href="#transformation-ecdsa-rdfc-2019"></a> with |unsecuredDocument| and
-|options| passed as parameters.
+href="#transformation-ecdsa-rdfc-2019"></a> with |unsecuredDocument|,
+|proofConfig|, and |options| passed as parameters.
           </li>
           <li>
 Let |hashData| be the result of running the algorithm in Section
