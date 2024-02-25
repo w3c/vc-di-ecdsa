@@ -598,52 +598,51 @@ section also include the verification of such a data integrity proof.
         <section>
           <h4>Create Proof (ecdsa-rdfc-2019)</h4>
 
-        <p>
+          <p>
 The following algorithm specifies how to create a [=data integrity proof=] given
 an <a>unsecured data document</a>. Required inputs are an
-<a>unsecured data document</a> ([=map=] |unsecuredDocument|), and a set of
-proof options ([=map=] |options|). A [=data integrity proof=] ([=map=]),
-or an error, is produced as output.
-        </p>
+<a>unsecured data document</a> ([=map=] |unsecuredDocument|), and a set of proof
+options ([=map=] |options|). A [=data integrity proof=] ([=map=]), or an error,
+is produced as output.
+          </p>
 
-        <ol class="algorithm">
-          <li>
+          <ol class="algorithm">
+            <li>
 Let |proof| be a clone of the proof options, |options|.
-          </li>
-          <li>
+            </li>
+            <li>
 Let |proofConfig| be the result of running the algorithm in
 Section <a href="#proof-configuration-ecdsa-rdfc-2019"></a> with
 |options| passed as a parameter.
-          </li>
-          <li>
+            </li>
+            <li>
 Let |transformedData| be the result of running the algorithm in Section <a
 href="#transformation-ecdsa-rdfc-2019"></a> with |unsecuredDocument|,
 |proofConfig|, and |options| passed as parameters.
-          </li>
-          <li>
+            </li>
+            <li>
 Let |hashData| be the result of running the algorithm in Section
 <a href="#hashing-ecdsa-rdfc-2019"></a> with |transformedData| and |proofConfig|
 passed as a parameters.
-          </li>
-          <li>
+            </li>
+            <li>
 Let |proofBytes| be the result of running the algorithm in Section
 <a href="#proof-serialization-ecdsa-rdfc-2019"></a> with |hashData| and
 |options| passed as parameters.
-          </li>
-          <li>
+            </li>
+            <li>
 Let |proof|.|proofValue| be a <a data-cite="VC-DATA-INTEGRITY#multibase-0">
 base58-btc-encoded Multibase value</a> of the |proofBytes|.
-          </li>
-          <li>
+            </li>
+            <li>
 Return |proof| as the [=data integrity proof=].
-          </li>
-        </ol>
+            </li>
+          </ol>
 
         </section>
 
         <section>
           <h4>Verify Proof (ecdsa-rdfc-2019)</h4>
-
 
           <p>
 The following algorithm specifies how to verify a [=data integrity proof=] given
@@ -943,12 +942,47 @@ section also include the verification of such a data integrity proof.
         <section>
           <h4>Create Proof (ecdsa-jcs-2019)</h4>
 
+
           <p>
-To generate a proof, the algorithm in
-<a href="https://www.w3.org/TR/vc-data-integrity/#add-proof">
-Section 4.1: Add Proof</a> of the Data Integrity
-[[VC-DATA-INTEGRITY]] specification MUST be executed.
+The following algorithm specifies how to create a [=data integrity proof=] given
+an <a>unsecured data document</a>. Required inputs are an
+<a>unsecured data document</a> ([=map=] |unsecuredDocument|), and a set of proof
+options ([=map=] |options|). A [=data integrity proof=] ([=map=]), or an error,
+is produced as output.
           </p>
+
+          <ol class="algorithm">
+            <li>
+Let |proof| be a clone of the proof options, |options|.
+            </li>
+            <li>
+Let |proofConfig| be the result of running the algorithm in
+Section <a href="#proof-configuration-ecdsa-jcs-2019"></a> with
+|options| passed as a parameter.
+            </li>
+            <li>
+Let |transformedData| be the result of running the algorithm in Section <a
+href="#transformation-ecdsa-jcs-2019"></a> with |unsecuredDocument|,
+|proofConfig|, and |options| passed as parameters.
+            </li>
+            <li>
+Let |hashData| be the result of running the algorithm in Section
+<a href="#hashing-ecdsa-jcs-2019"></a> with |transformedData| and |proofConfig|
+passed as a parameters.
+            </li>
+            <li>
+Let |proofBytes| be the result of running the algorithm in Section
+<a href="#proof-serialization-ecdsa-jcs-2019"></a> with |hashData| and
+|options| passed as parameters.
+            </li>
+            <li>
+Let |proof|.|proofValue| be a <a data-cite="VC-DATA-INTEGRITY#multibase-0">
+base58-btc-encoded Multibase value</a> of the |proofBytes|.
+            </li>
+            <li>
+Return |proof| as the [=data integrity proof=].
+            </li>
+          </ol>
         </section>
 
         <section>
