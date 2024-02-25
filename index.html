@@ -536,8 +536,7 @@ instance|cryptosuite instance=] ([=struct=] |cryptosuite|).
 Initialize |cryptosuite| to an empty [=struct=].
           </li>
           <li>
-If |options|.|type| does not equal `DataIntegrityProof`, an
-`INVALID_PROOF_CONFIGURATION` error MUST be raised.
+If |options|.|type| does not equal `DataIntegrityProof`, return |cryptosuite|.
           </li>
           <li>
 If |options|.|cryptosuite| is `ecdsa-rdfc-2019` then:
