@@ -255,7 +255,7 @@ Terminology used throughout this document is defined in the
 A <dfn>conforming proof</dfn> is any concrete expression of the data model
 that complies with the normative statements in this specification. Specifically,
 all relevant normative statements in Sections
-<a href="#data-model"></a> and <a href="#algorithms"></a>
+[[[#data-model]]] and [[[#algorithms]]]
 of this document MUST be enforced.
         </p>
 
@@ -452,7 +452,7 @@ The `cryptosuite` property of the proof MUST be `ecdsa-rdfc-2019` or `ecdsa-jcs-
 The value of the `proofValue` property of the proof MUST be an ECDSA signature
 produced according to [[FIPS-186-5]] and SHOULD use the <em>deterministic</em>
 ECDSA signature variant, produced according to [[FIPS-186-5]] using the curves
-and hashes as specified in section <a href="#algorithms"></a>, encoded according
+and hashes as specified in section [[[#algorithms]]], encoded according
 to section 7 of [[RFC4754]] (sometimes referred to as the IEEE P1363 format),
 and encoded using the base-58-btc header and
 alphabet as described in the
@@ -543,11 +543,11 @@ If |options|.|cryptosuite| is `ecdsa-rdfc-2019` then:
             <ol class="algorithm">
               <li>
 Set |cryptosuite|.|createProof| to the algorithm in Section
-<a href="#create-proof-ecdsa-rdfc-2019"></a>.
+[[[#create-proof-ecdsa-rdfc-2019]]].
               </li>
               <li>
 Set |cryptosuite|.|verifyProof| to the algorithm in Section
-<a href="#proof-verification-ecdsa-rdfc-2019"></a>.
+[[[#proof-verification-ecdsa-rdfc-2019]]].
               </li>
             </ol>
           </li>
@@ -556,11 +556,11 @@ If |options|.|cryptosuite| is `ecdsa-jcs-2019` then:
             <ol class="algorithm">
               <li>
 Set |cryptosuite|.|createProof| to the algorithm in Section
-<a href="#create-proof-ecdsa-jcs-2019"></a>.
+[[[#create-proof-ecdsa-jcs-2019]]].
               </li>
               <li>
 Set |cryptosuite|.|verifyProof| to the algorithm in Section
-<a href="#proof-verification-ecdsa-jcs-2019"></a>.
+[[[#proof-verification-ecdsa-jcs-2019]]].
               </li>
             </ol>
           </li>
@@ -569,11 +569,11 @@ If |options|.|cryptosuite| is `ecdsa-sd-2023` then:
             <ol class="algorithm">
               <li>
 Set |cryptosuite|.|createProof| to the algorithm in Section
-<a href="#create-base-proof-ecdsa-sd-2023"></a>.
+[[[#create-base-proof-ecdsa-sd-2023]]].
               </li>
               <li>
 Set |cryptosuite|.|verifyProof| to the algorithm in Section
-<a href="#verify-derived-proof-ecdsa-sd-2023"></a>.
+[[[#verify-derived-proof-ecdsa-sd-2023]]].
               </li>
             </ol>
           </li>
@@ -612,7 +612,7 @@ Let |proof| be a clone of the proof options, |options|.
             </li>
             <li>
 Let |proofConfig| be the result of running the algorithm in
-Section <a href="#proof-configuration-ecdsa-rdfc-2019"></a> with
+Section [[[#proof-configuration-ecdsa-rdfc-2019]]] with
 |options| passed as a parameter.
             </li>
             <li>
@@ -622,12 +622,12 @@ href="#transformation-ecdsa-rdfc-2019"></a> with |unsecuredDocument|,
             </li>
             <li>
 Let |hashData| be the result of running the algorithm in Section
-<a href="#hashing-ecdsa-rdfc-2019"></a> with |transformedData| and |proofConfig|
+[[[#hashing-ecdsa-rdfc-2019]]] with |transformedData| and |proofConfig|
 passed as a parameters.
             </li>
             <li>
 Let |proofBytes| be the result of running the algorithm in Section
-<a href="#proof-serialization-ecdsa-rdfc-2019"></a> with |hashData| and
+[[[#proof-serialization-ecdsa-rdfc-2019]]] with |hashData| and
 |options| passed as parameters.
             </li>
             <li>
@@ -682,12 +682,12 @@ href="#transformation-ecdsa-rdfc-2019"></a> with |unsecuredDocument| and
           </li>
           <li>
 Let |hashData| be the result of running the algorithm in Section
-<a href="#hashing-ecdsa-rdfc-2019"></a> with |transformedData| and |proofConfig|
+[[[#hashing-ecdsa-rdfc-2019]]] with |transformedData| and |proofConfig|
 passed as a parameters.
           </li>
           <li>
 Let |verified:boolean| be the result of running the algorithm in Section
-<a href="#proof-verification-ecdsa-rdfc-2019"></a> algorithm on |hashData|,
+[[[#proof-verification-ecdsa-rdfc-2019]]] algorithm on |hashData|,
 |proofBytes|, and |proofConfig|.
             </li>
             <li>
@@ -716,7 +716,7 @@ Return a [=verification result=] with [=struct/items=]:
           <p>
 The following algorithm specifies how to transform an unsecured input document
 into a transformed document that is ready to be provided as input to the
-hashing algorithm in Section <a href="#hashing-ecdsa-rdfc-2019"></a>.
+hashing algorithm in Section [[[#hashing-ecdsa-rdfc-2019]]].
           </p>
 
           <p>
@@ -760,8 +760,8 @@ Return |canonicalDocument| as the <em>transformed data document</em>.
 The following algorithm specifies how to cryptographically hash a
 <em>transformed data document</em> and <em>proof configuration</em>
 into cryptographic hash data that is ready to be provided as input to the
-algorithms in Section <a href="#proof-serialization-ecdsa-rdfc-2019"></a> or
-Section <a href="#proof-verification-ecdsa-rdfc-2019"></a>. One must use the hash
+algorithms in Section [[[#proof-serialization-ecdsa-rdfc-2019]]] or
+Section [[[#proof-verification-ecdsa-rdfc-2019]]]. One must use the hash
 algorithm appropriate in security level to the curve used, i.e., for curve
 P-256 one uses SHA-256 and for curve P-384 one uses SHA-384.
           </p>
@@ -957,7 +957,7 @@ Let |proof| be a clone of the proof options, |options|.
             </li>
             <li>
 Let |proofConfig| be the result of running the algorithm in
-Section <a href="#proof-configuration-ecdsa-jcs-2019"></a> with
+Section [[[#proof-configuration-ecdsa-jcs-2019]]] with
 |options| passed as a parameter.
             </li>
             <li>
@@ -967,12 +967,12 @@ href="#transformation-ecdsa-jcs-2019"></a> with |unsecuredDocument|,
             </li>
             <li>
 Let |hashData| be the result of running the algorithm in Section
-<a href="#hashing-ecdsa-jcs-2019"></a> with |transformedData| and |proofConfig|
+[[[#hashing-ecdsa-jcs-2019]]] with |transformedData| and |proofConfig|
 passed as a parameters.
             </li>
             <li>
 Let |proofBytes| be the result of running the algorithm in Section
-<a href="#proof-serialization-ecdsa-jcs-2019"></a> with |hashData| and
+[[[#proof-serialization-ecdsa-jcs-2019]]] with |hashData| and
 |options| passed as parameters.
             </li>
             <li>
@@ -1016,12 +1016,12 @@ href="#transformation-ecdsa-jcs-2019"></a> with |unsecuredDocument| and
           </li>
           <li>
 Let |hashData| be the result of running the algorithm in Section
-<a href="#hashing-ecdsa-jcs-2019"></a> with |transformedData| and |proofConfig|
+[[[#hashing-ecdsa-jcs-2019]]] with |transformedData| and |proofConfig|
 passed as a parameters.
           </li>
           <li>
 Let |verified:boolean| be the result of running the algorithm in Section
-<a href="#proof-verification-ecdsa-jcs-2019"></a> algorithm on |hashData|,
+[[[#proof-verification-ecdsa-jcs-2019]]] algorithm on |hashData|,
 |proofBytes|, and |proofConfig|.
             </li>
             <li>
@@ -1050,7 +1050,7 @@ Return a [=verification result=] with [=struct/items=]:
           <p>
 The following algorithm specifies how to transform an unsecured input document
 into a transformed document that is ready to be provided as input to the
-hashing algorithm in Section <a href="#hashing-ecdsa-jcs-2019"></a>.
+hashing algorithm in Section [[[#hashing-ecdsa-jcs-2019]]].
           </p>
 
           <p>
@@ -1093,8 +1093,8 @@ Return |canonicalDocument| as the <em>transformed data document</em>.
 The following algorithm specifies how to cryptographically hash a
 <em>transformed data document</em> and <em>proof configuration</em>
 into cryptographic hash data that is ready to be provided as input to the
-algorithms in Section <a href="#proof-serialization-ecdsa-jcs-2019"></a> or
-Section <a href="#proof-verification-ecdsa-jcs-2019"></a>. One must use the
+algorithms in Section [[[#proof-serialization-ecdsa-jcs-2019]]] or
+Section [[[#proof-verification-ecdsa-jcs-2019]]]. One must use the
 hash algorithm appropriate in security level to the curve used, i.e., for curve
 P-256 one uses SHA-256, and for curve P-384 one uses SHA-384.
           </p>
@@ -1339,7 +1339,7 @@ Serialize |rdf| to an array of N-Quad strings, |nquads|.
             </li>
             <li>
 Return the result of calling the algorithm in Section
-<a href="#labelreplacementcanonicalizenquads"></a>, passing |nquads|,
+[[[#labelreplacementcanonicalizenquads]]], passing |nquads|,
 |labelMapFactoryFunction|, and any custom options.
             </li>
           </ol>
@@ -1459,7 +1459,7 @@ N-Quad strings with custom scheme URNs. The required inputs are an array of
 N-Quad strings (|inputNQuads|) and a URN scheme (|urnScheme|).
 An array of N-Quad strings, <em>skolemizedNQuads</em>, is produced as output.
 This operation is intended to be reversible through the use of the algorithm in
-Section <a href="#deskolemizenquads"></a>.
+Section [[[#deskolemizenquads]]].
           </p>
 
           <ol class="algorithm">
@@ -1497,7 +1497,7 @@ N-Quad statements with a blank node identifier. The required inputs are an array
 of N-Quad strings (|inputNQuads|) and a URN scheme
 (|urnScheme|). An array of N-Quad strings,
 <em>deskolemizedNquads</em>, is produced as output. This operation is intended
-to reverse use of the algorithm in Section <a href="#deskolemizenquads"></a>.
+to reverse use of the algorithm in Section [[[#deskolemizenquads]]].
           </p>
 
           <ol class="algorithm">
@@ -1541,7 +1541,7 @@ Any additional custom options (such as a document loader) can also be passed.
 It produces the expanded form of the skolemized JSON-LD document
 (|skolemizedExpandedDocument| as output. The skolemization used in this
 operation is intended to be reversible through the use of the algorithm in
-Section <a href="#todeskolemizednquads"></a>.
+Section [[[#todeskolemizednquads]]].
           </p>
 
           <ol class="algorithm">
@@ -1616,7 +1616,7 @@ an expanded form of the skolemized JSON-LD document
 (|skolemizedExpandedDocument| and a compact form of the skolemized
 JSON-LD document (|skolemizedCompactDocument|) as output. The
 skolemization used in this operation is intended to be reversible through the
-use of the algorithm in Section <a href="#todeskolemizednquads"></a>.
+use of the algorithm in Section [[[#todeskolemizednquads]]].
           </p>
 
           <ol class="algorithm">
@@ -1628,7 +1628,7 @@ options.
             </li>
             <li>
 Initialize |skolemizedExpandedDocument| to the result of the
-algorithm in Section <a href="#skolemizeexpandedjsonld"></a>.
+algorithm in Section [[[#skolemizeexpandedjsonld]]].
             </li>
             <li>
 Initialize |skolemizedCompactDocument| to the result of the JSON-LD
@@ -1648,7 +1648,7 @@ Return an object with both |skolemizedExpandedDocument| and
 
           <p>
 The following algorithm converts a skolemized JSON-LD document, such as one
-created using the algorithm in Section <a href="#skolemizecompactjsonld"></a>,
+created using the algorithm in Section [[[#skolemizecompactjsonld]]],
 to an array of deskolemized N-Quads. The required input is a JSON-LD document,
 <em>skolemizedDocument</em>. Additional custom options (such as a document
 loader) can be passed. An array of deskolemized N-Quad strings
@@ -1657,19 +1657,19 @@ loader) can be passed. An array of deskolemized N-Quad strings
 
           <ol class="algorithm">
             <li>
-Initialize `skolemizedDataset` to the result of the
+Initialize |skolemizedDataset| to the result of the
 <a href="https://www.w3.org/TR/json-ld11-api/#deserialize-json-ld-to-rdf-algorithm">
 Deserialize JSON-LD to RDF</a> algorithm, passing any custom options (such as a
-document loader), to convert `skolemizedDocument` from JSON-LD to RDF in N-Quads
+document loader), to convert |skolemizedDocument| from JSON-LD to RDF in N-Quads
 format.
             </li>
             <li>
-Split `skolemizedDataset` into an array of individual N-Quads,
-`skolemizedNQuads`.
+Split |skolemizedDataset| into an array of individual N-Quads,
+|skolemizedNQuads|.
             </li>
             <li>
 Set |deskolemizedNQuads| to the result of the algorithm in Section
-<a href="#deskolemizenquads"></a> with `skolemizedNQuads` and "custom-scheme:"
+[[[#deskolemizenquads]]] with |skolemizedNQuads| and "custom-scheme:"
 as parameters. Implementations MAY choose a different <em>urnScheme</em>
 that is different than "custom-scheme:" so long as the same scheme name was
 used to generate <em>skolemizedDocument</em>.
@@ -1691,29 +1691,29 @@ into a JSON tree. The required input is a JSON Pointer string
 
           <ol class="algorithm">
             <li>
-Initialize `paths` to an empty array.
+Initialize |paths| to an empty array.
             </li>
             <li>
-Initialize `splitPath` to an array by splitting |pointer| on the
+Initialize |splitPath| to an array by splitting |pointer| on the
 "/" character and skipping the first, empty, split element. In Javascript
 notation, this step is equivalent to the following code:
 `pointer.split('/').slice(1)`
             </li>
             <li>
-For each `path` in `splitPath`:
+For each |path| in |splitPath|:
               <ol class="algorithm">
                 <li>
-If `path` does not include `~`, then add `path` to `paths`, converting it to
+If |path| does not include `~`, then add |path| to |paths|, converting it to
 an integer if it parses as one, leaving it as a string if it does not.
                 </li>
                 <li>
-Otherwise, unescape any JSON pointer escape sequences in `path` and add the
-result to `paths`.
+Otherwise, unescape any JSON pointer escape sequences in |path| and add the
+result to |paths|.
                 </li>
               </ol>
             </li>
             <li>
-Return `paths`.
+Return |paths|.
             </li>
           </ol>
         </section>
@@ -1724,7 +1724,7 @@ Return `paths`.
           <p>
 The following algorithm creates an initial selection (a fragment of a JSON-LD
 document) based on a JSON-LD object. This is a helper function used within the
-algorithm in Section <a href="#selectjsonld"></a>. The required input is a
+algorithm in Section [[[#selectjsonld]]]. The required input is a
 JSON-LD object (|source|). A JSON-LD document fragment object
 (|selection|) is produced as output.
           </p>
@@ -1735,12 +1735,12 @@ Initialize |selection| to an empty object.
             </li>
             <li>
 If |source| has an `id` that is not a blank node identifier, set
-`selection.id` to its value. Note: All non-blank node identifiers in the path of
+|selection|.|id| to its value. Note: All non-blank node identifiers in the path of
 any JSON Pointer MUST be included in the selection, this includes any root
 document identifier.
             </li>
             <li>
-If |source|.`type` is set, set |selection|.`type` to its value.
+If |source|.|type| is set, set |selection|.|type| to its value.
 Note: The selection MUST include all `type`s in the path of any JSON Pointer,
 including any root document `type`.
             </li>
@@ -1756,7 +1756,7 @@ Return |selection|.
           <p>
 The following algorithm selects a portion of a compact JSON-LD document using
 paths parsed from a parsed JSON Pointer. This is a helper function used within
-the algorithm in Section <a href="#selectjsonld"></a>. The required inputs are an
+the algorithm in Section [[[#selectjsonld]]]. The required inputs are an
 array of paths (|paths|) parsed from a JSON Pointer, a compact JSON-LD
 document (|document|), a selection document
 (|selectionDocument|) to be populated, and an array of arrays
@@ -1767,46 +1767,46 @@ any values selected via |paths|.
 
           <ol class="algorithm">
             <li>
-Initialize `parentValue` to `document`.
+Initialize |parentValue| to |document|.
             </li>
             <li>
-Initialize `value` to `parentValue`.
+Initialize |value| to |parentValue|.
             </li>
             <li>
-Initialize `selectedParent` to `selectionDocument`.
+Initialize |selectedParent| to |selectionDocument|.
             </li>
             <li>
-Initialize `selectedValue` to `selectedParent`.
+Initialize |selectedValue| to |selectedParent|.
             </li>
             <li>
-For each `path` in `paths`:
+For each |path| in |paths|:
               <ol class="algorithm">
                 <li>
-Set `selectedParent` to `selectedValue`.
+Set |selectedParent| to |selectedValue|.
                 </li>
                 <li>
-Set `parentValue` to `value`.
+Set |parentValue| to |value|.
                 </li>
                 <li>
-Set `value` to `parentValue[path]`. If `value` is now undefined, throw an error
-indicating that the JSON pointer does not match the given `document`.
+Set |value| to |parentValue.|path|. If |value| is now undefined, throw an error
+indicating that the JSON pointer does not match the given |document|.
                 </li>
                 <li>
-Set `selectedValue` to `selectedParent[path]`.
+Set |selectedValue| to |selectedParent|.|path|.
                 </li>
                 <li>
-If `selectedValue` is now undefined:
+If |selectedValue| is now undefined:
                   <ol class="algorithm">
                     <li>
-If `value` is an array, set `selectedValue` to an empty array and append
-`selectedValue` to |arrays|.
+If |value| is an array, set |selectedValue| to an empty array and append
+|selectedValue| to |arrays|.
                     </li>
                     <li>
-Otherwise, set `selectedValue` to an initial selection passing `value` as
-`source` to the algorithm in Section <a href="#createinitialselection"></a>.
+Otherwise, set |selectedValue| to an initial selection passing |value| as
+|source| to the algorithm in Section [[[#createinitialselection]]].
                     </li>
                     <li>
-Set `selectedParent[path]` to `selectedValue`.
+Set |selectedParent|.|path| to |selectedValue|.
                     </li>
                   </ol>
                 </li>
@@ -1817,21 +1817,21 @@ Note: With path traversal complete at the target value, the selected value will
 now be computed.
             </li>
             <li>
-If `value` is a literal, set `selectedValue` to `value`.
+If |value| is a literal, set |selectedValue| to |value|.
             </li>
             <li>
-If `value` is an array, Set `selectedValue` to a copy of `value`.
+If |value| is an array, Set |selectedValue| to a copy of |value|.
             </li>
             <li>
-In all other cases, set `selectedValue` to an object that merges a shallow copy of
-`selectedValue` with a deep copy of `value`, e.g., `{...selectedValue,
+In all other cases, set |selectedValue| to an object that merges a shallow copy of
+|selectedValue| with a deep copy of |value|, e.g., `{...selectedValue,
 &hellip;deepCopy(value)}`.
             </li>
             <li>
-Get the last `path`, `lastPath`, from `paths`.
+Get the last |path|, |lastPath|, from |paths|.
             </li>
             <li>
-Set `selectedParent[lastPath]` to `selectedValue`.
+Set |selectedParent|.|lastPath| to |selectedValue|.
             </li>
           </ol>
         </section>
@@ -1852,31 +1852,31 @@ original JSON-LD document is produced as output.
 
           <ol class="algorithm">
             <li>
-If `pointers` is empty, return `null`. This indicates nothing has been selected
+If |pointers| is empty, return `null`. This indicates nothing has been selected
 from the original document.
             </li>
             <li>
-Initialize `arrays` to an empty array. This variable will be used to track
+Initialize |arrays| to an empty array. This variable will be used to track
 selected sparse arrays to make them dense after all |pointers| have
 been processed.
             </li>
             <li>
-Initialize `selectionDocument` to an initial selection passing `document` as
-`source` to the algorithm in Section <a href="#createinitialselection"></a>.
+Initialize |selectionDocument| to an initial selection passing |document| as
+|source| to the algorithm in Section [[[#createinitialselection]]].
             </li>
             <li>
-Set the value of the <em>`@context`</em> property in `selectionDocument` to
-a copy of the value of the <em>`@context`</em> property in `document`.
+Set the value of the <em>`@context`</em> property in |selectionDocument| to
+a copy of the value of the <em>`@context`</em> property in |document|.
             <li>
-For each `pointer` in `pointers`, walk the document from root to the pointer
-target value, building the `selectionDocument`:
+For each |pointer| in |pointers|, walk the document from root to the pointer
+target value, building the |selectionDocument|:
               <ol class="algorithm">
                 <li>
-Parse the `pointer` into an array of paths, |paths|, using the
-algorithm in Section <a href="#jsonpointertopaths"></a>.
+Parse the |pointer| into an array of paths, |paths|, using the
+algorithm in Section [[[#jsonpointertopaths]]].
                 </li>
                 <li>
-Use the algorithm in Section <a href="#selectpaths"></a>, passing
+Use the algorithm in Section [[[#selectpaths]]], passing
 |document|, |paths|, |selectionDocument|, and
 |arrays|.
                 </li>
@@ -1892,7 +1892,7 @@ elements that are defined.
               </ol>
             </li>
             <li>
-Return `selectionDocument`.
+Return |selectionDocument|.
             </li>
           </ol>
         </section>
@@ -1955,18 +1955,18 @@ is produced as output.
           <ol class="algorithm">
             <li>
 Initialize |selectionDocument| to the result of the algorithm
-in Section <a href="#selectjsonld"></a>, passing |pointers|,
+in Section [[[#selectjsonld]]], passing |pointers|,
 and |skolemizedCompactDocument| as <em>document</em>.
             </li>
             <li>
 Initialize |deskolemizedNQuads| to the result of the algorithm
-in Section <a href="#todeskolemizednquads"></a>, passing
+in Section [[[#todeskolemizednquads]]], passing
 |selectionDocument| as |skolemizedCompactDocument|, and
 any custom options.
             </li>
             <li>
 Initialize |nquads| to the result of the algorithm
-in Section <a href="#relabelblanknodes"></a>, passing |labelMap|,
+in Section [[[#relabelblanknodes]]], passing |labelMap|,
 and |deskolemizedNQuads| as |nquads|.
             </li>
             <li>
@@ -2010,18 +2010,18 @@ produced as output.
             <li>
 Initialize |skolemizedExpandedDocument| and
 |skolemizedCompactDocument| to their associated values in the
-result of the algorithm in Section <a href="#skolemizecompactjsonld"></a>,
+result of the algorithm in Section [[[#skolemizecompactjsonld]]],
 passing |document| and any custom options.
             </li>
             <li>
 Initialize |deskolemizedNQuads| to the result of the
-algorithm in Section <a href="#todeskolemizednquads"></a>, passing
+algorithm in Section [[[#todeskolemizednquads]]], passing
 |skolemizedExpandedDocument| and any custom options.
             </li>
             <li>
 Initialize |nquads| and |labelMap| to their associated
 values in the result of the algorithm in Section
-<a href="#labelreplacementcanonicalizenquads"></a>, passing
+[[[#labelreplacementcanonicalizenquads]]], passing
 |labelMapFactoryFunction|, |deskolemizedNQuads| as
 |nquads|, and any custom options.
             </li>
@@ -2034,7 +2034,7 @@ For each key (|name|) and value (|pointers|) entry in
               <ol class="algorithm">
                 <li>
 Add an entry with a key of |name| and a value that is the result
-of the algorithm in Section <a href="#selectcanonicalnquads"></a>, passing
+of the algorithm in Section [[[#selectcanonicalnquads]]], passing
 |pointers|, |labelMap|, |skolemizedCompactDocument|
 as |document|, and any custom options.
                 </li>
@@ -2250,7 +2250,7 @@ produced as output, which contains the "baseSignature", "publicKey",
 Initialize |baseSignature|, |publicKey|, |hmacKey|, |signatures|, and
 |mandatoryPointers| to the values of the associated properties in the object
 returned when calling the algorithm in Section
-<a href="#parsebaseproofvalue"></a>, passing the |proofValue| from |proof|.
+[[[#parsebaseproofvalue]]], passing the |proofValue| from |proof|.
             </li>
             <li>
 Initialize |hmac| to an HMAC API using |hmacKey|. The HMAC uses the same hash
@@ -2273,7 +2273,7 @@ and value of |combinedPointers|.
             <li>
 Initialize |groups| and |labelMap| to their associated values in the result
 of calling the algorithm in Section
-<a href="#canonicalizeandgroup"></a>, passing |document|,
+[[[#canonicalizeandgroup]]], passing |document|,
 |labelMapFactoryFunction|, |groupDefinitions|, and any custom
 JSON-LD API options as parameters. Note: This step transforms the document into
 an array of canonical N-Quad strings with pseudorandom blank node identifiers
@@ -2437,7 +2437,7 @@ as a byte string, is produced as output.
           <ol class="algorithm">
             <li>
 Initialize |compressedLabelMap| to the result of calling the algorithm in
-Section <a href="#compresslabelmap"></a>, passing |labelMap| as the parameter.
+Section [[[#compresslabelmap]]], passing |labelMap| as the parameter.
             </li>
             <li>
 Initialize a byte array, |proofValue|, that starts with the ECDSA-SD disclosure
@@ -2497,7 +2497,7 @@ array of integers, throwing an error if not.
             </li>
             <li>
 Replace the fourth element in |components| using the result of calling the
-algorithm in Section <a href="#decompresslabelmap"></a>, passing the existing
+algorithm in Section [[[#decompresslabelmap]]], passing the existing
 fourth element of |components| as |compressedLabelMap|.
             </li>
             <li>
@@ -2534,7 +2534,7 @@ to use the |proofHash| value.
 Initialize |baseSignature|, |publicKey|, |signatures|, |labelMap|, and
 |mandatoryIndexes|, to the values associated with their property names in the
 object returned when calling the algorithm in Section
-<a href="#parsederivedproofvalue"></a>, passing |proofValue| from |proof|.
+[[[#parsederivedproofvalue]]], passing |proofValue| from |proof|.
             </li>
             <li>
 Initialize |labelMapFactoryFunction| to the result of calling the
@@ -2615,7 +2615,7 @@ Let |proof| be a clone of the proof options, |options|.
             </li>
             <li>
 Let |proofConfig| be the result of running the algorithm in
-Section <a href="#base-proof-configuration-ecdsa-sd-2023"></a> with
+Section [[[#base-proof-configuration-ecdsa-sd-2023]]] with
 |options| passed as a parameter.
             </li>
             <li>
@@ -2625,12 +2625,12 @@ href="#base-proof-transformation-ecdsa-sd-2023"></a> with |unsecuredDocument|,
             </li>
             <li>
 Let |hashData| be the result of running the algorithm in Section
-<a href="#base-proof-hashing-ecdsa-sd-2023"></a> with |transformedData| and |proofConfig|
+[[[#base-proof-hashing-ecdsa-sd-2023]]] with |transformedData| and |proofConfig|
 passed as a parameters.
             </li>
             <li>
 Let |proofBytes| be the result of running the algorithm in Section
-<a href="#base-proof-serialization-ecdsa-sd-2023"></a> with |hashData| and
+[[[#base-proof-serialization-ecdsa-sd-2023]]] with |hashData| and
 |options| passed as parameters.
             </li>
             <li>
@@ -2649,7 +2649,7 @@ Return |proof| as the [=data integrity proof=].
           <p>
 The following algorithm specifies how to transform an unsecured input document
 into a transformed document that is ready to be provided as input to the
-hashing algorithm in Section <a href="#base-proof-hashing-ecdsa-sd-2023"></a>.
+hashing algorithm in Section [[[#base-proof-hashing-ecdsa-sd-2023]]].
           </p>
 
           <p>
@@ -2685,7 +2685,7 @@ Initialize |groupDefinitions| to a map with an entry with a key of the string
             </li>
             <li>
 Initialize |groups| to the result of calling the algorithm in Section
-<a href="#canonicalizeandgroup"></a>, passing |labelMapFactoryFunction|,
+[[[#canonicalizeandgroup]]], passing |labelMapFactoryFunction|,
 |groupDefinitions|, |unsecuredDocument| as |document|, and any custom JSON-LD
 API options. Note: This step transforms the document into an array of canonical
 N-Quads with pseudorandom blank node identifiers based on |hmac|, and groups
@@ -2716,7 +2716,7 @@ and `hmacKey` set to |hmacKey|.
 The following algorithm specifies how to cryptographically hash a
 <em>transformed data document</em> and <em>proof configuration</em>
 into cryptographic hash data that is ready to be provided as input to the
-algorithms in Section <a href="#base-proof-serialization-ecdsa-sd-2023"></a>.
+algorithms in Section [[[#base-proof-serialization-ecdsa-sd-2023]]].
           </p>
 
           <p>
@@ -2737,7 +2737,7 @@ part of the return value.
             </li>
             <li>
 Initialize |mandatoryHash| to the result of calling the the algorithm in Section
-<a href="#hashmandatorynquads"></a>, passing
+[[[#hashmandatorynquads]]], passing
 |transformedDocument|.|mandatory|.
             </li>
             <li>
@@ -2855,7 +2855,7 @@ coordinate of the public key).
             </li>
             <li>
 Initialize |toSign| to the result of calling the algorithm in Section
-<a href="#serializesigndata"></a>, passing |proofHash|, |publicKey|, and
+[[[#serializesigndata]]], passing |proofHash|, |publicKey|, and
 |mandatoryHash| as parameters to the algorithm.
             </li>
             <li>
@@ -2864,7 +2864,7 @@ private key associated with the base proof verification method.
             </li>
             <li>
 Initialize |proofValue| to the result of calling the algorithm in Section
-<a href="#serializebaseproofvalue"></a>, passing |baseSignature|,
+[[[#serializebaseproofvalue]]], passing |baseSignature|,
 |publicKey|, |hmacKey|, |signatures|, and |mandatoryPointers| as parameters
 to the algorithm.
             </li>
@@ -2894,7 +2894,7 @@ value, represented as an object, is produced as output.
 Initialize |baseSignature|, |publicKey|, |signatures|, |labelMap|,
 |mandatoryIndexes|, |revealDocument| to the values associated with their
 property names in the object returned when calling the algorithm in
-Section <a href="#createdisclosuredata"></a>, passing the |document|, |proof|,
+Section [[[#createdisclosuredata]]], passing the |document|, |proof|,
 |selectivePointers|, and any custom JSON-LD API options, such as a document
 loader.
             </li>
@@ -2903,7 +2903,7 @@ Initialize |newProof| to a shallow copy of |proof|.
             </li>
             <li>
 Replace |proofValue| in |newProof| with the result of calling the algorithm
-in Section <a href="#serializederivedproofvalue"></a>, passing
+in Section [[[#serializederivedproofvalue]]], passing
 |baseSignature|, |publicKey|, |signatures|, |labelMap|, and |mandatoryIndexes|.
             </li>
             <li>
@@ -2936,7 +2936,7 @@ Let |unsecuredDocument| be a copy of |document| with the `proof` value removed.
 Initialize |baseSignature|, |proofHash|, |publicKey|, |signatures|,
 |nonMandatory|, and |mandatoryHash| to the values associated with their property
 names in the object returned when calling the algorithm in Section
-<a href="#createverifydata"></a>, passing the |document|, |proof|, and any
+[[[#createverifydata]]], passing the |document|, |proof|, and any
 custom JSON-LD API options, such as a document loader.
             </li>
             <li>
@@ -2947,11 +2947,11 @@ message count.
             <li>
 Initialize |publicKeyBytes| to the public key bytes expressed in |publicKey|.
 Instructions on how to decode the public key value can be found in Section
-<a href="#multikey"></a>.
+[[[#multikey]]].
             </li>
             <li>
 Initialize |toVerify| to the result of calling the algorithm in Setion
-<a href="#serializesigndata"></a>, passing |proofHash|, |publicKey|, and
+[[[#serializesigndata]]], passing |proofHash|, |publicKey|, and
 |mandatoryHash|.
             </li>
             <li>
@@ -3566,7 +3566,7 @@ shown below.
           data-include-format="text"></pre>
           <p>
 Finally, the values above are run through the algorithm of Section
-<a href="#serializebaseproofvalue"></a> to produce the `proofValue` which is
+[[[#serializebaseproofvalue]]] to produce the `proofValue` which is
 used in the signed based document shown below.
           </p>
           <pre class="example nohighlight" title="Signed Base Document" data-include="TestVectors/ecdsa-sd-2023/addSignedSDBase.json"
@@ -3577,8 +3577,8 @@ used in the signed based document shown below.
           <p>
 In order to create a derived proof a holder starts with a signed document
 containing a base proof. The base document we will use for these test vectors is
-the final example from Section <a href="#base-proof"></a> above. The first
-step is to run the algorithm of Section <a href="#parsebaseproofvalue"></a> to
+the final example from Section [[[#base-proof]]] above. The first
+step is to run the algorithm of Section [[[#parsebaseproofvalue]]] to
 recover `baseSignature`, `publicKey`, `hmacKey`, `signatures`, and
 `mandatoryPointers` as shown below.
           </p>
@@ -3599,7 +3599,7 @@ information which included only the year of their most recent board.
 To produce the `revealDocument`, i.e., the unsigned document that will
 eventually be signed and sent to the verifier, we append the selective pointers
 to the mandatory pointers and input these combined pointers along with the
-document without proof to the algorithm of Section <a href="#selectjsonld"></a>
+document without proof to the algorithm of Section [[[#selectjsonld]]]
 to give the result shown below.
           </p>
           <pre class="example nohighlight" title="Unsigned Reveal Document" data-include="TestVectors/ecdsa-sd-2023/derivedUnsignedReveal.json"
@@ -3610,7 +3610,7 @@ appropriately updated information to the verifier on which statements are
 mandatory, the signatures for the selected non-mandatory statements, and the
 mapping between canonical blank node ids for the reveal document and a subset of
 the HMAC blank node ids. Running step 6 of the
-<a href="#createdisclosuredata"></a> yields an abundance of information about
+[[[#createdisclosuredata]]] yields an abundance of information about
 various statement groups relative to the original document. Below we show a
 portion of the indexes for those groups.
           </p>
@@ -3642,14 +3642,14 @@ lists are shown below.
           <p>
 The last important piece of disclosure data is a mapping of canonical blank node
 ids to HMAC based ids, the `labelMap`, computed according to Section
-<a href="#createdisclosuredata"></a> steps 12-14. This is shown below along with
+[[[#createdisclosuredata]]] steps 12-14. This is shown below along with
 the rest of the disclosure data minus the reveal document.
           </p>
           <pre class="example nohighlight" title="Disclosure Data" data-include="TestVectors/ecdsa-sd-2023/derivedDisclosureData.json"
           data-include-format="text"></pre>
           <p>
 Finally using the disclosure data above with the algorithm of Section
-<a href="#serializederivedproofvalue"></a> we obtain the signed derived (reveal)
+[[[#serializederivedproofvalue]]] we obtain the signed derived (reveal)
 document shown below.
           </p>
           <pre class="example nohighlight" title="Signed Derived Document" data-include="TestVectors/ecdsa-sd-2023/derivedRevealDocument.json"
