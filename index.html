@@ -989,11 +989,59 @@ Return |proof| as the [=data integrity proof=].
           <h4>Verify Proof (ecdsa-jcs-2019)</h4>
 
           <p>
-To verify a proof, the algorithm in
-<a href="https://www.w3.org/TR/vc-data-integrity/#verify-proof">
-Section 4.2: Verify Proof</a> of the Data Integrity
-[[VC-DATA-INTEGRITY]] specification MUST be executed.
+The following algorithm specifies how to verify a [=data integrity proof=] given
+an <a>secured data document</a>. Required inputs are an
+<a>secured data document</a> ([=map=] |securedDocument|). This algorithm returns
+a [=verification result=]:
           </p>
+
+          <ol class="algorithm">
+          <li>
+Let |unsecuredDocument| be a copy of |securedDocument| with
+the `proof` value removed.
+          </li>
+          <li>
+Let |proofConfig| be a copy of |securedDocument|.|proof| with `proofValue`
+removed.
+          </li>
+          <li>
+Let |proofBytes| be the
+<a data-cite="VC-DATA-INTEGRITY#multibase-0">Multibase decoded base58-btc
+value</a> in |securedDocument|.|proof|.|proofValue|.
+          </li>
+          <li>
+Let |transformedData| be the result of running the algorithm in Section <a
+href="#transformation-ecdsa-jcs-2019"></a> with |unsecuredDocument| and
+|proofConfig| passed as parameters.
+          </li>
+          <li>
+Let |hashData| be the result of running the algorithm in Section
+<a href="#hashing-ecdsa-jcs-2019"></a> with |transformedData| and |proofConfig|
+passed as a parameters.
+          </li>
+          <li>
+Let |verified:boolean| be the result of running the algorithm in Section
+<a href="#proof-verification-ecdsa-jcs-2019"></a> algorithm on |hashData|,
+|proofBytes|, and |proofConfig|.
+            </li>
+            <li>
+If |proof|.|created| does not [=map/exist=],
+an error MUST be raised and SHOULD convey an error type of
+<a data-cite="VC-DATA-INTEGRITY#MALFORMED_PROOF_ERROR">
+MALFORMED_PROOF_ERROR</a>.
+            </li>
+            <li>
+Return a [=verification result=] with [=struct/items=]:
+              <dl data-link-for="verification result">
+                <dt>[=verified=]</dt>
+                <dd>|verified|</dd>
+                <dt>[=verifiedDocument=]</dt>
+                <dd>
+|unsecuredDocument| if |verified| is `true`, otherwise <a data-cite="INFRA#nulls">Null</a></dd>
+              </dl>
+            </li>
+          </ol>
+
         </section>
 
         <section>
