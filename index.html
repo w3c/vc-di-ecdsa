@@ -2168,26 +2168,26 @@ A single <em>base proof</em> string value is produced as output.
 
           <ol class="algorithm">
             <li>
-Initialize a byte array, `proofValue`, that starts with the ECDSA-SD base proof
+Initialize a byte array, |proofValue|, that starts with the ECDSA-SD base proof
 header bytes 0xd9, 0x5d, and 0x00.
             </li>
             <li>
-Initialize `components` to an array with five elements containing the values of:
-`baseSignature`, `publicKey`, `hmacKey`, `signatures`, and `mandatoryPointers`.
+Initialize |components| to an array with five elements containing the values of:
+|baseSignature|, |publicKey|, |hmacKey|, |signatures|, and |mandatoryPointers|.
             </li>
             <li>
-CBOR-encode `components` and append it to `proofValue`.
+CBOR-encode |components| and append it to |proofValue|.
             </li>
             <li>
-Initialize `baseProof` to a string with the Multibase
-base64url-no-pad-encoding of `proofValue` as described in the
+Initialize |baseProof| to a string with the Multibase
+base64url-no-pad-encoding of |proofValue| as described in the
 <a href="https://www.w3.org/TR/vc-data-integrity/#multibase-0">
 Multibase section</a> of [[VC-DATA-INTEGRITY]]. That is, return a string
 starting with "`u`" and ending with the base64url-no-pad-encoded value of
-`proofValue`.
+|proofValue|.
             </li>
             <li>
-Return `baseProof` as <em>base proof</em>.
+Return |baseProof| as <em>base proof</em>.
             </li>
           </ol>
 
@@ -2200,31 +2200,31 @@ Return `baseProof` as <em>base proof</em>.
 The following algorithm parses the components of an `ecdsa-sd-2023` selective
 disclosure base proof value. The required inputs are a proof value
 (|proofValue|). A single object <em>parsed base proof</em>, containing
-five elements, using the names "baseSignature", "publicKey", "hmacKey",
-"signatures", and "mandatoryPointers", is produced  as output.
+five elements, using the names `baseSignature`, `publicKey`, `hmacKey`,
+`signatures`, and `mandatoryPointers`, is produced  as output.
           </p>
 
           <ol class="algorithm">
             <li>
-Ensure the `proofValue` string starts with `u`, indicating that it is a
+Ensure the |proofValue| string starts with `u`, indicating that it is a
 multibase-base64url-no-pad-encoded value, throwing an error if it does not.
             </li>
             <li>
-Initialize `decodedProofValue` to the result of base64url-no-pad-decoding the
-substring after the leading `u` in `proofValue`.
+Initialize |decodedProofValue| to the result of base64url-no-pad-decoding the
+substring after the leading `u` in |proofValue|.
             </li>
             <li>
-Ensure that the `decodedProofValue` starts with the ECDSA-SD base proof header
+Ensure that the |decodedProofValue| starts with the ECDSA-SD base proof header
 bytes 0xd9, 0x5d, and 0x00, throwing an error if it does not.
             </li>
             <li>
-Initialize `components` to an array that is the result of CBOR-decoding the
+Initialize |components| to an array that is the result of CBOR-decoding the
 bytes that follow the three-byte ECDSA-SD base proof header. Ensure the result
 is an array of five elements.
             </li>
             <li>
 Return an object with properties set to the five elements, using the names
-"baseSignature", "publicKey", "hmacKey", "signatures", and "mandatoryPointers",
+`baseSignature`, `publicKey`, `hmacKey`, `signatures`, and `mandatoryPointers`,
 respectively.
             </li>
           </ol>
@@ -2247,82 +2247,82 @@ produced as output, which contains the "baseSignature", "publicKey",
 
           <ol class="algorithm">
             <li>
-Initialize `baseSignature`, `publicKey`, `hmacKey`, `signatures`, and
-`mandatoryPointers` to the values of the associated properties in the object
+Initialize |baseSignature|, |publicKey|, |hmacKey|, |signatures|, and
+|mandatoryPointers| to the values of the associated properties in the object
 returned when calling the algorithm in Section
-<a href="#parsebaseproofvalue"></a>, passing the `proofValue` from `proof`.
+<a href="#parsebaseproofvalue"></a>, passing the |proofValue| from |proof|.
             </li>
             <li>
-Initialize `hmac` to an HMAC API using `hmacKey`. The HMAC uses the same hash
+Initialize |hmac| to an HMAC API using |hmacKey|. The HMAC uses the same hash
 algorithm used in the signature algorithm, i.e., SHA-256 for a P-256 curve.
             </li>
             <li>
-Initialize `labelMapFactoryFunction` to the result of calling the
-`createHmacIdLabelMapFunction` algorithm passing `hmac` as `HMAC`.
+Initialize |labelMapFactoryFunction| to the result of calling the
+|createHmacIdLabelMapFunction| algorithm passing |hmac|.
             </li>
             <li>
-Initialize `combinedPointers` to the concatenation of `mandatoryPointers`
-and `selectivePointers`.
+Initialize |combinedPointers| to the concatenation of |mandatoryPointers|
+and |selectivePointers|.
             </li>
             <li>
-Initialize `groupDefinitions` to a map with the following entries: key of
-the string `"mandatory"` and value of `mandatoryPointers`, key of the string
-`"selective"` and value of `selectivePointers`, and key of the string `"combined"`
-and value of `combinedPointers`.
+Initialize |groupDefinitions| to a map with the following entries: key of
+the string `"mandatory"` and value of |mandatoryPointers|, key of the string
+`"selective"` and value of |selectivePointers|, and key of the string `"combined"`
+and value of |combinedPointers|.
             </li>
             <li>
-Initialize `groups` and `labelMap` to their associated values in the result
+Initialize |groups| and |labelMap| to their associated values in the result
 of calling the algorithm in Section
-<a href="#canonicalizeandgroup"></a>, passing `document`,
-`labelMapFactoryFunction`, `groupDefinitions`, and any custom
+<a href="#canonicalizeandgroup"></a>, passing |document|,
+|labelMapFactoryFunction|, |groupDefinitions|, and any custom
 JSON-LD API options as parameters. Note: This step transforms the document into
 an array of canonical N-Quad strings with pseudorandom blank node identifiers
-based on `hmac`, and groups the N-Quad strings according to selections based on
+based on |hmac|, and groups the N-Quad strings according to selections based on
 JSON pointers.
             </li>
             <li>
-Initialize `relativeIndex` to zero.
+Initialize |relativeIndex| to zero.
             </li>
             <li>
-Initialize `mandatoryIndexes` to an empty array.
+Initialize |mandatoryIndexes| to an empty array.
             </li>
             <li>
-For each `absoluteIndex` in the keys in `groups.combined.matching`, convert the
-absolute index of any mandatory N-Quad to an index relative to the combined
+For each |absoluteIndex| in the keys in |groups|.|combined|.|matching|, convert
+the absolute index of any mandatory N-Quad to an index relative to the combined
 output that is to be revealed:
               <ol class="algorithm">
                 <li>
-If `groups.mandatory.matching` has `absoluteIndex` as a key, then append
-`relativeIndex` to `mandatoryIndexes`.
+If |groups|.|mandatory|.|matching| has |absoluteIndex| as a key, then append
+|relativeIndex| to |mandatoryIndexes|.
                 </li>
                 <li>
-Increment `relativeIndex`.
+Increment |relativeIndex|.
                 </li>
               </ol>
             </li>
             <li>
 Determine which signatures match a selectively disclosed statement, which
-requires incrementing an index counter while iterating over all `signatures`,
+requires incrementing an index counter while iterating over all |signatures|,
 skipping over any indexes that match the mandatory group.
               <ol class="algorithm">
                 <li>
-Initialize `index` to `0`.
+Initialize |index| to `0`.
                 </li>
                 <li>
-Initialize `filteredSignatures` to an empty array.
+Initialize |filteredSignatures| to an empty array.
                 </li>
                 <li>
-For each `signature` in `signatures`:
+For each |signature| in |signatures|:
                   <ol class="algorithm">
                     <li>
-While `index` is in `groups.mandatory.matching`, increment `index`.
+While |index| is in |groups|.|mandatory|.|matching|, increment |index|.
                     </li>
                     <li>
-If `index` is in `groups.selective.matching`, add `signature` to
-`filteredSignatures`.
+If |index| is in |groups|.|selective|.|matching|, add |signature| to
+|filteredSignatures|.
                     </li>
                     <li>
-Increment `index`.
+Increment |index|.
                     </li>
                   </ol>
                 </li>
@@ -2330,7 +2330,7 @@ Increment `index`.
             </li>
             <li>
 Initialize |revealDocument| to the result of the "selectJsonLd"
-algorithm, passing `document`, and `combinedPointers` as `pointers`.
+algorithm, passing |document|, and |combinedPointers| as |pointers|.
             </li>
             <li>
 Run the RDF Dataset Canonicalization Algorithm [[RDF-CANON]] on
@@ -2346,18 +2346,18 @@ canonicalize the revealed document to the blank node identifiers that were
 originally signed in the base proof.
             </li>
             <li>
-For each key (`inputLabel`) and value (`verifierLabel`) in `canonicalIdMap:
+For each key (|inputLabel|) and value (|verifierLabel|) in |canonicalIdMap|:
               <ol class="algorithm">
                 <li>
-Add an entry to `verifierLabelMap` using `verifierLabel` as the key and the
-value associated with `inputLabel` as a key in `labelMap` as the value.
+Add an entry to |verifierLabelMap| using |verifierLabel| as the key and the
+value associated with |inputLabel| as a key in |labelMap| as the value.
                 </li>
               </ol>
             </li>
             <li>
-Return an object with properties matching `baseSignature`, `publicKey`,
-"signatures" for `filteredSignatures`, "verifierLabelMap" for `labelMap`,
-`mandatoryIndexes`, and `revealDocument`.
+Return an object with properties matching |baseSignature|, |publicKey|,
+`signatures` for |filteredSignatures|, `verifierLabelMap` for |labelMap|,
+|mandatoryIndexes|, and |revealDocument|.
             </li>
           </ol>
 
@@ -2373,21 +2373,21 @@ label map (|labelMap|). The output is a <em>compressed label map</em>.
 
           <ol class="algorithm">
             <li>
-Initialize `map` to an empty map.
+Initialize |map| to an empty map.
             </li>
             <li>
-For each entry (`k`, `v`) in `labelMap`:
+For each entry (|k|, |v|) in |labelMap|:
               <ol class="algorithm">
                 <li>
-Add an entry to `map` with a key that is a base-10 integer parsed from the
-characters following the "c14n" prefix in `k` and a value that is a byte array
+Add an entry to |map| with a key that is a base-10 integer parsed from the
+characters following the "c14n" prefix in |k| and a value that is a byte array
 resulting from base64url-no-pad-decoding the characters after the "u" prefix in
-                `v`.
+                |v|.
                 </li>
               </ol>
             </li>
             <li>
-Return `map` as <em>compressed label map</em>.
+Return |map| as <em>compressed label map</em>.
             </li>
           </ol>
 
@@ -2404,19 +2404,19 @@ compressed label map (|compressedLabelMap|). The output is a
 
           <ol class="algorithm">
             <li>
-Initialize `map` to an empty map.
+Initialize |map| to an empty map.
             </li>
             <li>
-For each entry (`k`, `v`) in `compressedLabelMap`:
+For each entry (|k|, |v|) in |compressedLabelMap|:
               <ol class="algorithm">
                 <li>
-Add an entry to `map` with a key that adds the prefix "c14n" to `k` and a value
-that adds a prefix of "u" to the base64url-no-pad-encoded value for `v`.
+Add an entry to |map| with a key that adds the prefix "c14n" to |k| and a value
+that adds a prefix of "u" to the base64url-no-pad-encoded value for |v|.
                 </li>
               </ol>
             </li>
             <li>
-Return `map` as <em>decompressed label map</em>.
+Return |map| as <em>decompressed label map</em>.
             </li>
           </ol>
 
@@ -2436,28 +2436,28 @@ as a byte string, is produced as output.
 
           <ol class="algorithm">
             <li>
-Initialize `compressedLabelMap` to the result of calling the algorithm in
-Section <a href="#compresslabelmap"></a>, passing `labelMap` as the parameter.
+Initialize |compressedLabelMap| to the result of calling the algorithm in
+Section <a href="#compresslabelmap"></a>, passing |labelMap| as the parameter.
             </li>
             <li>
-Initialize a byte array, `proofValue`, that starts with the ECDSA-SD disclosure
+Initialize a byte array, |proofValue|, that starts with the ECDSA-SD disclosure
 proof header bytes `0xd9`, `0x5d`, and `0x01`.
             </li>
             <li>
-Initialize `components` to an array with five elements containing the values of:
-`baseSignature`, `publicKey`, `signatures`, `compressedLabelMap`, and
-`mandatoryIndexes`.
+Initialize |components| to an array with five elements containing the values of:
+|baseSignature|, |publicKey|, |signatures|, |compressedLabelMap|, and
+|mandatoryIndexes|.
             </li>
             <li>
-CBOR-encode `components` and append it to `proofValue`.
+CBOR-encode |components| and append it to |proofValue|.
             </li>
             <li>
 Return the <em>derived proof</em> as a string with the
-base64url-no-pad-encoding of `proofValue` as described in the
+base64url-no-pad-encoding of |proofValue| as described in the
 <a href="https://www.w3.org/TR/vc-data-integrity/#multibase-0">
 Multibase section</a> of [[VC-DATA-INTEGRITY]]. That is, return a string
 starting with "`u`" and ending with the base64url-no-pad-encoded value of
-`proofValue`.
+|proofValue|.
             </li>
           </ol>
 
@@ -2476,19 +2476,19 @@ contains a set to five elements, using the names "baseSignature", "publicKey",
 
           <ol class="algorithm">
             <li>
-Ensure the `proofValue` string starts with `u`, indicating that it is a
+Ensure the |proofValue| string starts with `u`, indicating that it is a
 multibase-base64url-no-pad-encoded value, throwing an error if it does not.
             </li>
             <li>
-Initialize `decodedProofValue` to the result of base64url-no-pad-decoding the
-substring after the leading `u` in `proofValue`.
+Initialize |decodedProofValue| to the result of base64url-no-pad-decoding the
+substring after the leading `u` in |proofValue|.
             </li>
             <li>
-Ensure that the `decodedProofValue` starts with the ECDSA-SD disclosure proof
+Ensure that the |decodedProofValue| starts with the ECDSA-SD disclosure proof
 header bytes `0xd9`, `0x5d`, and `0x01`, throwing an error if it does not.
             </li>
             <li>
-Initialize `components` to an array that is the result of CBOR-decoding the
+Initialize |components| to an array that is the result of CBOR-decoding the
 bytes that follow the three-byte ECDSA-SD disclosure proof header. Ensure the
 result is an array of five elements. Ensure the result is an array of five
 elements: a byte array of length 64, a byte array of length 36, an array of byte
@@ -2496,9 +2496,9 @@ arrays, each of length 64, a map of integers to byte arrays of length 32, and an
 array of integers, throwing an error if not.
             </li>
             <li>
-Replace the fourth element in `components` using the result of calling the
+Replace the fourth element in |components| using the result of calling the
 algorithm in Section <a href="#decompresslabelmap"></a>, passing the existing
-fourth element of `components` as `compressedLabelMap`.
+fourth element of |components| as |compressedLabelMap|.
             </li>
             <li>
 Return <em>derived proof value</em> as an object with properties set to the five
@@ -2524,53 +2524,53 @@ and "mandatoryHash".
 
           <ol class="algorithm">
             <li>
-Initialize `proofHash` to the result of perform RDF Dataset Canonicalization
+Initialize |proofHash| to the result of perform RDF Dataset Canonicalization
 [[RDF-CANON]] on the proof options. The hash used is the same as the one used in
 the signature algorithm, i.e., SHA-256 for a P-256 curve. Note: This step can be
 performed in parallel; it only needs to be completed before this algorithm needs
-to use the `proofHash` value.
+to use the |proofHash| value.
             </li>
             <li>
-Initialize `baseSignature`, `publicKey`, `signatures`, `labelMap`, and
-`mandatoryIndexes`, to the values associated with their property names in the
+Initialize |baseSignature|, |publicKey|, |signatures|, |labelMap|, and
+|mandatoryIndexes|, to the values associated with their property names in the
 object returned when calling the algorithm in Section
-<a href="#parsederivedproofvalue"></a>, passing `proofValue` from `proof`.
+<a href="#parsederivedproofvalue"></a>, passing |proofValue| from |proof|.
             </li>
             <li>
-Initialize `labelMapFactoryFunction` to the result of calling the
+Initialize |labelMapFactoryFunction| to the result of calling the
 "createLabelMapFunction" algorithm.
             </li>
             <li>
-Initialize `nquads` to the result of calling the "labelReplacementCanonicalize"
-algorithm, passing `document`, `labelMapFactoryFunction`, and any custom
+Initialize |nquads| to the result of calling the "labelReplacementCanonicalize"
+algorithm, passing |document|, |labelMapFactoryFunction|, and any custom
 JSON-LD API options. Note: This step transforms the document into an array of
-canonical N-Quads with pseudorandom blank node identifiers based on `labelMap`.
+canonical N-Quads with pseudorandom blank node identifiers based on |labelMap|.
             </li>
             <li>
-Initialize `mandatory` to an empty array.
+Initialize |mandatory| to an empty array.
             </li>
             <li>
-Initialize `nonMandatory` to an empty array.
+Initialize |nonMandatory| to an empty array.
             </li>
             <li>
-For each entry (`index`, `nq`) in `nquads`, separate the N-Quads into mandatory
+For each entry (|index|, |nq|) in |nquads|, separate the N-Quads into mandatory
 and non-mandatory categories:
               <ol class="algorithm">
                 <li>
-If `mandatoryIndexes` includes `index`, add `nq` to `mandatory`.
+If |mandatoryIndexes| includes |index|, add |nq| to |mandatory|.
                 </li>
                 <li>
-Otherwise, add `nq` to `nonMandatory`.
+Otherwise, add |nq| to |nonMandatory|.
                 </li>
               </ol>
             </li>
             <li>
-Initialize `mandatoryHash` to the result of calling the "hashMandatory"
-primitive, passing `mandatory`.
+Initialize |mandatoryHash| to the result of calling the "hashMandatory"
+primitive, passing |mandatory|.
             </li>
             <li>
-Return an object with properties matching `baseSignature`, `proofHash`,
-`publicKey`, `signatures`, `nonMandatory`, and `mandatoryHash`.
+Return an object with properties matching |baseSignature|, |proofHash|,
+|publicKey|, |signatures|, |nonMandatory|, and |mandatoryHash|.
             </li>
           </ol>
 
@@ -2670,41 +2670,41 @@ MUST use UTF-8 encoding.
 
           <ol class="algorithm">
             <li>
-Initialize `hmac` to an HMAC API using a locally generated and exportable HMAC
+Initialize |hmac| to an HMAC API using a locally generated and exportable HMAC
 key. The HMAC uses the same hash algorithm used in the signature algorithm,
 which is detected via the |verificationMethod| provided to the
 function. i.e., SHA-256 for a P-256 curve.
             </li>
             <li>
-Initialize `labelMapFactoryFunction` to the result of calling the
-`createHmacIdLabelMapFunction` algorithm passing `hmac` as `HMAC`.
+Initialize |labelMapFactoryFunction| to the result of calling the
+|createHmacIdLabelMapFunction| algorithm passing |hmac|.
             </li>
             <li>
-Initialize `groupDefinitions` to a map with an entry with a key of the string
+Initialize |groupDefinitions| to a map with an entry with a key of the string
 "mandatory" and a value of |mandatoryPointers|.
             </li>
             <li>
-Initialize `groups` to the result of calling the algorithm in Section
-<a href="#canonicalizeandgroup"></a>, passing `labelMapFactoryFunction`,
-`groupDefinitions`, `unsecuredDocument` as `document`, and any custom JSON-LD
+Initialize |groups| to the result of calling the algorithm in Section
+<a href="#canonicalizeandgroup"></a>, passing |labelMapFactoryFunction|,
+|groupDefinitions|, |unsecuredDocument| as |document|, and any custom JSON-LD
 API options. Note: This step transforms the document into an array of canonical
-N-Quads with pseudorandom blank node identifiers based on `hmac`, and groups
+N-Quads with pseudorandom blank node identifiers based on |hmac|, and groups
 the N-Quad strings according to selections based on JSON pointers.
             </li>
             <li>
-Initialize `mandatory` to the values in the `groups.mandatory.matching` map.
+Initialize |mandatory| to the values in the |groups|.|mandatory|.|matching| map.
             </li>
             <li>
-Initialize `nonMandatory` to the values in the `groups.mandatory.nonMatching`
-map.
+Initialize |nonMandatory| to the values in the
+|groups|.|mandatory|.|nonMatching| map.
             </li>
             <li>
-Initialize `hmacKey` to the result of exporting the HMAC key from `hmac`.
+Initialize |hmacKey| to the result of exporting the HMAC key from |hmac|.
             </li>
             <li>
-Return an object with "mandatoryPointers" set to `mandatoryPointers`,
-"mandatory" set to `mandatory`, "nonMandatory" set to `nonMandatory`,
-and "hmacKey" set to `hmacKey`.
+Return an object with `mandatoryPointers` set to |mandatoryPointers|,
+`mandatory` set to |mandatory|, `nonMandatory` set to |nonMandatory|,
+and `hmacKey` set to |hmacKey|.
             </li>
           </ol>
         </section>
@@ -2728,25 +2728,25 @@ as an object is produced as output.
 
           <ol class="algorithm">
             <li>
-Initialize `proofHash` to the result of calling the RDF Dataset Canonicalization
-algorithm [[RDF-CANON]] on `canonicalProofConfig` and then cryptographically
+Initialize |proofHash| to the result of calling the RDF Dataset Canonicalization
+algorithm [[RDF-CANON]] on |canonicalProofConfig| and then cryptographically
 hashing the result using the same hash that is used by the signature algorithm,
 i.e., SHA-256 for a P-256 curve. Note: This step can be performed in parallel;
 it only needs to be completed before this algorithm terminates as the result is
 part of the return value.
             </li>
             <li>
-Initialize `mandatoryHash` to the result of calling the the algorithm in Section
+Initialize |mandatoryHash| to the result of calling the the algorithm in Section
 <a href="#hashmandatorynquads"></a>, passing
-|transformedDocument|.`mandatory`.
+|transformedDocument|.|mandatory|.
             </li>
             <li>
-Initialize `hashData` as a deep copy of |transformedDocument| and
-add `proofHash` as "proofHash" and `mandatoryHash` as "mandatoryHash" to that
+Initialize |hashData| as a deep copy of |transformedDocument| and
+add |proofHash| as `proofHash` and |mandatoryHash| as `mandatoryHash` to that
 object.
             </li>
             <li>
-Return `hashData` as <em>hash data</em>.
+Return |hashData| as <em>hash data</em>.
             </li>
           </ol>
 
@@ -2825,51 +2825,51 @@ represented as series of bytes is produced as output.
 
           <ol class="algorithm">
             <li>
-Initialize `proofHash`, `mandatoryPointers`, `mandatoryHash`, `nonMandatory`,
-and `hmacKey` to the values associated with their property names
+Initialize |proofHash|, |mandatoryPointers|, |mandatoryHash|, |nonMandatory|,
+and |hmacKey| to the values associated with their property names
 |hashData|.
             </li>
             <li>
-Initialize `proofScopedKeyPair` to a locally generated P-256 ECDSA key pair.
+Initialize |proofScopedKeyPair| to a locally generated P-256 ECDSA key pair.
 Note: This key pair is scoped to the specific proof; it is not used for anything
 else and the private key will be destroyed when this algorithm terminates.
             </li>
             <li>
-Initialize `signatures` to an array where each element holds the result of
+Initialize |signatures| to an array where each element holds the result of
 digitally signing the UTF-8 representation of each N-Quad string in
-`nonMandatory`, in order. The digital signature algorithm is ES256, i.e., uses a
+|nonMandatory|, in order. The digital signature algorithm is ES256, i.e., uses a
 P-256 curve over a SHA-256 digest, and uses the private key from
-`proofScopedKeyPair`. Note: This step generates individual signatures for each
+|proofScopedKeyPair|. Note: This step generates individual signatures for each
 statement that can be selectively disclosed using a local, proof-scoped key pair
 that binds them together; this key pair will be bound to the proof by a
 signature over its public key using the private key associated with the base
 proof verification method.
             </li>
             <li>
-Initialize `publicKey` to the multikey expression of the public key exported
-from `proofScopedKeyPair`. That is, an array of bytes starting with the bytes
+Initialize |publicKey| to the multikey expression of the public key exported
+from |proofScopedKeyPair|. That is, an array of bytes starting with the bytes
 0x80 and 0x24 (which is the multikey p256-pub header (0x1200) expressed as a
 varint) followed by the compressed public key bytes (the compressed header with
 `2` for an even `y` coordinate and `3` for an odd one followed by the `x`
 coordinate of the public key).
             </li>
             <li>
-Initialize `toSign` to the result of calling the algorithm in Section
-<a href="#serializesigndata"></a>, passing `proofHash`, `publicKey`, and
-`mandatoryHash` as parameters to the algorithm.
+Initialize |toSign| to the result of calling the algorithm in Section
+<a href="#serializesigndata"></a>, passing |proofHash|, |publicKey|, and
+|mandatoryHash| as parameters to the algorithm.
             </li>
             <li>
-Initialize `baseSignature` to the result of digitally signing `toSign` using the
+Initialize |baseSignature| to the result of digitally signing |toSign| using the
 private key associated with the base proof verification method.
             </li>
             <li>
-Initialize `proofValue to the result of calling the algorithm in Section
-<a href="#serializebaseproofvalue"></a>, passing `baseSignature`,
-`publicKey`, `hmacKey`, `signatures`, and `mandatoryPointers` as parameters
+Initialize |proofValue| to the result of calling the algorithm in Section
+<a href="#serializebaseproofvalue"></a>, passing |baseSignature|,
+|publicKey|, |hmacKey|, |signatures|, and |mandatoryPointers| as parameters
 to the algorithm.
             </li>
             <li>
-Return `proofValue` as <em>digital proof</em>.
+Return |proofValue| as <em>digital proof</em>.
             </li>
           </ol>
 
@@ -2891,26 +2891,26 @@ value, represented as an object, is produced as output.
 
           <ol>
             <li>
-Initialize `baseSignature`, `publicKey`, `signatures`, `labelMap`,
-`mandatoryIndexes`, `revealDocument` to the values associated with their
+Initialize |baseSignature|, |publicKey|, |signatures|, |labelMap|,
+|mandatoryIndexes|, |revealDocument| to the values associated with their
 property names in the object returned when calling the algorithm in
-Section <a href="#createdisclosuredata"></a>, passing the `document`, `proof`,
-`selectivePointers`, and any custom JSON-LD API options, such as a document
+Section <a href="#createdisclosuredata"></a>, passing the |document|, |proof|,
+|selectivePointers|, and any custom JSON-LD API options, such as a document
 loader.
             </li>
             <li>
-Initialize `newProof` to a shallow copy of `proof`.
+Initialize |newProof| to a shallow copy of |proof|.
             </li>
             <li>
-Replace `proofValue` in `newProof` with the result of calling the algorithm
+Replace |proofValue| in |newProof| with the result of calling the algorithm
 in Section <a href="#serializederivedproofvalue"></a>, passing
-`baseSignature`, `publicKey`, `signatures`, `labelMap`, and `mandatoryIndexes`.
+|baseSignature|, |publicKey|, |signatures|, |labelMap|, and |mandatoryIndexes|.
             </li>
             <li>
-Set the value of the "proof" property in `revealDocument` to `newProof`.
+Set the value of the "proof" property in |revealDocument| to |newProof|.
             </li>
             <li>
-Return `revealDocument` as the <em>selectively revealed document</em>.
+Return |revealDocument| as the <em>selectively revealed document</em>.
             </li>
           </ol>
 
@@ -2930,53 +2930,53 @@ a [=verification result=]:
 
           <ol class="algorithm">
             <li>
-Let `unsecuredDocument` be a copy of `document` with the `proof` value removed.
+Let |unsecuredDocument| be a copy of |document| with the `proof` value removed.
             </li>
             <li>
-Initialize `baseSignature`, `proofHash`, `publicKey`, `signatures`,
-`nonMandatory`, and `mandatoryHash` to the values associated with their property
+Initialize |baseSignature|, |proofHash|, |publicKey|, |signatures|,
+|nonMandatory|, and |mandatoryHash| to the values associated with their property
 names in the object returned when calling the algorithm in Section
-<a href="#createverifydata"></a>, passing the `document`, `proof`, and any
+<a href="#createverifydata"></a>, passing the |document|, |proof|, and any
 custom JSON-LD API options, such as a document loader.
             </li>
             <li>
-If the length of `signatures` does not match the length of `nonMandatory`, throw
+If the length of |signatures| does not match the length of |nonMandatory|, throw
 an error indicating that the signature count does not match the non-mandatory
 message count.
             </li>
             <li>
-Initialize `publicKeyBytes` to the public key bytes expressed in `publicKey`.
+Initialize |publicKeyBytes| to the public key bytes expressed in |publicKey|.
 Instructions on how to decode the public key value can be found in Section
 <a href="#multikey"></a>.
             </li>
             <li>
-Initialize `toVerify` to the result of calling the algorithm in Setion
-<a href="#serializesigndata"></a>, passing `proofHash`, `publicKey`, and
-`mandatoryHash`.
+Initialize |toVerify| to the result of calling the algorithm in Setion
+<a href="#serializesigndata"></a>, passing |proofHash|, |publicKey|, and
+|mandatoryHash|.
             </li>
             <li>
-Initialize `verified` to true.
+Initialize |verified| to true.
             </li>
             <li>
-Initialize `verificationCheck` be the result of applying the verification
+Initialize |verificationCheck| be the result of applying the verification
 algorithm of the Elliptic Curve Digital Signature Algorithm (ECDSA) [FIPS-186-5],
-with `toVerify` as the data to be verified against the `baseSignature` using
-the public key specified by `publicKeyBytes`. If `verificationCheck` is
-`false`, set `verified` to false.
+with |toVerify| as the data to be verified against the |baseSignature| using
+the public key specified by |publicKeyBytes|. If |verificationCheck| is
+`false`, set |verified| to false.
             </li>
             <li>
-For every entry (`index`, `signature`) in `signatures`, verify every signature
+For every entry (|index|, |signature|) in |signatures|, verify every signature
 for every selectively disclosed (non-mandatory) statement:
               <ol class="algorithm">
                 <li>
-Initialize `verificationCheck` to the result of applying the verification
+Initialize |verificationCheck| to the result of applying the verification
 algorithm Elliptic Curve Digital Signature Algorithm (ECDSA) [FIPS-186-5], with
-the UTF-8 representation of the value at `index` of `nonMandatory` as the data
-to be verified against `signature` using the public key specified by
-`publicKeyBytes`.
+the UTF-8 representation of the value at |index| of |nonMandatory| as the data
+to be verified against |signature| using the public key specified by
+|publicKeyBytes|.
                 </li>
                 <li>
-If `verificationCheck` is `false`, set `verified` to false.
+If |verificationCheck| is `false`, set |verified| to false.
                 </li>
               </ol>
             </li>
@@ -2984,10 +2984,10 @@ If `verificationCheck` is `false`, set `verified` to false.
 Return a [=verification result=] with [=struct/items=]:
               <dl data-link-for="verification result">
                 <dt>[=verified=]</dt>
-                <dd>The value of `verified`</dd>
+                <dd>The value of |verified|</dd>
                 <dt>[=verifiedDocument=]</dt>
                 <dd>
-`unsecuredDocument` if `verified` is `true`, otherwise <a
+|unsecuredDocument| if |verified| is `true`, otherwise <a
 data-cite="INFRA#nulls">Null</a>
                 </dd>
               </dl>
