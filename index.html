@@ -2924,11 +2924,14 @@ The following algorithm attempts verification of an `ecdsa-sd-2023` derived
 proof. This algorithm is called by a verifier of an ECDSA-SD-protected
 [=verifiable credential=]. The inputs include a JSON-LD document
 (<var>document</var>), an ECDSA-SD disclosure proof (<var>proof</var>), and any
-custom JSON-LD API options, such as a document loader. A single boolean
-<em>verification result</em> value is produced as output.
+custom JSON-LD API options, such as a document loader. This algorithm returns
+a [=verification result=]:
           </p>
 
           <ol class="algorithm">
+            <li>
+Let `unsecuredDocument` be a copy of `document` with the `proof` value removed.
+            </li>
             <li>
 Initialize `baseSignature`, `proofHash`, `publicKey`, `signatures`,
 `nonMandatory`, and `mandatoryHash` to the values associated with their property
@@ -2952,30 +2955,42 @@ Initialize `toVerify` to the result of calling the algorithm in Setion
 `mandatoryHash`.
             </li>
             <li>
-Initialize `verificationResult` be the result of applying the verification
+Initialize `verified` to true.
+            </li>
+            <li>
+Initialize `verificationCheck` be the result of applying the verification
 algorithm of the Elliptic Curve Digital Signature Algorithm (ECDSA) [FIPS-186-5],
 with `toVerify` as the data to be verified against the `baseSignature` using
-the public key specified by `publicKeyBytes`. If `verificationResult` is
-`false`, return `false`.
+the public key specified by `publicKeyBytes`. If `verificationCheck` is
+`false`, set `verified` to false.
             </li>
             <li>
 For every entry (`index`, `signature`) in `signatures`, verify every signature
 for every selectively disclosed (non-mandatory) statement:
               <ol class="algorithm">
                 <li>
-Initialize `verificationResult` to the result of applying the verification
+Initialize `verificationCheck` to the result of applying the verification
 algorithm Elliptic Curve Digital Signature Algorithm (ECDSA) [FIPS-186-5], with
 the UTF-8 representation of the value at `index` of `nonMandatory` as the data
 to be verified against `signature` using the public key specified by
 `publicKeyBytes`.
                 </li>
                 <li>
-If `verificationResult` is `false`, return `false`.
+If `verificationCheck` is `false`, set `verified` to false.
                 </li>
               </ol>
             </li>
             <li>
-Return `verificationResult` as <em>verification result</em>.
+Return a [=verification result=] with [=struct/items=]:
+              <dl data-link-for="verification result">
+                <dt>[=verified=]</dt>
+                <dd>The value of `verified`</dd>
+                <dt>[=verifiedDocument=]</dt>
+                <dd>
+`unsecuredDocument` if `verified` is `true`, otherwise <a
+data-cite="INFRA#nulls">Null</a>
+                </dd>
+              </dl>
             </li>
           </ol>
 
