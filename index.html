@@ -2166,7 +2166,8 @@ Initialize |components| to an array with five elements containing the values of:
 |baseSignature|, |publicKey|, |hmacKey|, |signatures|, and |mandatoryPointers|.
             </li>
             <li>
-CBOR-encode |components| and append it to |proofValue|.
+CBOR-encode |components| per [[RFC8949]] where CBOR tagging MUST NOT be used on
+any of the |components|. Append the produced encoded value to |proofValue|.
             </li>
             <li>
 Initialize |baseProof| to a string with the Multibase
@@ -2439,7 +2440,8 @@ Initialize |components| to an array with five elements containing the values of:
 |mandatoryIndexes|.
             </li>
             <li>
-CBOR-encode |components| and append it to |proofValue|.
+CBOR-encode |components| per [[RFC8949]] where CBOR tagging MUST NOT be used on
+any of the |components|. Append the produced encoded value to |proofValue|.
             </li>
             <li>
 Return the <em>derived proof</em> as a string with the
