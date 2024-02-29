@@ -2665,8 +2665,8 @@ MUST use UTF-8 encoding.
 Initialize |hmac| to an HMAC API using a locally generated and exportable HMAC
 key. The HMAC uses the same hash algorithm used in the signature algorithm,
 which is detected via the |verificationMethod| provided to the
-function. i.e., SHA-256 for a P-256 curve. Per the recommendations of
-[[RFC2104]] the HMAC key MUST be the same length as the digest size. For SHA-256
+function, i.e., SHA-256 for a P-256 curve. Per the recommendations of
+[[RFC2104]], the HMAC key MUST be the same length as the digest size; for SHA-256,
 this is 256 bits or 32 bytes.
             </li>
             <li>
