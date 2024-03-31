@@ -491,9 +491,10 @@ Section [[[#add-derived-proof-ecdsa-sd-2023]]].
       <p>
 The following section describes multiple Data Integrity cryptographic suites
 that utilize the Elliptic Curve Digital Signature Algorithm (ECDSA)
-[[FIPS-186-5]]. When generating ECDSA signatures, MUST be expressed according
-to section 7 of [[RFC4754]] (sometimes referred to as the IEEE P1363 format).
-All ECDSA signatures SHOULD use the <em>deterministic</em>
+[[FIPS-186-5]]. When generating ECDSA signatures, the signature value MUST be
+expressed according to section 7 of [[RFC4754]] (sometimes referred to as the
+IEEE P1363 format) and encoded according to the specific cryptosuite proof
+generation algorithm. All ECDSA signatures SHOULD use the <em>deterministic</em>
 variant of the algorithm defined in [[FIPS-186-5]].
       </p>
 
