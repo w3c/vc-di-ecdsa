@@ -444,15 +444,19 @@ A proof contains the attributes specified in the
 of [[VC-DATA-INTEGRITY]] with the following restrictions.
           </p>
           <p>
-The `type` property of the proof MUST be `DataIntegrityProof`.
+The `type` property MUST be `DataIntegrityProof`.
           </p>
           <p>
-The `cryptosuite` property of the proof MUST be `ecdsa-rdfc-2019` or `ecdsa-jcs-2019`.
+The `cryptosuite` property MUST be `ecdsa-rdfc-2019`,
+`ecdsa-jcs-2019`, or `ecdsa-sd-2023`.
           </p>
           <p>
-The value of the `proofValue` property of the proof is produced according to
-[[FIPS-186-5]] using the curves, hashes, and base-encoding as specified in
-section [[[#algorithms]]].
+The value of the `proofValue` property is produced according to
+the `cryptosuite` type and is specified in either
+Section [[[#create-proof-ecdsa-rdfc-2019]]], or
+Section [[[#create-proof-ecdsa-jcs-2019]]], or
+Section [[[#create-base-proof-ecdsa-sd-2023]]], or
+Section [[[#add-derived-proof-ecdsa-sd-2023]]].
           </p>
 
           <pre class="example nohighlight"
