@@ -451,14 +451,13 @@ The `cryptosuite` property of the proof MUST be `ecdsa-rdfc-2019` or `ecdsa-jcs-
           </p>
           <p>
 The value of the `proofValue` property of the proof MUST be an ECDSA signature
-produced according to [[FIPS-186-5]] and SHOULD use the <em>deterministic</em>
-ECDSA signature variant, produced according to [[FIPS-186-5]] using the curves
-and hashes as specified in section [[[#algorithms]]], encoded according
-to section 7 of [[RFC4754]] (sometimes referred to as the IEEE P1363 format),
-and encoded using the base-58-btc header and
-alphabet as described in the
+produced according to [[FIPS-186-5]] using the curves and hashes as specified in
+section [[[#algorithms]]], encoded according to section 7 of [[RFC4754]]
+(sometimes referred to as the IEEE P1363 format), and encoded using the
+base-58-btc header and alphabet as described in the
 <a href="https://www.w3.org/TR/vc-data-integrity/#multibase-0">
-Multibase section</a> of [[VC-DATA-INTEGRITY]].
+Multibase section</a> of [[VC-DATA-INTEGRITY]]. The ECDSA signature SHOULD use
+the <em>deterministic</em> ECDSA signature variant described in [[FIPS-186-5]].
           </p>
 
           <pre class="example nohighlight"
