@@ -450,10 +450,9 @@ The `type` property of the proof MUST be `DataIntegrityProof`.
 The `cryptosuite` property of the proof MUST be `ecdsa-rdfc-2019` or `ecdsa-jcs-2019`.
           </p>
           <p>
-The value of the `proofValue` property of the proof MUST be an ECDSA signature,
-expressed according to section 7 of [[RFC4754]] (sometimes referred to as the
-IEEE P1363 format), produced according to [[FIPS-186-5]] using the curves,
-hashes, and base-encoding as specified in section [[[#algorithms]]].
+The value of the `proofValue` property of the proof is produced according to
+[[FIPS-186-5]] using the curves, hashes, and base-encoding as specified in
+section [[[#algorithms]]].
           </p>
 
           <pre class="example nohighlight"
@@ -488,8 +487,10 @@ hashes, and base-encoding as specified in section [[[#algorithms]]].
       <p>
 The following section describes multiple Data Integrity cryptographic suites
 that utilize the Elliptic Curve Digital Signature Algorithm (ECDSA)
-[[FIPS-186-5]]. When generating ECDSA signatures, the <em>deterministic</em>
-ECDSA algorithm variant SHOULD be used.
+[[FIPS-186-5]]. When generating ECDSA signatures, MUST be expressed according
+to section 7 of [[RFC4754]] (sometimes referred to as the IEEE P1363 format).
+All ECDSA signatures SHOULD use the <em>deterministic</em>
+variant of the algorithm defined in [[FIPS-186-5]].
       </p>
 
       <p>
