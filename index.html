@@ -937,8 +937,6 @@ section also include the verification of such a data integrity proof.
 
         <section>
           <h4>Create Proof (ecdsa-jcs-2019)</h4>
-
-
           <p>
 The following algorithm specifies how to create a [=data integrity proof=] given
 an <a>unsecured data document</a>. Required inputs are an
@@ -970,6 +968,10 @@ passed as a parameters.
 Let |proofBytes| be the result of running the algorithm in Section
 [[[#proof-serialization-ecdsa-jcs-2019]]] with |hashData| and
 |options| passed as parameters.
+            </li>
+            <li>
+Set <var>proof</var>.<var>@context</var> to
+<var>unsecuredDocument</var>.<var>@context</var>.
             </li>
             <li>
 Let |proof|.|proofValue| be a <a data-cite="VC-DATA-INTEGRITY#multibase-0">
@@ -1131,9 +1133,9 @@ The following algorithm specifies how to generate a
 <em>proof configuration</em> from a set of <em>proof options</em>
 that is used as input to the <a href="#hashing-ecdsa-jcs-2019">proof hashing algorithm</a>.
           </p>
-
           <p>
-The required inputs to this algorithm are <em>proof options</em>
+The required inputs to this algorithm are the <em>document</em>
+(|unsecuredDocument|) and the <em>proof options</em>
 (|options|). The <em>proof options</em> MUST contain a type identifier
 for the
 <a data-cite="vc-data-integrity#dfn-cryptosuite">
@@ -1155,6 +1157,10 @@ If |proofConfig|.|type| is not set to `DataIntegrityProof` and/or
 If |proofConfig|.|created| is set and if the value is not a
 valid [[XMLSCHEMA11-2]] datetime, an `INVALID_PROOF_DATETIME` error MUST be
 raised.
+            </li>
+            <li>
+Set <var>proofConfig</var>.<var>@context</var> to
+<var>unsecuredDocument</var>.<var>@context</var>
             </li>
             <li>
 Let |canonicalProofConfig| be the result of applying the
