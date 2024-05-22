@@ -985,13 +985,23 @@ Return |proof| as the [=data integrity proof=].
 
         <section>
           <h4>Verify Proof (ecdsa-jcs-2019)</h4>
-
           <p>
 The following algorithm specifies how to verify a [=data integrity proof=] given
 an <a>secured data document</a>. Required inputs are an
 <a>secured data document</a> ([=map=] |securedDocument|). This algorithm returns
-a [=verification result=]:
+a [=verification result=], which is a [=struct=] whose
+[=struct/items=] are:
           </p>
+          <dl>
+            <dt>[=verification result/verified=]</dt>
+            <dd>`true` or `false`</dd>
+            <dt>[=verification result/verifiedDocument=]</dt>
+            <dd>
+<a data-cite="INFRA#nulls">Null</a>, if [=verification result/verified=] is
+`false`; otherwise, an [=unsecured data document=]
+            </dd>
+          </dl>
+
 
           <ol class="algorithm">
           <li>
@@ -1007,6 +1017,20 @@ Let |proofBytes| be the
 <a data-cite="VC-DATA-INTEGRITY#multibase-0">Multibase decoded base58-btc
 value</a> in |securedDocument|.|proof|.|proofValue|.
           </li>
+          <li>
+If |proofConfig|.<var>@context</var> exists:
+              <ol class="algorithm">
+                <li>
+Check that the |securedDocument|.<var>@context</var> starts with all values
+contained in the |proofConfig|.<var>@context</var> in the same order.
+Otherwise, set |verified| to `false` and skip to the last step.
+                </li>
+                <li>
+Set |unsecuredDocument|.<var>@context</var> equal to
+|proofConfig|.<var>@context</var>.
+                </li>
+              </ol>
+            </li>
           <li>
 Let |transformedData| be the result of running the algorithm in Section <a
 href="#transformation-ecdsa-jcs-2019"></a> with |unsecuredDocument| and
