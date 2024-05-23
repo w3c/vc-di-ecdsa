@@ -22,6 +22,10 @@
     "created": "2023-02-24T23:36:38Z",
     "verificationMethod": "https://vc.example/issuers/5678#zDnaepBuvsQ8cpsWrVKw8fbpGpvPeNSjVPTWoq6cRqaYzBKVP",
     "proofPurpose": "assertionMethod",
-    "proofValue": "z7pnwfec5k9N26YDUjjDxjJEijAdEoAbJY2n3CTx3CYvzzRxcV5UkmECmLmQcA8eYTsDQ6GHCFDSk7Yb1hd4uN5a"
+    "@context": [
+      "https://www.w3.org/ns/credentials/v2",
+      "https://www.w3.org/ns/credentials/examples/v2"
+    ],
+    "proofValue": "z3Uid91ZWFdE5NHJcePnZsN6j16r13euxdo3ceCotGxowPnsBENxUFxYYiqD23GduZ3fM16oqCntTgpJChaW4FVVs"
   }
 }
