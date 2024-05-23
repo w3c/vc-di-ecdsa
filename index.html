@@ -3385,11 +3385,15 @@ compute the ECDSA signature, and then base-58-btc encode the signature.
         <pre class="example nohighlight" title="Signature of Combined Hashes base-58-btc"
         data-include="TestVectors/ecdsa-jcs-2019-p256/sigBTC58JCSECDSAP256.txt" data-include-format="text"></pre>
 
-        <p>Assemble the signed credential with the following two steps:</p>
+        <p>Assemble the signed credential with the following three steps:</p>
         <ol>
           <li>
 Add the <code>proofValue</code> field with the previously computed base-58-btc
 value to the proof options document.
+          </li>
+          <li>
+Set the proof options <code>@context</code> field to the value of the
+<var>unsecuredDocument.@context</var>.
           </li>
           <li>
 Set the <code>proof</code> field of the credential to the augmented proof
@@ -3456,11 +3460,15 @@ compute the ECDSA signature, and then base-58-btc encode the signature.
         <pre class="example nohighlight" title="Signature of Combined Hashes base-58-btc"
         data-include="TestVectors/ecdsa-jcs-2019-p384/sigBTC58JCSECDSAP384.txt" data-include-format="text"></pre>
 
-        <p>Assemble the signed credential with the following two steps:</p>
+        <p>Assemble the signed credential with the following three steps:</p>
         <ol>
           <li>
 Add the <code>proofValue</code> field with the previously computed base-58-btc
 value to the proof options document.
+          </li>
+          <li>
+Set the proof options <code>@context</code> field to the value of the
+<var>unsecuredDocument.@context</var>.
           </li>
           <li>
 Set the <code>proof</code> field of the credential to the augmented proof
