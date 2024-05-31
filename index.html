@@ -947,6 +947,10 @@ is produced as output.
 
           <ol class="algorithm">
             <li>
+Set <var>options</var>.<var>@context</var> to
+<var>unsecuredDocument</var>.<var>@context</var>.
+            </li>
+            <li>
 Let |proof| be a clone of the proof options, |options|.
             </li>
             <li>
@@ -1181,10 +1185,6 @@ If |proofConfig|.|type| is not set to `DataIntegrityProof` and/or
 If |proofConfig|.|created| is set and if the value is not a
 valid [[XMLSCHEMA11-2]] datetime, an `INVALID_PROOF_DATETIME` error MUST be
 raised.
-            </li>
-            <li>
-Set <var>proofConfig</var>.<var>@context</var> to
-<var>unsecuredDocument</var>.<var>@context</var>
             </li>
             <li>
 Let |canonicalProofConfig| be the result of applying the
