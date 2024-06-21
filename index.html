@@ -736,12 +736,11 @@ set to the string `ecdsa-rdfc-2019` then a `PROOF_TRANSFORMATION_ERROR` MUST be
 raised.
             </li>
             <li>
-Let |canonicalDocument| be the result of applying the
-Universal RDF Dataset Canonicalization Algorithm
-[[RDF-CANON]] to the |unsecuredDocument|.
-            </li>
-            <li>
-Set |output| to the value of |canonicalDocument|.
+Let |canonicalDocument| be the result of converting |unsecuredDocument|
+<a data-cite="JSON-LD11-API#deserialize-json-ld-to-rdf-algorithm">
+to RDF statements</a>, applying the Universal RDF Dataset Canonicalization
+Algorithm [[RDF-CANON]] to the result, and then serializing the result to
+[[N-QUADS]].
             </li>
             <li>
 Return |canonicalDocument| as the <em>transformed data document</em>.
@@ -1095,10 +1094,8 @@ raised.
             </li>
             <li>
 Let |canonicalDocument| be the result of applying the
-JSON Canonicalization Scheme [[RFC8785]] to the |unsecuredDocument|.
-            </li>
-            <li>
-Set |output| to the value of |canonicalDocument|.
+JSON Canonicalization Scheme [[RFC8785]] to a JSON serialization of the
+|unsecuredDocument|.
             </li>
             <li>
 Return |canonicalDocument| as the <em>transformed data document</em>.
