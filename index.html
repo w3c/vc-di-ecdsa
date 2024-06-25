@@ -1810,7 +1810,7 @@ Set |parentValue| to |value|.
                 <li>
 Set |value| to |parentValue.|path|. If |value| is now undefined,
 an error MUST be raised and SHOULD convey an error type of
-`PROOF_GENERATION_ERROR`
+`PROOF_GENERATION_ERROR`,
 indicating that the JSON pointer does not match the given |document|.
                 </li>
                 <li>
@@ -2229,8 +2229,8 @@ five elements, using the names `baseSignature`, `publicKey`, `hmacKey`,
 
           <ol class="algorithm">
             <li>
-Ensure the |proofValue| string starts with `u`, indicating that it is a
-multibase-base64url-no-pad-encoded value, if it does not an error MUST be raised
+If the |proofValue| string does not start with `u`, indicating that it is
+a multibase-base64url-no-pad-encoded value, an error MUST be raised
 and SHOULD convey an error type of `PROOF_VERIFICATION_ERROR`.
             </li>
             <li>
@@ -2238,8 +2238,8 @@ Initialize |decodedProofValue| to the result of base64url-no-pad-decoding the
 substring after the leading `u` in |proofValue|.
             </li>
             <li>
-Ensure that the |decodedProofValue| starts with the ECDSA-SD base proof header
-bytes 0xd9, 0x5d, and 0x00, if it does not an error MUST be raised and SHOULD
+If the |decodedProofValue| does not start with the ECDSA-SD base proof
+header bytes `0xd9`, `0x5d`, and `0x00`, an error MUST be raised and SHOULD
 convey an error type of `PROOF_VERIFICATION_ERROR`.
             </li>
             <li>
@@ -2503,7 +2503,8 @@ contains a set to five elements, using the names "baseSignature", "publicKey",
           <ol class="algorithm">
             <li>
 Ensure the |proofValue| string starts with `u`, indicating that it is a
-multibase-base64url-no-pad-encoded value, if it does not an error MUST be raised
+If the |proofValue| string does not start with `u`, indicating that it is a
+multibase-base64url-no-pad-encoded value, an error MUST be raised
 and SHOULD convey an error type of `PROOF_VERIFICATION_ERROR`.
             </li>
             <li>
@@ -2511,18 +2512,17 @@ Initialize |decodedProofValue| to the result of base64url-no-pad-decoding the
 substring after the leading `u` in |proofValue|.
             </li>
             <li>
-Ensure that the |decodedProofValue| starts with the ECDSA-SD disclosure proof
-header bytes `0xd9`, `0x5d`, and `0x01`, if it does not an error MUST be raised
+If the |decodedProofValue| does not start with the ECDSA-SD disclosure proof
+header bytes `0xd9`, `0x5d`, and `0x01`, an error MUST be raised
 and SHOULD convey an error type of `PROOF_VERIFICATION_ERROR`.
             </li>
             <li>
-Initialize |components| to an array that is the result of CBOR-decoding the
-bytes that follow the three-byte ECDSA-SD disclosure proof header. Ensure the
-result is an array of five elements. Ensure the result is an array of five
-elements: a byte array of length 64, a byte array of length 36, an array of byte
-arrays, each of length 64, a map of integers to byte arrays of length 32, and an
-array of integers, if it does not an error MUST be raised and SHOULD convey an
-error type of `PROOF_VERIFICATION_ERROR`.
+Initialize |components| to an array that is the result of CBOR-decoding the bytes
+that follow the three-byte ECDSA-SD disclosure proof header. If the result is not
+an array of the following five elements — a byte array of length 64; a byte array
+of length 36; an array of byte arrays, each of length 64; a map of integers to
+byte arrays, each of length 32; and an array of integers — an error MUST be raised
+and SHOULD convey an error type of `PROOF_VERIFICATION_ERROR`.
             </li>
             <li>
 Replace the fourth element in |components| using the result of calling the
@@ -2974,7 +2974,7 @@ custom JSON-LD API options, such as a document loader.
             <li>
 If the length of |signatures| does not match the length of |nonMandatory|,
 an error MUST be raised and SHOULD convey an error type of
-`PROOF_VERIFICATION_ERROR` indicating that the signature count does not match
+`PROOF_VERIFICATION_ERROR`, indicating that the signature count does not match
 the non-mandatory message count.
             </li>
             <li>
