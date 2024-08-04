@@ -950,22 +950,22 @@ is produced as output.
 
           <ol class="algorithm">
             <li>
-If <var>unsecuredDocument</var>.<var>@context</var> is present, set
-<var>options</var>.<var>@context</var> to
-<var>unsecuredDocument</var>.<var>@context</var>.
+Let |proof| be a clone of the proof options, |options|.
             </li>
             <li>
-Let |proof| be a clone of the proof options, |options|.
+If <var>unsecuredDocument</var>.<var>@context</var> is present, set
+<var>proof</var>.<var>@context</var> to
+<var>unsecuredDocument</var>.<var>@context</var>.
             </li>
             <li>
 Let |proofConfig| be the result of running the algorithm in
 Section [[[#proof-configuration-ecdsa-jcs-2019]]] with
-|options| passed as a parameter.
+|proof| passed as a parameter.
             </li>
             <li>
 Let |transformedData| be the result of running the algorithm in Section <a
-href="#transformation-ecdsa-jcs-2019"></a> with |unsecuredDocument|,
-|proofConfig|, and |options| passed as parameters.
+href="#transformation-ecdsa-jcs-2019"></a> with |unsecuredDocument|
+and |options| passed as parameters.
             </li>
             <li>
 Let |hashData| be the result of running the algorithm in Section
