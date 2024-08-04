@@ -950,7 +950,8 @@ is produced as output.
 
           <ol class="algorithm">
             <li>
-Set <var>options</var>.<var>@context</var> to
+If <var>unsecuredDocument</var>.<var>@context</var> is present, set
+<var>options</var>.<var>@context</var> to
 <var>unsecuredDocument</var>.<var>@context</var>.
             </li>
             <li>
@@ -975,10 +976,6 @@ passed as a parameters.
 Let |proofBytes| be the result of running the algorithm in Section
 [[[#proof-serialization-ecdsa-jcs-2019]]] with |hashData| and
 |options| passed as parameters.
-            </li>
-            <li>
-Set <var>proof</var>.<var>@context</var> to
-<var>unsecuredDocument</var>.<var>@context</var>.
             </li>
             <li>
 Let |proof|.|proofValue| be a <a data-cite="VC-DATA-INTEGRITY#multibase-0">
