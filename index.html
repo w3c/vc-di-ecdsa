@@ -226,6 +226,17 @@ specified in [[FIPS-186-5]] with elliptic curves P-256 and P-384 specified in
 [[NIST-SP-800-186]]. [[FIPS-186-5]] includes the <em>deterministic</em> ECDSA
 algorithm which is also specified in [[RFC6979]].
       </p>
+
+      <p class="note">
+The elliptic curves P-256 and P-384 of [[NIST-SP-800-186]] are referred to as
+<em>secp256r1</em> and <em>secp384r1</em> respectively in [[SECG2]]. This notation 
+is sometimes used in ECDSA software libraries. Developers 
+must be careful not to confuse <em>secp256<b>r</b>1</em> terms with 
+<em>secp256<b>k</b>1</em>: the second is a <em>different</em> elliptic curve that is not
+used by this specification. ECDSA software libraries may implement only one of the two 
+alternatives.
+      </p>
+
       <p>
 This specification uses either the RDF Dataset Canonicalization Algorithm
 [[RDF-CANON]] or the JSON Canonicalization Scheme [[RFC8785]] to transform the
@@ -233,11 +244,6 @@ input document into its canonical form. It uses one of two mechanisms to digest
 and sign: SHA-256 [[RFC6234]] as the message digest algorithm and ECDSA with
 Curve P-256 as the signature algorithm, or SHA-384 [[RFC6234]] as the message
 digest algorithm and ECDSA with Curve P-384 as the signature algorithm.
-      </p>
-      <p class="note">
-The elliptic curves P-256 and P-384 of [[NIST-SP-800-186]] are referred to as
-<em>secp256r1</em> and <em>secp384r1</em> respectively in [[SECG2]]. In
-addition, this notation is sometimes used in ECDSA software libraries.
       </p>
 
       <section id="terminology">
