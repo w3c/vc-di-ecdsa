@@ -227,15 +227,20 @@ specified in [[FIPS-186-5]] with elliptic curves P-256 and P-384 specified in
 algorithm which is also specified in [[RFC6979]].
       </p>
 
-      <p class="note">
+      <div class="note">
+        <p>
 The elliptic curves P-256 and P-384 of [[NIST-SP-800-186]] are respectively referred
-to as <em>secp256r1</em> and <em>secp384r1</em> in [[SECG2]]. This notation 
-is sometimes used in ECDSA software libraries. Developers 
-must be careful not to confuse <em>secp256<b>r</b>1</em> terms with 
-<em>secp256<b>k</b>1</em>: the second is a <em>different</em> elliptic curve that is not
-used by this specification. ECDSA software libraries may implement only one of the two 
-alternatives.
-      </p>
+to as <em>secp256r1</em> and <em>secp384r1</em> in [[SECG2]]. This notation is
+sometimes also used by ECDSA software libraries.
+        </p>
+        <p>
+Developers are cautioned to not confuse <em>secp256<b>r</b>1</em> terms with
+<em>secp256<b>k</b>1</em> terms; the latter are from a third, <em>different</em>,
+elliptic curve, that is not used by this specification. ECDSA software libraries
+might not implement all of these curves, so developers need to take care when
+choosing an ECDSA software library for their implementation.
+        </p>
+      </div>
 
       <p>
 This specification uses either the RDF Dataset Canonicalization Algorithm
