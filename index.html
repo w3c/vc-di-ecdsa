@@ -520,9 +520,9 @@ functions in this section use information from the verification method
       <p>
 When the RDF Dataset Canonicalization Algorithm (RDFC-1.0) [[RDF-CANON]] is used with ECDSA
 algorithms, the cryptographic hashing function used by RDFC-1.0 MUST depend on the size of 
-the associated public key. For P-256 keys, the SHA-2 with 256 bits of output MUST be 
+the associated public key. For P-256 keys, SHA-2 with 256 bits of output MUST be 
 utilized, which is the default. For P-384 keys, SHA-2 with 384-bits of output MUST be
-utilized, following the <a data-cite="RDF-CANON#dfn-hash-algorithm">implementation-dependent action</a> 
+utilized, relying on the <a data-cite="RDF-CANON#dfn-hash-algorithm">implementation-dependent setting</a> 
 for RDFC-1.0.
       </p>
 
