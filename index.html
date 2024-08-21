@@ -316,8 +316,8 @@ during the processing of digital signatures.
           <h4>Multikey</h4>
 
           <p>
-The <a data-cite="VC-DATA-INTEGRITY#multikey">Multikey format</a>, as defined in
-[[VC-DATA-INTEGRITY]], is used to express public keys for the cryptographic
+The <a data-cite="controller-document#multikey">Multikey format</a>, as defined in
+[[controller-document]], is used to express public keys for the cryptographic
 suites defined in this specification.
           </p>
 
@@ -331,8 +331,8 @@ The Multikey encoding of a P-256
 public key MUST start with the two-byte prefix `0x8024` (the varint expression
 of `0x1200`) followed by the 33-byte compressed public key data. The resulting
 35-byte value MUST then be encoded using the base-58-btc alphabet, according to
-the <a data-cite="VC-DATA-INTEGRITY#multibase-0">Multibase</a> section in the
-[[VC-DATA-INTEGRITY]] specification, and then prepended with the base-58-btc
+the <a data-cite="controller-document#multibase-0">Multibase</a> section in the
+[[controller-document]] specification, and then prepended with the base-58-btc
 Multibase header (`z`).
           </p>
 
@@ -341,8 +341,8 @@ The encoding of a P-384 public key MUST start with the
 two-byte prefix `0x8124` (the varint expression of `0x1201`) followed by the
 49-byte compressed public key data. The resulting 51-byte value is then encoded
 using the base-58-btc alphabet, according to the
-<a data-cite="VC-DATA-INTEGRITY#multibase-0">Multibase</a> section in the
-[[VC-DATA-INTEGRITY]] specification, and then prepended with the base-58-btc
+<a data-cite="controller-document#multibase-0">Multibase</a> section in the
+[[controller-document]] specification, and then prepended with the base-58-btc
 Multibase header (`z`). Any other encodings MUST NOT be allowed.
           </p>
 
@@ -418,16 +418,16 @@ private key).
 The encoding of a P-256 secret key MUST start with the two-byte prefix `0x8626`
 (the varint expression of `0x1306`) followed by the 32-byte secret key data. The
 34-byte value MUST then be encoded using the base-58-btc alphabet, according to
-the <a data-cite="VC-DATA-INTEGRITY#multibase-0">Multibase</a> section in the
-[[VC-DATA-INTEGRITY]] specification, and then prepended with the base-58-btc
+the <a data-cite="controller-document#multibase-0">Multibase</a> section in the
+[[controller-document]] specification, and then prepended with the base-58-btc
 Multibase header (`z`). Any other encodings MUST NOT be allowed.
           </p>
           <p>
 The encoding of a P-384 secret key is the two-byte prefix `0x8726` (the varint
 expression of `0x1307`) followed by the 48-byte secret key data. The 50-byte
 value MUST then be encoded using the base-58-btc alphabet, according to the
-<a data-cite="VC-DATA-INTEGRITY#multibase-0">Multibase</a> section in the
-[[VC-DATA-INTEGRITY]] specification, and then prepended with the base-58-btc
+<a data-cite="controller-document#multibase-0">Multibase</a> section in the
+[[controller-document]] specification, and then prepended with the base-58-btc
 Multibase header (`z`). Any other encodings MUST NOT be allowed.
           </p>
 
@@ -648,7 +648,7 @@ Let |proofBytes| be the result of running the algorithm in Section
 |options| passed as parameters.
             </li>
             <li>
-Let |proof|.|proofValue| be a <a data-cite="VC-DATA-INTEGRITY#multibase-0">
+Let |proof|.|proofValue| be a <a data-cite="controller-document#multibase-0">
 base58-btc-encoded Multibase value</a> of the |proofBytes|.
             </li>
             <li>
@@ -689,7 +689,7 @@ removed.
           </li>
           <li>
 Let |proofBytes| be the
-<a data-cite="VC-DATA-INTEGRITY#multibase-0">Multibase decoded base58-btc
+<a data-cite="controller-document#multibase-0">Multibase decoded base58-btc
 value</a> in |securedDocument|.|proof|.|proofValue|.
           </li>
           <li>
@@ -993,7 +993,7 @@ Let |proofBytes| be the result of running the algorithm in Section
 |options| passed as parameters.
             </li>
             <li>
-Let |proof|.|proofValue| be a <a data-cite="VC-DATA-INTEGRITY#multibase-0">
+Let |proof|.|proofValue| be a <a data-cite="controller-document#multibase-0">
 base58-btc-encoded Multibase value</a> of the |proofBytes|.
             </li>
             <li>
@@ -1032,7 +1032,7 @@ Let |proofOptions| be the result of a copy of |securedDocument|.|proof| with
             </li>
             <li>
 Let |proofBytes| be the
-<a data-cite="VC-DATA-INTEGRITY#multibase-0">Multibase decoded base58-btc
+<a data-cite="controller-document#multibase-0">Multibase decoded base58-btc
 value</a> in |securedDocument|.|proof|.|proofValue|.
             </li>
             <li>
@@ -2224,8 +2224,8 @@ any of the |components|. Append the produced encoded value to |proofValue|.
             <li>
 Initialize |baseProof| to a string with the Multibase
 base64url-no-pad-encoding of |proofValue| as described in the
-<a href="https://www.w3.org/TR/vc-data-integrity/#multibase-0">
-Multibase section</a> of [[VC-DATA-INTEGRITY]]. That is, return a string
+<a data-cite="controller-document#multibase-0">
+Multibase section</a> of [[controller-document]]. That is, return a string
 starting with "`u`" and ending with the base64url-no-pad-encoded value of
 |proofValue|.
             </li>
@@ -2502,8 +2502,8 @@ any of the |components|. Append the produced encoded value to |proofValue|.
             <li>
 Return the <em>derived proof</em> as a string with the
 base64url-no-pad-encoding of |proofValue| as described in the
-<a href="https://www.w3.org/TR/vc-data-integrity/#multibase-0">
-Multibase section</a> of [[VC-DATA-INTEGRITY]]. That is, return a string
+<a data-cite="controller-document#multibase-0">
+Multibase section</a> of [[controller-document]]. That is, return a string
 starting with "`u`" and ending with the base64url-no-pad-encoded value of
 |proofValue|.
             </li>
@@ -2687,7 +2687,7 @@ Let |proofBytes| be the result of running the algorithm in Section
 |options| passed as parameters.
             </li>
             <li>
-Let |proof|.|proofValue| be a <a data-cite="VC-DATA-INTEGRITY#multibase-0">
+Let |proof|.|proofValue| be a <a data-cite="controller-document#multibase-0">
 base64-url-encoded Multibase value</a> of the |proofBytes|.
             </li>
             <li>
