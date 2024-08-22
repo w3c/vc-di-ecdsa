@@ -20,8 +20,8 @@
     "type": "DataIntegrityProof",
     "cryptosuite": "ecdsa-rdfc-2019",
     "created": "2023-02-24T23:36:38Z",
-    "verificationMethod": "https://vc.example/issuers/5678#zDnaepBuvsQ8cpsWrVKw8fbpGpvPeNSjVPTWoq6cRqaYzBKVP",
+    "verificationMethod": "did:key:zDnaepBuvsQ8cpsWrVKw8fbpGpvPeNSjVPTWoq6cRqaYzBKVP#zDnaepBuvsQ8cpsWrVKw8fbpGpvPeNSjVPTWoq6cRqaYzBKVP",
     "proofPurpose": "assertionMethod",
-    "proofValue": "z4KKHqaD4F7GHyLA6f3wK9Ehxtogv5jQRFpQBM4sXkSf7Bozd7bAf7dF6UkfM2aSCBMm24mPvaFXmzQmimzaEC3SL"
+    "proofValue": "zaHXrr7AQdydBk3ahpCDpWbxfLokDqmCToYm2dyWvpcFVyWooC2he63w1f7UNQoAMKdhaRtcnaE2KTo5o5vTCcfw"
   }
 }
