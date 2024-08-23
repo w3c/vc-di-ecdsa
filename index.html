@@ -923,7 +923,7 @@ represented as a boolean value is produced as output.
 Let |publicKeyBytes| be the result of retrieving the
 public key bytes associated with the
 |options|.|verificationMethod| value as described in the
-[[controller-document]] specification,
+[[[controller-document]]] specification,
 <a data-cite="controller-document#retrieve-verification-method">
 Section: Retrieve Verification Method</a>.
             </li>
@@ -1276,7 +1276,7 @@ represented as a boolean value is produced as output.
 Let |publicKeyBytes| be the result of retrieving the
 public key bytes associated with the
 |options|.|verificationMethod| value as described in the
-[[controller-document]] specification,
+[[[controller-document]]] specification,
 <a data-cite="controller-document#retrieve-verification-method">
 Section: Retrieve Verification Method</a>.
             </li>
@@ -2221,7 +2221,7 @@ any of the |components|. Append the produced encoded value to |proofValue|.
 Initialize |baseProof| to a string with the Multibase
 base64url-no-pad-encoding of |proofValue| as described in the
 <a data-cite="controller-document#multibase-0">
-Multibase section</a> of [[controller-document]]. That is, return a string
+Multibase section</a> of [[[controller-document]]]. That is, return a string
 starting with "`u`" and ending with the base64url-no-pad-encoded value of
 |proofValue|.
             </li>
@@ -2499,7 +2499,7 @@ any of the |components|. Append the produced encoded value to |proofValue|.
 Return the <em>derived proof</em> as a string with the
 base64url-no-pad-encoding of |proofValue| as described in the
 <a data-cite="controller-document#multibase-0">
-Multibase section</a> of [[controller-document]]. That is, return a string
+Multibase section</a> of [[[controller-document]]]. That is, return a string
 starting with "`u`" and ending with the base64url-no-pad-encoded value of
 |proofValue|.
             </li>
@@ -2512,7 +2512,7 @@ starting with "`u`" and ending with the base64url-no-pad-encoded value of
 
           <p>
 The following algorithm parses the components of the derived proof value.
-The required inputs are a derived proof value (|proofValue|).
+The required input is a derived proof value (|proofValue|).
 A single <em>derived proof value</em> value object is produced as output, which
 contains a set to five elements, using the names "baseSignature", "publicKey",
 "signatures", "labelMap", and "mandatoryIndexes".
