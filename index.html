@@ -606,7 +606,7 @@ Return |cryptosuite|.
 
         <p>
 The `ecdsa-rdfc-2019` cryptographic suite takes an input document, canonicalizes
-the document using the Universal RDF Dataset Canonicalization Algorithm
+the document using the [[[RDF-CANON]]]
 [[RDF-CANON]], and then cryptographically hashes and signs the output
 resulting in the production of a data integrity proof. The algorithms in this
 section also include the verification of such a data integrity proof.
@@ -756,7 +756,7 @@ Let |canonicalDocument| be the result of converting |unsecuredDocument| to
 <a data-cite="JSON-LD11-API#expansion-algorithm">JSON-LD expanded form</a>
 and then <a data-cite="JSON-LD11-API#deserialize-json-ld-to-rdf-algorithm">
 to RDF statements</a>, applying the <a data-cite="RDF-CANON#canon-algorithm">
-Universal RDF Dataset Canonicalization Algorithm</a>, and then serializing the
+RDF Dataset Canonicalization Algorithm</a>, and then serializing the
 result to [[N-QUADS]].
             </li>
             <li>
@@ -853,8 +853,7 @@ Set |proofConfig|.<var>@context</var> to
             </li>
             <li>
 Let |canonicalProofConfig| be the result of applying the
-Universal RDF Dataset Canonicalization Algorithm
-[[RDF-CANON]] to the |proofConfig|.
+[[[RDF-CANON]]] [[RDF-CANON]] to the |proofConfig|.
             </li>
             <li>
 Return |canonicalProofConfig|.
@@ -2641,7 +2640,7 @@ Recommendation phase.
 
         <p>
 The `ecdsa-sd-2023` cryptographic suite takes an input document, canonicalizes
-the document using the Universal RDF Dataset Canonicalization Algorithm
+the document using the [[[RDF-CANON]]]
 [[RDF-CANON]], and then cryptographically hashes and signs the output
 resulting in the production of a data integrity proof. The algorithms in this
 section also include the verification of such a data integrity proof.
@@ -2846,8 +2845,7 @@ Set |proofConfig|.<var>@context</var> to
             </li>
             <li>
 Let |canonicalProofConfig| be the result of applying the
-Universal RDF Dataset Canonicalization Algorithm
-[[RDF-CANON]] to the |proofConfig|.
+[[[RDF-CANON]]] [[RDF-CANON]] to the |proofConfig|.
             </li>
             <li>
 Return |canonicalProofConfig|.
