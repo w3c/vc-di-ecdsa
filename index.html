@@ -520,7 +520,7 @@ functions in this section use information from the verification method
 &mdash; such as the cryptographic hashing algorithm.
       </p>
 
-      <p>
+      <p id="canon-and-hash">
 When the RDF Dataset Canonicalization Algorithm (RDFC-1.0) [[RDF-CANON]] is used
 with ECDSA algorithms, the cryptographic hashing function used by RDFC-1.0 is
 chosen based on the size of the associated public key. For P-256 keys, the
@@ -755,9 +755,11 @@ an error MUST be raised and SHOULD convey an error type of
 Let |canonicalDocument| be the result of converting |unsecuredDocument| to
 <a data-cite="JSON-LD11-API#expansion-algorithm">JSON-LD expanded form</a>
 and then <a data-cite="JSON-LD11-API#deserialize-json-ld-to-rdf-algorithm">
-to RDF statements</a>, applying the <a data-cite="RDF-CANON#canon-algorithm">
-RDF Dataset Canonicalization Algorithm</a>, and then serializing the
-result to [[N-QUADS]].
+to RDF statements</a>, applying the <a data-cite="RDF-CANON#canon-algorithm">RDF Dataset Canonicalization
+Algorithm</a> [[RDF-CANON]] to the result, and then serializing the result to a
+<a data-cite="RDF-CANON#dfn-serialized-canonical-form">serialized canonical form</a> [[RDF-CANON]].
+For canonicalization one must use the hash algorithm appropriate in security level to
+the curve used; see <a href="#canon-and-hash">further details</a>.
             </li>
             <li>
 Return |canonicalDocument| as the <em>transformed data document</em>.
@@ -1316,7 +1318,7 @@ cryptographic suites that perform selective disclosure.
           <h4>labelReplacementCanonicalizeNQuads</h4>
 
           <p>
-The following algorithm canonicalizes an array of N-Quad strings and replaces
+The following algorithm canonicalizes an array of N-Quad [[N-QUADS]] strings and replaces
 any blank node identifiers in the canonicalized result using a label map
 factory function, |labelMapFactoryFunction|. The required inputs are
 an array of N-Quad strings (|nquads|), and a label map factory function
