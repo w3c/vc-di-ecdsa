@@ -314,8 +314,8 @@ during the processing of digital signatures.
           <h4>Multikey</h4>
 
           <p>
-The <a data-cite="controller-document#multikey">Multikey format</a>, as defined in
-[[controller-document]], is used to express public keys for the cryptographic
+The <a data-cite="controller-document#multikey">Multikey format</a>, defined in
+[[[controller-document]]], is used to express public keys for the cryptographic
 suites defined in this specification.
           </p>
 
@@ -325,23 +325,13 @@ expression of a P-256 or P-384 public key.
           </p>
 
           <p>
-The Multikey encoding of a P-256
-public key MUST start with the two-byte prefix `0x8024` (the varint expression
-of `0x1200`) followed by the 33-byte compressed public key data. The resulting
-35-byte value MUST then be encoded using the base-58-btc alphabet, according to
-the <a data-cite="controller-document#multibase-0">Multibase</a> section in the
-[[controller-document]] specification, and then prepended with the base-58-btc
-Multibase header (`z`).
-          </p>
-
-          <p>
-The encoding of a P-384 public key MUST start with the
-two-byte prefix `0x8124` (the varint expression of `0x1201`) followed by the
-49-byte compressed public key data. The resulting 51-byte value is then encoded
-using the base-58-btc alphabet, according to the
-<a data-cite="controller-document#multibase-0">Multibase</a> section in the
-[[controller-document]] specification, and then prepended with the base-58-btc
-Multibase header (`z`). Any other encodings MUST NOT be allowed.
+The `publicKeyMultibase` value of the verification method MUST start with the
+base-58-btc prefix (`z`), as defined in the
+<a data-cite="controller-document#multibase-0">Multibase section</a> of
+[[[controller-document]]]. A Multibase-encoded ECDSA 256-bit public key value or
+an ECDSA 384-bit public key value follows, as defined in the
+<a data-cite="controller-document#Multikey">Multikey section</a> of
+[[[controller-document]]]. Any other encoding MUST NOT be allowed.
           </p>
 
           <p class="advisement">
@@ -412,22 +402,17 @@ The `secretKeyMultibase` property represents a Multibase-encoded Multikey
 expression of a P-256 or P-384 secret key (also sometimes referred to as a
 private key).
           </p>
+
           <p>
-The encoding of a P-256 secret key MUST start with the two-byte prefix `0x8626`
-(the varint expression of `0x1306`) followed by the 32-byte secret key data. The
-34-byte value MUST then be encoded using the base-58-btc alphabet, according to
-the <a data-cite="controller-document#multibase-0">Multibase</a> section in the
-[[controller-document]] specification, and then prepended with the base-58-btc
-Multibase header (`z`). Any other encodings MUST NOT be allowed.
+The `secretKeyMultibase` value of the verification method MUST start with the
+base-58-btc prefix (`z`), as defined in the
+<a data-cite="controller-document#multibase-0">Multibase section</a> of
+[[[controller-document]]]. A Multibase-encoded ECDSA 256-bit secret key value or
+an ECDSA 384-bit secret key value follows, as defined in the
+<a data-cite="controller-document#Multikey">Multikey section</a> of
+[[[controller-document]]]. Any other encoding MUST NOT be allowed.
           </p>
-          <p>
-The encoding of a P-384 secret key is the two-byte prefix `0x8726` (the varint
-expression of `0x1307`) followed by the 48-byte secret key data. The 50-byte
-value MUST then be encoded using the base-58-btc alphabet, according to the
-<a data-cite="controller-document#multibase-0">Multibase</a> section in the
-[[controller-document]] specification, and then prepended with the base-58-btc
-Multibase header (`z`). Any other encodings MUST NOT be allowed.
-          </p>
+
 
           <p class="advisement">
             Developers are advised to prevent accidental publication of a representation of a secret
