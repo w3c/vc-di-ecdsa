@@ -16,13 +16,13 @@
         subtitle: "Achieving Data Integrity using ECDSA with NIST-compliant curves",
         // specification status (e.g. WD, LCWD, NOTE, etc.). If in doubt use ED.
         group: "vc",
-        specStatus: "CRD",
+        specStatus: "CR",
 
         // the specification's short name, as in http://www.w3.org/TR/short-name/
         shortName: "vc-di-ecdsa",
 
         // if you wish the publication date to be other than today, set this
-        //publishDate:  "2023-11-14",
+        publishDate:  "2024-10-24",
 
         // if there is a previously published draft, uncomment this and set its YYYY-MM-DD date
         // and its maturity status
@@ -34,8 +34,8 @@
         //latestVersion: "https://www.w3.org/community/reports/credentials/CG-FINAL-di-ecdsa-2019-20220724/",
 
         // if this is a LCWD, uncomment and set the end of its review period
-        implementationReportURI: "https://w3c.github.io/vc-data-integrity/implementations/",
-        crEnd: "2024-01-17",
+        implementationReportURI: "https://w3c.github.io/vc-di-ecdsa-test-suite/",
+        crEnd: "2024-11-24",
 
         // if you want to have extra CSS, append them to this list
         // it is recommended that the respec.css stylesheet be kept
@@ -91,8 +91,6 @@
 
         github: "https://github.com/w3c/vc-di-ecdsa/",
 
-        otherLinks: [],
-
         // URI of the patent status for this WG, for Rec-track documents
         // !!!! IMPORTANT !!!!
         // This is important for Rec-track documents, do not copy a patent URI from a random
@@ -104,14 +102,6 @@
         alternateFormats: [ {uri: "diff-20111214.html", label: "diff to previous version"} ],
         */
         localBiblio: {
-          MULTIBASE: {
-            title: "Multibase",
-            href: "https://datatracker.ietf.org/doc/html/draft-multiformats-multibase-01",
-          },
-          MULTICODEC: {
-            title: "Multicodec",
-            href: "https://github.com/multiformats/multicodec/",
-          },
           SECG2: {
             title: "SEC 2: Recommended Elliptic Curve Domain Parameters",
             href: "https://www.secg.org/sec2-v2.pdf",
@@ -199,7 +189,7 @@ ol.algorithm li:before {
   <body>
     <section id="abstract">
       <p>
-This specification describes a Data Integrity Cryptosuite for use when
+This specification describes Data Integrity cryptosuites for use when
 generating a digital signature using the Elliptic Curve Digital Signature
 Algorithm (ECDSA).
       </p>
@@ -213,8 +203,16 @@ specification. In order to exit the Candidate Recommendation phase, the
 Working Group has set the requirement of at least two independent
 implementations for each mandatory feature in the specification. For details
 on the conformance testing process, see the test suites listed in the
-<a href="https://w3c.github.io/vc-data-integrity/implementations/">
+<a href="https://w3c.github.io/vc-di-ecdsa-test-suite/">
 implementation report</a>.
+      </p>
+
+      <p class="atrisk issue"
+        title="Features with less than two independent implementations">
+Any feature with less than two independent implementations in the
+<a href="https://w3c.github.io/vc-di-ecdsa-test-suite/">
+ECDSA Cryptosuite Implementation Report</a> is an "at risk" feature and might be
+removed before the transition to W3C Proposed Recommendation.
       </p>
 
     </section>
