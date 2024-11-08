@@ -1630,14 +1630,16 @@ Return |skolemizedExpandedDocument|.
 The following algorithm replaces all blank node identifiers in a compact
 JSON-LD document with custom-scheme URNs. The required inputs are a compact
 JSON-LD document (|document|) and a custom URN scheme
-(|urnScheme|). The |document| is assumed to use only one
+(|urnScheme|) which defaults to "custom-scheme:". The |document| is assumed to
+use only one
 <em>@context</em> property at the top level of the document. Any additional
 custom options (such as a document loader) can also be passed. It produces both
 an expanded form of the skolemized JSON-LD document
 (|skolemizedExpandedDocument| and a compact form of the skolemized
 JSON-LD document (|skolemizedCompactDocument|) as output. The
 skolemization used in this operation is intended to be reversible through the
-use of the algorithm in Section [[[#todeskolemizednquads]]].
+use of the algorithm in Section [[[#todeskolemizednquads]]] which must use the
+same custom URN scheme (|urnScheme|).
           </p>
 
           <ol class="algorithm">
