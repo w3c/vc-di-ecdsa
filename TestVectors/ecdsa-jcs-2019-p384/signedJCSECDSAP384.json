@@ -22,6 +22,10 @@
     "created": "2023-02-24T23:36:38Z",
     "verificationMethod": "did:key:z82LkuBieyGShVBhvtE2zoiD6Kma4tJGFtkAhxR5pfkp5QPw4LutoYWhvQCnGjdVn14kujQ#z82LkuBieyGShVBhvtE2zoiD6Kma4tJGFtkAhxR5pfkp5QPw4LutoYWhvQCnGjdVn14kujQ",
     "proofPurpose": "assertionMethod",
-    "proofValue": "zR3krc7pt9Dpn1PY2u8HWPePggtzAG2SuH2ZGNrzw8Ku3QrFLWgDTjS5mCWy65ShixJEtpMwfviAFfh5xTgd5FGN1sSbpPJ5djqSZQLqQkY8KLBPNswuqKtq3bS8f9vEHm8w"
+    "@context": [
+      "https://www.w3.org/ns/credentials/v2",
+      "https://www.w3.org/ns/credentials/examples/v2"
+    ],
+    "proofValue": "zq3EuTeLiGurmB2JR5oL8oWEsT7u2tba4HT1oZbiMYWc5qzsoW2kLYcBcF4HM5vCpJyTkceULKrVXuJQkXeN5seL4uXrFNFRMm53GWy1Yrto8rTWxZi9DkNeWP7yUPs7ELAm"
   }
 }
