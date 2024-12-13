@@ -1,6 +1,6 @@
 <!DOCTYPE html><html lang="en" dir="ltr"><head>
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
-<meta name="generator" content="ReSpec 35.1.2">
+<meta name="generator" content="ReSpec 35.2.0">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <style>
 span.example-title{text-transform:none}
@@ -149,10 +149,10 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
   "group": "vc",
   "specStatus": "CR",
   "shortName": "vc-di-ecdsa",
-  "publishDate": "2024-11-05",
+  "publishDate": "2024-12-19",
+  "crEnd": "2024-01-19",
   "edDraftURI": "https://w3c.github.io/vc-di-ecdsa/",
   "implementationReportURI": "https://w3c.github.io/vc-di-ecdsa-test-suite/",
-  "crEnd": "2024-12-05",
   "editors": [
     {
       "name": "Manu Sporny",
@@ -266,20 +266,20 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
       ]
     }
   ],
-  "publishISODate": "2024-11-05T00:00:00.000Z",
-  "generatedSubtitle": "W3C Candidate Recommendation Snapshot 05 November 2024"
+  "publishISODate": "2024-12-19T00:00:00.000Z",
+  "generatedSubtitle": "W3C Candidate Recommendation Snapshot 19 December 2024"
 }</script>
 <link rel="stylesheet" href="https://www.w3.org/StyleSheets/TR/2021/W3C-CR"></head>
   <body class="h-entry" data-cite="INFRA VC-DATA-MODEL-2.0 VC-DATA-INTEGRITY"><div class="head">
     <p class="logos"><a class="logo" href="https://www.w3.org/"><img crossorigin="" alt="W3C" height="48" src="https://www.w3.org/StyleSheets/TR/2021/logos/W3C" width="72">
   </a></p>
     <h1 id="title" class="title">Data Integrity ECDSA Cryptosuites v1.0</h1> <h2 id="subtitle" class="subtitle">Achieving Data Integrity using ECDSA with NIST-compliant curves</h2>
-    <p id="w3c-state"><a href="https://www.w3.org/standards/types#CR">W3C Candidate Recommendation Snapshot</a> <time class="dt-published" datetime="2024-11-05">05 November 2024</time></p>
+    <p id="w3c-state"><a href="https://www.w3.org/standards/types#CR">W3C Candidate Recommendation Snapshot</a> <time class="dt-published" datetime="2024-12-19">19 December 2024</time></p>
     <details open="">
       <summary>More details about this document</summary>
       <dl>
         <dt>This version:</dt><dd>
-                <a class="u-url" href="https://www.w3.org/TR/2024/CR-vc-di-ecdsa-20241105/">https://www.w3.org/TR/2024/CR-vc-di-ecdsa-20241105/</a>
+                <a class="u-url" href="https://www.w3.org/TR/2024/CR-vc-di-ecdsa-20241219/">https://www.w3.org/TR/2024/CR-vc-di-ecdsa-20241219/</a>
               </dd>
         <dt>Latest published version:</dt><dd>
                 <a href="https://www.w3.org/TR/vc-di-ecdsa/">https://www.w3.org/TR/vc-di-ecdsa/</a>
@@ -391,7 +391,7 @@ removed before the transition to <abbr title="World Wide Web Consortium">W3C</ab
         <a href="https://www.w3.org/policies/patent-policy/#sec-Requirements">royalty-free licensing</a>
         for implementations.</p><p>
           This Candidate Recommendation is not expected to advance to Proposed
-          Recommendation any earlier than 05 December 2024.
+          Recommendation any earlier than 19 January 2024.
         </p><p>
     
         This document was produced by a group
@@ -518,8 +518,8 @@ during the processing of digital signatures.
           
 
           <p>
-The <a href="https://www.w3.org/TR/controller-document/#multikey">Multikey format</a>, defined in
-<cite><a data-matched-text="[[[controller-document]]]" href="https://www.w3.org/TR/controller-document/">Controller Documents 1.0</a></cite>, is used to express public keys for the cryptographic
+The <a href="https://www.w3.org/TR/controller-document/#Multikey">Multikey format</a>, defined in
+<cite><a data-matched-text="[[[controller-document]]]" href="https://www.w3.org/TR/controller-document/">Controlled Identifier Document 1.0</a></cite>, is used to express public keys for the cryptographic
 suites defined in this specification.
           </p>
 
@@ -532,10 +532,10 @@ expression of a P-256 or P-384 public key.
 The <code>publicKeyMultibase</code> value of the verification method <em class="rfc2119">MUST</em> start with the
 base-58-btc prefix (<code>z</code>), as defined in the
 <a href="https://www.w3.org/TR/controller-document/#multibase-0">Multibase section</a> of
-<cite><a data-matched-text="[[[controller-document]]]" href="https://www.w3.org/TR/controller-document/">Controller Documents 1.0</a></cite>. A Multibase-encoded ECDSA 256-bit public key value or
+<cite><a data-matched-text="[[[controller-document]]]" href="https://www.w3.org/TR/controller-document/">Controlled Identifier Document 1.0</a></cite>. A Multibase-encoded ECDSA 256-bit public key value or
 an ECDSA 384-bit public key value follows, as defined in the
 <a href="https://www.w3.org/TR/controller-document/#Multikey">Multikey section</a> of
-<cite><a data-matched-text="[[[controller-document]]]" href="https://www.w3.org/TR/controller-document/">Controller Documents 1.0</a></cite>. Any other encoding <em class="rfc2119">MUST NOT</em> be allowed.
+<cite><a data-matched-text="[[[controller-document]]]" href="https://www.w3.org/TR/controller-document/">Controlled Identifier Document 1.0</a></cite>. Any other encoding <em class="rfc2119">MUST NOT</em> be allowed.
           </p>
 
           <p class="advisement">
@@ -615,10 +615,10 @@ private key).
 The <code>secretKeyMultibase</code> value of the verification method <em class="rfc2119">MUST</em> start with the
 base-58-btc prefix (<code>z</code>), as defined in the
 <a href="https://www.w3.org/TR/controller-document/#multibase-0">Multibase section</a> of
-<cite><a data-matched-text="[[[controller-document]]]" href="https://www.w3.org/TR/controller-document/">Controller Documents 1.0</a></cite>. A Multibase-encoded ECDSA 256-bit secret key value or
+<cite><a data-matched-text="[[[controller-document]]]" href="https://www.w3.org/TR/controller-document/">Controlled Identifier Document 1.0</a></cite>. A Multibase-encoded ECDSA 256-bit secret key value or
 an ECDSA 384-bit secret key value follows, as defined in the
 <a href="https://www.w3.org/TR/controller-document/#Multikey">Multikey section</a> of
-<cite><a data-matched-text="[[[controller-document]]]" href="https://www.w3.org/TR/controller-document/">Controller Documents 1.0</a></cite>. Any other encoding <em class="rfc2119">MUST NOT</em> be allowed.
+<cite><a data-matched-text="[[[controller-document]]]" href="https://www.w3.org/TR/controller-document/">Controlled Identifier Document 1.0</a></cite>. Any other encoding <em class="rfc2119">MUST NOT</em> be allowed.
           </p>
 
 
@@ -734,14 +734,14 @@ by default, and abort processing upon detection.
         <p>
 This algorithm is used to configure a cryptographic suite to be used by the
 <a href="https://www.w3.org/TR/vc-data-integrity/#add-proof">Add Proof</a> and
-<a href="VC-DATA-INTEGRITY#verify-proof">Verify Proof</a>
+<a href="https://www.w3.org/TR/vc-data-integrity/#verify-proof">Verify Proof</a>
 functions in <cite><a data-matched-text="[[[VC-DATA-INTEGRITY]]]" href="https://www.w3.org/TR/vc-data-integrity/">Verifiable Credential Data Integrity 1.0</a></cite>. The algorithm takes an options object
-(<a data-link-type="dfn|abstract-op" data-type="dfn" href="https://infra.spec.whatwg.org/#ordered-map">map</a> <var>options</var>) as input and returns a <a data-link-type="dfn|abstract-op" data-lt="data integrity cryptographic suite instance" data-type="dfn" href="https://www.w3.org/TR/vc-data-integrity/#dfn-data-integrity-cryptographic-suite-instance">cryptosuite instance</a> (<a data-link-type="dfn|abstract-op" data-type="dfn" href="https://infra.spec.whatwg.org/#struct">struct</a> <var>cryptosuite</var>).
+(<a data-link-type="dfn" href="https://infra.spec.whatwg.org/#ordered-map">map</a> <var>options</var>) as input and returns a <a data-link-type="dfn" data-lt="data integrity cryptographic suite instance" href="https://www.w3.org/TR/vc-data-integrity/#dfn-data-integrity-cryptographic-suite-instance">cryptosuite instance</a> (<a data-link-type="dfn" href="https://infra.spec.whatwg.org/#struct">struct</a> <var>cryptosuite</var>).
         </p>
 
         <ol class="algorithm">
           <li>
-Initialize <var>cryptosuite</var> to an empty <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://infra.spec.whatwg.org/#struct">struct</a>.
+Initialize <var>cryptosuite</var> to an empty <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#struct">struct</a>.
           </li>
           <li>
 If <var>options</var>.<var>type</var> does not equal <code>DataIntegrityProof</code>, return <var>cryptosuite</var>.
@@ -807,10 +807,10 @@ section also include the verification of such a data integrity proof.
           
 
           <p>
-The following algorithm specifies how to create a <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://www.w3.org/TR/vc-data-integrity/#dfn-data-integrity-proof">data integrity proof</a> given
-an <a data-type="dfn" href="https://www.w3.org/TR/vc-data-integrity/#dfn-unsecured-data-document">unsecured data document</a>. Required inputs are an
-<a data-type="dfn" href="https://www.w3.org/TR/vc-data-integrity/#dfn-unsecured-data-document">unsecured data document</a> (<a data-link-type="dfn|abstract-op" data-type="dfn" href="https://infra.spec.whatwg.org/#ordered-map">map</a> <var>unsecuredDocument</var>), and a set of proof
-options (<a data-link-type="dfn|abstract-op" data-type="dfn" href="https://infra.spec.whatwg.org/#ordered-map">map</a> <var>options</var>). A <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://www.w3.org/TR/vc-data-integrity/#dfn-data-integrity-proof">data integrity proof</a> (<a data-link-type="dfn|abstract-op" data-type="dfn" href="https://infra.spec.whatwg.org/#ordered-map">map</a>), or an error,
+The following algorithm specifies how to create a <a data-link-type="dfn" href="https://www.w3.org/TR/vc-data-integrity/#dfn-data-integrity-proof">data integrity proof</a> given
+an <a data-link-type="dfn" href="https://www.w3.org/TR/vc-data-integrity/#dfn-unsecured-data-document">unsecured data document</a>. Required inputs are an
+<a data-link-type="dfn" href="https://www.w3.org/TR/vc-data-integrity/#dfn-unsecured-data-document">unsecured data document</a> (<a data-link-type="dfn" href="https://infra.spec.whatwg.org/#ordered-map">map</a> <var>unsecuredDocument</var>), and a set of proof
+options (<a data-link-type="dfn" href="https://infra.spec.whatwg.org/#ordered-map">map</a> <var>options</var>). A <a data-link-type="dfn" href="https://www.w3.org/TR/vc-data-integrity/#dfn-data-integrity-proof">data integrity proof</a> (<a data-link-type="dfn" href="https://infra.spec.whatwg.org/#ordered-map">map</a>), or an error,
 is produced as output.
           </p>
 
@@ -842,7 +842,7 @@ Let <var>proof</var>.<var>proofValue</var> be a <a href="https://www.w3.org/TR/c
 base58-btc-encoded Multibase value</a> of the <var>proofBytes</var>.
             </li>
             <li>
-Return <var>proof</var> as the <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://www.w3.org/TR/vc-data-integrity/#dfn-data-integrity-proof">data integrity proof</a>.
+Return <var>proof</var> as the <a data-link-type="dfn" href="https://www.w3.org/TR/vc-data-integrity/#dfn-data-integrity-proof">data integrity proof</a>.
             </li>
           </ol>
 
@@ -852,11 +852,11 @@ Return <var>proof</var> as the <a data-link-type="dfn|abstract-op" data-type="df
           
 
           <p>
-The following algorithm specifies how to verify a <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://www.w3.org/TR/vc-data-integrity/#dfn-data-integrity-proof">data integrity proof</a> given
-an <a data-type="dfn" href="https://www.w3.org/TR/vc-data-integrity/#dfn-secured-data-document">secured data document</a>. Required inputs are an
-<a data-type="dfn" href="https://www.w3.org/TR/vc-data-integrity/#dfn-secured-data-document">secured data document</a> (<a data-link-type="dfn|abstract-op" data-type="dfn" href="https://infra.spec.whatwg.org/#ordered-map">map</a> <var>securedDocument</var>). This algorithm returns
-a <dfn id="dfn-verification-result" tabindex="0" aria-haspopup="dialog" data-dfn-type="dfn">verification result</dfn>, which is a <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://infra.spec.whatwg.org/#struct">struct</a> whose
-<a data-link-type="dfn|abstract-op" data-type="dfn" href="https://infra.spec.whatwg.org/#struct-item">items</a> are:
+The following algorithm specifies how to verify a <a data-link-type="dfn" href="https://www.w3.org/TR/vc-data-integrity/#dfn-data-integrity-proof">data integrity proof</a> given
+an <a data-link-type="dfn" href="https://www.w3.org/TR/vc-data-integrity/#dfn-secured-data-document">secured data document</a>. Required inputs are an
+<a data-link-type="dfn" href="https://www.w3.org/TR/vc-data-integrity/#dfn-secured-data-document">secured data document</a> (<a data-link-type="dfn" href="https://infra.spec.whatwg.org/#ordered-map">map</a> <var>securedDocument</var>). This algorithm returns
+a <dfn id="dfn-verification-result" tabindex="0" aria-haspopup="dialog" data-dfn-type="dfn">verification result</dfn>, which is a <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#struct">struct</a> whose
+<a data-link-type="dfn" href="https://infra.spec.whatwg.org/#struct-item">items</a> are:
           </p>
           <dl>
             <dt><dfn data-dfn-for="verification result" id="dfn-verified" tabindex="0" aria-haspopup="dialog" data-dfn-type="dfn">verified</dfn></dt>
@@ -864,7 +864,7 @@ a <dfn id="dfn-verification-result" tabindex="0" aria-haspopup="dialog" data-dfn
             <dt><dfn data-dfn-for="verification result" id="dfn-verifieddocument" tabindex="0" aria-haspopup="dialog" data-dfn-type="dfn">verifiedDocument</dfn></dt>
             <dd>
 <a href="https://infra.spec.whatwg.org/#nulls">Null</a>, if <a data-link-type="dfn|abstract-op" href="#dfn-verified" class="internalDFN" id="ref-for-dfn-verified-1">verified</a> is
-<code>false</code>; otherwise, an <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://www.w3.org/TR/vc-data-integrity/#dfn-unsecured-data-document">unsecured data document</a>
+<code>false</code>; otherwise, an <a data-link-type="dfn" href="https://www.w3.org/TR/vc-data-integrity/#dfn-unsecured-data-document">unsecured data document</a>
             </dd>
           </dl>
 
@@ -897,7 +897,7 @@ Let <var data-type="boolean">verified</var> be the result of running the algorit
 <var>proofBytes</var>, and <var>proofConfig</var>.
             </li>
             <li>
-Return a <a data-link-type="dfn|abstract-op" href="#dfn-verification-result" class="internalDFN" id="ref-for-dfn-verification-result-1">verification result</a> with <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://infra.spec.whatwg.org/#struct-item">items</a>:
+Return a <a data-link-type="dfn|abstract-op" href="#dfn-verification-result" class="internalDFN" id="ref-for-dfn-verification-result-1">verification result</a> with <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#struct-item">items</a>:
               <dl data-link-for="verification result">
                 <dt><a data-link-type="dfn|abstract-op" href="#dfn-verified" class="internalDFN" id="ref-for-dfn-verified-2">verified</a></dt>
                 <dd><var data-type="boolean">verified</var></dd>
@@ -1114,7 +1114,7 @@ represented as a boolean value is produced as output.
 Let <var>publicKeyBytes</var> be the result of retrieving the
 public key bytes associated with the
 <var>options</var>.<var>verificationMethod</var> value as described in the
-<cite><a data-matched-text="[[[controller-document]]]" href="https://www.w3.org/TR/controller-document/">Controller Documents 1.0</a></cite> specification,
+<cite><a data-matched-text="[[[controller-document]]]" href="https://www.w3.org/TR/controller-document/">Controlled Identifier Document 1.0</a></cite> specification,
 <a href="https://www.w3.org/TR/controller-document/#retrieve-verification-method">
 Section: Retrieve Verification Method</a>.
             </li>
@@ -1146,10 +1146,10 @@ section also include the verification of such a data integrity proof.
         <section id="create-proof-ecdsa-jcs-2019"><div class="header-wrapper"><h4 id="x3-3-1-create-proof-ecdsa-jcs-2019"><bdi class="secno">3.3.1 </bdi>Create Proof (ecdsa-jcs-2019)</h4><a class="self-link" href="#create-proof-ecdsa-jcs-2019" aria-label="Permalink for Section 3.3.1"></a></div>
           
           <p>
-The following algorithm specifies how to create a <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://www.w3.org/TR/vc-data-integrity/#dfn-data-integrity-proof">data integrity proof</a> given
-an <a data-type="dfn" href="https://www.w3.org/TR/vc-data-integrity/#dfn-unsecured-data-document">unsecured data document</a>. Required inputs are an
-<a data-type="dfn" href="https://www.w3.org/TR/vc-data-integrity/#dfn-unsecured-data-document">unsecured data document</a> (<a data-link-type="dfn|abstract-op" data-type="dfn" href="https://infra.spec.whatwg.org/#ordered-map">map</a> <var>unsecuredDocument</var>), and a set of proof
-options (<a data-link-type="dfn|abstract-op" data-type="dfn" href="https://infra.spec.whatwg.org/#ordered-map">map</a> <var>options</var>). A <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://www.w3.org/TR/vc-data-integrity/#dfn-data-integrity-proof">data integrity proof</a> (<a data-link-type="dfn|abstract-op" data-type="dfn" href="https://infra.spec.whatwg.org/#ordered-map">map</a>), or an error,
+The following algorithm specifies how to create a <a data-link-type="dfn" href="https://www.w3.org/TR/vc-data-integrity/#dfn-data-integrity-proof">data integrity proof</a> given
+an <a data-link-type="dfn" href="https://www.w3.org/TR/vc-data-integrity/#dfn-unsecured-data-document">unsecured data document</a>. Required inputs are an
+<a data-link-type="dfn" href="https://www.w3.org/TR/vc-data-integrity/#dfn-unsecured-data-document">unsecured data document</a> (<a data-link-type="dfn" href="https://infra.spec.whatwg.org/#ordered-map">map</a> <var>unsecuredDocument</var>), and a set of proof
+options (<a data-link-type="dfn" href="https://infra.spec.whatwg.org/#ordered-map">map</a> <var>options</var>). A <a data-link-type="dfn" href="https://www.w3.org/TR/vc-data-integrity/#dfn-data-integrity-proof">data integrity proof</a> (<a data-link-type="dfn" href="https://infra.spec.whatwg.org/#ordered-map">map</a>), or an error,
 is produced as output.
           </p>
 
@@ -1186,7 +1186,7 @@ Let <var>proof</var>.<var>proofValue</var> be a <a href="https://www.w3.org/TR/c
 base58-btc-encoded Multibase value</a> of the <var>proofBytes</var>.
             </li>
             <li>
-Return <var>proof</var> as the <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://www.w3.org/TR/vc-data-integrity/#dfn-data-integrity-proof">data integrity proof</a>.
+Return <var>proof</var> as the <a data-link-type="dfn" href="https://www.w3.org/TR/vc-data-integrity/#dfn-data-integrity-proof">data integrity proof</a>.
             </li>
           </ol>
         </section>
@@ -1194,10 +1194,10 @@ Return <var>proof</var> as the <a data-link-type="dfn|abstract-op" data-type="df
         <section id="verify-proof-ecdsa-jcs-2019"><div class="header-wrapper"><h4 id="x3-3-2-verify-proof-ecdsa-jcs-2019"><bdi class="secno">3.3.2 </bdi>Verify Proof (ecdsa-jcs-2019)</h4><a class="self-link" href="#verify-proof-ecdsa-jcs-2019" aria-label="Permalink for Section 3.3.2"></a></div>
           
           <p>
-The following algorithm specifies how to verify a <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://www.w3.org/TR/vc-data-integrity/#dfn-data-integrity-proof">data integrity proof</a> given
-an <a data-type="dfn" href="https://www.w3.org/TR/vc-data-integrity/#dfn-secured-data-document">secured data document</a>. Required inputs are an
-<a data-type="dfn" href="https://www.w3.org/TR/vc-data-integrity/#dfn-secured-data-document">secured data document</a> (<a data-link-type="dfn|abstract-op" data-type="dfn" href="https://infra.spec.whatwg.org/#ordered-map">map</a> <var>securedDocument</var>). This algorithm returns
-a <a data-link-type="dfn|abstract-op" href="#dfn-verification-result" class="internalDFN" id="ref-for-dfn-verification-result-2">verification result</a>, which is a <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://infra.spec.whatwg.org/#struct">struct</a> whose <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://infra.spec.whatwg.org/#struct-item">items</a> are:
+The following algorithm specifies how to verify a <a data-link-type="dfn" href="https://www.w3.org/TR/vc-data-integrity/#dfn-data-integrity-proof">data integrity proof</a> given
+an <a data-link-type="dfn" href="https://www.w3.org/TR/vc-data-integrity/#dfn-secured-data-document">secured data document</a>. Required inputs are an
+<a data-link-type="dfn" href="https://www.w3.org/TR/vc-data-integrity/#dfn-secured-data-document">secured data document</a> (<a data-link-type="dfn" href="https://infra.spec.whatwg.org/#ordered-map">map</a> <var>securedDocument</var>). This algorithm returns
+a <a data-link-type="dfn|abstract-op" href="#dfn-verification-result" class="internalDFN" id="ref-for-dfn-verification-result-2">verification result</a>, which is a <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#struct">struct</a> whose <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#struct-item">items</a> are:
           </p>
 
           <dl>
@@ -1205,7 +1205,7 @@ a <a data-link-type="dfn|abstract-op" href="#dfn-verification-result" class="int
             <dd><code>true</code> or <code>false</code></dd>
             <dt><a data-link-type="dfn|abstract-op" href="#dfn-verifieddocument" class="internalDFN" id="ref-for-dfn-verifieddocument-2">verifiedDocument</a></dt>
             <dd>
-if <a data-link-type="dfn|abstract-op" href="#dfn-verified" class="internalDFN" id="ref-for-dfn-verified-4">verified</a> is <code>true</code>, an <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://www.w3.org/TR/vc-data-integrity/#dfn-unsecured-data-document">unsecured data document</a>;
+if <a data-link-type="dfn|abstract-op" href="#dfn-verified" class="internalDFN" id="ref-for-dfn-verified-4">verified</a> is <code>true</code>, an <a data-link-type="dfn" href="https://www.w3.org/TR/vc-data-integrity/#dfn-unsecured-data-document">unsecured data document</a>;
 otherwise <a href="https://infra.spec.whatwg.org/#nulls">Null</a>
             </dd>
           </dl>
@@ -1259,7 +1259,7 @@ Let <var data-type="boolean">verified</var> be the result of running the algorit
 <var>proofConfig</var>.
               </li>
               <li>
-Return a <a data-link-type="dfn|abstract-op" href="#dfn-verification-result" class="internalDFN" id="ref-for-dfn-verification-result-3">verification result</a> with <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://infra.spec.whatwg.org/#struct-item">items</a>:
+Return a <a data-link-type="dfn|abstract-op" href="#dfn-verification-result" class="internalDFN" id="ref-for-dfn-verification-result-3">verification result</a> with <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#struct-item">items</a>:
                 <dl data-link-for="verification result">
                   <dt><a data-link-type="dfn|abstract-op" href="#dfn-verified" class="internalDFN" id="ref-for-dfn-verified-5">verified</a></dt>
                   <dd><var data-type="boolean">verified</var></dd>
@@ -1466,7 +1466,7 @@ represented as a boolean value is produced as output.
 Let <var>publicKeyBytes</var> be the result of retrieving the
 public key bytes associated with the
 <var>options</var>.<var>verificationMethod</var> value as described in the
-<cite><a data-matched-text="[[[controller-document]]]" href="https://www.w3.org/TR/controller-document/">Controller Documents 1.0</a></cite> specification,
+<cite><a data-matched-text="[[[controller-document]]]" href="https://www.w3.org/TR/controller-document/">Controlled Identifier Document 1.0</a></cite> specification,
 <a href="https://www.w3.org/TR/controller-document/#retrieve-verification-method">
 Section: Retrieve Verification Method</a>.
             </li>
@@ -2410,7 +2410,7 @@ any of the <var>components</var>. Append the produced encoded value to <var>proo
 Initialize <var>baseProof</var> to a string with the Multibase
 base64url-no-pad-encoding of <var>proofValue</var> as described in the
 <a href="https://www.w3.org/TR/controller-document/#multibase-0">
-Multibase section</a> of <cite><a data-matched-text="[[[controller-document]]]" href="https://www.w3.org/TR/controller-document/">Controller Documents 1.0</a></cite>. That is, return a string
+Multibase section</a> of <cite><a data-matched-text="[[[controller-document]]]" href="https://www.w3.org/TR/controller-document/">Controlled Identifier Document 1.0</a></cite>. That is, return a string
 starting with "<code>u</code>" and ending with the base64url-no-pad-encoded value of
 <var>proofValue</var>.
             </li>
@@ -2688,7 +2688,7 @@ any of the <var>components</var>. Append the produced encoded value to <var>proo
 Return the <em>derived proof</em> as a string with the
 base64url-no-pad-encoding of <var>proofValue</var> as described in the
 <a href="https://www.w3.org/TR/controller-document/#multibase-0">
-Multibase section</a> of <cite><a data-matched-text="[[[controller-document]]]" href="https://www.w3.org/TR/controller-document/">Controller Documents 1.0</a></cite>. That is, return a string
+Multibase section</a> of <cite><a data-matched-text="[[[controller-document]]]" href="https://www.w3.org/TR/controller-document/">Controlled Identifier Document 1.0</a></cite>. That is, return a string
 starting with "<code>u</code>" and ending with the base64url-no-pad-encoded value of
 <var>proofValue</var>.
             </li>
@@ -2752,7 +2752,7 @@ elements, using the names "baseSignature", "publicKey", "signatures",
 
           <p>
 The following algorithm creates the data needed to perform verification of an
-ECDSA-SD-protected <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://www.w3.org/TR/vc-data-model-2.0/#dfn-verifiable-credential">verifiable credential</a>. The inputs include a JSON-LD
+ECDSA-SD-protected <a data-link-type="dfn" href="https://www.w3.org/TR/vc-data-model-2.0/#dfn-verifiable-credential">verifiable credential</a>. The inputs include a JSON-LD
 document (<var>document</var>), an ECDSA-SD disclosure proof (<var>proof</var>),
 and any custom JSON-LD API options, such as a document loader. A single
 <em>verify data</em> object value is produced as output containing the following
@@ -2840,10 +2840,10 @@ section also include the verification of such a data integrity proof.
 
 
           <p>
-The following algorithm specifies how to create a <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://www.w3.org/TR/vc-data-integrity/#dfn-data-integrity-proof">data integrity proof</a> given
-an <a data-type="dfn" href="https://www.w3.org/TR/vc-data-integrity/#dfn-unsecured-data-document">unsecured data document</a>. Required inputs are an
-<a data-type="dfn" href="https://www.w3.org/TR/vc-data-integrity/#dfn-unsecured-data-document">unsecured data document</a> (<a data-link-type="dfn|abstract-op" data-type="dfn" href="https://infra.spec.whatwg.org/#ordered-map">map</a> <var>unsecuredDocument</var>), and a set of proof
-options (<a data-link-type="dfn|abstract-op" data-type="dfn" href="https://infra.spec.whatwg.org/#ordered-map">map</a> <var>options</var>). A <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://www.w3.org/TR/vc-data-integrity/#dfn-data-integrity-proof">data integrity proof</a> (<a data-link-type="dfn|abstract-op" data-type="dfn" href="https://infra.spec.whatwg.org/#ordered-map">map</a>), or an error,
+The following algorithm specifies how to create a <a data-link-type="dfn" href="https://www.w3.org/TR/vc-data-integrity/#dfn-data-integrity-proof">data integrity proof</a> given
+an <a data-link-type="dfn" href="https://www.w3.org/TR/vc-data-integrity/#dfn-unsecured-data-document">unsecured data document</a>. Required inputs are an
+<a data-link-type="dfn" href="https://www.w3.org/TR/vc-data-integrity/#dfn-unsecured-data-document">unsecured data document</a> (<a data-link-type="dfn" href="https://infra.spec.whatwg.org/#ordered-map">map</a> <var>unsecuredDocument</var>), and a set of proof
+options (<a data-link-type="dfn" href="https://infra.spec.whatwg.org/#ordered-map">map</a> <var>options</var>). A <a data-link-type="dfn" href="https://www.w3.org/TR/vc-data-integrity/#dfn-data-integrity-proof">data integrity proof</a> (<a data-link-type="dfn" href="https://infra.spec.whatwg.org/#ordered-map">map</a>), or an error,
 is produced as output.
           </p>
 
@@ -2875,7 +2875,7 @@ Let <var>proof</var>.<var>proofValue</var> be a <a href="https://www.w3.org/TR/c
 base64-url-encoded Multibase value</a> of the <var>proofBytes</var>.
             </li>
             <li>
-Return <var>proof</var> as the <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://www.w3.org/TR/vc-data-integrity/#dfn-data-integrity-proof">data integrity proof</a>.
+Return <var>proof</var> as the <a data-link-type="dfn" href="https://www.w3.org/TR/vc-data-integrity/#dfn-data-integrity-proof">data integrity proof</a>.
             </li>
           </ol>
         </section>
@@ -3120,8 +3120,8 @@ Return <var>proofValue</var> as <em>digital proof</em>.
 
           <p>
 The following algorithm creates a selective disclosure derived proof; called by
-a holder of an <code>ecdsa-sd-2023</code>-protected <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://www.w3.org/TR/vc-data-model-2.0/#dfn-verifiable-credential">verifiable credential</a>.
-The derived proof is to be given to the <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://www.w3.org/TR/vc-data-model-2.0/#dfn-verifier">verifier</a>. The inputs include a
+a holder of an <code>ecdsa-sd-2023</code>-protected <a data-link-type="dfn" href="https://www.w3.org/TR/vc-data-model-2.0/#dfn-verifiable-credential">verifiable credential</a>.
+The derived proof is to be given to the <a data-link-type="dfn" href="https://www.w3.org/TR/vc-data-model-2.0/#dfn-verifier">verifier</a>. The inputs include a
 JSON-LD document (<var>document</var>), an ECDSA-SD base proof
 (<var>proof</var>), an array of JSON pointers to use to selectively disclose
 statements (<var>selectivePointers</var>), and any custom JSON-LD API options,
@@ -3162,7 +3162,7 @@ Return <var>revealDocument</var> as the <em>selectively revealed document</em>.
           <p>
 The following algorithm attempts verification of an <code>ecdsa-sd-2023</code> derived
 proof. This algorithm is called by a verifier of an ECDSA-SD-protected
-<a data-link-type="dfn|abstract-op" data-type="dfn" href="https://www.w3.org/TR/vc-data-model-2.0/#dfn-verifiable-credential">verifiable credential</a>. The inputs include a JSON-LD document
+<a data-link-type="dfn" href="https://www.w3.org/TR/vc-data-model-2.0/#dfn-verifiable-credential">verifiable credential</a>. The inputs include a JSON-LD document
 (<var>document</var>), an ECDSA-SD disclosure proof (<var>proof</var>), and any
 custom JSON-LD API options, such as a document loader. This algorithm returns
 a <a data-link-type="dfn|abstract-op" href="#dfn-verification-result" class="internalDFN" id="ref-for-dfn-verification-result-4">verification result</a>:
@@ -3223,7 +3223,7 @@ If <var>verificationCheck</var> is <code>false</code>, set <var>verified</var> t
               </ol>
             </li>
             <li>
-Return a <a data-link-type="dfn|abstract-op" href="#dfn-verification-result" class="internalDFN" id="ref-for-dfn-verification-result-5">verification result</a> with <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://infra.spec.whatwg.org/#struct-item">items</a>:
+Return a <a data-link-type="dfn|abstract-op" href="#dfn-verification-result" class="internalDFN" id="ref-for-dfn-verification-result-5">verification result</a> with <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#struct-item">items</a>:
               <dl data-link-for="verification result">
                 <dt><a data-link-type="dfn|abstract-op" href="#dfn-verified" class="internalDFN" id="ref-for-dfn-verified-6">verified</a></dt>
                 <dd>The value of <var>verified</var></dd>
@@ -3378,7 +3378,7 @@ privacy assumptions.
 
         <p>
 The cryptographic suites described in this specification do not support
-<a data-link-type="dfn|abstract-op" data-type="dfn" href="https://www.w3.org/TR/vc-data-model-2.0/#dfn-unlinkable-disclosure">unlinkable disclosure</a>. If <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://www.w3.org/TR/vc-data-model-2.0/#dfn-unlinkable-disclosure">unlinkable disclosure</a> is of interest, the
+<a data-link-type="dfn" href="https://www.w3.org/TR/vc-data-model-2.0/#dfn-unlinkable-disclosure">unlinkable disclosure</a>. If <a data-link-type="dfn" href="https://www.w3.org/TR/vc-data-model-2.0/#dfn-unlinkable-disclosure">unlinkable disclosure</a> is of interest, the
 <cite><a data-matched-text="[[[?VC-DI-BBS]]]" href="https://www.w3.org/TR/vc-di-bbs/">Data Integrity BBS Cryptosuites v1.0</a></cite> specification provides an unlinkable digital signature
 mechanism.
         </p>
@@ -5064,7 +5064,7 @@ Brent Zundel.
 <section id="references" class="appendix"><div class="header-wrapper"><h2 id="d-references"><bdi class="secno">D. </bdi>References</h2><a class="self-link" href="#references" aria-label="Permalink for Appendix D."></a></div><section id="normative-references"><div class="header-wrapper"><h3 id="d-1-normative-references"><bdi class="secno">D.1 </bdi>Normative references</h3><a class="self-link" href="#normative-references" aria-label="Permalink for Appendix D.1"></a></div>
     
     <dl class="bibliography"><dt id="bib-controller-document">[controller-document]</dt><dd>
-      <a href="https://www.w3.org/TR/controller-document/"><cite>Controller Documents 1.0</cite></a>. Manu Sporny; Michael Jones.  W3C. 15 October 2024. W3C Working Draft. URL: <a href="https://www.w3.org/TR/controller-document/">https://www.w3.org/TR/controller-document/</a>
+      <a href="https://www.w3.org/TR/controller-document/"><cite>Controlled Identifier Document 1.0</cite></a>. Manu Sporny; Michael Jones.  W3C. 9 December 2024. W3C Working Draft. URL: <a href="https://www.w3.org/TR/controller-document/">https://www.w3.org/TR/controller-document/</a>
     </dd><dt id="bib-fips-186-5">[FIPS-186-5]</dt><dd>
       <a href="https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.186-5.pdf"><cite>FIPS PUB 186-5: Digital Signature Standard (DSS)</cite></a>.  U.S. Department of Commerce/National Institute of Standards and Technology. 3 February 2023. National Standard. URL: <a href="https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.186-5.pdf">https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.186-5.pdf</a>
     </dd><dt id="bib-infra">[INFRA]</dt><dd>
@@ -5086,7 +5086,7 @@ Brent Zundel.
     </dd><dt id="bib-rfc6234">[RFC6234]</dt><dd>
       <a href="https://www.rfc-editor.org/rfc/rfc6234"><cite>US Secure Hash Algorithms (SHA and SHA-based HMAC and HKDF)</cite></a>. D. Eastlake 3rd; T. Hansen.  IETF. May 2011. Informational. URL: <a href="https://www.rfc-editor.org/rfc/rfc6234">https://www.rfc-editor.org/rfc/rfc6234</a>
     </dd><dt id="bib-rfc6901">[RFC6901]</dt><dd>
-      <a href="https://www.rfc-editor.org/rfc/rfc6901"><cite>JavaScript Object Notation (JSON) Pointer</cite></a>. P. Bryan, Ed.; K. Zyp; M. Nottingham, Ed..  IETF. April 2013. Proposed Standard. URL: <a href="https://www.rfc-editor.org/rfc/rfc6901">https://www.rfc-editor.org/rfc/rfc6901</a>
+      <a href="https://www.rfc-editor.org/rfc/rfc6901"><cite>JavaScript Object Notation (JSON) Pointer</cite></a>. P. Bryan, Ed.; K. Zyp; M. Nottingham, Ed. IETF. April 2013. Proposed Standard. URL: <a href="https://www.rfc-editor.org/rfc/rfc6901">https://www.rfc-editor.org/rfc/rfc6901</a>
     </dd><dt id="bib-rfc6979">[RFC6979]</dt><dd>
       <a href="https://www.rfc-editor.org/rfc/rfc6979"><cite>Deterministic Usage of the Digital Signature Algorithm (DSA) and Elliptic Curve Digital Signature Algorithm (ECDSA)</cite></a>. T. Pornin.  IETF. August 2013. Informational. URL: <a href="https://www.rfc-editor.org/rfc/rfc6979">https://www.rfc-editor.org/rfc/rfc6979</a>
     </dd><dt id="bib-rfc8174">[RFC8174]</dt><dd>
@@ -5096,7 +5096,7 @@ Brent Zundel.
     </dd><dt id="bib-rfc8949">[RFC8949]</dt><dd>
       <a href="https://www.rfc-editor.org/rfc/rfc8949"><cite>Concise Binary Object Representation (CBOR)</cite></a>. C. Bormann; P. Hoffman.  IETF. December 2020. Internet Standard. URL: <a href="https://www.rfc-editor.org/rfc/rfc8949">https://www.rfc-editor.org/rfc/rfc8949</a>
     </dd><dt id="bib-vc-data-integrity">[VC-DATA-INTEGRITY]</dt><dd>
-      <a href="https://www.w3.org/TR/vc-data-integrity/"><cite>Verifiable Credential Data Integrity 1.0</cite></a>. Manu Sporny; Dave Longley; Greg Bernstein; Dmitri Zagidulin; Sebastian Crane.  W3C. 19 October 2024. W3C Candidate Recommendation. URL: <a href="https://www.w3.org/TR/vc-data-integrity/">https://www.w3.org/TR/vc-data-integrity/</a>
+      <a href="https://www.w3.org/TR/vc-data-integrity/"><cite>Verifiable Credential Data Integrity 1.0</cite></a>. Manu Sporny; Dave Longley; Greg Bernstein; Dmitri Zagidulin; Sebastian Crane.  W3C. 17 November 2024. W3C Candidate Recommendation. URL: <a href="https://www.w3.org/TR/vc-data-integrity/">https://www.w3.org/TR/vc-data-integrity/</a>
     </dd><dt id="bib-vc-data-model-2.0">[vc-data-model-2.0]</dt><dd>
       <a href="https://www.w3.org/TR/vc-data-model-2.0/"><cite>Verifiable Credentials Data Model v2.0</cite></a>. Manu Sporny; Ted Thibodeau Jr; Ivan Herman; Michael Jones; Gabe Cohen.  W3C. 19 October 2024. W3C Candidate Recommendation. URL: <a href="https://www.w3.org/TR/vc-data-model-2.0/">https://www.w3.org/TR/vc-data-model-2.0/</a>
     </dd><dt id="bib-xmlschema11-2">[XMLSCHEMA11-2]</dt><dd>
