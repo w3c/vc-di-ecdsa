@@ -1834,14 +1834,16 @@ Return <var>skolemizedExpandedDocument</var>.
 The following algorithm replaces all blank node identifiers in a compact
 JSON-LD document with custom-scheme URNs. The required inputs are a compact
 JSON-LD document (<var>document</var>) and a custom URN scheme
-(<var>urnScheme</var>). The <var>document</var> is assumed to use only one
+(<var>urnScheme</var>) which defaults to "custom-scheme:". The <var>document</var> is assumed to
+use only one
 <em>@context</em> property at the top level of the document. Any additional
 custom options (such as a document loader) can also be passed. It produces both
 an expanded form of the skolemized JSON-LD document
 (<var>skolemizedExpandedDocument</var> and a compact form of the skolemized
 JSON-LD document (<var>skolemizedCompactDocument</var>) as output. The
 skolemization used in this operation is intended to be reversible through the
-use of the algorithm in Section <a href="#todeskolemizednquads" data-matched-text="[[[#todeskolemizednquads]]]" class="sec-ref"><bdi class="secno">3.4.9 </bdi>toDeskolemizedNQuads</a>.
+use of the algorithm in Section <a href="#todeskolemizednquads" data-matched-text="[[[#todeskolemizednquads]]]" class="sec-ref"><bdi class="secno">3.4.9 </bdi>toDeskolemizedNQuads</a> which uses the
+same custom URN scheme (<var>urnScheme</var>).
           </p>
 
           <ol class="algorithm">
@@ -3003,7 +3005,10 @@ that is used as input to the
 
           <p>
 The required inputs to this algorithm are <em>proof options</em>
-(<var>options</var>). The <em>proof options</em> <em class="rfc2119">MUST</em> contain a type identifier
+(<var>options</var>) and the
+<a href="https://www.w3.org/TR/vc-data-integrity/#dfn-unsecured-data-document">unsecured data
+document</a> (<var>unsecuredDocument</var>).
+The <em>proof options</em> <em class="rfc2119">MUST</em> contain a type identifier
 for the
 <a href="https://www.w3.org/TR/vc-data-integrity/#dfn-cryptosuite">
 cryptographic suite</a> (<var>type</var>) and <em class="rfc2119">MUST</em> contain a cryptosuite
@@ -4974,7 +4979,7 @@ Portions of the work on this specification have been funded by the United States
 Department of Homeland Security's Science and Technology Directorate under
 contracts 70RSAT20T00000029, 70RSAT21T00000016, 70RSAT23T00000005,
 70RSAT20T00000010/P00001, 70RSAT20T00000029, 70RSAT21T00000016/P00001,
-70RSAT23T00000005, 70RSAT23C00000030, 70RSAT23R00000006, and the National
+70RSAT23T00000005, 70RSAT23C00000030, 70RSAT23R00000006, 70RSAT24T00000011, and the National
 Science Foundation through NSF 22-572. The content of this specification does
 not necessarily reflect the position or the policy of the U.S. Government and no
 official endorsement should be inferred.
