@@ -16,7 +16,7 @@ _:c14n1 <https://w3id.org/citizenship#employmentAuthorizationDocument> _:c14n0 .
 _:c14n1 <https://w3id.org/citizenship#residentSince> "2015-01-01"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
 _:c14n2 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://w3id.org/citizenship#EmploymentAuthorizationDocumentCredential> .
 _:c14n2 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://www.w3.org/2018/credentials#VerifiableCredential> .
-_:c14n2 <https://schema.org/description> "Example Country Employment Authorization Document." .
+_:c14n2 <https://schema.org/description> "Example Employment Authorization Document." .
 _:c14n2 <https://schema.org/name> "Employment Authorization Document" .
 _:c14n2 <https://www.w3.org/2018/credentials#credentialSubject> _:c14n1 .
 _:c14n2 <https://www.w3.org/2018/credentials#issuer> <did:key:zDnaegE6RR3atJtHKwTRTWHsJ3kNHqFwv7n9YjTgmU7TyfU76> .
