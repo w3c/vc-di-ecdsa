@@ -1,0 +1,31 @@
+{
+  "@context": [
+    "https://www.w3.org/ns/credentials/v2",
+    "https://w3id.org/citizenship/v4rc1"
+  ],
+  "type": [
+    "VerifiableCredential",
+    "PermanentResidentCardCredential"
+  ],
+  "issuer": {
+    "id": "did:key:zDnaeTHxNEBZoKaEo6PdA83fq98ebiFvo3X273Ydu4YmV96rg",
+    "image": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQIW2P4z/DiPwAG0ALnwgz64QAAAABJRU5ErkJggg=="
+  },
+  "validFrom": "2024-12-16T00:00:00Z",
+  "validUntil": "2025-12-16T23:59:59Z",
+  "credentialSubject": {
+    "type": [
+      "PermanentResident",
+      "Person"
+    ],
+    "birthCountry": "Arcadia"
+  },
+  "proof": {
+    "type": "DataIntegrityProof",
+    "cryptosuite": "ecdsa-sd-2023",
+    "created": "2023-08-15T23:36:38Z",
+    "verificationMethod": "did:key:zDnaepBuvsQ8cpsWrVKw8fbpGpvPeNSjVPTWoq6cRqaYzBKVP#zDnaepBuvsQ8cpsWrVKw8fbpGpvPeNSjVPTWoq6cRqaYzBKVP",
+    "proofPurpose": "assertionMethod",
+    "proofValue": "u2V0BhVhAHADSALdqTIftV6rg8JpqBetOJUiYhCp1jTsAaVF-qJd_mhGLTcwXvsM-n570G4Pc3glX3AhkP1RsjKI2DRsfL1gjgCQCKnLOGbY_FuM-ASpSkkOxsIR2E8n7Ml2q1UQ6tEwzi5OGWED9kexIs1JJZfehRT6f-gZwVOym99YzioRSXrMoi7DK96llHwL-4U1tM-4WeaqIKDSMzFdOGU1_V_yovjVMGzD3WEA1aOFAKvZyyxpMNg7XAwyosadE7tPEVyd06W0j46iQ2xSN6NvQZZQkSig_RiR6VA540UeJ4ODGTulrblOGNwe8WEDdyEMKG_jNu7boweLctDTcDbWasMVQG9fazuniwCNOI5ntlXZdYu9Mq_D-gRfuMvJLj4xk0ZVd3UNiJp2UkwNeWEDVTQBWsnmhfFkb2FgAFPicjNq-IMgNhPfBN8Sjb5eFDdCAP9bx1wgUoLWNzp1Q8wGSyYDVvEUd6pplafkOtdi4WECmeKxixUFtDpO529Pvqa3UweGnnmcHuj2DH_wRn2g3wYSnZSNAy4piAE9FnJBQZ7nMA_Q7PGd6Ai7qsdfXJDwFWEBjcwxCAQrKwyOR1y1PdVsIWI4cKJq5PiosLZpdhabT0G_es5k59hTvtLMZGWa65vUA7kQmeuRJkPMLRObJKUO0ogBYINy79kKRYKPmAHoHNXEECliRVtrBI0BehX7mdFRKDCh4AVggVkUuBrlOaELGVQWJD4M_qW5bcKEHWGNbOrPA_qAOKKyEAAQFBw"
+  }
+}

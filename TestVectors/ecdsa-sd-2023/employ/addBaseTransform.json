@@ -1,0 +1,112 @@
+{
+  "mandatoryPointers": [
+    "/issuer"
+  ],
+  "mandatory": {
+    "dataType": "Map",
+    "value": [
+      [
+        0,
+        "<did:key:zDnaegE6RR3atJtHKwTRTWHsJ3kNHqFwv7n9YjTgmU7TyfU76> <https://schema.org/image> <data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQIW2NgUPr/HwADaAIhG61j/AAAAABJRU5ErkJggg==> .\n"
+      ],
+      [
+        12,
+        "_:u4YIOZn1MHES1Z4Ij2hWZG3R4dEYBqg5fHTyDEvYhC38 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://w3id.org/citizenship#EmploymentAuthorizationDocumentCredential> .\n"
+      ],
+      [
+        13,
+        "_:u4YIOZn1MHES1Z4Ij2hWZG3R4dEYBqg5fHTyDEvYhC38 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://www.w3.org/2018/credentials#VerifiableCredential> .\n"
+      ],
+      [
+        17,
+        "_:u4YIOZn1MHES1Z4Ij2hWZG3R4dEYBqg5fHTyDEvYhC38 <https://www.w3.org/2018/credentials#issuer> <did:key:zDnaegE6RR3atJtHKwTRTWHsJ3kNHqFwv7n9YjTgmU7TyfU76> .\n"
+      ]
+    ]
+  },
+  "nonMandatory": {
+    "dataType": "Map",
+    "value": [
+      [
+        1,
+        "_:u3Lv2QpFgo-YAegc1cQQKWJFW2sEjQF6FfuZ0VEoMKHg <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://schema.org/Person> .\n"
+      ],
+      [
+        2,
+        "_:u3Lv2QpFgo-YAegc1cQQKWJFW2sEjQF6FfuZ0VEoMKHg <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://w3id.org/citizenship#EmployablePerson> .\n"
+      ],
+      [
+        3,
+        "_:u3Lv2QpFgo-YAegc1cQQKWJFW2sEjQF6FfuZ0VEoMKHg <https://schema.org/additionalName> \"JACOB\" .\n"
+      ],
+      [
+        4,
+        "_:u3Lv2QpFgo-YAegc1cQQKWJFW2sEjQF6FfuZ0VEoMKHg <https://schema.org/birthDate> \"1999-07-17\"^^<http://www.w3.org/2001/XMLSchema#dateTime> .\n"
+      ],
+      [
+        5,
+        "_:u3Lv2QpFgo-YAegc1cQQKWJFW2sEjQF6FfuZ0VEoMKHg <https://schema.org/familyName> \"SMITH\" .\n"
+      ],
+      [
+        6,
+        "_:u3Lv2QpFgo-YAegc1cQQKWJFW2sEjQF6FfuZ0VEoMKHg <https://schema.org/gender> \"Male\" .\n"
+      ],
+      [
+        7,
+        "_:u3Lv2QpFgo-YAegc1cQQKWJFW2sEjQF6FfuZ0VEoMKHg <https://schema.org/givenName> \"JOHN\" .\n"
+      ],
+      [
+        8,
+        "_:u3Lv2QpFgo-YAegc1cQQKWJFW2sEjQF6FfuZ0VEoMKHg <https://schema.org/image> <data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQIW2Ng+M/wHwAEAQH/7yMK/gAAAABJRU5ErkJggg==> .\n"
+      ],
+      [
+        9,
+        "_:u3Lv2QpFgo-YAegc1cQQKWJFW2sEjQF6FfuZ0VEoMKHg <https://w3id.org/citizenship#birthCountry> \"Bahamas\" .\n"
+      ],
+      [
+        10,
+        "_:u3Lv2QpFgo-YAegc1cQQKWJFW2sEjQF6FfuZ0VEoMKHg <https://w3id.org/citizenship#employmentAuthorizationDocument> _:uVkUuBrlOaELGVQWJD4M_qW5bcKEHWGNbOrPA_qAOKKw .\n"
+      ],
+      [
+        11,
+        "_:u3Lv2QpFgo-YAegc1cQQKWJFW2sEjQF6FfuZ0VEoMKHg <https://w3id.org/citizenship#residentSince> \"2015-01-01\"^^<http://www.w3.org/2001/XMLSchema#dateTime> .\n"
+      ],
+      [
+        14,
+        "_:u4YIOZn1MHES1Z4Ij2hWZG3R4dEYBqg5fHTyDEvYhC38 <https://schema.org/description> \"Example Country Employment Authorization Document.\" .\n"
+      ],
+      [
+        15,
+        "_:u4YIOZn1MHES1Z4Ij2hWZG3R4dEYBqg5fHTyDEvYhC38 <https://schema.org/name> \"Employment Authorization Document\" .\n"
+      ],
+      [
+        16,
+        "_:u4YIOZn1MHES1Z4Ij2hWZG3R4dEYBqg5fHTyDEvYhC38 <https://www.w3.org/2018/credentials#credentialSubject> _:u3Lv2QpFgo-YAegc1cQQKWJFW2sEjQF6FfuZ0VEoMKHg .\n"
+      ],
+      [
+        18,
+        "_:u4YIOZn1MHES1Z4Ij2hWZG3R4dEYBqg5fHTyDEvYhC38 <https://www.w3.org/2018/credentials#validFrom> \"2019-12-03T00:00:00Z\"^^<http://www.w3.org/2001/XMLSchema#dateTime> .\n"
+      ],
+      [
+        19,
+        "_:u4YIOZn1MHES1Z4Ij2hWZG3R4dEYBqg5fHTyDEvYhC38 <https://www.w3.org/2018/credentials#validUntil> \"2029-12-03T00:00:00Z\"^^<http://www.w3.org/2001/XMLSchema#dateTime> .\n"
+      ],
+      [
+        20,
+        "_:uVkUuBrlOaELGVQWJD4M_qW5bcKEHWGNbOrPA_qAOKKw <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://w3id.org/citizenship#EmploymentAuthorizationDocument> .\n"
+      ],
+      [
+        21,
+        "_:uVkUuBrlOaELGVQWJD4M_qW5bcKEHWGNbOrPA_qAOKKw <https://schema.org/identifier> \"83627465\" .\n"
+      ],
+      [
+        22,
+        "_:uVkUuBrlOaELGVQWJD4M_qW5bcKEHWGNbOrPA_qAOKKw <https://w3id.org/citizenship#lprCategory> \"C09\" .\n"
+      ],
+      [
+        23,
+        "_:uVkUuBrlOaELGVQWJD4M_qW5bcKEHWGNbOrPA_qAOKKw <https://w3id.org/citizenship#lprNumber> \"999-999-999\" .\n"
+      ]
+    ]
+  },
+  "hmacKeyString": "00112233445566778899AABBCCDDEEFF00112233445566778899AABBCCDDEEFF"
+}

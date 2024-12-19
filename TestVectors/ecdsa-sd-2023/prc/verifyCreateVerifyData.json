@@ -1,0 +1,22 @@
+{
+  "baseSignature": "1c00d200b76a4c87ed57aae0f09a6a05eb4e254898842a758d3b0069517ea8977f9a118b4dcc17bec33e9f9ef41b83dcde0957dc08643f546c8ca2360d1b1f2f",
+  "proofHash": "9c5c9b189f06cfa9d9f21a838ccb9b04316f07ad1a517bfd4955ee28c6a8229c",
+  "publicKey": "zDnaeTHfhmSaQKBc7CmdL3K7oYg3D6SC7yowe2eBeVd2DH32r",
+  "signatures": [
+    "fd91ec48b3524965f7a1453e9ffa067054eca6f7d6338a84525eb3288bb0caf7a9651f02fee14d6d33ee1679aa8828348ccc574e194d7f57fca8be354c1b30f7",
+    "3568e1402af672cb1a4c360ed7030ca8b1a744eed3c4572774e96d23e3a890db148de8dbd06594244a283f46247a540e78d14789e0e0c64ee96b6e53863707bc",
+    "ddc8430a1bf8cdbbb6e8c1e2dcb434dc0db59ab0c5501bd7dacee9e2c0234e2399ed95765d62ef4cabf0fe8117ee32f24b8f8c64d1955ddd4362269d9493035e",
+    "d54d0056b279a17c591bd8580014f89c8cdabe20c80d84f7c137c4a36f97850dd0803fd6f1d70814a0b58dce9d50f30192c980d5bc451dea9a6569f90eb5d8b8",
+    "a678ac62c5416d0e93b9dbd3efa9add4c1e1a79e6707ba3d831ffc119f6837c184a7652340cb8a62004f459c905067b9cc03f43b3c677a022eeab1d7d7243c05",
+    "63730c42010acac32391d72d4f755b08588e1c289ab93e2a2c2d9a5d85a6d3d06fdeb39939f614efb4b3191966bae6f500ee44267ae44990f30b44e6c92943b4"
+  ],
+  "nonMandatory": [
+    "_:u3Lv2QpFgo-YAegc1cQQKWJFW2sEjQF6FfuZ0VEoMKHg <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://schema.org/Person> .\n",
+    "_:u3Lv2QpFgo-YAegc1cQQKWJFW2sEjQF6FfuZ0VEoMKHg <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://w3id.org/citizenship#PermanentResident> .\n",
+    "_:u3Lv2QpFgo-YAegc1cQQKWJFW2sEjQF6FfuZ0VEoMKHg <https://w3id.org/citizenship#birthCountry> \"Arcadia\" .\n",
+    "_:uVkUuBrlOaELGVQWJD4M_qW5bcKEHWGNbOrPA_qAOKKw <https://www.w3.org/2018/credentials#credentialSubject> _:u3Lv2QpFgo-YAegc1cQQKWJFW2sEjQF6FfuZ0VEoMKHg .\n",
+    "_:uVkUuBrlOaELGVQWJD4M_qW5bcKEHWGNbOrPA_qAOKKw <https://www.w3.org/2018/credentials#validFrom> \"2024-12-16T00:00:00Z\"^^<http://www.w3.org/2001/XMLSchema#dateTime> .\n",
+    "_:uVkUuBrlOaELGVQWJD4M_qW5bcKEHWGNbOrPA_qAOKKw <https://www.w3.org/2018/credentials#validUntil> \"2025-12-16T23:59:59Z\"^^<http://www.w3.org/2001/XMLSchema#dateTime> .\n"
+  ],
+  "mandatoryHash": "b76d8d5bf67d27f51597519d19d95809c75e35212cc65291bd71bbe36007f979"
+}
