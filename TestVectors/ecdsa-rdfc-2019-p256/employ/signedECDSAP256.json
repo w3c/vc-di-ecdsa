@@ -32,7 +32,7 @@
     }
   },
   "name": "Employment Authorization Document",
-  "description": "Example Country Employment Authorization Document.",
+  "description": "Example Employment Authorization Document.",
   "validFrom": "2019-12-03T00:00:00Z",
   "validUntil": "2029-12-03T00:00:00Z",
   "proof": {
@@ -41,6 +41,6 @@
     "created": "2023-02-24T23:36:38Z",
     "verificationMethod": "did:key:zDnaepBuvsQ8cpsWrVKw8fbpGpvPeNSjVPTWoq6cRqaYzBKVP#zDnaepBuvsQ8cpsWrVKw8fbpGpvPeNSjVPTWoq6cRqaYzBKVP",
     "proofPurpose": "assertionMethod",
-    "proofValue": "z4SWLpMWVhqUAgZweKfVftaZqWX2F8ZKMZV1Rszr6G73SsMHCjNUykW75hNwfFrVYacCFqraR6pnPqGcD6NyQ7SUu"
+    "proofValue": "z4y9rJ7JxwfZZUBAHgDHJh7FzMbsycPhEtcSHqrfyn7fx3S5MWdajNu1r6SsJmirzfcWHe7vp9XKHmRqW6qe7u3d3"
   }
 }
