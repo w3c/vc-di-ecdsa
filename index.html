@@ -22,9 +22,9 @@
         shortName: "vc-di-ecdsa",
 
         // if you wish the publication date to be other than today, set this
-        publishDate:  "2025-03-06",
-        crEnd: "2024-01-19",
-        prEnd: "2025-04-03",
+        publishDate: "2025-3-20",
+        crEnd: "2025-01-19",
+        prEnd: "2025-4-17",
 
         // if there is a previously published draft, uncomment this and set its YYYY-MM-DD date
         // and its maturity status
@@ -294,8 +294,8 @@ during the processing of digital signatures.
           <h4>Multikey</h4>
 
           <p>
-The <a data-cite="cid-1.0#Multikey">Multikey format</a>, defined in
-[[[cid-1.0]]], is used to express public keys for the cryptographic
+The <a data-cite="CID#Multikey">Multikey format</a>, defined in
+[[[CID]]], is used to express public keys for the cryptographic
 suites defined in this specification.
           </p>
 
@@ -307,11 +307,11 @@ expression of a P-256 or P-384 public key.
           <p>
 The `publicKeyMultibase` value of the verification method MUST start with the
 base-58-btc prefix (`z`), as defined in the
-<a data-cite="cid-1.0#multibase-0">Multibase section</a> of
-[[[cid-1.0]]]. A Multibase-encoded ECDSA 256-bit public key value or
+<a data-cite="CID#multibase-0">Multibase section</a> of
+[[[CID]]]. A Multibase-encoded ECDSA 256-bit public key value or
 an ECDSA 384-bit public key value follows, as defined in the
-<a data-cite="cid-1.0#Multikey">Multikey section</a> of
-[[[cid-1.0]]]. Any other encoding MUST NOT be allowed.
+<a data-cite="CID#Multikey">Multikey section</a> of
+[[[CID]]]. Any other encoding MUST NOT be allowed.
           </p>
 
           <p class="advisement">
@@ -386,11 +386,11 @@ private key).
           <p>
 The `secretKeyMultibase` value of the verification method MUST start with the
 base-58-btc prefix (`z`), as defined in the
-<a data-cite="cid-1.0#multibase-0">Multibase section</a> of
-[[[cid-1.0]]]. A Multibase-encoded ECDSA 256-bit secret key value or
+<a data-cite="CID#multibase-0">Multibase section</a> of
+[[[CID]]]. A Multibase-encoded ECDSA 256-bit secret key value or
 an ECDSA 384-bit secret key value follows, as defined in the
-<a data-cite="cid-1.0#Multikey">Multikey section</a> of
-[[[cid-1.0]]]. Any other encoding MUST NOT be allowed.
+<a data-cite="CID#Multikey">Multikey section</a> of
+[[[CID]]]. Any other encoding MUST NOT be allowed.
           </p>
 
 
@@ -611,7 +611,7 @@ Let |proofBytes| be the result of running the algorithm in Section
 |options| passed as parameters.
             </li>
             <li>
-Let |proof|.|proofValue| be a <a data-cite="cid-1.0#multibase-0">
+Let |proof|.|proofValue| be a <a data-cite="CID#multibase-0">
 base58-btc-encoded Multibase value</a> of the |proofBytes|.
             </li>
             <li>
@@ -652,7 +652,7 @@ removed.
           </li>
           <li>
 Let |proofBytes| be the
-<a data-cite="cid-1.0#multibase-0">Multibase decoded base58-btc
+<a data-cite="CID#multibase-0">Multibase decoded base58-btc
 value</a> in |securedDocument|.|proof|.|proofValue|.
           </li>
           <li>
@@ -888,8 +888,8 @@ represented as a boolean value is produced as output.
 Let |publicKeyBytes| be the result of retrieving the
 public key bytes associated with the
 |options|.|verificationMethod| value as described in the
-[[[cid-1.0]]] specification,
-<a data-cite="cid-1.0#retrieve-verification-method">
+[[[CID]]] specification,
+<a data-cite="CID#retrieve-verification-method">
 Section: Retrieve Verification Method</a>.
             </li>
             <li>
@@ -957,7 +957,7 @@ Let |proofBytes| be the result of running the algorithm in Section
 |options| passed as parameters.
             </li>
             <li>
-Let |proof|.|proofValue| be a <a data-cite="cid-1.0#multibase-0">
+Let |proof|.|proofValue| be a <a data-cite="CID#multibase-0">
 base58-btc-encoded Multibase value</a> of the |proofBytes|.
             </li>
             <li>
@@ -996,7 +996,7 @@ Let |proofOptions| be the result of a copy of |securedDocument|.|proof| with
             </li>
             <li>
 Let |proofBytes| be the
-<a data-cite="cid-1.0#multibase-0">Multibase decoded base58-btc
+<a data-cite="CID#multibase-0">Multibase decoded base58-btc
 value</a> in |securedDocument|.|proof|.|proofValue|.
             </li>
             <li>
@@ -1241,8 +1241,8 @@ represented as a boolean value is produced as output.
 Let |publicKeyBytes| be the result of retrieving the
 public key bytes associated with the
 |options|.|verificationMethod| value as described in the
-[[[cid-1.0]]] specification,
-<a data-cite="cid-1.0#retrieve-verification-method">
+[[[CID]]] specification,
+<a data-cite="CID#retrieve-verification-method">
 Section: Retrieve Verification Method</a>.
             </li>
             <li>
@@ -2170,8 +2170,8 @@ any of the |components|. Append the produced encoded value to |proofValue|.
             <li>
 Initialize |baseProof| to a string with the Multibase
 base64url-no-pad-encoding of |proofValue| as described in the
-<a data-cite="cid-1.0#multibase-0">
-Multibase section</a> of [[[cid-1.0]]]. That is, return a string
+<a data-cite="CID#multibase-0">
+Multibase section</a> of [[[CID]]]. That is, return a string
 starting with "`u`" and ending with the base64url-no-pad-encoded value of
 |proofValue|.
             </li>
@@ -2448,8 +2448,8 @@ any of the |components|. Append the produced encoded value to |proofValue|.
             <li>
 Return the <em>derived proof</em> as a string with the
 base64url-no-pad-encoding of |proofValue| as described in the
-<a data-cite="cid-1.0#multibase-0">
-Multibase section</a> of [[[cid-1.0]]]. That is, return a string
+<a data-cite="CID#multibase-0">
+Multibase section</a> of [[[CID]]]. That is, return a string
 starting with "`u`" and ending with the base64url-no-pad-encoded value of
 |proofValue|.
             </li>
@@ -2625,7 +2625,7 @@ Let |proofBytes| be the result of running the algorithm in Section
 |options| passed as parameters.
             </li>
             <li>
-Let |proof|.|proofValue| be a <a data-cite="cid-1.0#multibase-0">
+Let |proof|.|proofValue| be a <a data-cite="CID#multibase-0">
 base64-url-encoded Multibase value</a> of the |proofBytes|.
             </li>
             <li>
@@ -3986,6 +3986,21 @@ document shown below.
 This section contains the substantive changes that have been made to this
 specification over time.
       </p>
+
+      <p>
+Changes since the
+<a href="https://www.w3.org/TR/2024/CR-vc-di-ecdsa-20241219/">
+Second Candidate Recommendation</a>:
+      </p>
+
+      <ul>
+        <li>
+Various editorial changes in algorithms and descriptions to improve readability.
+        </li>
+        <li>
+Update to use newly published [[[CID]]] specification references.
+        </li>
+      </ul>
 
       <p>
 Changes since the
