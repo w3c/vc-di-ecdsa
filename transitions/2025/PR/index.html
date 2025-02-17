@@ -149,9 +149,9 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
   "group": "vc",
   "specStatus": "PR",
   "shortName": "vc-di-ecdsa",
-  "publishDate": "2025-03-06",
-  "crEnd": "2024-01-19",
-  "prEnd": "2025-04-03",
+  "publishDate": "2025-3-20",
+  "crEnd": "2025-01-19",
+  "prEnd": "2025-4-17",
   "edDraftURI": "https://w3c.github.io/vc-di-ecdsa/",
   "implementationReportURI": "https://w3c.github.io/vc-di-ecdsa-test-suite/",
   "editors": [
@@ -253,8 +253,8 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
           "href": "https://www.w3.org/TR/vc-data-integrity/"
         },
         {
-          "value": "Controller Documents v1.0",
-          "href": "https://www.w3.org/TR/controller-document/"
+          "value": "Controlled Identifiers v1.0",
+          "href": "https://www.w3.org/TR/cid-1.0/"
         },
         {
           "value": "Data Integrity EdDSA Cryptosuites v1.0",
@@ -267,20 +267,20 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
       ]
     }
   ],
-  "publishISODate": "2025-03-06T00:00:00.000Z",
-  "generatedSubtitle": "W3C Proposed Recommendation 06 March 2025"
+  "publishISODate": "2025-03-20T00:00:00.000Z",
+  "generatedSubtitle": "W3C Proposed Recommendation 20 March 2025"
 }</script>
 <link rel="stylesheet" href="https://www.w3.org/StyleSheets/TR/2021/W3C-PR"></head>
   <body class="h-entry" data-cite="INFRA VC-DATA-MODEL-2.0 VC-DATA-INTEGRITY"><div class="head">
     <p class="logos"><a class="logo" href="https://www.w3.org/"><img crossorigin="" alt="W3C" height="48" src="https://www.w3.org/StyleSheets/TR/2021/logos/W3C" width="72">
   </a></p>
     <h1 id="title" class="title">Data Integrity ECDSA Cryptosuites v1.0</h1> <h2 id="subtitle" class="subtitle">Achieving Data Integrity using ECDSA with NIST-compliant curves</h2>
-    <p id="w3c-state"><a href="https://www.w3.org/standards/types#PR">W3C Proposed Recommendation</a> <time class="dt-published" datetime="2025-03-06">06 March 2025</time></p>
+    <p id="w3c-state"><a href="https://www.w3.org/standards/types#PR">W3C Proposed Recommendation</a> <time class="dt-published" datetime="2025-03-20">20 March 2025</time></p>
     <details open="">
       <summary>More details about this document</summary>
       <dl>
         <dt>This version:</dt><dd>
-                <a class="u-url" href="https://www.w3.org/TR/2025/PR-vc-di-ecdsa-20250306/">https://www.w3.org/TR/2025/PR-vc-di-ecdsa-20250306/</a>
+                <a class="u-url" href="https://www.w3.org/TR/2025/PR-vc-di-ecdsa-20250320/">https://www.w3.org/TR/2025/PR-vc-di-ecdsa-20250320/</a>
               </dd>
         <dt>Latest published version:</dt><dd>
                 <a href="https://www.w3.org/TR/vc-di-ecdsa/">https://www.w3.org/TR/vc-di-ecdsa/</a>
@@ -325,7 +325,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
   </dd><dd>
     <a href="https://www.w3.org/TR/vc-data-integrity/">Verifiable Credential Data Integrity v1.0</a>
   </dd><dd>
-    <a href="https://www.w3.org/TR/controller-document/">Controller Documents v1.0</a>
+    <a href="https://www.w3.org/TR/cid-1.0/">Controlled Identifiers v1.0</a>
   </dd><dd>
     <a href="https://www.w3.org/TR/vc-di-eddsa/">Data Integrity EdDSA Cryptosuites v1.0</a>
   </dd><dd>
@@ -373,11 +373,11 @@ Algorithm (ECDSA).
     
   </p><p>
         The <abbr title="World Wide Web Consortium">W3C</abbr> Membership and other interested parties are invited to review
-        the document and send comments through 03 April 2025.
+        the document and send comments through 17 April 2025.
         Advisory Committee Representatives should consult their
         <a href="https://www.w3.org/2002/09/wbs/myQuestionnaires">WBS questionnaires</a>. Note that substantive technical comments were expected during the
         Candidate Recommendation review period that ended
-        19 January 2024.
+        19 January 2025.
       </p><p>
     
         This document was produced by a group
@@ -504,8 +504,8 @@ during the processing of digital signatures.
           
 
           <p>
-The <a href="https://www.w3.org/TR/controller-document/#Multikey">Multikey format</a>, defined in
-<cite><a data-matched-text="[[[controller-document]]]" href="https://www.w3.org/TR/controller-document/">Controlled Identifiers (CIDs) v1.0</a></cite>, is used to express public keys for the cryptographic
+The <a href="https://www.w3.org/TR/cid-1.0/#Multikey">Multikey format</a>, defined in
+<cite><a data-matched-text="[[[CID]]]" href="https://www.w3.org/TR/cid-1.0/">Controlled Identifiers v1.0</a></cite>, is used to express public keys for the cryptographic
 suites defined in this specification.
           </p>
 
@@ -517,11 +517,11 @@ expression of a P-256 or P-384 public key.
           <p>
 The <code>publicKeyMultibase</code> value of the verification method <em class="rfc2119">MUST</em> start with the
 base-58-btc prefix (<code>z</code>), as defined in the
-<a href="https://www.w3.org/TR/controller-document/#multibase-0">Multibase section</a> of
-<cite><a data-matched-text="[[[controller-document]]]" href="https://www.w3.org/TR/controller-document/">Controlled Identifiers (CIDs) v1.0</a></cite>. A Multibase-encoded ECDSA 256-bit public key value or
+<a href="https://www.w3.org/TR/cid-1.0/#multibase-0">Multibase section</a> of
+<cite><a data-matched-text="[[[CID]]]" href="https://www.w3.org/TR/cid-1.0/">Controlled Identifiers v1.0</a></cite>. A Multibase-encoded ECDSA 256-bit public key value or
 an ECDSA 384-bit public key value follows, as defined in the
-<a href="https://www.w3.org/TR/controller-document/#Multikey">Multikey section</a> of
-<cite><a data-matched-text="[[[controller-document]]]" href="https://www.w3.org/TR/controller-document/">Controlled Identifiers (CIDs) v1.0</a></cite>. Any other encoding <em class="rfc2119">MUST NOT</em> be allowed.
+<a href="https://www.w3.org/TR/cid-1.0/#Multikey">Multikey section</a> of
+<cite><a data-matched-text="[[[CID]]]" href="https://www.w3.org/TR/cid-1.0/">Controlled Identifiers v1.0</a></cite>. Any other encoding <em class="rfc2119">MUST NOT</em> be allowed.
           </p>
 
           <p class="advisement">
@@ -600,11 +600,11 @@ private key).
           <p>
 The <code>secretKeyMultibase</code> value of the verification method <em class="rfc2119">MUST</em> start with the
 base-58-btc prefix (<code>z</code>), as defined in the
-<a href="https://www.w3.org/TR/controller-document/#multibase-0">Multibase section</a> of
-<cite><a data-matched-text="[[[controller-document]]]" href="https://www.w3.org/TR/controller-document/">Controlled Identifiers (CIDs) v1.0</a></cite>. A Multibase-encoded ECDSA 256-bit secret key value or
+<a href="https://www.w3.org/TR/cid-1.0/#multibase-0">Multibase section</a> of
+<cite><a data-matched-text="[[[CID]]]" href="https://www.w3.org/TR/cid-1.0/">Controlled Identifiers v1.0</a></cite>. A Multibase-encoded ECDSA 256-bit secret key value or
 an ECDSA 384-bit secret key value follows, as defined in the
-<a href="https://www.w3.org/TR/controller-document/#Multikey">Multikey section</a> of
-<cite><a data-matched-text="[[[controller-document]]]" href="https://www.w3.org/TR/controller-document/">Controlled Identifiers (CIDs) v1.0</a></cite>. Any other encoding <em class="rfc2119">MUST NOT</em> be allowed.
+<a href="https://www.w3.org/TR/cid-1.0/#Multikey">Multikey section</a> of
+<cite><a data-matched-text="[[[CID]]]" href="https://www.w3.org/TR/cid-1.0/">Controlled Identifiers v1.0</a></cite>. Any other encoding <em class="rfc2119">MUST NOT</em> be allowed.
           </p>
 
 
@@ -824,7 +824,7 @@ Let <var>proofBytes</var> be the result of running the algorithm in Section
 <var>options</var> passed as parameters.
             </li>
             <li>
-Let <var>proof</var>.<var>proofValue</var> be a <a href="https://www.w3.org/TR/controller-document/#multibase-0">
+Let <var>proof</var>.<var>proofValue</var> be a <a href="https://www.w3.org/TR/cid-1.0/#multibase-0">
 base58-btc-encoded Multibase value</a> of the <var>proofBytes</var>.
             </li>
             <li>
@@ -865,7 +865,7 @@ removed.
           </li>
           <li>
 Let <var>proofBytes</var> be the
-<a href="https://www.w3.org/TR/controller-document/#multibase-0">Multibase decoded base58-btc
+<a href="https://www.w3.org/TR/cid-1.0/#multibase-0">Multibase decoded base58-btc
 value</a> in <var>securedDocument</var>.<var>proof</var>.<var>proofValue</var>.
           </li>
           <li>
@@ -1100,8 +1100,8 @@ represented as a boolean value is produced as output.
 Let <var>publicKeyBytes</var> be the result of retrieving the
 public key bytes associated with the
 <var>options</var>.<var>verificationMethod</var> value as described in the
-<cite><a data-matched-text="[[[controller-document]]]" href="https://www.w3.org/TR/controller-document/">Controlled Identifiers (CIDs) v1.0</a></cite> specification,
-<a href="https://www.w3.org/TR/controller-document/#retrieve-verification-method">
+<cite><a data-matched-text="[[[CID]]]" href="https://www.w3.org/TR/cid-1.0/">Controlled Identifiers v1.0</a></cite> specification,
+<a href="https://www.w3.org/TR/cid-1.0/#retrieve-verification-method">
 Section: Retrieve Verification Method</a>.
             </li>
             <li>
@@ -1168,7 +1168,7 @@ Let <var>proofBytes</var> be the result of running the algorithm in Section
 <var>options</var> passed as parameters.
             </li>
             <li>
-Let <var>proof</var>.<var>proofValue</var> be a <a href="https://www.w3.org/TR/controller-document/#multibase-0">
+Let <var>proof</var>.<var>proofValue</var> be a <a href="https://www.w3.org/TR/cid-1.0/#multibase-0">
 base58-btc-encoded Multibase value</a> of the <var>proofBytes</var>.
             </li>
             <li>
@@ -1207,7 +1207,7 @@ Let <var>proofOptions</var> be the result of a copy of <var>securedDocument</var
             </li>
             <li>
 Let <var>proofBytes</var> be the
-<a href="https://www.w3.org/TR/controller-document/#multibase-0">Multibase decoded base58-btc
+<a href="https://www.w3.org/TR/cid-1.0/#multibase-0">Multibase decoded base58-btc
 value</a> in <var>securedDocument</var>.<var>proof</var>.<var>proofValue</var>.
             </li>
             <li>
@@ -1452,8 +1452,8 @@ represented as a boolean value is produced as output.
 Let <var>publicKeyBytes</var> be the result of retrieving the
 public key bytes associated with the
 <var>options</var>.<var>verificationMethod</var> value as described in the
-<cite><a data-matched-text="[[[controller-document]]]" href="https://www.w3.org/TR/controller-document/">Controlled Identifiers (CIDs) v1.0</a></cite> specification,
-<a href="https://www.w3.org/TR/controller-document/#retrieve-verification-method">
+<cite><a data-matched-text="[[[CID]]]" href="https://www.w3.org/TR/cid-1.0/">Controlled Identifiers v1.0</a></cite> specification,
+<a href="https://www.w3.org/TR/cid-1.0/#retrieve-verification-method">
 Section: Retrieve Verification Method</a>.
             </li>
             <li>
@@ -2380,8 +2380,8 @@ any of the <var>components</var>. Append the produced encoded value to <var>proo
             <li>
 Initialize <var>baseProof</var> to a string with the Multibase
 base64url-no-pad-encoding of <var>proofValue</var> as described in the
-<a href="https://www.w3.org/TR/controller-document/#multibase-0">
-Multibase section</a> of <cite><a data-matched-text="[[[controller-document]]]" href="https://www.w3.org/TR/controller-document/">Controlled Identifiers (CIDs) v1.0</a></cite>. That is, return a string
+<a href="https://www.w3.org/TR/cid-1.0/#multibase-0">
+Multibase section</a> of <cite><a data-matched-text="[[[CID]]]" href="https://www.w3.org/TR/cid-1.0/">Controlled Identifiers v1.0</a></cite>. That is, return a string
 starting with "<code>u</code>" and ending with the base64url-no-pad-encoded value of
 <var>proofValue</var>.
             </li>
@@ -2658,8 +2658,8 @@ any of the <var>components</var>. Append the produced encoded value to <var>proo
             <li>
 Return the <em>derived proof</em> as a string with the
 base64url-no-pad-encoding of <var>proofValue</var> as described in the
-<a href="https://www.w3.org/TR/controller-document/#multibase-0">
-Multibase section</a> of <cite><a data-matched-text="[[[controller-document]]]" href="https://www.w3.org/TR/controller-document/">Controlled Identifiers (CIDs) v1.0</a></cite>. That is, return a string
+<a href="https://www.w3.org/TR/cid-1.0/#multibase-0">
+Multibase section</a> of <cite><a data-matched-text="[[[CID]]]" href="https://www.w3.org/TR/cid-1.0/">Controlled Identifiers v1.0</a></cite>. That is, return a string
 starting with "<code>u</code>" and ending with the base64url-no-pad-encoded value of
 <var>proofValue</var>.
             </li>
@@ -2834,7 +2834,7 @@ Let <var>proofBytes</var> be the result of running the algorithm in Section
 <var>options</var> passed as parameters.
             </li>
             <li>
-Let <var>proof</var>.<var>proofValue</var> be a <a href="https://www.w3.org/TR/controller-document/#multibase-0">
+Let <var>proof</var>.<var>proofValue</var> be a <a href="https://www.w3.org/TR/cid-1.0/#multibase-0">
 base64-url-encoded Multibase value</a> of the <var>proofBytes</var>.
             </li>
             <li>
@@ -5861,6 +5861,21 @@ specification over time.
 
       <p>
 Changes since the
+<a href="https://www.w3.org/TR/2024/CR-vc-di-ecdsa-20241219/">
+Second Candidate Recommendation</a>:
+      </p>
+
+      <ul>
+        <li>
+Various editorial changes in algorithms and descriptions to improve readability.
+        </li>
+        <li>
+Update to use newly published <cite><a data-matched-text="[[[CID]]]" href="https://www.w3.org/TR/cid-1.0/">Controlled Identifiers v1.0</a></cite> specification references.
+        </li>
+      </ul>
+
+      <p>
+Changes since the
 <a href="https://www.w3.org/TR/2023/CR-vc-di-ecdsa-20231121/">
 First Candidate Recommendation</a>:
       </p>
@@ -6011,8 +6026,8 @@ Dmitri Zagidulin.
 
 <section id="references" class="appendix"><div class="header-wrapper"><h2 id="d-references"><bdi class="secno">D. </bdi>References</h2><a class="self-link" href="#references" aria-label="Permalink for Appendix D."></a></div><section id="normative-references"><div class="header-wrapper"><h3 id="d-1-normative-references"><bdi class="secno">D.1 </bdi>Normative references</h3><a class="self-link" href="#normative-references" aria-label="Permalink for Appendix D.1"></a></div>
     
-    <dl class="bibliography"><dt id="bib-controller-document">[controller-document]</dt><dd>
-      <a href="https://www.w3.org/TR/controller-document/"><cite>Controlled Identifiers (CIDs) v1.0</cite></a>. Manu Sporny; Michael Jones.  W3C. 26 January 2025. W3C Working Draft. URL: <a href="https://www.w3.org/TR/controller-document/">https://www.w3.org/TR/controller-document/</a>
+    <dl class="bibliography"><dt id="bib-cid">[CID]</dt><dd>
+      <a href="https://www.w3.org/TR/cid-1.0/"><cite>Controlled Identifiers v1.0</cite></a>. Manu Sporny; Michael Jones.  W3C. 9 February 2025. CRD. URL: <a href="https://www.w3.org/TR/cid-1.0/">https://www.w3.org/TR/cid-1.0/</a>
     </dd><dt id="bib-fips-186-5">[FIPS-186-5]</dt><dd>
       <a href="https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.186-5.pdf"><cite>FIPS PUB 186-5: Digital Signature Standard (DSS)</cite></a>.  U.S. Department of Commerce/National Institute of Standards and Technology. 3 February 2023. National Standard. URL: <a href="https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.186-5.pdf">https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.186-5.pdf</a>
     </dd><dt id="bib-infra">[INFRA]</dt><dd>
@@ -6044,7 +6059,7 @@ Dmitri Zagidulin.
     </dd><dt id="bib-rfc8949">[RFC8949]</dt><dd>
       <a href="https://www.rfc-editor.org/rfc/rfc8949"><cite>Concise Binary Object Representation (CBOR)</cite></a>. C. Bormann; P. Hoffman.  IETF. December 2020. Internet Standard. URL: <a href="https://www.rfc-editor.org/rfc/rfc8949">https://www.rfc-editor.org/rfc/rfc8949</a>
     </dd><dt id="bib-vc-data-integrity">[VC-DATA-INTEGRITY]</dt><dd>
-      <a href="https://www.w3.org/TR/vc-data-integrity/"><cite>Verifiable Credential Data Integrity 1.0</cite></a>. Manu Sporny; Ted Thibodeau Jr; Ivan Herman; Dave Longley; Greg Bernstein.  W3C. 26 January 2025. CRD. URL: <a href="https://www.w3.org/TR/vc-data-integrity/">https://www.w3.org/TR/vc-data-integrity/</a>
+      <a href="https://www.w3.org/TR/vc-data-integrity/"><cite>Verifiable Credential Data Integrity 1.0</cite></a>. Manu Sporny; Ted Thibodeau Jr; Ivan Herman; Dave Longley; Greg Bernstein.  W3C. 10 February 2025. CRD. URL: <a href="https://www.w3.org/TR/vc-data-integrity/">https://www.w3.org/TR/vc-data-integrity/</a>
     </dd><dt id="bib-vc-data-model-2.0">[vc-data-model-2.0]</dt><dd>
       <a href="https://www.w3.org/TR/vc-data-model-2.0/"><cite>Verifiable Credentials Data Model v2.0</cite></a>. Manu Sporny; Ted Thibodeau Jr; Ivan Herman; Gabe Cohen; Michael Jones.  W3C. 27 January 2025. CRD. URL: <a href="https://www.w3.org/TR/vc-data-model-2.0/">https://www.w3.org/TR/vc-data-model-2.0/</a>
     </dd><dt id="bib-xmlschema11-2">[XMLSCHEMA11-2]</dt><dd>
@@ -6057,7 +6072,7 @@ Dmitri Zagidulin.
     </dd><dt id="bib-secg2">[SECG2]</dt><dd>
       <a href="https://www.secg.org/sec2-v2.pdf"><cite>SEC 2: Recommended Elliptic Curve Domain Parameters</cite></a>.  Certicom Research. January 27, 2010. URL: <a href="https://www.secg.org/sec2-v2.pdf">https://www.secg.org/sec2-v2.pdf</a>
     </dd><dt id="bib-vc-di-bbs">[VC-DI-BBS]</dt><dd>
-      <a href="https://www.w3.org/TR/vc-di-bbs/"><cite>Data Integrity BBS Cryptosuites v1.0</cite></a>. Greg Bernstein; Manu Sporny.  W3C. 15 October 2024. CRD. URL: <a href="https://www.w3.org/TR/vc-di-bbs/">https://www.w3.org/TR/vc-di-bbs/</a>
+      <a href="https://www.w3.org/TR/vc-di-bbs/"><cite>Data Integrity BBS Cryptosuites v1.0</cite></a>. Greg Bernstein; Manu Sporny.  W3C. 30 January 2025. CRD. URL: <a href="https://www.w3.org/TR/vc-di-bbs/">https://www.w3.org/TR/vc-di-bbs/</a>
     </dd></dl>
   </section></section><p role="navigation" id="back-to-top">
     <a href="#title"><abbr title="Back to Top">↑</abbr></a>
