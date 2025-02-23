@@ -2460,8 +2460,8 @@ Initialize <var>hmac</var> to an HMAC API using <var>hmacKey</var>. The HMAC use
 algorithm used in the signature algorithm, i.e., SHA-256 for a P-256 curve.
             </li>
             <li>
-Initialize <var>labelMapFactoryFunction</var> to the result of calling the
-<var>createHmacIdLabelMapFunction</var> algorithm passing <var>hmac</var>.
+Initialize <var>labelMapFactoryFunction</var> to the result of calling the algorithm of
+section <a href="#createhmacidlabelmapfunction" data-matched-text="[[[#createhmacidlabelmapfunction]]]" class="sec-ref"><bdi class="secno">3.4.4 </bdi>createHmacIdLabelMapFunction</a>, passing <var>hmac</var>.
             </li>
             <li>
 Initialize <var>combinedPointers</var> to the concatenation of <var>mandatoryPointers</var>
@@ -2532,8 +2532,8 @@ Increment <var>index</var>.
               </ol>
             </li>
             <li>
-Initialize <var>revealDocument</var> to the result of the "selectJsonLd"
-algorithm, passing <var>document</var>, and <var>combinedPointers</var> as <var>pointers</var>.
+Initialize <var>revealDocument</var> to the result of the calling the algorithm in Section
+<a href="#selectjsonld" data-matched-text="[[[#selectjsonld]]]" class="sec-ref"><bdi class="secno">3.4.13 </bdi>selectJsonLd</a>, passing <var>document</var>, and <var>combinedPointers</var> as <var>pointers</var>.
             </li>
             <li>
 Run the RDF Dataset Canonicalization Algorithm [<cite><a class="bibref" data-link-type="biblio" href="#bib-rdf-canon" title="RDF Dataset Canonicalization">RDF-CANON</a></cite>] on
@@ -2746,12 +2746,13 @@ object returned when calling the algorithm in Section
 <a href="#parsederivedproofvalue" data-matched-text="[[[#parsederivedproofvalue]]]" class="sec-ref"><bdi class="secno">3.5.8 </bdi>parseDerivedProofValue</a>, passing <var>proofValue</var> from <var>proof</var>.
             </li>
             <li>
-Initialize <var>labelMapFactoryFunction</var> to the result of calling the
-"createLabelMapFunction" algorithm.
+Initialize <var>labelMapFactoryFunction</var> to the result of calling the algorithm of
+Section <a href="#createlabelmapfunction" data-matched-text="[[[#createlabelmapfunction]]]" class="sec-ref"><bdi class="secno">3.4.3 </bdi>createLabelMapFunction</a>.
             </li>
             <li>
-Initialize <var>nquads</var> to the result of calling the "labelReplacementCanonicalize"
-algorithm, passing <var>document</var>, <var>labelMapFactoryFunction</var>, and any custom
+Initialize <var>nquads</var> to the result of calling the algorithm of section
+<a href="#labelreplacementcanonicalizejsonld" data-matched-text="[[[#labelreplacementcanonicalizejsonld]]]" class="sec-ref"><bdi class="secno">3.4.2 </bdi>labelReplacementCanonicalizeJsonLd</a>, passing <var>document</var>,
+<var>labelMapFactoryFunction</var>, and any custom
 JSON-LD API options. Note: This step transforms the document into an array of
 canonical N-Quads with pseudorandom blank node identifiers based on <var>labelMap</var>.
             </li>
@@ -2878,8 +2879,8 @@ function, i.e., SHA-256 for a P-256 curve. Per the recommendations of
 this is 256 bits or 32 bytes.
             </li>
             <li>
-Initialize <var>labelMapFactoryFunction</var> to the result of calling the
-<var>createHmacIdLabelMapFunction</var> algorithm passing <var>hmac</var>.
+Initialize <var>labelMapFactoryFunction</var> to the result of calling the algorithm of
+Section <a href="#createhmacidlabelmapfunction" data-matched-text="[[[#createhmacidlabelmapfunction]]]" class="sec-ref"><bdi class="secno">3.4.4 </bdi>createHmacIdLabelMapFunction</a>, passing <var>hmac</var>.
             </li>
             <li>
 Initialize <var>groupDefinitions</var> to a map with an entry with a key of the string
@@ -6027,7 +6028,7 @@ Dmitri Zagidulin.
 <section id="references" class="appendix"><div class="header-wrapper"><h2 id="d-references"><bdi class="secno">D. </bdi>References</h2><a class="self-link" href="#references" aria-label="Permalink for Appendix D."></a></div><section id="normative-references"><div class="header-wrapper"><h3 id="d-1-normative-references"><bdi class="secno">D.1 </bdi>Normative references</h3><a class="self-link" href="#normative-references" aria-label="Permalink for Appendix D.1"></a></div>
     
     <dl class="bibliography"><dt id="bib-cid">[CID]</dt><dd>
-      <a href="https://www.w3.org/TR/cid-1.0/"><cite>Controlled Identifiers v1.0</cite></a>. Manu Sporny; Michael Jones.  W3C. 9 February 2025. CRD. URL: <a href="https://www.w3.org/TR/cid-1.0/">https://www.w3.org/TR/cid-1.0/</a>
+      <a href="https://www.w3.org/TR/cid-1.0/"><cite>Controlled Identifiers v1.0</cite></a>. Manu Sporny; Michael Jones.  W3C. 18 February 2025. CRD. URL: <a href="https://www.w3.org/TR/cid-1.0/">https://www.w3.org/TR/cid-1.0/</a>
     </dd><dt id="bib-fips-186-5">[FIPS-186-5]</dt><dd>
       <a href="https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.186-5.pdf"><cite>FIPS PUB 186-5: Digital Signature Standard (DSS)</cite></a>.  U.S. Department of Commerce/National Institute of Standards and Technology. 3 February 2023. National Standard. URL: <a href="https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.186-5.pdf">https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.186-5.pdf</a>
     </dd><dt id="bib-infra">[INFRA]</dt><dd>
@@ -6059,9 +6060,9 @@ Dmitri Zagidulin.
     </dd><dt id="bib-rfc8949">[RFC8949]</dt><dd>
       <a href="https://www.rfc-editor.org/rfc/rfc8949"><cite>Concise Binary Object Representation (CBOR)</cite></a>. C. Bormann; P. Hoffman.  IETF. December 2020. Internet Standard. URL: <a href="https://www.rfc-editor.org/rfc/rfc8949">https://www.rfc-editor.org/rfc/rfc8949</a>
     </dd><dt id="bib-vc-data-integrity">[VC-DATA-INTEGRITY]</dt><dd>
-      <a href="https://www.w3.org/TR/vc-data-integrity/"><cite>Verifiable Credential Data Integrity 1.0</cite></a>. Manu Sporny; Ted Thibodeau Jr; Ivan Herman; Dave Longley; Greg Bernstein.  W3C. 10 February 2025. CRD. URL: <a href="https://www.w3.org/TR/vc-data-integrity/">https://www.w3.org/TR/vc-data-integrity/</a>
+      <a href="https://www.w3.org/TR/vc-data-integrity/"><cite>Verifiable Credential Data Integrity 1.0</cite></a>. Manu Sporny; Ted Thibodeau Jr; Ivan Herman; Dave Longley; Greg Bernstein.  W3C. 19 February 2025. CRD. URL: <a href="https://www.w3.org/TR/vc-data-integrity/">https://www.w3.org/TR/vc-data-integrity/</a>
     </dd><dt id="bib-vc-data-model-2.0">[vc-data-model-2.0]</dt><dd>
-      <a href="https://www.w3.org/TR/vc-data-model-2.0/"><cite>Verifiable Credentials Data Model v2.0</cite></a>. Manu Sporny; Ted Thibodeau Jr; Ivan Herman; Gabe Cohen; Michael Jones.  W3C. 27 January 2025. CRD. URL: <a href="https://www.w3.org/TR/vc-data-model-2.0/">https://www.w3.org/TR/vc-data-model-2.0/</a>
+      <a href="https://www.w3.org/TR/vc-data-model-2.0/"><cite>Verifiable Credentials Data Model v2.0</cite></a>. Manu Sporny; Ted Thibodeau Jr; Ivan Herman; Gabe Cohen; Michael Jones.  W3C. 23 February 2025. CRD. URL: <a href="https://www.w3.org/TR/vc-data-model-2.0/">https://www.w3.org/TR/vc-data-model-2.0/</a>
     </dd><dt id="bib-xmlschema11-2">[XMLSCHEMA11-2]</dt><dd>
       <a href="https://www.w3.org/TR/xmlschema11-2/"><cite>W3C XML Schema Definition Language (XSD) 1.1 Part 2: Datatypes</cite></a>. David Peterson; Sandy Gao; Ashok Malhotra; Michael Sperberg-McQueen; Henry Thompson; Paul V. Biron et al.  W3C. 5 April 2012. W3C Recommendation. URL: <a href="https://www.w3.org/TR/xmlschema11-2/">https://www.w3.org/TR/xmlschema11-2/</a>
     </dd></dl>
@@ -6072,7 +6073,7 @@ Dmitri Zagidulin.
     </dd><dt id="bib-secg2">[SECG2]</dt><dd>
       <a href="https://www.secg.org/sec2-v2.pdf"><cite>SEC 2: Recommended Elliptic Curve Domain Parameters</cite></a>.  Certicom Research. January 27, 2010. URL: <a href="https://www.secg.org/sec2-v2.pdf">https://www.secg.org/sec2-v2.pdf</a>
     </dd><dt id="bib-vc-di-bbs">[VC-DI-BBS]</dt><dd>
-      <a href="https://www.w3.org/TR/vc-di-bbs/"><cite>Data Integrity BBS Cryptosuites v1.0</cite></a>. Greg Bernstein; Manu Sporny.  W3C. 30 January 2025. CRD. URL: <a href="https://www.w3.org/TR/vc-di-bbs/">https://www.w3.org/TR/vc-di-bbs/</a>
+      <a href="https://www.w3.org/TR/vc-di-bbs/"><cite>Data Integrity BBS Cryptosuites v1.0</cite></a>. Greg Bernstein; Manu Sporny.  W3C. 18 February 2025. CRD. URL: <a href="https://www.w3.org/TR/vc-di-bbs/">https://www.w3.org/TR/vc-di-bbs/</a>
     </dd></dl>
   </section></section><p role="navigation" id="back-to-top">
     <a href="#title"><abbr title="Back to Top">↑</abbr></a>
