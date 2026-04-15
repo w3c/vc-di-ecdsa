@@ -12,7 +12,7 @@
       "image": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQIW2P4z/DiPwAG0ALnwgz64QAAAABJRU5ErkJggg=="
        },
     "name": "Permanent Resident Card",
-    "description": "Government of Utopia Permanent Resident Card.",
+    "description": "Permanent Resident Card from Government of Utopia.",
     "credentialSubject": {
       "type": [
         "PermanentResident",
