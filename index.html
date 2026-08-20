@@ -129,7 +129,7 @@
             href: "https://doi.org/10.6028/NIST.SP.800-57pt1r5"
           }
         },
-        xref: ["INFRA", "VC-DATA-MODEL-2.0", "VC-DATA-INTEGRITY"],
+        xref: ["INFRA", "VC-DATA-MODEL-2.0", "VC-DATA-INTEGRITY-1.1"],
         lint: { "informative-dfn": false },
         otherLinks: [{
           key: "Related Specifications",
@@ -522,7 +522,9 @@ functions in [[[VC-DATA-INTEGRITY]]]. The algorithm takes an options object
 ([=map=] |options|) as input and returns a [=data integrity cryptographic suite
 instance|cryptosuite instance=] ([=struct=] |cryptosuite|).
         </p>
-
+        <p class="ednote">
+Update to use general full disclosure ECDSA cryptosuite.
+        </p>
         <ol class="algorithm">
           <li>
 Initialize |cryptosuite| to an empty [=struct=].
@@ -576,9 +578,18 @@ Return |cryptosuite|.
 
       </section>
 
+      <section id="ECDSA-CryptoSuite">
+        <h3>ECDSA Cryptosuites (full disclosure)</h3>
+        <p class="ednote">
+Define/explain all full disclosure ECDSA cryptosuites here.    
+        </p>
+      </section>
+
       <section>
         <h3>ecdsa-rdfc-2019</h3>
-
+        <p class="ednote">
+To be removed.
+        </p>
         <p>
 The `ecdsa-rdfc-2019` cryptographic suite takes an input document, canonicalizes
 the document using the [[[RDF-CANON]]]
@@ -920,7 +931,9 @@ Return |verificationResult| as the <em>verification result</em>.
       </section>
       <section>
         <h3>ecdsa-jcs-2019</h3>
-
+        <p class="ednote">
+To be removed.
+        </p>
         <p>
 The `ecdsa-jcs-2019` cryptographic suite takes an input document, canonicalizes
 the document using the JSON Canonicalization Scheme [[RFC8785]], and then
