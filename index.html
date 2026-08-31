@@ -582,15 +582,15 @@ corresponding verification algorithm, using either the [[NIST-SP-800-186]] P-256
 curve, or the P-384 curve.
         </p>
         <p>
-The ECDSA cryptosuites defined in this specification utilize either the
-SHA-256 cryptographic hashing algorithm [[RFC6234]] when the P-256 curve is 
-utilized,  or the SHA-384 hashing  algorithm when the P-384 curve is 
-utilized. These correspond to  a |hashName| parameterr of `SHA-256` or  
-`SHA-384` for use in  
+The ECDSA cryptosuites defined in this specification use either the
+SHA-256 cryptographic hashing algorithm [[RFC6234]] when the P-256 curve is
+used, or the SHA-384 hashing algorithm when the P-384 curve is
+used. These correspond to a |hashName| parameter of `SHA-256` or
+`SHA-384` for use in
 [[[VC-DATA-INTEGRITY-1.1#CryptosuiteCommonAlgorithms]]]. Furthermore all ECDSA
-cryptosuites utilize <a data-cite="CID#multibase-0">
-base58-btc-encoded Multibase value</a>  for their proof, hence |proofEncoding| 
-parameter is set to `base58` in 
+cryptosuites use <a data-cite="CID#multibase-0">
+base58-btc-encoded Multibase value</a> for their proof, hence |proofEncoding|
+parameter is set to `base58` in
 [[[VC-DATA-INTEGRITY-1.1#CryptosuiteCommonAlgorithms]]].
         </p>
 
@@ -602,7 +602,7 @@ and the length of the raw signature is 96 bytes.
         </p>
         <p>
 Supporting both Universal RDF Dataset Canonicalization Algorithm [[RDF-CANON]],
-"`rdfc`", and JSON Canonicalization Scheme [[RFC8785]], "`jcs`",  leads to the
+"`rdfc`", and JSON Canonicalization Scheme [[RFC8785]], "`jcs`", leads to the
 family of EdDSA cryptosuites given in [[[#ECDSASuiteTable]]].
         </p>
         <table id="ECDSASuiteTable" class="data numbered">
@@ -645,8 +645,8 @@ family of EdDSA cryptosuites given in [[[#ECDSASuiteTable]]].
 
         <p class="note">
 The choice of the P-256 or P-384 is made by the issuer, based on desired 
-security strength with P-256 commonly used. The verifier can tell the curve 
-used (P-256 or P-384) based on the length of the retrieved public key material.
+security strength with P-256 commonly used. The verifier can tell which curve 
+was used (P-256 or P-384) by the length of the retrieved public key material.
         </p>
 
       </section>
