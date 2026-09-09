@@ -442,10 +442,9 @@ The `cryptosuite` property MUST be `ecdsa-rdfc-2019`,
           <p>
 The value of the `proofValue` property is produced according to
 the `cryptosuite` type and is specified in either
-Section [[[#create-proof-ecdsa-rdfc-2019]]], or
-Section [[[#create-proof-ecdsa-jcs-2019]]], or
-Section [[[#create-base-proof-ecdsa-sd-2023]]], or
-Section [[[#add-derived-proof-ecdsa-sd-2023]]].
+[[[VC-DATA-INTEGRITY-1.1#create-proof]]] or
+[[[VC-DATA-INTEGRITY-1.1#create-base-proof]]], or
+[[[VC-DATA-INTEGRITY-1.1#verify-derived-proof]]].
           </p>
 
           <pre class="example nohighlight"
@@ -1399,8 +1398,8 @@ shown below.
           <pre class="example nohighlight" title="Add Base Signing" data-include="TestVectors/ecdsa-sd-2023/employ/addRawBaseSignatureInfo.json"
           data-include-format="text"></pre>
           <p>
-Finally, the values above are run through the algorithm of Section
-[[[#serializebaseproofvalue]]] to produce the `proofValue` which is
+Finally, the values above are run through the algorithm of
+[[[VC-DATA-INTEGRITY-1.1#SerializeBase-SIC]]] to produce the `proofValue` which is
 used in the signed based document shown below.
           </p>
           <pre class="example nohighlight" title="Signed Base Document" data-include="TestVectors/ecdsa-sd-2023/employ/addSignedSDBase.json"
@@ -1412,7 +1411,7 @@ used in the signed based document shown below.
 In order to create a derived proof a holder starts with a signed document
 containing a base proof. The base document we will use for these test vectors is
 the final example from Section [[[#base-proof]]] above. The first
-step is to run the algorithm of Section [[[#parsebaseproofvalue]]] to
+step is to run the algorithm of [[[VC-DATA-INTEGRITY-1.1#ParseBase-SIC]]] to
 recover `baseSignature`, `publicKey`, `hmacKey`, `signatures`, and
 `mandatoryPointers` as shown below.
           </p>
@@ -1428,7 +1427,7 @@ to the verifiers by specifying JSON pointers for selective disclosure.
 To produce the `revealDocument`, i.e., the unsigned document that will
 eventually be signed and sent to the verifier, we append the selective pointers
 to the mandatory pointers and input these combined pointers along with the
-document without proof to the algorithm of Section [[[#selectjsonld]]]
+document without proof to the algorithm of [[[VC-DATA-INTEGRITY-1.1#selectjsonld]]]
 to give the result shown below.
           </p>
           <pre class="example nohighlight" title="Unsigned Reveal Document" data-include="TestVectors/ecdsa-sd-2023/employ/derivedUnsignedReveal.json"
@@ -1439,7 +1438,8 @@ appropriately updated information to the verifier on which statements are
 mandatory, the signatures for the selected non-mandatory statements, and the
 mapping between canonical blank node ids for the reveal document and a subset of
 the HMAC blank node ids. Running step 6 of the
-[[[#createdisclosuredata]]] yields an abundance of information about
+[[[VC-DATA-INTEGRITY-1.1#CreateDisclosureData]]] yields an abundance of 
+information about
 various statement groups relative to the original document. Below we show a
 portion of the indexes for those groups.
           </p>
@@ -1470,15 +1470,15 @@ lists are shown below.
           data-include-format="text"></pre>
           <p>
 The last important piece of disclosure data is a mapping of canonical blank node
-ids to HMAC based ids, the `labelMap`, computed according to Section
-[[[#createdisclosuredata]]] steps 12-14. This is shown below along with
+ids to HMAC based ids, the `labelMap`, computed according to
+[[[VC-DATA-INTEGRITY-1.1#CreateDisclosureData]]]. This is shown below along with
 the rest of the disclosure data minus the reveal document.
           </p>
           <pre class="example nohighlight" title="Disclosure Data" data-include="TestVectors/ecdsa-sd-2023/employ/derivedDisclosureData.json"
           data-include-format="text"></pre>
           <p>
 Finally using the disclosure data above with the algorithm of Section
-[[[#serializederivedproofvalue]]] we obtain the signed derived (reveal)
+[[[VC-DATA-INTEGRITY-1.1#SerializeDerived-SIC]]] we obtain the signed derived (reveal)
 document shown below.
           </p>
           <pre class="example nohighlight" title="Signed Derived Document" data-include="TestVectors/ecdsa-sd-2023/employ/derivedRevealDocument.json"
@@ -1526,7 +1526,7 @@ is given as a hexadecimal string.
       data-include-format="text">
           </pre>
           <p>
-In our scenario a person will be issued an permanent resident credential as
+In our scenario a person will be issued a permanent resident credential as
 shown below.
           </p>
           <pre class="example nohighlight" title="Credential without Proof" data-include="TestVectors/prCredUnsigned.json"
@@ -1594,7 +1594,7 @@ shown below.
       data-include-format="text"></pre>
           <p>
 Finally, the values above are run through the algorithm of Section
-[[[#serializebaseproofvalue]]] to produce the `proofValue` which is
+[[[VC-DATA-INTEGRITY-1.1#SerializeBase-SIC]]] to produce the `proofValue` which is
 used in the signed based document shown below.
           </p>
           <pre class="example nohighlight" title="Signed Base Document" data-include="TestVectors/ecdsa-sd-2023/prc/addSignedSDBase.json"
@@ -1606,7 +1606,7 @@ used in the signed based document shown below.
 In order to create a derived proof a holder starts with a signed document
 containing a base proof. The base document we will use for these test vectors is
 the final example from Section [[[#base-proof]]] above. The first
-step is to run the algorithm of Section [[[#parsebaseproofvalue]]] to
+step is to run the algorithm of [[[VC-DATA-INTEGRITY-1.1#ParseBase-SIC]]] to
 recover `baseSignature`, `publicKey`, `hmacKey`, `signatures`, and
 `mandatoryPointers` as shown below.
           </p>
@@ -1622,7 +1622,7 @@ to the verifiers by specifying JSON pointers for selective disclosure.
 To produce the `revealDocument`, i.e., the unsigned document that will
 eventually be signed and sent to the verifier, we append the selective pointers
 to the mandatory pointers and input these combined pointers along with the
-document without proof to the algorithm of Section [[[#selectjsonld]]]
+document without proof to the algorithm of [[[VC-DATA-INTEGRITY-1.1#selectjsonld]]]
 to give the result shown below.
           </p>
           <pre class="example nohighlight" title="Unsigned Reveal Document" data-include="TestVectors/ecdsa-sd-2023/prc/derivedUnsignedReveal.json"
@@ -1632,8 +1632,8 @@ Now that we know what the revealed document looks like, we need to furnish
 appropriately updated information to the verifier on which statements are
 mandatory, the signatures for the selected non-mandatory statements, and the
 mapping between canonical blank node ids for the reveal document and a subset of
-the HMAC blank node ids. Running step 6 of the
-[[[#createdisclosuredata]]] yields an abundance of information about
+the HMAC blank node ids. Running 
+[[[VC-DATA-INTEGRITY-1.1#CreateDisclosureData]]] yields an abundance of information about
 various statement groups relative to the original document. Below we show a
 portion of the indexes for those groups.
           </p>
@@ -1665,14 +1665,14 @@ lists are shown below.
           <p>
 The last important piece of disclosure data is a mapping of canonical blank node
 ids to HMAC based ids, the `labelMap`, computed according to Section
-[[[#createdisclosuredata]]] steps 12-14. This is shown below along with
+[[[VC-DATA-INTEGRITY-1.1#CreateDisclosureData]]]. This is shown below along with
 the rest of the disclosure data minus the reveal document.
           </p>
           <pre class="example nohighlight" title="Disclosure Data" data-include="TestVectors/ecdsa-sd-2023/prc/derivedDisclosureData.json"
       data-include-format="text"></pre>
           <p>
 Finally using the disclosure data above with the algorithm of Section
-[[[#serializederivedproofvalue]]] we obtain the signed derived (reveal)
+[[[VC-DATA-INTEGRITY-1.1#SerializeDerived-SIC]]] we obtain the signed derived (reveal)
 document shown below.
           </p>
           <pre class="example nohighlight" title="Signed Derived Document" data-include="TestVectors/ecdsa-sd-2023/prc/derivedRevealDocument.json"
