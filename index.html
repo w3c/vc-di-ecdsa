@@ -554,12 +554,20 @@ Set |cryptosuite|.|verifyProof| to the algorithm in Section
 If |options|.|cryptosuite| is `ecdsa-sd-2023` then:
             <ol class="algorithm">
               <li>
-Set |cryptosuite|.|createProof| to the algorithm in Section
-[[[#create-base-proof-ecdsa-sd-2023]]].
+Set the values of the parameters `approach`, `hashName`, `sigFunc`, and
+`verifyFunc`, as indicated in section [[[#selective-disclosure-ecdsa-cryptosuites]]].
               </li>
               <li>
-Set |cryptosuite|.|verifyProof| to the algorithm in Section
-[[[#verify-derived-proof-ecdsa-sd-2023]]].
+Set |cryptosuite|.|createBaseProof| to the algorithm in Section
+[[[VC-DATA-INTEGRITY-1.1#create-base-proof]]] passing in the above parameters.
+              </li>
+              <li>
+Set |cryptosuite|.|addDerivedProof| to the algorithm in Section
+[[[VC-DATA-INTEGRITY-1.1#add-derived-proof]]] passing in the above parameters.
+              </li>
+              <li>
+Set |cryptosuite|.|verifyDerivedProof| to the algorithm in Section
+[[[VC-DATA-INTEGRITY-1.1#verify-derived-proof]]] passing in the above parameters.
               </li>
             </ol>
           </li>
@@ -652,422 +660,42 @@ was used (P-256 or P-384) by the length of the retrieved public key material.
       </section>
 
       <section>
-        <h3>ecdsa-sd-2023</h3>
+        <h3>Selective Disclosure ECDSA Cryptosuites</h3>
 
-        <p>
-The `ecdsa-sd-2023` cryptographic suite takes an input document, canonicalizes
-the document using the [[[RDF-CANON]]]
-[[RDF-CANON]], and then cryptographically hashes and signs the output
-resulting in the production of a data integrity proof. The algorithms in this
-section also include the verification of such a data integrity proof.
+        <p class="informative">
+The [[VC-DATA-INTEGRITY-1.1]] specification defines [=selective disclosure=] and
+defines common algorithms for implementing [=selective disclosure=] where the
+signature scheme does not natively support it.  Two general <em>approaches</em>
+are defined (1) Signed Individual Claims ([=SIC=]) and (2) Salted Hash of Claims
+([=SHoC=]). The size of the signature impacts the overall base and derived proof
+sizes as indicated in [[[VC-DATA-INTEGRITY-1.1#SDApproachTable]]]. For short
+signature sizes such as those produced by ECDSA algorithms the [=SIC=] approach 
+would be used.
         </p>
-
-        <section>
-          <h4>Create Base Proof (ecdsa-sd-2023)</h4>
-
-
-          <p>
-The following algorithm specifies how to create a [=data integrity proof=] given
-an <a>unsecured data document</a>. Required inputs are an
-<a>unsecured data document</a> ([=map=] |unsecuredDocument|), and a set of proof
-options ([=map=] |options|). A [=data integrity proof=] ([=map=]), or an error,
-is produced as output.
-          </p>
-
-          <ol class="algorithm">
-            <li>
-Let |proof| be a clone of the proof options, |options|.
-            </li>
-            <li>
-Let |proofConfig| be the result of running the algorithm in
-Section [[[#base-proof-configuration-ecdsa-sd-2023]]] with
-|options| passed as a parameter.
-            </li>
-            <li>
-Let |transformedData| be the result of running the algorithm in Section <a
-href="#base-proof-transformation-ecdsa-sd-2023"></a> with |unsecuredDocument|,
-|proofConfig|, and |options| passed as parameters.
-            </li>
-            <li>
-Let |hashData| be the result of running the algorithm in Section
-[[[#base-proof-hashing-ecdsa-sd-2023]]] with |transformedData| and |proofConfig|
-passed as a parameters.
-            </li>
-            <li>
-Let |proofBytes| be the result of running the algorithm in Section
-[[[#base-proof-serialization-ecdsa-sd-2023]]] with |hashData| and
-|options| passed as parameters.
-            </li>
-            <li>
-Let |proof|.|proofValue| be a <a data-cite="CID#multibase-0">
-base64-url-encoded Multibase value</a> of the |proofBytes|.
-            </li>
-            <li>
-Return |proof| as the [=data integrity proof=].
-            </li>
-          </ol>
-        </section>
-
-        <section>
-          <h4>Base Proof Transformation (ecdsa-sd-2023)</h4>
-
-          <p>
-The following algorithm specifies how to transform an unsecured input document
-into a transformed document that is ready to be provided as input to the
-hashing algorithm in Section [[[#base-proof-hashing-ecdsa-sd-2023]]].
-          </p>
-
-          <p>
-Required inputs to this algorithm are an
-<a data-cite="vc-data-integrity#dfn-unsecured-data-document">
-unsecured data document</a> (|unsecuredDocument|) and
-transformation options (|options|). The
-transformation options MUST contain a type identifier for the
-<a data-cite="vc-data-integrity#dfn-cryptosuite">
-cryptographic suite</a> (|type|), a cryptosuite
-identifier (|cryptosuite|), and a verification method
-(|verificationMethod|). The transformation options MUST contain an
-array of mandatory JSON pointers (|mandatoryPointers|) and MAY contain
-additional options, such as a JSON-LD document loader. A <em>transformed data
-document</em> is produced as output. Whenever this algorithm encodes strings, it
-MUST use UTF-8 encoding.
-          </p>
-
-          <ol class="algorithm">
-            <li>
-Initialize |hmac| to an HMAC API using a locally generated and exportable HMAC
-key. The HMAC uses the same hash algorithm used in the signature algorithm,
-which is detected via the |verificationMethod| provided to the
-function, i.e., SHA-256 for a P-256 curve. Per the recommendations of
-[[RFC2104]], the HMAC key MUST be the same length as the digest size; for SHA-256,
-this is 256 bits or 32 bytes.
-            </li>
-            <li>
-Initialize |labelMapFactoryFunction| to the result of calling the algorithm of
-Section [[[#createhmacidlabelmapfunction]]], passing |hmac|.
-            </li>
-            <li>
-Initialize |groupDefinitions| to a map with an entry with a key of the string
-"mandatory" and a value of |mandatoryPointers|.
-            </li>
-            <li>
-Initialize |groups| to the result of calling the algorithm in Section
-[[[#canonicalizeandgroup]]], passing |labelMapFactoryFunction|,
-|groupDefinitions|, |unsecuredDocument| as |document|, and any custom JSON-LD
-API options. Note: This step transforms the document into an array of canonical
-N-Quads with pseudorandom blank node identifiers based on |hmac|, and groups
-the N-Quad strings according to selections based on JSON pointers.
-            </li>
-            <li>
-Initialize |mandatory| to the values in the |groups|.|mandatory|.|matching| map.
-            </li>
-            <li>
-Initialize |nonMandatory| to the values in the
-|groups|.|mandatory|.|nonMatching| map.
-            </li>
-            <li>
-Initialize |hmacKey| to the result of exporting the HMAC key from |hmac|.
-            </li>
-            <li>
-Return an object with `mandatoryPointers` set to |mandatoryPointers|,
-`mandatory` set to |mandatory|, `nonMandatory` set to |nonMandatory|,
-and `hmacKey` set to |hmacKey|.
-            </li>
-          </ol>
-        </section>
-
-        <section>
-          <h4>Base Proof Hashing (ecdsa-sd-2023)</h4>
-
-          <p>
-The following algorithm specifies how to cryptographically hash a
-<em>transformed data document</em> and <em>proof configuration</em>
-into cryptographic hash data that is ready to be provided as input to the
-algorithms in Section [[[#base-proof-serialization-ecdsa-sd-2023]]].
-          </p>
-
-          <p>
-The required inputs to this algorithm are a <em>transformed data document</em>
-(|transformedDocument|) and <em>canonical proof configuration</em>
-(|canonicalProofConfig|). A <em>hash data</em> value represented
-as an object is produced as output.
-          </p>
-
-          <ol class="algorithm">
-            <li>
-Initialize |proofHash| to the result of calling the RDF Dataset Canonicalization
-algorithm [[RDF-CANON]] on |canonicalProofConfig| and then cryptographically
-hashing the result using the same hash that is used by the signature algorithm,
-i.e., SHA-256 for a P-256 curve. Note: This step can be performed in parallel;
-it only needs to be completed before this algorithm terminates as the result is
-part of the return value.
-            </li>
-            <li>
-Initialize |mandatoryHash| to the result of calling the the algorithm in Section
-[[[#hashmandatorynquads]]], passing
-|transformedDocument|.|mandatory|.
-            </li>
-            <li>
-Initialize |hashData| as a deep copy of |transformedDocument| and
-add |proofHash| as `proofHash` and |mandatoryHash| as `mandatoryHash` to that
-object.
-            </li>
-            <li>
-Return |hashData| as <em>hash data</em>.
-            </li>
-          </ol>
-
-        </section>
-
-        <section>
-          <h4>Base Proof Configuration (ecdsa-sd-2023)</h4>
-
-          <p>
-The following algorithm specifies how to generate a
-<em>proof configuration</em> from a set of <em>proof options</em>
-that is used as input to the
-<a href="#base-proof-hashing-ecdsa-sd-2023">base proof hashing algorithm</a>.
-          </p>
-
-          <p>
-The required inputs to this algorithm are <em>proof options</em>
-(|options|) and the
-<a data-cite="vc-data-integrity#dfn-unsecured-data-document">unsecured data
-document</a> (|unsecuredDocument|).
-The <em>proof options</em> MUST contain a type identifier
-for the
-<a data-cite="vc-data-integrity#dfn-cryptosuite">
-cryptographic suite</a> (|type|) and MUST contain a cryptosuite
-identifier (|cryptosuite|). A <em>proof configuration</em>
-object is produced as output.
-          </p>
-
-          <ol class="algorithm">
-            <li>
-Let |proofConfig| be a clone of the |options| object.
-            </li>
-            <li>
-If |proofConfig|.|type| is not set to `DataIntegrityProof` and/or
-|proofConfig|.|cryptosuite| is not set to `ecdsa-sd-2023`,
-an error MUST be raised and SHOULD convey an error type of
-<a data-cite="VC-DATA-INTEGRITY#PROOF_GENERATION_ERROR">PROOF_GENERATION_ERROR</a>.
-            </li>
-            <li>
-If |proofConfig|.|created| is set and if the value is not a
-valid [[XMLSCHEMA11-2]] datetime, an error MUST be raised and SHOULD convey an
-error type of
-<a data-cite="VC-DATA-INTEGRITY#PROOF_GENERATION_ERROR">PROOF_GENERATION_ERROR</a>.
-            </li>
-            <li>
-Set |proofConfig|.<var>@context</var> to
-|unsecuredDocument|.<var>@context</var>.
-            </li>
-            <li>
-Let |canonicalProofConfig| be the result of applying the
-[[[RDF-CANON]]] [[RDF-CANON]] to the |proofConfig|.
-            </li>
-            <li>
-Return |canonicalProofConfig|.
-            </li>
-          </ol>
-
-        </section>
-
-        <section>
-          <h4>Base Proof Serialization (ecdsa-sd-2023)</h4>
-
-          <p>
-The following algorithm specifies how to create a base proof; called by an
-issuer of an ECDSA-SD-protected Verifiable Credential. The base proof is to be
-given only to the holder, who is responsible for generating a derived proof from
-it, exposing only selectively disclosed details in the proof to a verifier. This
-algorithm is designed to be used in conjunction with the algorithms defined
-in the Data Integrity [[VC-DATA-INTEGRITY]] specification,
-<a data-cite="vc-data-integrity#algorithms">
-Section 4: Algorithms</a>. Required inputs are
-cryptographic hash data (|hashData|) and
-<em>proof options</em> (|options|). The
-<em>proof options</em> MUST contain a type identifier for the
-<a data-cite="vc-data-integrity#dfn-cryptosuite">
-cryptographic suite</a> (|type|) and MAY contain a cryptosuite
-identifier (|cryptosuite|). A single <em>digital proof</em> value
-represented as series of bytes is produced as output.
-          </p>
-
-          <ol class="algorithm">
-            <li>
-Initialize |proofHash|, |mandatoryPointers|, |mandatoryHash|, |nonMandatory|,
-and |hmacKey| to the values associated with their property names
-|hashData|.
-            </li>
-            <li>
-Initialize |proofScopedKeyPair| to a locally generated P-256 ECDSA key pair.
-Note: This key pair is scoped to the specific proof; it is not used for anything
-else and the private key will be destroyed when this algorithm terminates.
-            </li>
-            <li>
-Initialize |signatures| to an array where each element holds the result of
-digitally signing the UTF-8 representation of each N-Quad string in
-|nonMandatory|, in order. The digital signature algorithm is ES256, i.e., uses a
-P-256 curve over a SHA-256 digest, and uses the private key from
-|proofScopedKeyPair|. Note: This step generates individual signatures for each
-statement that can be selectively disclosed using a local, proof-scoped key pair
-that binds them together; this key pair will be bound to the proof by a
-signature over its public key using the private key associated with the base
-proof verification method.
-            </li>
-            <li>
-Initialize |publicKey| to the multikey expression of the public key exported
-from |proofScopedKeyPair|. That is, an array of bytes starting with the bytes
-0x80 and 0x24 (which is the multikey p256-pub header (0x1200) expressed as a
-varint) followed by the compressed public key bytes (the compressed header with
-`2` for an even `y` coordinate and `3` for an odd one followed by the `x`
-coordinate of the public key).
-            </li>
-            <li>
-Initialize |toSign| to the result of calling the algorithm in Section
-[[[#serializesigndata]]], passing |proofHash|, |publicKey|, and
-|mandatoryHash| as parameters to the algorithm.
-            </li>
-            <li>
-Initialize |baseSignature| to the result of digitally signing |toSign| using the
-private key associated with the base proof verification method.
-            </li>
-            <li>
-Initialize |proofValue| to the result of calling the algorithm in Section
-[[[#serializebaseproofvalue]]], passing |baseSignature|,
-|publicKey|, |hmacKey|, |signatures|, and |mandatoryPointers| as parameters
-to the algorithm.
-            </li>
-            <li>
-Return |proofValue| as <em>digital proof</em>.
-            </li>
-          </ol>
-
-        </section>
-
-        <section>
-          <h4>Add Derived Proof (ecdsa-sd-2023)</h4>
-
-          <p>
-The following algorithm creates a selective disclosure derived proof; called by
-a holder of an `ecdsa-sd-2023`-protected [=verifiable credential=].
-The derived proof is to be given to the [=verifier=]. The inputs include a
-JSON-LD document (|document|), an ECDSA-SD base proof
-(|proof|), an array of JSON pointers to use to selectively disclose
-statements (|selectivePointers|), and any custom JSON-LD API options,
-such as a document loader. A single <em>selectively revealed document</em>
-value, represented as an object, is produced as output.
-          </p>
-
-          <ol>
-            <li>
-Initialize |baseSignature|, |publicKey|, |signatures|, |labelMap|,
-|mandatoryIndexes|, |revealDocument| to the values associated with their
-property names in the object returned when calling the algorithm in
-Section [[[#createdisclosuredata]]], passing the |document|, |proof|,
-|selectivePointers|, and any custom JSON-LD API options, such as a document
-loader.
-            </li>
-            <li>
-Initialize |newProof| to a shallow copy of |proof|.
-            </li>
-            <li>
-Replace |proofValue| in |newProof| with the result of calling the algorithm
-in Section [[[#serializederivedproofvalue]]], passing
-|baseSignature|, |publicKey|, |signatures|, |labelMap|, and |mandatoryIndexes|.
-            </li>
-            <li>
-Set the value of the "proof" property in |revealDocument| to |newProof|.
-            </li>
-            <li>
-Return |revealDocument| as the <em>selectively revealed document</em>.
-            </li>
-          </ol>
-
-        </section>
-
-        <section>
-          <h4>Verify Derived Proof (ecdsa-sd-2023)</h4>
-
-          <p>
-The following algorithm attempts verification of an `ecdsa-sd-2023` derived
-proof. This algorithm is called by a verifier of an ECDSA-SD-protected
-[=verifiable credential=]. The inputs include a JSON-LD document
-(|document|), an ECDSA-SD disclosure proof (|proof|), and any
-custom JSON-LD API options, such as a document loader. This algorithm returns
-a [=verification result=]:
-          </p>
-
-          <ol class="algorithm">
-            <li>
-Let |unsecuredDocument| be a copy of |document| with the `proof` value removed.
-            </li>
-            <li>
-Initialize |baseSignature|, |proofHash|, |publicKey|, |signatures|,
-|nonMandatory|, and |mandatoryHash| to the values associated with their property
-names in the object returned when calling the algorithm in Section
-[[[#createverifydata]]], passing the |document|, |proof|, and any
-custom JSON-LD API options, such as a document loader.
-            </li>
-            <li>
-If the length of |signatures| does not match the length of |nonMandatory|,
-an error MUST be raised and SHOULD convey an error type of
-<a data-cite="VC-DATA-INTEGRITY#PROOF_VERIFICATION_ERROR">PROOF_VERIFICATION_ERROR</a>,
-indicating that the signature count does not match
-the non-mandatory message count.
-            </li>
-            <li>
-Initialize |publicKeyBytes| to the public key bytes expressed in |publicKey|.
-Instructions on how to decode the public key value can be found in Section
-[[[#multikey]]].
-            </li>
-            <li>
-Initialize |toVerify| to the result of calling the algorithm in Setion
-[[[#serializesigndata]]], passing |proofHash|, |publicKey|, and
-|mandatoryHash|.
-            </li>
-            <li>
-Initialize |verified| to true.
-            </li>
-            <li>
-Initialize |verificationCheck| be the result of applying the verification
-algorithm of the Elliptic Curve Digital Signature Algorithm (ECDSA) [FIPS-186-5],
-with |toVerify| as the data to be verified against the |baseSignature| using
-the public key specified by |publicKeyBytes|. If |verificationCheck| is
-`false`, set |verified| to false.
-            </li>
-            <li>
-For every entry (|index|, |signature|) in |signatures|, verify every signature
-for every selectively disclosed (non-mandatory) statement:
-              <ol class="algorithm">
-                <li>
-Initialize |verificationCheck| to the result of applying the verification
-algorithm Elliptic Curve Digital Signature Algorithm (ECDSA) [FIPS-186-5], with
-the UTF-8 representation of the value at |index| of |nonMandatory| as the data
-to be verified against |signature| using the public key specified by
-|publicKeyBytes|.
-                </li>
-                <li>
-If |verificationCheck| is `false`, set |verified| to false.
-                </li>
-              </ol>
-            </li>
-            <li>
-Return a [=verification result=] with [=struct/items=]:
-              <dl data-link-for="verification result">
-                <dt>[=verified=]</dt>
-                <dd>The value of |verified|</dd>
-                <dt>[=verifiedDocument=]</dt>
-                <dd>
-|unsecuredDocument| if |verified| is `true`, otherwise <a
-data-cite="INFRA#nulls">Null</a>
-                </dd>
-              </dl>
-            </li>
-          </ol>
-
-        </section>
+        <p>
+The selective disclosure cryptosuites defined in this specification are listed
+in  [[[#ECDSA-SD-SuiteTable]]]. Note that all selective disclosure cryptosuites
+utilize the advanced features of [[RDF-CANON]].
+        </p>        
+        <table id="ECDSA-SD-SuiteTable" class="data numbered">
+          <caption><em>Supported EdDSA Selective Disclosure Cryptosuites.</em> </caption>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Approach</th>
+              <th>Signature/Verification</th>
+              <th>Hash</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>`ecdsa-sd-2023`</td>
+              <td>[=SIC=]</td>
+              <td>Elliptic Curve Digital Signature Algorithm (ECDSA) [[FIPS-186-5]], P-256 curve</td>
+              <td>SHA-256</td>
+            </tr>
+          </tbody>
+        </table>
 
       </section>
 
